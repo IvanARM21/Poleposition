@@ -1,0 +1,35 @@
+@import url("./ui/globals.css");
+@import url("./ui/swiper.css");
+@import url("./nosotros.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container-page {
+  @apply max-w-screen-2xl w-full mx-auto;
+}
+
+@layer components {
+  .formulario {
+    @apply w-full max-w-3xl flex flex-col gap-5 p-5 sm:p-10 rounded-xl border;
+  }
+
+  
+  .centrarDiv {
+    @apply flex items-center justify-center min-h-screen;
+  }
+
+  .label {
+    @apply text-sm text-gray-500 uppercase font-bold;
+  }
+  .input {
+    @apply p-3 bg-gray-50 rounded-xl;
+  }
+  .campo {
+    @apply flex flex-col gap-2;
+  }
+  .submit {
+    @apply mt-5 hover:bg-white hover:text-red-600 hover:border-red-500 cursor-pointer border-2 border-red-500 bg-red-500 p-3 text-white font-bold transition-all duration-300 rounded-xl;
+  }
+}

@@ -1,0 +1,26 @@
+@keyframes entrada {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+* {
+  font-family: 'Mulish', sans-serif;
+  animation: entrada 0.5s ease-out;
+}
+html {
+  width: 100%;
+}
+.title {
+  @apply text-center font-semibold text-5xl text-gray-700 mb-10;
+}
+
+.link {
+  @apply text-red-600 border-b border-transparent hover:border-red-500 transition-colors duration-300 text-nowrap;
+}
+.icono {
+  @apply size-[44px] fill-red-600 hover:fill-white hover:bg-red-600 p-1 rounded-full hover:scale-110 transition-all duration-500;
+}
