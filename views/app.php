@@ -28,7 +28,7 @@
         }
     ?>
     <!-- intento de nav bar -->
-    <header class="border-b bg-white fixed inset-x-0 h-20 w-full z-20">
+    <header class="border-b bg-white  inset-x-0 h-20 w-full z-20">
         <nav class="container-page flex justify-between lg:grid lg:grid-cols-3">
             <!-- logo -->
             <a href="/" class="w-20 h-20">

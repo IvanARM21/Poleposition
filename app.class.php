@@ -16,28 +16,25 @@ class App {
         for($i = 1; $i < count($uriParts); $i++) {
             $this->args[] = $uriParts[$i];
         }
-        // Conexión a la BD
         $this->connectDB();
-        // uri = www.poleposition.com/productos 
-        // uriParts[0] = productos
         $this->loadModel($uriParts[0]);
     }
 
-    // Conecta a la base de datos y se guarda en el App
     public function connectDB() {
         $this->db = new DB();
     }
 
-    // Carga el modelo correspondiente segun la primera parte de la url
     public function loadModel($modelName) {
-        // $modelName = "products"
         if($modelName != "") {
-            // llama al ./models/products.php
-            require_once("./models/" . $modelName . ".php");
-            // transorma products a Products
-            $modelName = ucfirst($modelName);
-    
-            // LLamamos al modelo correspondiente (según la URL)
+            if(preg_match('/-/', $modelName)) {
+                $modelParts = explode('-', $modelName);
+                $newName = implode('', $modelParts);
+                require_once("./models/" . $newName . ".php");
+                $modelName = ucfirst($newName);
+            } else {
+                require_once("./models/" . $modelName . ".php");
+                $modelName = ucfirst($modelName);
+            }
             $this->model = new $modelName($this->db);
             $this->callMethod($this->model);
         } else {
@@ -46,24 +43,41 @@ class App {
         }
     }
 
-    // Realizar modificaciones para ejecutar CREATE UPDATE DELETE
     private function callMethod($model) {
         $template = "";
+
         if(!isset($this->args[0])) {
             $template = $model->index();
+        } else if($this->args[0] === "crear") {
+            $template = $model->create(); 
+        } else if($this->args[0] === "editar") {
+            $template = $model->update($this->args[1]); 
+        } else if ($this->args[0] === "delete") {
+            $template = $model->delete($this->args[1]); 
         } else {
-            $template = $model->index(); 
+            $template = $model->show($this->args[0]);
         }
-        $this->render($template, $model->getTitle());
+
+        $layout = "app";
+        if(get_class($model) === "Dashboard") {
+            $layout = "admin";
+        }
+        $this->render($template, $model->getTitle(), $layout);
     }
 
-    // Renderiza el app.php que contiene la base como el link a la hoja de estilos, etiqueta head el header y footer
-    private function render($child, $title = "PP | Home") {
-        $view = new Template("./views/app.php", [
-            "title" => $title,
-            "child" => $child
-        ]);
-        // Imprime esta vista que contiene dentro el $child y $title
+    private function render($child, $title = "PP | Home", $layout = "app") {
+        if($layout === "app") {
+            $view = new Template("./views/app.php", [
+                "title" => $title,
+                "child" => $child
+            ]);
+        } else if($layout === "admin") {
+            $view = new Template("./views/admin.php", [
+                "title" => $title,
+                "child" => $child
+            ]);
+        }
+       
         echo $view;
     }
 }
