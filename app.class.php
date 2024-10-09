@@ -77,7 +77,6 @@ class App {
                 "child" => $child
             ]);
         }
-       
         echo $view;
     }
 }

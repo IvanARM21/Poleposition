@@ -48,7 +48,7 @@
                 <a class="link" href="/">Inicio</a>
                 <a class="link" href="/catalogo">Catalogo</a>
                 <a class="link" href="/contacto">Contacto</a>
-               <!-- <a class="link" href="/sobrenosotros">Sobre Nosotros</a> -->
+               <a class="link" href="/sobre-nosotros">Sobre Nosotros</a>
             </div>
 
             <!-- auth -->
@@ -111,8 +111,43 @@
             </div>
             <div class="swiper-pagination">a</div>
         </div>
+
+
     <?php endif; ?>
 
+
+    <?php if ($_SERVER['REQUEST_URI'] === "/sobre-nosotros"): ?>
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide slide-1 slide-item img-1-sobrenosotros">
+                    <div class="text-container">
+                        <h5 class="slider-title"></h5>
+                    </div>
+                </div>
+                <div class="swiper-slide slide-2 slide-item img-2-sobrenosotros">
+                    <div class="text-container">
+                        <h5 class="slider-title"></h5>
+                    </div>
+                </div>
+                <div class="swiper-slide slide-3 slide-item img-3-sobrenosotros">
+                    <div class="text-container">
+                        <h5 class="slider-title"></h5>
+                    </div>
+                </div>
+                <div class="swiper-slide slide-4 slide-item img-4-sobrenosotros">
+                    <div class="text-container">
+                        <h5 class="slider-title"></h5>
+                    </div>
+                </div>
+                <div class="swiper-slide slide-5 slide-item img-5-sobrenosotros">
+                    <div class="text-container">
+                        <h5 class="slider-title"></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination">a</div>
+        </div>
+    <?php endif; ?>
 
     <div class="h-20 "></div>
 

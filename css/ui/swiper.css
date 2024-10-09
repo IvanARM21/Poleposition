@@ -31,6 +31,30 @@
 .img-5 {
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/contacto/4.webp')
 }
+
+.img-1-sobrenosotros {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+		  url("../img/ferrariSN.jpg");
+  }
+  
+  .img-2-sobrenosotros {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+		  url("../img/llavesSN.jpg");
+  }
+  
+  .img-3-sobrenosotros {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+			url("../img/BMWSN.jpg");
+  }
+  
+  .img-4-sobrenosotros {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/ferrari.jpg")
+  }
+  
+  .img-5-sobrenosotros {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/contacto/4.webp')
+  }  
+  
 .swiper-slide {
 	background-size: cover;
 	background-position: center center;

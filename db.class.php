@@ -4,7 +4,7 @@ class DB {
     private $db;
 
     public function __construct() {
-        $this->db = new mysqli("localhost", "root", "root", "automotora");
+        $this->db = new mysqli("localhost", "root", "", "automotora");
         
         if ($this->db->connect_error) {
             die("Error de conexión: " . $this->db->connect_error);
