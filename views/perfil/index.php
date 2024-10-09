@@ -1,6 +1,6 @@
-<section>
-    <h1 class="title">Mi Perfil</h1>
-    <div class="flex flex-col sm:flex-row items-start gap-5 h-full">
+<section class="flex flex-col items-center py-8">
+    <h1 class="title text-2xl font-bold mb-5 sm:text-">Mi Perfil</h1>
+    <div class="flex flex-col sm:flex-row items-start gap-5 w-full max-w-6xl mx-auto">
 
         <!-- sidebar -->
         <nav class="bg-white p-2 w-full sm:min-h-[372px] sm:w-60 border rounded-xl flex sm:flex-col gap-3">
@@ -8,8 +8,7 @@
                 class="hover:bg-gray-50 px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
                 id="perfilBtn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                    <path
-                        d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
+                    <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
                 </svg>
                 Perfil
             </button>
@@ -29,9 +28,7 @@
         <div class="w-full" id="perfilForm">
             <form method="POST" action="" class="flex flex-col space-y-4 w-full">
                 <div class="flex flex-col gap-y-3 formulario">
-                    <h1 class="text-gray-800 font-black text-xl">Información Personal:</h1>
-
-                    <!-- si algo de perfil esta sin poner y se le hace click al formulario tira error -->
+                    <h2 class="text-gray-800 font-black text-xl">Información Personal:</h2>
 
                     <?php if (!empty($errorPerfil)): ?>
                         <p class="text-red-600"><?php echo htmlspecialchars($errorPerfil); ?></p>
@@ -69,9 +66,9 @@
                 >Eliminar Cuenta</button>
             </div>
         </div>
-    </div>  
+    </div>
 </section>
 
-<!-- <div class="bg-black bg-opacity-50 absolute inset-0 z-50 backdrop-blur-sm">
-    
-</div> -->
+<!-- 
+<div class="bg-black bg-opacity-50 absolute inset-0 z-50 backdrop-blur-sm"></div> 
+-->

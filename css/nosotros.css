@@ -46,11 +46,8 @@
 }
 
 .info-container {
-    display: flex;
     justify-content: space-around;
-    padding: 40px 20px;
-    background-color: #f5f5f5; /* Color de fondo */
-    border-top: 2px solid #ccc; /* Línea superior */
+    
 }
 
 .info-box {
@@ -65,6 +62,7 @@
 .info-box:hover {
     transform: translateY(-5px); /* Efecto al pasar el mouse */
 }
+
 
 .info-box p {
     line-height: 1.5; /* Espaciado entre líneas */

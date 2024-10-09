@@ -55,12 +55,12 @@
             <div class="hidden lg:flex gap-5 justify-end items-center  text-red-600 font-semibold">
                 <?php if ($isLogged): ?>
                     <a class="link" href="/perfil">Perfil</a>
-                    <a class="link" href="/logout">Cerrar Sesión</a>
                     <?php if ($isAdmin): ?>
-                        <a class="link" href="/dashboard">Dashboard</a>
-                    <?php endif; ?>
-                <?php else: ?>
-                    <a href="/login" class="link">Iniciar Sesión</a>
+                            <a class="link" href="/dashboard">Dashboard</a>
+                        <?php endif; ?>
+                    <a class="link" href="/logout">Cerrar Sesión</a>
+                    <?php else: ?>
+                        <a href="/login" class="link">Iniciar Sesión</a>
                     <a href="/register" class="link">Registrarse</a>
                 <?php endif; ?>
 
@@ -84,29 +84,19 @@
         <div class="swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide slide-1 slide-item img-1">
-                    <div class="text-container">
-                        <h5 class="slider-title"></h5>
-                    </div>
+                    
                 </div>
                 <div class="swiper-slide slide-2 slide-item img-2">
-                    <div class="text-container">
-                        <h5 class="slider-title"></h5>
-                    </div>
+                    
                 </div>
                 <div class="swiper-slide slide-3 slide-item img-3">
-                    <div class="text-container">
-                        <h5 class="slider-title"></h5>
-                    </div>
+                    
                 </div>
                 <div class="swiper-slide slide-4 slide-item img-4">
-                    <div class="text-container">
-                        <h5 class="slider-title"></h5>
-                    </div>
+                    
                 </div>
                 <div class="swiper-slide slide-5 slide-item img-5">
-                    <div class="text-container">
-                        <h5 class="slider-title"></h5>
-                    </div>
+                    
                 </div>
             </div>
             <div class="swiper-pagination">a</div>
@@ -117,39 +107,35 @@
 
 
     <?php if ($_SERVER['REQUEST_URI'] === "/sobre-nosotros"): ?>
+        <div class="fixed-text">
+            <h1
+                class="text-white font-black leading-10 text-[40px] min-[400px]:text-5xl sm:text-6xl lg:text-7xl select-none">
+                <span class="block">¡Conoce mas sobre </span><span class="text-red-600 block">Pole-Position
+                    Motors!</span></h1>
+            
+            </div>
+            
         <div class="swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide slide-1 slide-item img-1-sobrenosotros">
-                    <div class="text-container">
-                        <h5 class="slider-title"></h5>
-                    </div>
                 </div>
                 <div class="swiper-slide slide-2 slide-item img-2-sobrenosotros">
-                    <div class="text-container">
-                        <h5 class="slider-title"></h5>
-                    </div>
+            
                 </div>
                 <div class="swiper-slide slide-3 slide-item img-3-sobrenosotros">
-                    <div class="text-container">
-                        <h5 class="slider-title"></h5>
-                    </div>
+            
                 </div>
                 <div class="swiper-slide slide-4 slide-item img-4-sobrenosotros">
-                    <div class="text-container">
-                        <h5 class="slider-title"></h5>
-                    </div>
+                    
                 </div>
                 <div class="swiper-slide slide-5 slide-item img-5-sobrenosotros">
-                    <div class="text-container">
-                        <h5 class="slider-title"></h5>
-                    </div>
+                
                 </div>
             </div>
             <div class="swiper-pagination">a</div>
         </div>
     <?php endif; ?>
 
-    <div class="h-20 "></div>
 
     <!-- child para generar las paginas -->
     <main class="container-page flex-1 my-10">
@@ -163,10 +149,10 @@
         <div
             class="container-page flex justify-between flex-col-reverse gap-5 md:flex-row items-center md:h-20 py-4 px-2">
             <p class="text-gray-500 text-xl flex flex-wrap gap-2 justify-center">
-                <span>&copy; 2024 Pole-Position Motors </span> <span> All Rights Reserved.</span>
+                <span>&copy; 2024 Pole-Position Motors. </span> <span> Todos los derechos reservados.</span>
             </p>
             <div class="flex gap-5">
-                <a href="https://www.instagram.com/ivanrm021/" target="_blank">
+                <a href="https://www.instagram.com/bbruuuuno/" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icono" width="40" height="40" viewBox="0 0 24 24"
                         style="transform: ;msFilter:;">
                         <path
