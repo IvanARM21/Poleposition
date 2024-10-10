@@ -69,4 +69,7 @@
     <main class="lg:ml-80 px-4 md:px-20 mt-10">
         <?= $child ?>
     </main>
+
+    <script type="module" src="/js/dashboard/index.js"></script>
+        
 </body>

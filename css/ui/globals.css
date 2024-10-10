@@ -9,7 +9,7 @@
 
 * {
   font-family: 'Mulish', sans-serif;
-  animation: entrada 0.5s ease-out;
+  animation: entrada 0.25s ease-out;
 }
 html {
   width: 100%;
@@ -24,3 +24,4 @@ html {
 .icono {
   @apply size-[44px] fill-red-600 hover:fill-white hover:bg-red-600 p-1 rounded-full hover:scale-110 transition-all duration-500;
 }
+

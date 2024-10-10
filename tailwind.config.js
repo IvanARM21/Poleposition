@@ -10,12 +10,26 @@ module.exports = {
         '50px' : '50px'
       },
       scale: {
-        '102' : '1.02', // 102% de escala
+        '102' : '1.02', 
       },
       width: {
         '98' : '400px'
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".no-scrollbar::-webkit-scrollbar": {
+          display: "none",
+        },
+        ".no-scrollbar": {
+          "-ms-overflow-style": "none",
+          "scrollbar-width": "none",
+        },
+      };
+
+      addUtilities(newUtilities);
+    }
+  ],
 }

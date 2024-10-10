@@ -12,7 +12,6 @@ export const LoadMenuBtn = () => {
             menuBg.classList.add("bg-black-activo");
         });
         menuCloseBtn.addEventListener("click", menuClose);
-
         menuBg.addEventListener("click", menuClose);
     }
 }

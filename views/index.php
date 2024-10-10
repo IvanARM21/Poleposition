@@ -1,6 +1,8 @@
 <!-- marcas con las q trabajamos -->
 
-<section>
+<!-- <div class="h-24"> </div> -->
+
+<section class>
     <h2 class="font-black text-2xl text-red-600 flex justify-center uppercase text-center md:text-5xl lg:text-5xl">
         Marcas con las que trabajamos
     </h2>

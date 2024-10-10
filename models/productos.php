@@ -1,7 +1,7 @@
 <?php
 
 // Modelo de la página de Products
-class Products {
+class Productos {
 
     private $db;
     private $title;
@@ -19,15 +19,12 @@ class Products {
     // Este es el index de en este caso Página Productos
     // /products
     public function index() {
-        $sql = "SELECT * FROM products";
-        $products = $this->db->find($sql);
+        $sql = "SELECT * FROM vehiculo";
+        $product = $this->db->find($sql);
 
         // Creamos el título de está página
-        $this->title = "PP | Products";
-
-        return new Template('./views/products/index.php', [
-            "products" => $products
-        ]);
+        $this->title = "PP | Vehiculos";
+        header("Location: /dashboard");
     }
 
     // Esta es la página donde podemos ver el producto
@@ -37,7 +34,7 @@ class Products {
         
         $product = $this->db->queryOne("SELECT * FROM products WHERE id = " . $id);
 
-        return new Template('./views/products/show.html', [
+        return new Template('./views/productos/show.html', [
             "product" => $product
         ]);
     }
@@ -48,7 +45,7 @@ class Products {
     // Aquí podemos crear un nuevo producto
     // /products/create
     public function create() {
-        
+        // echo json_decode()
     }
 
     // Aquí podemos actualizar un producto

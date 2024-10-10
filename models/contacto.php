@@ -30,7 +30,7 @@ class Contacto {
     // /products/1
     public function show($id) {
 
-       return new Template('./views/404.php', [
+       return new Template('./views/no-encontrada/', [
         ]);
     }
     
