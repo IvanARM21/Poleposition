@@ -8,9 +8,11 @@ module.exports = {
     extend: {
       fontSize: {
         '50px' : '50px'
-      }
+      },
+      scale: {
+        '102' : '1.02', // 102% de escala
+      },
     },
   },
   plugins: [],
 }
-

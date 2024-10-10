@@ -1,14 +1,15 @@
 <!-- marcas con las q trabajamos -->
 
 <section>
-    <h2 class="font-black text-2xl text-red-600 flex justify-center uppercase text-center md:text-5xl lg:text-5xl" >Marcas con las que trabajamos
+    <h2 class="font-black text-2xl text-red-600 flex justify-center uppercase text-center md:text-5xl lg:text-5xl">
+        Marcas con las que trabajamos
     </h2>
     <div class="flex flex-wrap justify-center items-center mx-auto w-full max-w-5xl pt-8 pb-16">
         <div class="flex justify-center space-x-5">
             <img src="../img/marcas/lambo.png" class="h-16 w-auto sm:h-24 md:h-32 lg:h-32">
             <img src="../img/marcas/bmw.png" class="h-16 w-auto sm:h-24 md:h-32 lg:h-32">
             <img src="../img/marcas/porsche.png" class="h-16 w-auto sm:h-24 md:h-32 lg:h-32">
-            <img src="../img/marcas/ford.png" class="h-16 w-auto sm:h-24 md:h-32 lg:h-32">
+            <img src="../img/marcas/ferrari.png" class="h-16 w-auto sm:h-24 md:h-32 lg:h-32">
         </div>
     </div>
 </section>
@@ -16,7 +17,8 @@
 <!-- testimonios y reseñas -->
 
 <section>
-    <h2 class="font-black text-2xl text-red-600 flex justify-center uppercase text-center  md:text-5xl lg:text-5xl">Testimonios & Reseñas</h2>
+    <h2 class="font-black text-2xl text-red-600 flex justify-center uppercase text-center  md:text-5xl lg:text-5xl">
+        Testimonios & Reseñas</h2>
 
     <div class="flex flex-col sm:flex-row justify-center space-x-0 sm:space-x-3  items-center">
         <div
@@ -35,7 +37,7 @@
                 <p class="text-sm text-gray-500 text-right">- Bruno Flamant</p>
             </div>
 
-            <div class="flex flex-col sm:flex-row justify-center space-x-0 sm:space-x-3  items-center">
+            <div class="flex flex-row sm:flex-row justify-center space-x-0 sm:space-x-3  items-center">
                 <div
                     class="border-2 p-4 rounded-lg shadow-md max-w-xs mt-5 transition-transform transform hover:scale-105 hover:shadow-lg">
                     <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Tomas Shelby</h3>
@@ -48,16 +50,82 @@
 
 <!-- vehiculos seleccionado -->
 
-<section>
-    <h2 class="font-medium text-xl text-gray-600 flex justify-left text-left  pt-10">Vehículos seleccionados</h2>
-    <h2 class="font-black text-5xl text-red-600 flex justify-left uppercase text-left">Destacados</h2>
+<section class="px-4 sm:px-8 lg:px-16">
+    <h2
+        class="font-medium text-lg sm:text-xl lg:text-2xl text-gray-600 flex justify-center lg:justify-normal text-center sm:text-left pt-6 sm:pt-10">
+        Vehículos seleccionados</h2>
+    <h2
+        class="font-black text-3xl sm:text-4xl lg:text-5xl text-red-600 flex justify-center lg:justify-normal uppercase text-center sm:text-left">
+        Destacados</h2>
 
-    <div class="border-2 p-4 rounded-lg shadow-md mt-5 transition-transform transform hover:scale-105 hover:shadow-lg max-w-xl max-h-xl">
-        <div>
-            <img src="../img/ferrariSN.jpg" class="max-w-lg max-h-lg">
-            <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase text-xl sm:text-2xl">BMW m4 Competition</h3>
-            <div class="border-t my-4"></div>
+    <!-- divs autos -->
+
+    <div class="flex flex-col sm:flex-row space-x-4 mx-auto w-max">
+
+       <div
+            class="border-2 p-4 rounded-lg shadow-md mt-5 transition-transform transform hover:shadow-lg max-w-full sm:max-w-md md:max-w-lg flex flex-col sm:flex-row w-96 h-full">
+            <a href="/catalogo">
+            <div>
+                <img id="myImage" src="../img/catalogo/m3-competition-1.jpg"
+                    class="w-96 h-96 object-cover transition duration-500 ease-in-out transform hover:scale-105"
+                    onmouseover="this.src='../img/catalogo/m3-competition-2.jpg'"
+                    onmouseout="this.src='../img/catalogo/m3-competition-1.jpg'">
+
+                <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase text-lg sm:text-xl lg:text-2xl pt-4">
+                    2023 M3 COMPETITION
+                </h3>
+                <div class="border-2 my-4 shadow-2xl"></div>
+                <h3 class="font-extrabold text-left text-green-800 mb-2 uppercase text-lg sm:text-xl lg:text-2xl italic">
+                    US$ 132.855,00
+                </h3>
+            </div>
+            </a>
 
         </div>
+        <!-- 2 -->
+
+        <div
+            class="border-2 p-4 rounded-lg shadow-md mt-5 transition-transform transform hover:shadow-lg max-w-full sm:max-w-md md:max-w-lg flex flex-col sm:flex-row w-96 h-full">
+            <a href="/catalogo">
+            <div>
+                <img id="myImage" src="../img/catalogo/amg-g63-1.jpg"
+                    class="w-96 h-96 object-cover transition duration-500 ease-in-out transform hover:scale-105"
+                    onmouseover="this.src='../img/catalogo/amg-g63-2.jpg'"
+                    onmouseout="this.src='../img/catalogo/amg-g63-1.jpg'">
+
+                <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase text-lg sm:text-xl lg:text-2xl pt-4">
+                    2021 MERCEDES AMG G63   
+                </h3>
+                <div class="border-2 my-4 shadow-2xl"></div>
+                <h3 class="font-extrabold text-left text-green-800 mb-2 uppercase text-lg sm:text-xl lg:text-2xl italic">
+                    US$ 167.950,00
+                </h3>
+            </div>
+            </a>
+        </div>
+
+        <!-- 3 -->
+
+        <div
+            class="border-2 p-4 rounded-lg shadow-md mt-5 transition-transform transform hover:shadow-lg max-w-full sm:max-w-md md:max-w-lg flex flex-col sm:flex-row w-96 h-full">
+            <a href="/catalogo">
+            <div>
+                <img id="myImage" src="../img/catalogo/cayenne-coupe-1.jpg"
+                    class="w-96 h-96 object-cover transition duration-500 ease-in-out transform hover:scale-105"
+                    onmouseover="this.src='../img/catalogo/cayenne-coupe-2.jpg'"
+                    onmouseout="this.src='../img/catalogo/cayenne-coupe-1.jpg'">
+
+                <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase text-lg sm:text-xl lg:text-2xl pt-4">
+                    2023 Cayenne Coupe
+                </h3>
+                <div class="border-2 my-4 shadow-2xl"></div>
+                <h3 class="font-extrabold text-left text-green-800 mb-2 uppercase text-lg sm:text-xl lg:text-2xl italic">
+                    US$ 106.096,00
+                </h3>
+            </div>
+            </a> 
+        </div>
+
     </div>
+
 </section>
