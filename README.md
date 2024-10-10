@@ -10,8 +10,8 @@
 
 # Descargar actualizacion del proyecto
 
-git clone https://github.com/ivanarm21/poleposition.git
-git pull origin main
+1. git clone https://github.com/ivanarm21/poleposition.git
+2. git pull origin main
 
 # Actualizar
 
