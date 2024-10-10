@@ -12,6 +12,9 @@ module.exports = {
       scale: {
         '102' : '1.02', // 102% de escala
       },
+      width: {
+        '98' : '400px'
+      }
     },
   },
   plugins: [],

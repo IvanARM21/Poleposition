@@ -136,9 +136,9 @@
 <section>
 
     <div>
-    <h2
+   <a href="/contacto"> <h2
         class="pt-20 font-black text-3xl sm:text-4xl lg:text-5xl text-red-600 flex justify-center lg:justify-normal uppercase text-center sm:text-left">
-        Contáctenos</h2>
+        Contáctenos</h2> </a>
         <p
         class="font-medium text-lg sm:text-xl lg:text-2xl text-gray-600 flex justify-center lg:justify-normal text-center sm:text-left sm:pt-5">
         Nuestros horarios de atención al cliente:</p>
@@ -146,8 +146,8 @@
         class="font-medium text-lg  text-zinc-400 flex justify-center lg:justify-normal text-center sm:text-left">
         Lunes a Viernes de 8.30 a 12.30 y de 14.00 a 18.30; Sábado de 8.30 a 12:30</p>
 
-        <h2
+        <p
         class="pt-5 font-black text-2xl sm:text-3xl lg:text-4xl text-red-600 flex justify-center lg:justify-normal uppercase text-center sm:text-left">
-        (+598) 91 014 226</h2>
+        (+598) 91 014 226</p>
     </div>
 </section>

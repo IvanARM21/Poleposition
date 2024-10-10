@@ -20,6 +20,7 @@
                 <th class="py-4 text-left">Marca</th>
                 <th class="py-4 text-left">Año</th>
                 <th class="py-4 text-left">Acciones</th>
+                <!-- agregale para imagen ivan rodriguez -->
             </tr>
         </thead>
         <tbody>

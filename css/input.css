@@ -1,5 +1,6 @@
 @import url("./ui/globals.css");
 @import url("./ui/swiper.css");
+@import url("./ui/menu.css");
 @import url("./nosotros.css");
 
 @tailwind base;

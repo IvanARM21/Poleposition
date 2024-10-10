@@ -6,10 +6,10 @@ const menuBg = document.getElementById("bgMenu");
 export const LoadMenuBtn = () => {
     if(menuShowBtn) {
         menuShowBtn.addEventListener("click", () => {
-            menu.classList.remove("hidden");
-            menu.classList.add("show");
-            menuBg.classList.remove("bg-hidden");
-            menuBg.classList.add("bg-black");
+            menu.classList.remove("menu-inactivo");
+            menu.classList.add("menu-activo");
+            menuBg.classList.remove("bg-black-inactivo");
+            menuBg.classList.add("bg-black-activo");
         });
         menuCloseBtn.addEventListener("click", menuClose);
 
@@ -18,8 +18,8 @@ export const LoadMenuBtn = () => {
 }
 
 const menuClose = () => {
-    menu.classList.remove("show");
-    menu.classList.add("hidden");
-    menuBg.classList.remove("bg-black");
-    menuBg.classList.add("bg-hidden");
+    menu.classList.remove("menu-activo");
+    menu.classList.add("menu-inactivo");
+    menuBg.classList.remove("bg-black-activo");
+    menuBg.classList.add("bg-black-inactivo");
 }

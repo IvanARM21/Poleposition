@@ -28,23 +28,23 @@
         }
     ?>
     <!-- intento de nav bar -->
-    <header class="border-b bg-white  inset-x-0 h-20 w-full z-20">
-        <nav class="container-page flex justify-between lg:grid lg:grid-cols-3">
+    <header class="border-b bg-white  inset-x-0 h-20 w-full z-20 px-4">
+        <nav class="flex justify-between lg:grid lg:grid-cols-3">
             <!-- logo -->
             <a href="/" class="w-20 h-20">
                 <img src="/img/logo.png" class="w-full">
             </a>
 
-            <button type="button" class="block lg:hidden">
+            <button type="button" class="block cursor-pointer lg:hidden" id="menuBtn">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-10">
+                    stroke="currentColor" class="size-8 text-gray-700">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
             </button>
 
-            <!-- cosos -->
-            <div class="hidden lg:flex justify-center items-center gap-5 text-red-600 font-semibold ">
+<!-- cosos -->
+<div class="hidden lg:flex justify-center items-center gap-5 text-red-600 font-semibold ">
                 <a class="link" href="/">Inicio</a>
                 <a class="link" href="/catalogo">Catalogo</a>
                 <a class="link" href="/contacto">Contacto</a>
@@ -55,19 +55,45 @@
             <div class="hidden lg:flex gap-5 justify-end items-center  text-red-600 font-semibold">
                 <?php if ($isLogged): ?>
                     <a class="link" href="/perfil">Perfil</a>
-                    <?php if ($isAdmin): ?>
-                            <a class="link" href="/dashboard">Dashboard</a>
-                        <?php endif; ?>
                     <a class="link" href="/logout">Cerrar Sesión</a>
-                    <?php else: ?>
-                        <a href="/login" class="link">Iniciar Sesión</a>
+                    <?php if ($isAdmin): ?>
+                        <a class="link" href="/dashboard">Dashboard</a>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <a href="/login" class="link">Iniciar Sesión</a>
                     <a href="/register" class="link">Registrarse</a>
                 <?php endif; ?>
-
-
             </div>
         </nav>
     </header>
+
+    <aside id="menu-mobile" class=" bg-white w-[calc(100%-20px)] max-w-[400px] h-full max-h-screen fixed z-30 flex flex-col justify-between px-4 top-0 right-0 gap-2 transform transition-all duration-300 lg:hidden menu-inactivo ">
+        <button
+            id="btnClose"
+            type="button"
+            class="fixed top-3 right-3 size-8"
+        >
+            <svg class="fixed top-3 right-3 size-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+        </button>
+        
+        <nav class="flex flex-col gap-4 mt-20">
+            <a href="/" class="text-gray-500 text-sm">Inicio</a>
+            <a href="/catalogo" class="text-gray-500 text-sm">Cátalogo</a>
+            <a href="/contacto" class="text-gray-500 text-sm">Contacto</a>
+            <a href="/sobre-nosotros" class="text-gray-500 text-sm">Sobre Nosotros</a>
+        </nav>
+
+        <nav class="flex flex-col gap-4 py-8 border-t">
+            <a href="/login" class="text-gray-500 text-sm">Iniciar Sesión</a>
+            <a href="/registro" class="text-gray-500 text-sm">Registro</a>
+        </nav>
+    </aside>
+
+    <div id="bgMenu" class="fixed bg-black bg-opacity-50 backdrop-blur-sm inset-0 z-20 transition-all duration-300 lg:hidden bg-black-inactivo"></div>
+
+
 
     <?php if ($_SERVER['REQUEST_URI'] === "/"): ?>
         <div class="fixed-text">
