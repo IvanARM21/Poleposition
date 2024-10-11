@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/dashboard/index.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <link rel="icon" type="image" href="../img/logo.png">
 </head>
@@ -62,7 +62,7 @@
             >
         </div>
         <div class="flex items-center text-gray-500 justify-end">
-            <?php echo json_decode($_COOKIE["usuario"])->nombreCompleto ?>
+            <?php echo json_decode($_COOKIE["usuario"])->nombreCompleto ?? "" ?>
         </div>
     </header>
 

@@ -3,10 +3,11 @@ const modalCloseBtn = document.getElementById("btnClose") ?? null;
 const modalCancelBtn = document.getElementById("btnCancel") ?? null;
 const modalBg = document.getElementById("modalBg") ?? null;
 
+let imagenes = [];
+let imagenesCargadas = [];
+let imagesArrayBuffer = [];
+
 const form = document.getElementById("vehiculoForm") ?? null;
-
-
-console.log(modalShowBtn);
 
 export const LoadModalBtn = () => {
     if(modalShowBtn) {
@@ -18,23 +19,42 @@ export const LoadModalBtn = () => {
         modalCancelBtn.addEventListener("click", menuClose);        
         form.addEventListener("submit", async function (e) {
             e.preventDefault();
-    
-            const vehicleData = {
-                marca: document.getElementById("marca").value,
-                modelo: document.getElementById("modelo").value,
-                color: document.getElementById("color").value,
-                precio: +document.getElementById("precio").value,
-                kilometraje: document.getElementById("kilometraje").value,
-                descripcion: document.getElementById("descripcion").value
-            };
-    
-            if(Object.values(vehicleData).includes("")) {
-                console.log("Campos Vacios")
-                return
-            } 
 
+            console.log("Has hecho click !!!!!!")
+            let images = [];
+            if(imagesArrayBuffer.length) {
+                images = await loadImages();
+            }
+
+            // const vehicleData = {
+            //     marca: document.getElementById("marca").value,
+            //     modelo: document.getElementById("modelo").value,
+            //     color: document.getElementById("color").value,
+            //     precio: +document.getElementById("precio").value,
+            //     kilometraje: document.getElementById("kilometraje").value,
+            //     descripcion: document.getElementById("descripcion").value,
+            //     images: images
+            // };
+
+            const vehicleData = {
+                marca: "Toyota",
+                modelo: "Corolla",
+                color: "Rojo",
+                precio: 20000, // Asegúrate de que sea un número
+                kilometraje: 15000, // También un número
+                descripcion: "Un excelente vehículo en condiciones impecables.",
+                // images: []
+            };
+            
+    
+            // if(Object.values(vehicleData).includes("")) {
+            //     console.log("Campos Vacios")
+            //     return
+            // } 
+            console.log(JSON.stringify(vehicleData));
             try {
-                const res = await fetch("http://localhost:3000/productos/crear", {
+                console.log("Antes de enviar los datos");
+                const response = await fetch("http://localhost:3000/productos/crear", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -42,19 +62,150 @@ export const LoadModalBtn = () => {
                     body: JSON.stringify(vehicleData)
                 });
 
-                console.log(res);
+                console.log(await response.text())
+
+                // Convierte la respuesta a JSON
+                // const result = await response.json();
+                // console.log(result);
             } catch (error) {
-                
+                console.log(error);
             }
-            menuClose();
+            // menuClose();
         });
     }
 }
 
-const menuOpen = () => {
-    modalBg.classList.add("flex");
-    modalBg.classList.remove("hidden");
+const loadArrayBuffer = async (imagen) => {
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+
+        fileReader.onload = () => {
+            resolve(fileReader.result);
+        };
+
+        fileReader.onerror = () => {
+            reject(new Error("Error al leer la imagen"));
+        };
+
+        fileReader.readAsArrayBuffer(imagen ?? "");
+    });
 }
+
+const loadImages = async () => {
+    const loadImagePromises = imagenes?.map(async (file) => {
+        const imageInArrayBuffer = await loadArrayBuffer(file);
+        return imageInArrayBuffer;
+    });
+
+    const images = await Promise.all(loadImagePromises);
+    return images; 
+};
+
+// Imagenes
+export const LoadHandleImages = () => {
+    const dropImage = document.getElementById("files") ?? null;
+    const inputImage = document.getElementById("imagenes") ?? null;
+    if(dropImage) {
+        dropImage.addEventListener("drop", handleDrop);
+        inputImage.addEventListener("change", handleImage);
+    }
+}
+
+const dragChange = document.getElementById("dragChange") ?? null;
+
+export const handleDragEnter = () => {
+    if(dragChange) {
+        dragChange.classList.remove("border-gray-300");
+        dragChange.classList.add("border-red-600");
+    }
+}
+
+export const handleDragLeave = () => {
+    if(dragChange) {
+        dragChange.classList.remove("border-red-600");
+        dragChange.classList.add("border-gray-300");
+    }
+}
+
+export const handleDrop = (e) => {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+    loadImagesAndShow(files);
+}
+
+export const handleImage = (e) => {
+    e.preventDefault();
+    const files = e.target.files;
+    loadImagesAndShow(files);
+}
+
+const loadImagesAndShow = async (files) => {
+    imagenes = [...imagenes, ...files];
+    for(const file of files) {
+        const imagenLoaded = await loadImage(file);
+        const imageInArrayBuffer = await loadArrayBuffer(file);
+        imagenesCargadas.push(imagenLoaded);
+        imagesArrayBuffer.push(imageInArrayBuffer);
+    }
+
+    handleDragLeave();
+    clearImages();
+    showImages();
+}
+
+const showImages = () => {
+    dragChange.classList.remove("flex-col", "flex", "justify-center", "items-center");
+    dragChange.classList.add("grid", "grid-cols-3", "gap-5", "p-2", "overflow-hidden", "relative")
+    imagenesCargadas.map((imagen, i) => {
+        if(i <= 6) {
+            const img = document.createElement("IMG");
+            img.src = imagen;
+            img.alt = "Image Preview";
+            img.classList.add("w-full", "h-[85px]", "object-cover", "rounded-lg", "shadow");
+            dragChange.appendChild(img);
+        }
+    });
+
+    const othersImages = imagenesCargadas.length - 6;
+    if(othersImages > 0) {
+        const paragraph = document.createElement("P");
+        paragraph.textContent = "+" + othersImages;
+        paragraph.classList.add("absolute", "top-2", "right-2", "text-white", "bg-gray-800", "px-2", "rounded-xl");
+        dragChange.appendChild(paragraph);
+    }
+}
+
+const clearImages = () => {
+    while(dragChange.children.length > 0) {
+        dragChange.removeChild(dragChange.firstChild);
+    }
+}
+
+const loadImage = async (imagen) => {
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.onload = () => {
+            resolve(fileReader.result);
+        };
+
+        fileReader.onerror = () => {
+            reject(new Error("Error al leer la imagen"));
+        };
+
+        fileReader.readAsDataURL(imagen);
+    });
+};
+
+
+
+// const showImage = () => {
+
+// }
+
+// const menuOpen = () => {
+//     modalBg.classList.add("flex");
+//     modalBg.classList.remove("hidden");
+// }
 
 const menuClose = () => {
     modalBg.classList.add("hidden");

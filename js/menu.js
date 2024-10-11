@@ -1,7 +1,7 @@
-const menuShowBtn = document.getElementById("menuBtn");
-const menuCloseBtn = document.getElementById("btnClose");
-const menu = document.getElementById("menu-mobile");
-const menuBg = document.getElementById("bgMenu");
+const menuShowBtn = document.getElementById("menuBtn") ?? null;
+const menuCloseBtn = document.getElementById("btnClose") ?? null;
+const menu = document.getElementById("menu-mobile") ?? null;
+const menuBg = document.getElementById("bgMenu") ?? null;
 
 export const LoadMenuBtn = () => {
     if(menuShowBtn) {

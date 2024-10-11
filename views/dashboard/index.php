@@ -106,6 +106,30 @@
                 ></textarea>
             </div>
 
+            <div class="flex flex-col gap-1">
+                <label for="imagenes" class="font-medium text-gray-800 text-sm">Imágenes</label>
+                <div 
+                    id="files"
+                    class="relative w-full h-52 border-red-600" 
+                    ondragenter="handleDragEnter()" 
+                    ondragleave="handleDragLeave()"
+                >
+                    <div 
+                        id="dragChange"
+                        class="w-full h-full border-2 border-gray-300 rounded-xl border-dashed flex flex-col justify-center items-center"
+                    >
+                        <p class="text-gray-700 text-sm font-semibold">Subir archivos</p>
+                        <p class="text-gray-500 text-sm italic font-medium">Arrastra y suelta</p>
+                    </div>
+                    <input 
+                        type="file"
+                        class="opacity-0 absolute inset-0"
+                        id="imagenes"
+                        multiple
+                    >
+                </div>
+            </div>
+
             <div class="flex gap-3 items-center justify-end mt-5">
                 <button
                     type="button"
@@ -124,3 +148,4 @@
     </div>
 </div>
 
+<script src="../../js/dashboard/modal.js" type="module"></script>
