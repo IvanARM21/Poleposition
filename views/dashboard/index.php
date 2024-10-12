@@ -1,6 +1,22 @@
-<?php 
-var_dump($vehiculos);
-?>
+<script>
+    // Verificar si el vehículo fue agregado exitosamente
+    document.addEventListener("DOMContentLoaded", function() {
+        const vehiculoAgregado = localStorage.getItem("vehiculoAgregado");
+        if (vehiculoAgregado === "true") {
+            // Mostrar el mensaje de éxito
+            const successMessage = document.getElementById("successMessage");
+            if (successMessage) {
+                successMessage.classList.remove("hidden");
+            }
+            // Eliminar el indicador de localStorage para que no vuelva a mostrarse
+            localStorage.removeItem("vehiculoAgregado");
+        }
+    });
+</script>
+
+<h2 id="successMessage" class="hidden text-green-600 font-bold">Vehículo agregado correctamente</h2>
+
+
 <div class="flex justify-between items-center gap-5">
     <h1 class="text-xl font-semibold">Lista de Vehiculos</h1>
 
@@ -139,11 +155,15 @@ var_dump($vehiculos);
                     <input 
                         type="file"
                         class="opacity-0 absolute inset-0"
-                        id="imagenes"
+                        id="imagenes"   
+                        accept=".jpg,.jpeg,.png,.gif"
                         multiple
                     >
                 </div>
             </div>
+
+            <div id="errorMsg" class="hidden text-left text-base font-bold mt-4"></div>
+
 
             <div class="flex gap-3 items-center justify-end mt-5">
                 <button

@@ -9,16 +9,43 @@ let imagenesCargadas = [];
 const form = document.getElementById("vehiculoForm") ?? null;
 
 export const LoadModalBtn = () => {
-    if(modalShowBtn) {
+    const modalShowBtn = document.getElementById("menuBtn") ?? null;
+    const modalCloseBtn = document.getElementById("btnClose") ?? null;
+    const modalCancelBtn = document.getElementById("btnCancel") ?? null;
+    const modalBg = document.getElementById("modalBg") ?? null;
+    const form = document.getElementById("vehiculoForm") ?? null;
+
+    const menuClose = () => {
+        modalBg.classList.add("hidden");
+        modalBg.classList.remove("flex");
+    };
+
+    if (modalShowBtn && modalCloseBtn && modalCancelBtn && form) {
+        // Mostrar modal
         modalShowBtn.addEventListener("click", () => {
             modalBg.classList.add("flex");
             modalBg.classList.remove("hidden");
         });
+
+        // Cerrar modal
         modalCloseBtn.addEventListener("click", menuClose);
-        modalCancelBtn.addEventListener("click", menuClose);        
+        modalCancelBtn.addEventListener("click", menuClose);
+
         form.addEventListener("submit", async function (e) {
             e.preventDefault();
-
+        
+            const fileInput = document.getElementById("imagenes"); 
+            const files = fileInput.files;
+            const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+        
+            // Validar que todos los archivos sean imágenes
+            for (let i = 0; i < files.length; i++) {
+                if (!allowedExtensions.exec(files[i].name)) {
+                    alert("Solo se permiten archivos con formato de imagen (.jpg, .jpeg, .png, .gif).");
+                    return;
+                }
+            }
+        
             const vehicleData = {
                 marca: document.getElementById("marca").value,
                 modelo: document.getElementById("modelo").value,
@@ -26,9 +53,9 @@ export const LoadModalBtn = () => {
                 precio: +document.getElementById("precio").value,
                 kilometraje: +document.getElementById("kilometraje").value,
                 descripcion: document.getElementById("descripcion").value,
-                images: imagenesCargadas
+                images: imagenesCargadas // Aquí tienes que asegurarte de que solo se pasen archivos de imagen
             };
-           
+
             try {
                 const response = await fetch("http://localhost:3000/productos/crear", {
                     method: "POST",
@@ -38,13 +65,31 @@ export const LoadModalBtn = () => {
                     body: JSON.stringify(vehicleData)
                 });
 
-                console.log(await response.text());
+                const result = await response.text();
+
+                if (response.ok) {
+                    localStorage.setItem("vehiculoAgregado", "true");
+
+                    menuClose();
+
+                    window.location.reload();
+                } else {
+                    const errorMessage = document.getElementById("errorMessage");
+                    if (errorMessage) {
+                        errorMessage.classList.remove("hidden");
+                    }
+                }
             } catch (error) {
-                console.log(error);
+                console.error(error);
+                const errorMessage = document.getElementById("errorMessage");
+                if (errorMessage) {
+                    errorMessage.classList.remove("hidden");
+                }
             }
         });
     }
-}
+};
+
 
 // Imagenes
 export const LoadHandleImages = () => {
@@ -85,16 +130,33 @@ export const handleImage = (e) => {
 }
 
 const loadImagesAndShow = async (files) => {
+    const errorMsg = document.getElementById("errorMsg");
+    errorMsg.classList.add("hidden");  
+    errorMsg.innerHTML = '';
+
+    const allowedExtensions = ['PNG', 'JPEG', 'Webp', 'Avif', 'Jfif'];
+
     imagenes = [...imagenes, ...files];
-    for(const file of files) {
-        const imagenLoaded = await loadImage(file);
-        imagenesCargadas.push(imagenLoaded);
+
+    for (const file of files) {
+        if (file.type.startsWith('image/')) {
+            const imagenLoaded = await loadImage(file);
+            imagenesCargadas.push(imagenLoaded);
+        } else {
+            console.log('Archivo no permitido:', file.name);
+
+            errorMsg.innerHTML = 'Solo se permiten archivos de las siguientes extensiones: ' +
+                allowedExtensions.map(ext => `<span class="text-red-600">${ext}</span>`).join(', ');
+
+            errorMsg.classList.remove("hidden"); 
+        }
     }
 
     handleDragLeave();
     clearImages();
     showImages();
 }
+
 
 const showImages = () => {
     dragChange.classList.remove("flex-col", "flex", "justify-center", "items-center");
