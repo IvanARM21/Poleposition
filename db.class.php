@@ -36,4 +36,15 @@ class DB {
         return $id;
     }
 
+    public function findVehiculosByIds($ids) {
+        $idsString = implode(',', array_map('intval', $ids));
+        $sql = "SELECT v.*, GROUP_CONCAT(vi.imagen) AS imagenes 
+                FROM vehiculo v 
+                LEFT JOIN vehiculoImagenes vi ON v.id = vi.idVehiculo 
+                WHERE v.id IN ($idsString) 
+                GROUP BY v.id";
+        return $this->find($sql);
+    }
+    
+
 }
