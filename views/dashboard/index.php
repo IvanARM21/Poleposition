@@ -1,3 +1,6 @@
+<?php 
+var_dump($vehiculos);
+?>
 <div class="flex justify-between items-center gap-5">
     <h1 class="text-xl font-semibold">Lista de Vehiculos</h1>
 
@@ -11,22 +14,34 @@
 </div>
 
 <div class="overflow-auto mt-10">
-    <table class="min-w-[800px] w-full">
+    <table class="min-w-[800px] w-full caption-bottom border-b border-gray-200">
         <thead>
-            <tr class="uppercase text-xs text-gray-800 border-b">
-                <th class="py-4 text-left">ID</th>
-                <th class="py-4 text-left">Vehiculo</th>
-                <th class="py-4 text-left">Precio</th>
-                <th class="py-4 text-left">Km</th>
-                <th class="py-4 text-left">Marca</th>
-                <th class="py-4 text-left">Año</th>
-                <th class="py-4 text-left">Acciones</th>
+            <tr class="border-b px-4 py-3.5 text-left text-sm font-semibold text-gray-800 border-gray-820">
+                <th class="border-b px-4 py-3.5 text-left text-sm font-semibold text-gray-800 border-gray-820">ID</th>
+                <th class="border-b px-4 py-3.5 text-left text-sm font-semibold text-gray-800 border-gray-820">Vehiculo</th>
+                <th class="border-b px-4 py-3.5 text-left text-sm font-semibold text-gray-800  border-gray-200">Precio</th>
+                <th class="border-b px-4 py-3.5 text-left text-sm font-semibold text-gray-800  border-gray-200">Km</th>
+                <th class="border-b px-4 py-3.5 text-left text-sm font-semibold text-gray-800  border-gray-200">Año</th>
+                <th class="border-b px-4 py-3.5 text-left text-sm font-semibold text-gray-800  border-gray-200">Acciones</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td></td>
-            </tr>
+        <tbody class="divide-y divide-gray-200">
+            <?php foreach($vehiculos as $vehiculo) : ?>
+                <tr>
+                    <td class="px-1 py-4 sm:p-4 text-sm"><?php echo $vehiculo->id; ?></td>
+                    <td class="px-1 py-4 sm:p-4 text-sm flex items-center gap-1">
+                        <img src="<?php echo "../../img/uploads/" . $vehiculo->imagenes ?>" alt="" class=" h-14 w-20 object-cover rounded-lg">
+                        <?php echo $vehiculo->marca ?>
+                        <?php echo $vehiculo->modelo; ?>
+                    </td>
+                    <td class="px-1 py-4 sm:p-4 text-sm"><?php echo $vehiculo->precio; ?></td>
+                    <td class="px-1 py-4 sm:p-4 text-sm"><?php echo $vehiculo->kilometraje; ?></td>
+                    <td class="px-1 py-4 sm:p-4 text-sm"><?php echo "2024" ?></td>
+                    <td class="px-1 py-4 sm:p-4 text-sm">
+                        
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </div>

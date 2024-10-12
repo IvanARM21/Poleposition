@@ -24,7 +24,7 @@ export const LoadModalBtn = () => {
                 modelo: document.getElementById("modelo").value,
                 color: document.getElementById("color").value,
                 precio: +document.getElementById("precio").value,
-                kilometraje: document.getElementById("kilometraje").value,
+                kilometraje: +document.getElementById("kilometraje").value,
                 descripcion: document.getElementById("descripcion").value,
                 images: imagenesCargadas
             };

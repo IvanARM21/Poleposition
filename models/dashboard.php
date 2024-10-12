@@ -25,9 +25,26 @@ class Dashboard {
             header("Location: /");
             exit();
         }
+
+        $sql = "
+            SELECT 
+                v.*, 
+                GROUP_CONCAT(vi.imagen SEPARATOR ',') AS imagenes
+            FROM 
+                Vehiculo v
+            LEFT JOIN 
+                vehiculoimagenes vi ON v.id = vi.idVehiculo
+            GROUP BY 
+                v.id";
+
+        $vehiculos = $this->db->find($sql);
+
+        json_encode($vehiculos);
+
         $this->title = "PP | Dashboard";
 
         return new Template('./views/dashboard/index.php', [
+            "vehiculos" => $vehiculos
         ]);
     }
 }
