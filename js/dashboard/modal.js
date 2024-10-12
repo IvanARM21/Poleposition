@@ -91,6 +91,7 @@ export const LoadModalBtn = () => {
 };
 
 
+
 // Imagenes
 export const LoadHandleImages = () => {
     const dropImage = document.getElementById("files") ?? null;
