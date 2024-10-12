@@ -15,8 +15,8 @@
 
 # Actualizar
 
-1. git add .
+1. ```git add .```
 
-2. git commit -m "explicar que se hizo"
+2. ```git commit -m "explicar que se hizo"```
 
-3. git push origin main
+3. ```git push origin main```
