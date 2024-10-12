@@ -55,10 +55,10 @@
             <div class="hidden lg:flex gap-5 justify-end items-center  text-red-600 font-semibold">
                 <?php if ($isLogged): ?>
                     <a class="link" href="/perfil">Perfil</a>
-                    <a class="link" href="/logout">Cerrar Sesión</a>
                     <?php if ($isAdmin): ?>
                         <a class="link" href="/dashboard">Dashboard</a>
                     <?php endif; ?>
+                    <a class="link" href="/logout">Cerrar Sesión</a>
                 <?php else: ?>
                     <a href="/login" class="link">Iniciar Sesión</a>
                     <a href="/register" class="link">Registrarse</a>
