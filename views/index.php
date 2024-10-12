@@ -1,7 +1,7 @@
 <?php
 
 $db = new DB();
-$idsDestacados = [1, 2, 3];
+$idsDestacados = [6, 2, 3];
 $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
 ?>
 <!-- marcas con las q trabajamos -->
@@ -89,8 +89,8 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
         <?php endforeach; ?>
     </div>
 
-    <div class="flex flex-row items-center justify-center sm:justify-normal sm:items-left px-4 sm:px-8 lg:px-[60px]">
-        <a name="catalogo" class="uppercase mt-6 mx-auto sm:mx-0 w-fit block py-3 px-8 text-xl text-white bg-red-600 hover:bg-red-700 rounded-lg font-extrabold transition-colors duration-300" href="./catalogo">
+    <div class="flex justify-start sm:justify-start mt-6">
+        <a name="catalogo" class="uppercase mx-auto sm:mx-0 py-3 px-8 text-xl text-white bg-red-600 hover:bg-red-700 rounded-lg font-extrabold transition-colors duration-300" href="./catalogo">
             Catálogo
         </a>
     </div>
@@ -103,11 +103,12 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
 <section>
 
     <div>
-        <a href="/contacto">
-            <h2
-                class="pt-20 font-black text-3xl sm:text-4xl lg:text-5xl text-red-600 flex justify-center lg:justify-normal uppercase text-center sm:text-left">
-                Contáctenos</h2>
-        </a>
+    <h2 class="pt-20 font-black text-3xl sm:text-4xl lg:text-5xl text-red-600 flex justify-center lg:justify-normal uppercase text-center sm:text-left">
+    <a href="/contacto" class="inline-block">
+        Contáctenos
+    </a>
+</h2>
+
         <p
             class="font-medium text-lg sm:text-xl lg:text-2xl text-gray-600 flex justify-center lg:justify-normal text-center sm:text-left sm:pt-5">
             Nuestros horarios de atención al cliente:</p>
