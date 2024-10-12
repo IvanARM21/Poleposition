@@ -58,33 +58,28 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
 
 <!-- vehiculos seleccionado -->
 <section class="px-4 sm:px-8 lg:px-16">
-    <h2
-        class="font-medium text-lg sm:text-xl lg:text-2xl text-gray-600 flex justify-center lg:justify-normal text-center sm:text-left pt-6 sm:pt-10">
+    <h2 class="font-medium text-lg sm:text-xl lg:text-2xl text-gray-600 flex justify-center lg:justify-normal text-center sm:text-left pt-6 sm:pt-10">
         Vehículos seleccionados
     </h2>
-    <h2
-        class="font-black text-3xl sm:text-4xl lg:text-5xl text-red-600 flex justify-center lg:justify-normal uppercase text-center sm:text-left">
+    <h2 class="font-black text-3xl sm:text-4xl lg:text-5xl text-red-600 flex justify-center lg:justify-normal uppercase text-center sm:text-left">
         Destacados
     </h2>
 
     <div class="flex flex-col sm:flex-row justify-center mx-auto w-full sm:space-x-4">
         <?php foreach ($vehiculosDestacados as $vehiculo): ?>
             <?php $imagenes = explode(',', $vehiculo->imagenes); ?>
-            <div
-                class="hover:border-1 hover:border-red-600 border-2 p-4 rounded-lg shadow-md mt-5 transition-transform transform hover:shadow-lg max-w-full sm:max-w-md md:max-w-lg flex flex-col sm:flex-row w-96 h-full">
-                <a href="/catalogo">
-                    <div>
+            <div class="border-2 p-4 rounded-lg shadow-md mt-5 transition-transform transform hover:shadow-lg max-w-full sm:max-w-md md:max-w-lg flex flex-col h-full">
+                <a href="/catalogo" class="flex flex-col h-full">
+                    <div class="flex-grow flex flex-col items-center">
                         <img src="../img/uploads/<?= htmlspecialchars($imagenes[0]) ?>"
-                            class="w-96 h-96 object-contain transition duration-500 ease-in-out transform hover:scale-102"
-                            <?php if (count($imagenes) > 1): ?>
-                                onmouseover="this.src='../img/uploads/<?= htmlspecialchars($imagenes[1]) ?>'"
-                                onmouseout="this.src='../img/uploads/<?= htmlspecialchars($imagenes[0]) ?>'" <?php endif; ?>>
+                             class="w-96 h-96 object-contain transition duration-500 ease-in-out transform hover:scale-102"
+                             <?php if (count($imagenes) > 1): ?>
+                                 onmouseover="this.src='../img/uploads/<?= htmlspecialchars($imagenes[1]) ?>'"
+                                 onmouseout="this.src='../img/uploads/<?= htmlspecialchars($imagenes[0]) ?>'" <?php endif; ?>>
 
-                        <h3
-                            class="font-extrabold text-left text-gray-800 mb-2 uppercase text-lg sm:text-xl lg:text-2xl pt-4">
-                            <?= htmlspecialchars($vehiculo->modelo) ?>     <?= htmlspecialchars($vehiculo->marca) ?>
+                        <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase text-lg sm:text-xl lg:text-2xl pt-4">
+                            <?= htmlspecialchars($vehiculo->marca) ?> <?= htmlspecialchars($vehiculo->modelo) ?>
                         </h3>
-                        <div class="border-2 shadow-2xl"></div>
                         <h3 class="font-extrabold text-left text-green-900 uppercase text-lg sm:text-xl lg:text-xl italic">
                             US$ <?= number_format($vehiculo->precio, 2) ?>
                         </h3>
@@ -94,14 +89,14 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
         <?php endforeach; ?>
     </div>
 
-    <div class="flex flex-row items-center justify-center sm:justify-normal sm:items-left px-4 sm:px-8 lg:px-28">
-        <a name="catalogo"
-            class="uppercase mt-6 mx-auto sm:mx-0 w-fit block py-3 px-8 text-xl text-white bg-red-600 hover:bg-red-700 rounded-lg font-extrabold transition-colors duration-300"
-            href="./catalogo">
+    <div class="flex flex-row items-center justify-center sm:justify-normal sm:items-left px-4 sm:px-8 lg:px-[60px]">
+        <a name="catalogo" class="uppercase mt-6 mx-auto sm:mx-0 w-fit block py-3 px-8 text-xl text-white bg-red-600 hover:bg-red-700 rounded-lg font-extrabold transition-colors duration-300" href="./catalogo">
             Catálogo
         </a>
     </div>
 </section>
+
+
 
 <!-- contactenos -->
 
