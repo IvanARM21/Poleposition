@@ -1,13 +1,9 @@
 <?php
 
-// Modelo de la página de Products
 class Productos {
 
     private $db;
     private $title;
-
-    // Se le pasa la instancia de la base de datos
-    // para poder insertar datos guardar datos y así
     public function __construct($db) {
         $this->db = $db;
     }
@@ -15,20 +11,14 @@ class Productos {
     public function getTitle() {
         return $this->title;
     }
-
-    // Este es el index de en este caso Página Productos
     // /products
     public function index() {
         $sql = "SELECT * FROM vehiculo";
         $product = $this->db->find($sql);
 
-        // Creamos el título de está página
         $this->title = "PP | Vehiculos";
         header("Location: /dashboard");
     }
-
-    // Esta es la página donde podemos ver el producto
-    // /products/1
     public function show($id) {
         echo $id;
         
@@ -39,68 +29,85 @@ class Productos {
         ]);
     }
     
-    // En los siguientes metodos creo que se deben realizar modificiones en
-    // callMethod para incluirlos de forma correcta
-
-    // Aquí podemos crear un nuevo producto
-    // /products/create
     public function create() {
-        // Desactiva la visualización de errores
-        error_reporting(E_ALL);
-        ini_set('display_errors', 0);
-    
-        // Configura el encabezado para JSON
         header('Content-Type: application/json');
     
         // Obtén el contenido JSON de la solicitud
         $rawData = file_get_contents('php://input');
     
-        // Decodifica el JSON a un array asociativo
         $vehicleData = json_decode($rawData, true);
     
-        // Verifica si hubo un error en la decodificación
         if (json_last_error() !== JSON_ERROR_NONE) {
             echo json_encode(['status' => 'error', 'message' => 'Error en los datos JSON']);
             return;
         }
     
-        // Accede a los datos
-        $marca = $vehicleData['marca'] ?? '';
         $modelo = $vehicleData['modelo'] ?? '';
+        $marca = $vehicleData['marca'] ?? '';
         $color = $vehicleData['color'] ?? '';
         $precio = $vehicleData['precio'] ?? 0;
         $kilometraje = $vehicleData['kilometraje'] ?? 0;
         $descripcion = $vehicleData['descripcion'] ?? '';
         $images = $vehicleData['images'] ?? [];
-    
-        // Genera la respuesta
-        $response = ['status' => 'success', 'data' => $vehicleData];
-        $jsonResponse = json_encode($response);
 
-        return $jsonResponse;
-    
-        // Verifica si hubo un error al codificar el JSON
-        if ($jsonResponse === false) {
-            echo json_encode(['status' => 'error', 'message' => 'Error en la codificación JSON']);
-            return;
+        $imagesName = [];
+        if($images) {
+          foreach($images as $image) {
+            $imagesName[] = $this->uploadFiles($image);
+          }
         }
-    
-        // Envía la respuesta JSON
 
-        echo $jsonResponse;
+        try {
+            // Guardar en la BD
+            $sql = "INSERT INTO Vehiculo (modelo, marca, color, precio, kilometraje, descripcion) VALUES ('$modelo', '$marca', '$color', $precio, $kilometraje, '$descripcion')";
+            $idVehiculo = $this->db->save($sql);
+
+            // Guardar Imagenes
+            foreach($imagesName as $image) {
+                $sql = "INSERT INTO vehiculoimagenes (idVehiculo, imagen) VALUES ($idVehiculo, '$image')";
+                $this->db->save($sql);
+            }
+
+            echo json_encode(['ok' => true, 'message' => 'Se ha guardado correctamente.']);
+        } catch (\Throwable $th) {
+            echo json_encode(['ok' => false, 'message' => 'Ha ocurrido un error.']);
+        }
+        exit;
+
     }
-    
-    
-    
-    
 
-    // Aquí podemos actualizar un producto
     public function update($id) {
         
     }
 
-    // Aquí podemos eliminar un producto
     public function delete($id) {
         
     }
+
+    public function uploadFiles($file) {
+        $base64Str = $file;
+        $base64String = preg_replace('#^data:image/\w+;base64,#i', '', $base64Str); 
+
+        // Decodificar Base64
+        $imageData = base64_decode($base64String);
+
+        // Nombre unico
+        $imageUnique = md5(uniqid(rand(), true)) . ".webp";
+
+        $uploadDir = dirname(__DIR__) . DIRECTORY_SEPARATOR . "img" . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
+        // Direction para subir archivos
+
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        } 
+
+        $filePath = $uploadDir . $imageUnique;
+
+
+        file_put_contents($filePath, $imageData);
+
+        // Retornamos la URL completa para guardar su nombre en BD 
+        return $imageUnique;
+    }
+
 }

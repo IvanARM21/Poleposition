@@ -4,7 +4,7 @@ class DB {
     private $db;
 
     public function __construct() {
-        $this->db = new mysqli("localhost", "root", "1234", "poleposition");
+        $this->db = new mysqli("localhost", "root", "root", "poleposition");
         
         if ($this->db->connect_error) {
             die("Error de conexión: " . $this->db->connect_error);
@@ -27,6 +27,13 @@ class DB {
     public function findOne($sql) {
         $result = $this->db->query($sql);
         return $result->fetch_object();
+    }
+
+    public function save($sql) {
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $id = $this->db->insert_id;
+        return $id;
     }
 
 }

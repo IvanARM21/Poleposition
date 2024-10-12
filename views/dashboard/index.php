@@ -110,16 +110,16 @@
                 <label for="imagenes" class="font-medium text-gray-800 text-sm">Imágenes</label>
                 <div 
                     id="files"
-                    class="relative w-full h-52 border-red-600" 
+                    class="relative w-full h-60 border-red-600" 
                     ondragenter="handleDragEnter()" 
                     ondragleave="handleDragLeave()"
                 >
                     <div 
                         id="dragChange"
-                        class="w-full h-full border-2 border-gray-300 rounded-xl border-dashed flex flex-col justify-center items-center"
+                        class="w-full h-full border border-gray-300 rounded-xl border-dashed flex flex-col justify-center items-center"
                     >
-                        <p class="text-gray-700 text-sm font-semibold">Subir archivos</p>
-                        <p class="text-gray-500 text-sm italic font-medium">Arrastra y suelta</p>
+                        <p class="text-gray-600 font-medium mb-1"><span class="text-red-600">Subir archivos</span> o arrastra y suelta</p>
+                        <p class="text-gray-500 text-sm font-medium">PNG, JPEG, Webp, Avif</p>
                     </div>
                     <input 
                         type="file"

@@ -5,7 +5,6 @@ const modalBg = document.getElementById("modalBg") ?? null;
 
 let imagenes = [];
 let imagenesCargadas = [];
-let imagesArrayBuffer = [];
 
 const form = document.getElementById("vehiculoForm") ?? null;
 
@@ -20,40 +19,17 @@ export const LoadModalBtn = () => {
         form.addEventListener("submit", async function (e) {
             e.preventDefault();
 
-            console.log("Has hecho click !!!!!!")
-            let images = [];
-            if(imagesArrayBuffer.length) {
-                images = await loadImages();
-            }
-
-            // const vehicleData = {
-            //     marca: document.getElementById("marca").value,
-            //     modelo: document.getElementById("modelo").value,
-            //     color: document.getElementById("color").value,
-            //     precio: +document.getElementById("precio").value,
-            //     kilometraje: document.getElementById("kilometraje").value,
-            //     descripcion: document.getElementById("descripcion").value,
-            //     images: images
-            // };
-
             const vehicleData = {
-                marca: "Toyota",
-                modelo: "Corolla",
-                color: "Rojo",
-                precio: 20000, // Asegúrate de que sea un número
-                kilometraje: 15000, // También un número
-                descripcion: "Un excelente vehículo en condiciones impecables.",
-                // images: []
+                marca: document.getElementById("marca").value,
+                modelo: document.getElementById("modelo").value,
+                color: document.getElementById("color").value,
+                precio: +document.getElementById("precio").value,
+                kilometraje: document.getElementById("kilometraje").value,
+                descripcion: document.getElementById("descripcion").value,
+                images: imagenesCargadas
             };
-            
-    
-            // if(Object.values(vehicleData).includes("")) {
-            //     console.log("Campos Vacios")
-            //     return
-            // } 
-            console.log(JSON.stringify(vehicleData));
+           
             try {
-                console.log("Antes de enviar los datos");
                 const response = await fetch("http://localhost:3000/productos/crear", {
                     method: "POST",
                     headers: {
@@ -62,44 +38,13 @@ export const LoadModalBtn = () => {
                     body: JSON.stringify(vehicleData)
                 });
 
-                console.log(await response.text())
-
-                // Convierte la respuesta a JSON
-                // const result = await response.json();
-                // console.log(result);
+                console.log(await response.text());
             } catch (error) {
                 console.log(error);
             }
-            // menuClose();
         });
     }
 }
-
-const loadArrayBuffer = async (imagen) => {
-    return new Promise((resolve, reject) => {
-        const fileReader = new FileReader();
-
-        fileReader.onload = () => {
-            resolve(fileReader.result);
-        };
-
-        fileReader.onerror = () => {
-            reject(new Error("Error al leer la imagen"));
-        };
-
-        fileReader.readAsArrayBuffer(imagen ?? "");
-    });
-}
-
-const loadImages = async () => {
-    const loadImagePromises = imagenes?.map(async (file) => {
-        const imageInArrayBuffer = await loadArrayBuffer(file);
-        return imageInArrayBuffer;
-    });
-
-    const images = await Promise.all(loadImagePromises);
-    return images; 
-};
 
 // Imagenes
 export const LoadHandleImages = () => {
@@ -143,9 +88,7 @@ const loadImagesAndShow = async (files) => {
     imagenes = [...imagenes, ...files];
     for(const file of files) {
         const imagenLoaded = await loadImage(file);
-        const imageInArrayBuffer = await loadArrayBuffer(file);
         imagenesCargadas.push(imagenLoaded);
-        imagesArrayBuffer.push(imageInArrayBuffer);
     }
 
     handleDragLeave();
@@ -155,13 +98,13 @@ const loadImagesAndShow = async (files) => {
 
 const showImages = () => {
     dragChange.classList.remove("flex-col", "flex", "justify-center", "items-center");
-    dragChange.classList.add("grid", "grid-cols-3", "gap-5", "p-2", "overflow-hidden", "relative")
+    dragChange.classList.add("grid", "grid-cols-3", "gap-2", "p-2", "relative")
     imagenesCargadas.map((imagen, i) => {
-        if(i <= 6) {
+        if(i < 6) {
             const img = document.createElement("IMG");
             img.src = imagen;
             img.alt = "Image Preview";
-            img.classList.add("w-full", "h-[85px]", "object-cover", "rounded-lg", "shadow");
+            img.classList.add("w-full", "h-[108px]", "object-cover", "rounded-lg", "shadow");
             dragChange.appendChild(img);
         }
     });
@@ -170,7 +113,7 @@ const showImages = () => {
     if(othersImages > 0) {
         const paragraph = document.createElement("P");
         paragraph.textContent = "+" + othersImages;
-        paragraph.classList.add("absolute", "top-2", "right-2", "text-white", "bg-gray-800", "px-2", "rounded-xl");
+        paragraph.classList.add("absolute", "-top-2", "-right-2", "text-white", "bg-gray-800", "px-2", "rounded-xl");
         dragChange.appendChild(paragraph);
     }
 }
