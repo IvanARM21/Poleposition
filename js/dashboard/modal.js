@@ -36,12 +36,12 @@ export const LoadModalBtn = () => {
         
             const fileInput = document.getElementById("imagenes"); 
             const files = fileInput.files;
-            const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+            const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.jfif)$/i;
         
-            // Validar que todos los archivos sean imágenes
+            // validar las extensiones
             for (let i = 0; i < files.length; i++) {
                 if (!allowedExtensions.exec(files[i].name)) {
-                    alert("Solo se permiten archivos con formato de imagen (.jpg, .jpeg, .png, .gif).");
+                    alert("Solo se permiten archivos con formato de imagen (.jpg, .jpeg, .png, .gif, .jfif).");
                     return;
                 }
             }

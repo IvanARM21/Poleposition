@@ -150,7 +150,7 @@
                         class="w-full h-full border border-gray-300 rounded-xl border-dashed flex flex-col justify-center items-center"
                     >
                         <p class="text-gray-600 font-medium mb-1"><span class="text-red-600">Subir archivos</span> o arrastra y suelta</p>
-                        <p class="text-gray-500 text-sm font-medium">PNG, JPEG, Webp, Avif</p>
+                        <p class="text-gray-500 text-sm font-medium">PNG, JPEG, Webp, Avif, JFIF</p>
                     </div>
                     <input 
                         type="file"
