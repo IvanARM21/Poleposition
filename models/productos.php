@@ -20,13 +20,23 @@ class Productos {
         header("Location: /dashboard");
     }
     public function show($id) {
-        echo $id;
-        
-        $product = $this->db->queryOne("SELECT * FROM products WHERE id = " . $id);
+        header('Content-Type: application/json');
+         
+        $sql = "SELECT v.*, GROUP_CONCAT(vi.imagen SEPARATOR ',') AS imagenes 
+        FROM Vehiculo v 
+        LEFT JOIN vehiculoimagenes vi ON v.id = vi.idVehiculo 
+        WHERE v.id = $id 
+        GROUP BY v.id";
 
-        return new Template('./views/productos/show.html', [
-            "product" => $product
-        ]);
+        // Ejecuta la consulta y verifica si falló
+        $vehicle = $this->db->find($sql);
+        if (!$vehicle) {
+            echo json_encode(['vehicle' => false, 'message' => 'Error en la consulta SQL: ' . $this->db->error()]);
+            exit;
+        }
+
+        echo json_encode(['vehicle' => $vehicle, 'message' => 'Se ha guardado correctamente.']);
+        exit;
     }
     
     public function create() {

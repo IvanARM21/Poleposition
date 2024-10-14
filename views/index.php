@@ -1,7 +1,7 @@
 <?php
 
 $db = new DB();
-$idsDestacados = [6, 2, 3];
+$idsDestacados = [1, 2, 3];
 $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
 ?>
 <!-- marcas con las q trabajamos -->
@@ -10,8 +10,10 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
 
 <section class>
     <h2 class="font-black text-2xl text-red-600 flex justify-center uppercase text-center md:text-5xl lg:text-5xl">
-        Marcas con las que trabajamos
+        marcas
     </h2>
+
+
     <div class="flex flex-wrap justify-center items-center mx-auto w-full max-w-5xl pt-8 pb-16">
         <div class="flex justify-center space-x-5">
             <img src="../img/marcas/lambo.png" class="h-16 w-auto sm:h-24 md:h-32 lg:h-32">
