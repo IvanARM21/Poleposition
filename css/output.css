@@ -9,8 +9,8 @@
 }
 
 * {
-  font-family: 'Mulish', sans-serif;
   animation: entrada 0.25s ease-out;
+  font-family: "Afacad Flux", sans-serif;
 }
 
 html {
@@ -67,7 +67,6 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
 }
 
 .swiper {
@@ -77,47 +76,52 @@ html {
 
 .img-1 {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-		url("../img/contacto/5.jpg");
+    url("../img/contacto/5.jpg");
 }
 
 .img-2 {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-		url("../img/contacto/1.png");
+    url("../img/contacto/1.png");
 }
 
 .img-3 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/contacto/2.webp");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../img/contacto/2.webp");
 }
 
 .img-4 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/contacto/3.webp')
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../img/contacto/3.webp");
 }
 
 .img-5 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/contacto/4.webp')
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../img/contacto/4.webp");
 }
 
 .img-1-sobrenosotros {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-		  url("../img/ferrariSN.jpg");
+    url("../img/ferrariSN.jpg");
 }
 
 .img-2-sobrenosotros {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-		  url("../img/llavesSN.jpg");
+    url("../img/llavesSN.jpg");
 }
 
 .img-3-sobrenosotros {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-			url("../img/BMWSN.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../img/BMWSN.jpg");
 }
 
 .img-4-sobrenosotros {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/ferrari.jpg")
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../img/ferrari.jpg");
 }
 
 .img-5-sobrenosotros {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/contacto/4.webp')
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../img/contacto/4.webp");
 }
 
 .swiper-slide {
@@ -160,7 +164,7 @@ html {
   }
 
   .swiper-button-prev,
-	.swiper-button-next {
+  .swiper-button-next {
     display: none;
   }
 }
@@ -839,6 +843,40 @@ video {
   --tw-contain-style:  ;
 }
 
+.container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
 .formulario {
   display: flex;
   width: 100%;
@@ -919,11 +957,6 @@ video {
 
 .inset-0 {
   inset: 0px;
-}
-
-.inset-x-0 {
-  left: 0px;
-  right: 0px;
 }
 
 .-right-2 {
@@ -1060,6 +1093,11 @@ video {
   aspect-ratio: 16 / 9;
 }
 
+.size-28 {
+  width: 7rem;
+  height: 7rem;
+}
+
 .size-5 {
   width: 1.25rem;
   height: 1.25rem;
@@ -1105,6 +1143,10 @@ video {
 
 .h-\[90vh\] {
   height: 90vh;
+}
+
+.h-auto {
+  height: auto;
 }
 
 .h-full {
@@ -1180,6 +1222,10 @@ video {
   max-width: 100%;
 }
 
+.max-w-screen-xl {
+  max-width: 1280px;
+}
+
 .max-w-xs {
   max-width: 20rem;
 }
@@ -1222,16 +1268,16 @@ video {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .flex-row {
   flex-direction: row;
 }
 
 .flex-col {
   flex-direction: column;
-}
-
-.flex-col-reverse {
-  flex-direction: column-reverse;
 }
 
 .flex-wrap {
@@ -1264,6 +1310,10 @@ video {
 
 .gap-1 {
   gap: 0.25rem;
+}
+
+.gap-10 {
+  gap: 2.5rem;
 }
 
 .gap-2 {
@@ -1397,6 +1447,11 @@ video {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
+.bg-gray-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+
 .bg-gray-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
@@ -1462,9 +1517,19 @@ video {
   padding-right: 1rem;
 }
 
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 
 .py-2 {
@@ -1497,8 +1562,16 @@ video {
   padding-bottom: 2rem;
 }
 
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+
 .pb-16 {
   padding-bottom: 4rem;
+}
+
+.pt-10 {
+  padding-top: 2.5rem;
 }
 
 .pt-20 {
@@ -1772,9 +1845,8 @@ video {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-gray-300:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+.hover\:bg-gray-200\/70:hover {
+  background-color: rgb(229 231 235 / 0.7);
 }
 
 .hover\:bg-gray-50:hover {
@@ -1792,14 +1864,14 @@ video {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-.hover\:text-red-600:hover {
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity));
-}
-
 .hover\:text-blue-600:hover {
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+
+.hover\:text-red-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 
 .hover\:shadow-lg:hover {
@@ -1922,10 +1994,6 @@ video {
 }
 
 @media (min-width: 768px) {
-  .md\:h-20 {
-    height: 5rem;
-  }
-
   .md\:h-32 {
     height: 8rem;
   }
@@ -1936,10 +2004,6 @@ video {
 
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .md\:flex-row {
-    flex-direction: row;
   }
 
   .md\:px-16 {

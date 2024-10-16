@@ -1,27 +1,32 @@
 <?php
 
-class Productos {
+class Productos
+{
 
     private $db;
     private $title;
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->db = $db;
     }
 
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
     // /products
-    public function index() {
+    public function index()
+    {
         $sql = "SELECT * FROM vehiculo";
         $product = $this->db->find($sql);
 
         $this->title = "PP | Vehiculos";
         header("Location: /dashboard");
     }
-    public function show($id) {
+    public function show($id)
+    {
         header('Content-Type: application/json');
-         
+
         $sql = "SELECT v.*, GROUP_CONCAT(vi.imagen SEPARATOR ',') AS imagenes 
         FROM Vehiculo v 
         LEFT JOIN vehiculoimagenes vi ON v.id = vi.idVehiculo 
@@ -38,20 +43,21 @@ class Productos {
         echo json_encode(['vehicle' => $vehicle, 'message' => 'Se ha guardado correctamente.']);
         exit;
     }
-    
-    public function create() {
+
+    public function create()
+    {
         header('Content-Type: application/json');
-    
+
         // Obtén el contenido JSON de la solicitud
         $rawData = file_get_contents('php://input');
-    
+
         $vehicleData = json_decode($rawData, true);
-    
+
         if (json_last_error() !== JSON_ERROR_NONE) {
-            echo json_encode(['status' => 'error', 'message' => 'Error en los datos JSON']);
+            echo json_encode(['status' => 'error', 'message' => 'Error en los datos']);
             return;
         }
-    
+
         $modelo = $vehicleData['modelo'] ?? '';
         $marca = $vehicleData['marca'] ?? '';
         $color = $vehicleData['color'] ?? '';
@@ -61,10 +67,10 @@ class Productos {
         $images = $vehicleData['images'] ?? [];
 
         $imagesName = [];
-        if($images) {
-          foreach($images as $image) {
-            $imagesName[] = $this->uploadFiles($image);
-          }
+        if ($images) {
+            foreach ($images as $image) {
+                $imagesName[] = $this->uploadFiles($image);
+            }
         }
 
         try {
@@ -73,7 +79,7 @@ class Productos {
             $idVehiculo = $this->db->save($sql);
 
             // Guardar Imagenes
-            foreach($imagesName as $image) {
+            foreach ($imagesName as $image) {
                 $sql = "INSERT INTO vehiculoimagenes (idVehiculo, imagen) VALUES ($idVehiculo, '$image')";
                 $this->db->save($sql);
             }
@@ -86,22 +92,40 @@ class Productos {
 
     }
 
-    public function update($id) {
-        
+    public function update($id)
+    {
+
     }
 
-    public function delete($id) {
-        
+    public function delete($id)
+    {
+        header('Content-Type: application/json');
+
+        // Eliminar Vehiculo
+        if ($id) {
+            $sqlImages = "DELETE FROM vehiculoimagenes WHERE idVehiculo = $id";
+            $this->db->delete($sqlImages);
+            $sql = "DELETE FROM vehiculo WHERE id = $id";
+            $this->db->delete($sql);
+            echo json_encode(['ok' => true, 'message' => 'Se ha eliminado correctamente.']);
+
+        } else {
+            echo json_encode(['ok' => false, 'message' => 'Ha ocurrido un error.']);
+        }
+        // Ejemplo 
+        // echo json_encode(['ok' => false, 'message' => 'Ha ocurrido un error.']);
+        exit;
     }
 
-    public function uploadFiles($file) {
+    public function uploadFiles($file)
+    {
         $base64Str = $file;
-        $base64String = preg_replace('#^data:image/\w+;base64,#i', '', $base64Str); 
+        $base64String = preg_replace('#^data:image/\w+;base64,#i', '', $base64Str);
 
         // Decodificar Base64
         $imageData = base64_decode($base64String);
 
-        // Nombre unico
+        // Nombre uncio
         $imageUnique = md5(uniqid(rand(), true)) . ".webp";
 
         $uploadDir = dirname(__DIR__) . DIRECTORY_SEPARATOR . "img" . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
@@ -109,7 +133,7 @@ class Productos {
 
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0755, true);
-        } 
+        }
 
         $filePath = $uploadDir . $imageUnique;
 

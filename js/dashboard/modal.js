@@ -43,7 +43,7 @@ export const LoadModalBtn = () => {
                 getVehicleById(e.currentTarget.id);
                 setTitle();
             });
-        })
+        });
 
         // Cerrar modal
         modalCloseBtn.addEventListener("click", menuClose);
@@ -107,8 +107,6 @@ export const LoadModalBtn = () => {
         });
     }
 };
-
-
 
 // Imagenes
 export const LoadHandleImages = () => {

@@ -3,12 +3,14 @@
 require_once('db.class.php');
 require_once('template.class.php');
 
-class App {
+class App
+{
     private $db;
     private $model;
     private $args;
 
-    public function __construct() {
+    public function __construct()
+    {
         $uri = $_SERVER['REQUEST_URI'];
         $uriParts = explode('/', $uri);
         array_shift($uriParts);
@@ -17,11 +19,13 @@ class App {
         $this->loadModel($uriParts[0]);
     }
 
-    public function connectDB() {
+    public function connectDB()
+    {
         $this->db = new DB();
     }
 
-    public function loadModel($modelName) {
+    public function loadModel($modelName)
+    {
         if ($modelName != "") {
             $modelPath = "./models/" . $this->getModelFileName($modelName);
             if (file_exists($modelPath)) {
@@ -39,7 +43,8 @@ class App {
         }
     }
 
-    private function getModelFileName($modelName) {
+    private function getModelFileName($modelName)
+    {
         if (preg_match('/-/', $modelName)) {
             $modelParts = explode('-', $modelName);
             return implode('', $modelParts) . ".php";
@@ -47,7 +52,8 @@ class App {
         return $modelName . ".php";
     }
 
-    private function getModelName($modelName) {
+    private function getModelName($modelName)
+    {
         if (preg_match('/-/', $modelName)) {
             $modelParts = explode('-', $modelName);
             return implode('', $modelParts);
@@ -55,9 +61,10 @@ class App {
         return $modelName;
     }
 
-    private function callMethod($model) {
+    private function callMethod($model)
+    {
         $template = "";
-    
+
         // Asegúrate de que el método index esté en el modelo
         if (method_exists($model, 'index') && !isset($this->args[0])) {
             $template = $model->index();
@@ -65,7 +72,7 @@ class App {
             $template = $model->create();
         } else if (method_exists($model, 'update') && $this->args[0] === "editar") {
             $template = $model->update($this->args[1]);
-        } else if (method_exists($model, 'delete') && $this->args[0] === "delete") {
+        } else if (method_exists($model, 'delete') && $this->args[0] === "eliminar") {
             $template = $model->delete($this->args[1]);
         } else if (method_exists($model, 'show')) {
             $template = $model->show($this->args[0]);
@@ -74,12 +81,13 @@ class App {
             $this->redirectToErrorPage();
             return; // Evitar que continúe
         }
-    
+
         $layout = (get_class($model) === "Dashboard") ? "admin" : "app";
         $this->render($template, $model->getTitle(), $layout);
     }
-    
-    private function render($child, $title = "PP | Home", $layout = "app") {
+
+    private function render($child, $title = "PP | Home", $layout = "app")
+    {
         if ($layout === "app") {
             $view = new Template("./views/app.php", [
                 "title" => $title,
@@ -94,9 +102,10 @@ class App {
         echo $view;
     }
 
-    private function redirectToErrorPage() {
+    private function redirectToErrorPage()
+    {
         http_response_code(404);
-        header("Location: /no-encontrada"); 
+        header("Location: /no-encontrada");
         exit();
     }
 }
