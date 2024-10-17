@@ -21,11 +21,10 @@ export const loadModalDeleteBtn = () => {
         });
     });
 
-    // Close modal
-    modalCloseBtn.addEventListener("click", menuClose);
-    modalCancelBtn.addEventListener("click", menuClose);
 
     deleteBtn.addEventListener("click", deleteVehicle);
+    modalCloseBtn.addEventListener("click", menuClose);
+    modalCancelBtn.addEventListener("click", menuClose);
 }
 
 const menuClose = () => {
@@ -37,8 +36,9 @@ const deleteVehicle = async () => {
     console.log("Eliminando", vehicleId);
     const resp = await fetch(`${PAGE_URL}/productos/eliminar/${vehicleId}`);
 
-    // Resp leer respuesta de /products/eliminar/${id}
-
     const result = await resp.text();
     console.log(result);
+
+    menuClose();
+    location.reload();
 }

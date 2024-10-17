@@ -171,7 +171,7 @@
 
 
     <!-- Contenido de la página -->
-    <footer class="bg-gray-50 w-full">
+    <footer class="bg-gray-50 w-full border-t border-gray-300 border-opacity-60">
         <div class="mx-auto max-w-screen-xl w-full px-6  py-10">
             <div class="grid grid-cols-5 gap-10 pb-10">
                 <div class="col-span-2">
@@ -199,7 +199,7 @@
                             <p>Sábado de 8.30 a 12:30</p>
                         </li>
                         <li><span class="text-gray-800">Télefono:</span> (+598) 91 014 226</li>
-                        <li><span class="text-gray-800">Email:</span> ceracoders@ventas.com</li>
+                        <li><span class="text-gray-800">Email:</span> contacto@poleposition.com</li>
                     </ul>
                 </div>
 
@@ -216,12 +216,12 @@
             </div>
 
             <div class="border-t w-full pt-10 flex justify-between items-center">
-                <p class="text-lg font-medium text-gray-600">© 2024 PolePosition, Inc. All rights reserved.</p>
+                <p class="text-lg font-medium text-gray-600">© 2024 PolePosition. Todos los derechos reservados.</p>
 
                 <div class="flex gap-5">
-                    <a href="https://www.facebook.com" target="_blank"
+                    <a href="https://www.instagram.com/ivanrm021" target="_blank"
                         class="text-lg text-gray-600 font-medium">Facebook</a>
-                    <a href="https://www.instagram.com/" target="_blank"
+                    <a href="https://www.instagram.com/bbruuuuno" target="_blank"
                         class="text-lg text-gray-600 font-medium">Instagram</a>
                 </div>
             </div>

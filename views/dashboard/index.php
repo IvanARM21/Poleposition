@@ -1,20 +1,24 @@
 <script>
-    // Verificar si el vehículo fue agregado exitosamente
     document.addEventListener("DOMContentLoaded", function () {
         const vehiculoAgregado = localStorage.getItem("vehiculoAgregado");
         if (vehiculoAgregado === "true") {
-            // Mostrar el mensaje de éxito
-            const successMessage = document.getElementById("successMessage");
-            if (successMessage) {
-                successMessage.classList.remove("hidden");
+            const successAlert = document.getElementById("successAlert");
+            if (successAlert) {
+                successAlert.classList.remove("hidden");
             }
-            // Eliminar el indicador de localStorage para que no vuelva a mostrarse
             localStorage.removeItem("vehiculoAgregado");
         }
     });
 </script>
 
-<h2 id="successMessage" class="hidden text-green-600 font-bold">Vehículo agregado correctamente</h2>
+
+<div id="successAlert" class="hidden flex items-center p-4 border-2 border-green-500/70 rounded-lg bg-black bg-opacity-10 shadow-lg mb-4">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+    </svg>
+    <h2 id="successMessage" class="text-black font-bold text-xl">Vehículo agregado correctamente</h2>
+</div>
+
 
 
 <div class="flex justify-between items-center gap-5">
