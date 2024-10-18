@@ -228,6 +228,7 @@ const menuClose = () => {
     modalBg.classList.add("hidden");
     modalBg.classList.remove("flex");
     resetData();
+    window.location.reload();
 }
 
 const setTitle = () => {
