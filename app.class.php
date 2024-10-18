@@ -33,7 +33,7 @@ class App
                 $modelName = ucfirst($this->getModelName($modelName));
                 $this->model = new $modelName($this->db);
                 $this->callMethod($this->model);
-            } else {
+            }  else {
                 http_response_code(404);
                 $this->redirectToErrorPage(); // Redirige a la página de error
             }
@@ -76,11 +76,11 @@ class App
             $template = $model->delete($this->args[1]);
         } else if (method_exists($model, 'show')) {
             $template = $model->show($this->args[0]);
-        } else {
-            // Si no se encuentra un método, redirigir a la página de error
-            $this->redirectToErrorPage();
-            return; // Evitar que continúe
-        }
+         }  else {
+             // Si no se encuentra un método, redirigir a la página de error
+         $this->redirectToErrorPage();
+             return; // Evitar que continúe
+         }
 
         $layout = (get_class($model) === "Dashboard") ? "admin" : "app";
         $this->render($template, $model->getTitle(), $layout);

@@ -62,7 +62,7 @@
                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">US$ <?= number_format($vehiculo->precio, 2) ?>
                     </td>
                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $vehiculo->kilometraje; ?></td>
-                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo "2024" ?></td>
+                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $vehiculo->año ?></td>
                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">
                         <div class="flex gap-5 items-center">
                             <button type="button" id="<?php echo $vehiculo->id ?>" name="editBtn"
@@ -122,6 +122,12 @@
                 <label for="precio" class="font-medium text-gray-800 ">Precio</label>
                 <input type="text" class="w-full border shadow rounded-xl py-2 px-4" id="precio"
                     placeholder="Precio del vehiculo">
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <label for="kilometraje" class="font-medium text-gray-800 ">Año</label>
+                <input type="number" class="w-full border shadow rounded-xl py-2 px-4" id="año"
+                    placeholder="Kilometros del vehiculo">
             </div>
 
             <div class="flex flex-col gap-1">

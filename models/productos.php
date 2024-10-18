@@ -75,8 +75,11 @@ class Productos
 
         try {
             // Guardar en la BD
-            $sql = "INSERT INTO Vehiculo (modelo, marca, color, precio, kilometraje, descripcion) VALUES ('$modelo', '$marca', '$color', $precio, $kilometraje, '$descripcion')";
+            $sql = "INSERT INTO Vehiculo (modelo, marca, color, precio, kilometraje, descripcion, año) VALUES ('$modelo', '$marca', '$color', $precio, $kilometraje, '$descripcion', 2025)";
             $idVehiculo = $this->db->save($sql);
+
+            echo $idVehiculo;
+            echo $sql;
 
             // Guardar Imagenes
             foreach ($imagesName as $image) {
@@ -84,6 +87,7 @@ class Productos
                 $this->db->save($sql);
             }
 
+            echo $idVehiculo;
             echo json_encode(['ok' => true, 'message' => 'Se ha guardado correctamente.']);
         } catch (\Throwable $th) {
             echo json_encode(['ok' => false, 'message' => 'Ha ocurrido un error.']);
@@ -94,7 +98,45 @@ class Productos
 
     public function update($id)
     {
+        header('Content-Type: application/json');
 
+        // Obtén el contenido JSON de la solicitud
+        $rawData = file_get_contents('php://input');
+
+        $vehicleData = json_decode($rawData, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            echo json_encode(['status' => 'error', 'message' => 'Error en los datos']);
+            return;
+        }
+
+        $modelo = $vehicleData['modelo'] ?? '';
+        $marca = $vehicleData['marca'] ?? '';
+        $color = $vehicleData['color'] ?? '';
+        $precio = $vehicleData['precio'] ?? 0;
+        $kilometraje = $vehicleData['kilometraje'] ?? 0;
+        $descripcion = $vehicleData['descripcion'] ?? '';
+        $imagenesCrear = $vehicleData['imagenesCrear'] ?? [];
+        $imagenesEliminar = $vehicleData['imagenesEliminar'] ?? [];
+
+        $imagenesCreadas = [];
+        if ($imagenesCrear) {
+            foreach ($imagenesCrear as $image) {
+                $imagenesCreadas[] = $this->uploadFiles($image);
+            }
+        }  
+
+        if($imagenesEliminar) {
+            foreach($imagenesEliminar as $imageName) {
+                $this->deleteFile($imageName);
+            }
+        }
+
+        // Eliminar en BD
+        $sqlImages = "DELETE FROM vehiculoimagenes WHERE idVehiculo = $id";
+
+        
+        
     }
 
     public function delete($id)
@@ -103,6 +145,12 @@ class Productos
 
         // Eliminar Vehiculo
         if ($id) {
+            $imagesName = $this->getImages($id);
+            if ($imagesName) {
+                foreach ($imagesName as $imageName) {
+                    $this->deleteFile($imageName);
+                }
+            }
             $sqlImages = "DELETE FROM vehiculoimagenes WHERE idVehiculo = $id";
             $this->db->delete($sqlImages);
             $sql = "DELETE FROM vehiculo WHERE id = $id";
@@ -116,6 +164,12 @@ class Productos
         // echo json_encode(['ok' => false, 'message' => 'Ha ocurrido un error.']);
         exit;
     }
+
+    public function getImages($idVehiculo) {
+        $sql = "SELECT * FROM vehiculoimagenes WHERE idVehiculo = $idVehiculo";
+        $imagesName = $this->db->find($sql);
+        return $imagesName;
+    } 
 
     public function uploadFiles($file)
     {
@@ -144,4 +198,21 @@ class Productos
         return $imageUnique;
     }
 
+    public function deleteFile($fileName)
+    {
+        $uploadDir = dirname(__DIR__) . DIRECTORY_SEPARATOR . "img" . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
+        
+        $filePath = $uploadDir . $fileName->imagen;
+    
+        if (file_exists($filePath)) {
+            if (unlink($filePath)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
 }

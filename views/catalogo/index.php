@@ -78,7 +78,6 @@ $vehiculos = $db->find($sql);
                 </ul>
             </div>
 
-            <!-- Botón de Aplicar Filtros (no hace nada por ahora) -->
             <div>
                 <button type="button" class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition duration-300">
                     Aplicar Filtros
@@ -87,7 +86,6 @@ $vehiculos = $db->find($sql);
         </form>
     </div>
 
-    <!-- Catálogo a la derecha -->
     <div class="w-full lg:w-3/4">
         <ul class="grid min-[480px]:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-3 lg:gap-x-5">
             <?php foreach($vehiculos as $vehiculo) : ?>
@@ -97,12 +95,14 @@ $vehiculos = $db->find($sql);
                     $imagenSecundaria = isset($imagenes[1]) ? "../../img/uploads/" . $imagenes[1] : $imagenPrincipal;
                 ?>
                 <li class="flex flex-col gap-2 rounded-xl">
-                    <div class="rounded-lg overflow-hidden">
-                        <img src="<?php echo $imagenPrincipal ?>" 
+
+                  <div class="rounded-lg overflow-hidden">
+                  <a href="/producto/<?php echo $vehiculo->id ?>">
+                  <img src="<?php echo $imagenPrincipal ?>" 
                              alt="Imagen de <?php echo $vehiculo->marca . ' ' . $vehiculo->modelo ?>" 
                              class="w-full aspect-video object-cover transition-all duration-300 hover:scale-105 cursor-pointer"
                              onmouseover="this.src='<?php echo $imagenSecundaria ?>'" 
-                             onmouseout="this.src='<?php echo $imagenPrincipal ?>'">
+                             onmouseout="this.src='<?php echo $imagenPrincipal ?>'"> </a>
                     </div>
                     <div class="px-1">
                         <h2 class="text-xl font-semibold text-gray-800 hover:text-red-600 transition-colors duration-300 cursor-pointer">
