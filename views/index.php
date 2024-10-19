@@ -13,8 +13,9 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
         marcas
     </h2>
 
+    <div class="pt-8"></div>
 
-    <div class="flex flex-wrap justify-center items-center mx-auto w-full max-w-5xl pt-8 pb-16">
+    <div class="flex flex-wrap justify-center items-center mx-auto w-full max-w-2xl pt-4 pb-4 border-2 rounded-lg">
         <div class="flex justify-center space-x-5">
             <img src="../img/marcas/lambo.png" class="h-16 w-auto sm:h-24 md:h-32 lg:h-32">
             <img src="../img/marcas/bmw.png" class="h-16 w-auto sm:h-24 md:h-32 lg:h-32">
@@ -26,7 +27,7 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
 
 <!-- testimonios y reseñas -->
 
-<section>
+<section class="pt-16">
     <h2 class="font-black text-2xl text-red-600 flex justify-center uppercase text-center  md:text-5xl lg:text-5xl">
         Testimonios & Reseñas</h2>
 

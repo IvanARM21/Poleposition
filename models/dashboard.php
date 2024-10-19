@@ -39,13 +39,16 @@ class Dashboard {
 
         $vehiculos = $this->db->find($sql);
 
-        json_encode($vehiculos);
+        json_encode(value: $vehiculos);
 
         $this->title = "PP | Dashboard";
 
         return new Template('./views/dashboard/index.php', [
             "vehiculos" => $vehiculos
         ]);
+
+    
+
     }
 }
 ?>
