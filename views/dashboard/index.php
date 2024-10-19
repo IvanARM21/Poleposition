@@ -86,7 +86,6 @@
 <?php endif; ?>
 
 
-<!-- Modal Add and Edit -->
 <div id="modalBg" class="hidden bg-black bg-opacity-50 fixed inset-0 backdrop-blur-sm  justify-center items-center">
     <div id="modalContainer"
         class="flex flex-col justify-between max-w-3xl w-full bg-white fixed z-10 h-[90vh] rounded-2xl overflow-auto p-5 overflow-y-scroll no-scrollbar">
@@ -167,9 +166,7 @@
         </form>
     </div>
 </div>
-<!-- Fin Modal Add and Edit -->
 
-<!-- Modal Delete -->
 <div id="modalBgDelete"
     class="hidden bg-black bg-opacity-50 fixed inset-0 backdrop-blur-sm justify-center items-center">
     <div id="modalContainer"
@@ -193,4 +190,3 @@
     </div>
 </div>
 
-<!-- Fin Modal Delete -->

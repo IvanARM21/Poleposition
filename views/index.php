@@ -1,7 +1,7 @@
 <?php
 
 $db = new DB();
-$idsDestacados = [1, 2, 3];
+$idsDestacados = [19, 20, 21];
 $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
 ?>
 <!-- marcas con las q trabajamos -->

@@ -12,11 +12,11 @@ $vehiculos = $db->find($sql);
 ?>
 
 <section class="flex gap-6 px-4">
-    <!-- Filtros a la izquierda -->
-    <div class="w-full lg:w-1/4">
+    <!-- filtros -->
+<div class="w-full lg:w-1/4">
         <form action="catalogo.php" method="GET" class="space-y-6">
-            <!-- Filtro de Marca -->
-            <div>
+        <!-- filtro x marca -->
+        <div>
                 <h3 class="text-lg font-semibold text-gray-800 mb-2">Marca</h3>
                 <ul class="space-y-2">
                     <?php
@@ -32,7 +32,7 @@ $vehiculos = $db->find($sql);
                 </ul>
             </div>
 
-            <!-- Filtro de Año -->
+            <!-- filtro año -->
             <div>
                 <h3 class="text-lg font-semibold text-gray-800 mb-2">Año</h3>
                 <div class="flex space-x-3">
@@ -41,7 +41,7 @@ $vehiculos = $db->find($sql);
                 </div>
             </div>
 
-            <!-- Filtro de Precio -->
+            <!-- filtro precio -->
             <div>
                 <h3 class="text-lg font-semibold text-gray-800 mb-2">Precio</h3>
                 <div class="flex space-x-3">
@@ -50,7 +50,7 @@ $vehiculos = $db->find($sql);
                 </div>
             </div>
 
-            <!-- Filtro de Kilometraje -->
+            <!-- filtro x km -->
             <div>
                 <h3 class="text-lg font-semibold text-gray-800 mb-2">Kilómetros</h3>
                 <div class="flex space-x-3">
@@ -59,7 +59,7 @@ $vehiculos = $db->find($sql);
                 </div>
             </div>
 
-            <!-- Filtro de Estado (Nuevo o Usado) -->
+            <!-- filtro nuevo o usado -->
             <div>
                 <h3 class="text-lg font-semibold text-gray-800 mb-2">Estado</h3>
                 <ul class="space-y-2">

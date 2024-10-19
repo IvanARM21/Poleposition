@@ -34,22 +34,24 @@ if ($idProducto > 0) {
                 $imagenes = explode(',', $vehiculo->imagenes);
                 $totalImagenes = count($imagenes);
                 ?>
-                <div id="image-slider" class="w-full h-64 md:h-80 overflow-hidden rounded-lg">
-                    <?php foreach ($imagenes as $index => $imagen): ?>
-                        <img src="/img/uploads/<?php echo $imagen; ?>" alt="Imagen del vehículo" class="vehicle-image w-full h-full object-cover rounded-lg <?php echo $index === 0 ? 'block' : 'hidden'; ?>">
-                    <?php endforeach; ?>
-                </div>
-                
-                <?php if ($totalImagenes > 1): ?>
-                    <button id="prev-button" class="absolute top-1/2 left-0 transform -translate-y-1/2 text-gray-700 p-2 z-10">
-                        &#10094; 
-                    </button>
+                <div id="image-slider" class="relative w-full h-64 md:h-80 overflow-hidden rounded-lg">
+    <?php foreach ($imagenes as $index => $imagen): ?>
+        <img src="/img/uploads/<?php echo $imagen; ?>" alt="Imagen del vehículo" class="vehicle-image w-full h-full object-cover rounded-lg <?php echo $index === 0 ? 'block' : 'hidden'; ?>">
+    <?php endforeach; ?>
+</div>
 
-                    <!-- Next Button -->
-                    <button id="next-button" class="absolute top-1/2 right-0 transform -translate-y-1/2 text-gray-700 p-2 z-10">
-                        &#10095; 
-                    </button>
-                <?php endif; ?>
+<?php if ($totalImagenes > 1): ?>
+    <!-- boton antes -->
+    <button id="prev-button" class="absolute top-[calc(50%-5rem)] left-4 text-gray-700 p-2 md:p-3 z-10 bg-white rounded-full shadow">
+        &#10094;
+    </button>
+
+    <!-- boton despues -->
+    <button id="next-button" class="absolute top-[calc(50%-5rem)] right-4 text-gray-700 p-2 md:p-3 z-10 bg-white rounded-full shadow">
+        &#10095;
+    </button>
+<?php endif; ?>
+
 
             <?php else: ?>
                 <div class="w-full h-64 md:h-80 bg-gray-200 flex items-center justify-center rounded-lg">
@@ -73,8 +75,9 @@ if ($idProducto > 0) {
                 </p>
             </div>
             <div class="flex gap-4 flex-col mt-auto sm:pt-16">
-                <button class="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700">Comprar</button>
-                <button class="w-full bg-white border border-red-600 text-red-600 py-2 rounded-md hover:bg-red-50">Alquilar</button>
+            <button class="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-102">Comprar</button>
+<button class="w-full bg-white border border-red-600 text-red-600 py-2 rounded-md hover:bg-red-50 hover:border-red-700 hover:text-red-700 hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-102">Alquilar</button>
+
             </div>
         </div>
 

@@ -169,9 +169,7 @@
     </main>
 
 
-
-    <!-- Contenido de la página -->
-    <footer class="bg-gray-50 w-full border-t border-gray-300 border-opacity-60">
+  <footer class="bg-gray-50 w-full border-t border-gray-300 border-opacity-60">
         <div class="mx-auto max-w-screen-xl w-full px-6  py-10">
             <div class="grid grid-cols-5 gap-10 pb-10">
                 <div class="col-span-2">
