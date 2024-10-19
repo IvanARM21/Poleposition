@@ -1,6 +1,6 @@
 <?php
 
-class SobreNosotros
+class Usuarios
 {
 
     private $db;
@@ -19,9 +19,19 @@ class SobreNosotros
     public function index()
     {
 
-        $this->title = "PP | Contacto";
+        $this->title = "Dashboard | Usuarios";
+
 
         return new Template('./views/dashboard/usuarios/index.php', [
         ]);
     }
+
+    public function show($id)
+    {
+        $this->title = "Dashboard | Usuario ";
+
+        return new Template('./views/dashboard/usuarios/show.php', [
+        ]);
+    }
+
 }

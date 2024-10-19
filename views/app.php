@@ -171,11 +171,11 @@
 
 
     <!-- Contenido de la página -->
-    <footer class="bg-gray-50 w-full border-t border-gray-300 border-opacity-60">
+    <footer class="bg-gray-50 w-full  border-opacity-60">
         <div class="mx-auto max-w-screen-xl w-full px-6  py-10">
-            <div class="grid grid-cols-5 gap-10 pb-10">
-                <div class="col-span-2">
-                    <img src="../img/logo-text.svg" class="size-28" alt="">
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 pb-10">
+                <div class="sm:col-span-2 md:col-span-3 lg:col-span-2">
+                    <img src="../img/logo-text.svg" class="size-20" alt="">
                 </div>
 
                 <div>
@@ -215,8 +215,10 @@
                 </div>
             </div>
 
-            <div class="border-t w-full pt-10 flex justify-between items-center">
-                <p class="text-lg font-medium text-gray-600">© 2024 PolePosition. Todos los derechos reservados.</p>
+            <div class="border-t w-full pt-10 flex flex-col-reverse gap-5 md:flex-row justify-between items-center">
+                <p class="text-lg font-medium text-gray-600 text-balance text-center">© 2024 PolePosition. Todos los
+                    derechos
+                    reservados.</p>
 
                 <div class="flex gap-5">
                     <a href="https://www.instagram.com/ivanrm021" target="_blank"

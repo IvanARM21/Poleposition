@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title> <!-- variable para el titulo de la pagina -->
-    <link rel="stylesheet" href="../css/output.css"> <!-- linkeo de tailwind css -->
+    <link rel="stylesheet" href="/css/output.css"> <!-- linkeo de tailwind css -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="module" src="/js/dashboard/index.js"></script>
-    <link rel="icon" type="image" href="../img/logo.png">
+    <link rel="icon" type="image" href="/img/logo.png">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 
         <nav class="flex flex-col gap-2">
             <a href="/">
-                <img src="../img/logo.png" class="w-20 px-4 mb-5" alt="">
+                <img src="/img/logo.png" class="w-20 px-4 mb-5" alt="">
             </a>
             <a href="" class="flex gap-2 items-center text-gray-600 hover:bg-gray-200/70 py-2 px-4 rounded-xl">
                 <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-500 size-6" fill="none" viewBox="0 0 24 24"

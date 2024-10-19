@@ -9,19 +9,26 @@ class App
     private $model;
     private $args;
 
-    private $modelDash;
+    private $layout = "app";
 
     public function __construct()
     {
         $uri = $_SERVER['REQUEST_URI'];
-        $uriParts = explode('/', $uri);
-        array_shift($uriParts);
-        $this->args = array_slice($uriParts, 1); // Simplificación
+        $uriParts = explode('/', trim($uri, '/')); // Quitar los slashes
+        $this->args = array_slice($uriParts, 1); // Obtener argumentos después del primer segmento
         $this->connectDB();
 
-        if ($uriParts[0] === "dashboard" && isset($uriParts[1])) {
-            $this->loadModel($uriParts[0] . $uriParts[1]);
+        // Manejo especial para dashboard
+        if ($uriParts[0] === "dashboard") {
+            // Si existe un segundo segmento como "usuarios"
+            $this->layout = "admin";
+            if (isset($uriParts[1])) {
+                $this->loadModel($uriParts[1], "dashboard/");
+            } else {
+                $this->loadModel('dashboard');
+            }
         } else {
+            $this->layout = "app";
             $this->loadModel($uriParts[0]);
         }
     }
@@ -31,21 +38,18 @@ class App
         $this->db = new DB();
     }
 
-    public function loadModel($modelName)
+    public function loadModel($modelName, $folder = "")
     {
-
         if ($modelName != "") {
-            $modelPath = "./models/" . $this->getModelFileName($modelName);
+            $modelPath = "./models/" . $folder . $this->getModelFileName($modelName);
             if (file_exists($modelPath)) {
                 require_once($modelPath);
                 $modelName = ucfirst($this->getModelName($modelName));
                 $this->model = new $modelName($this->db);
                 $this->callMethod($this->model);
+            } else {
+                $this->redirectToErrorPage();
             }
-            // else {
-            //     http_response_code(404);
-            //     $this->redirectToErrorPage(); // Redirige a la página de error
-            // }
         } else {
             $template = new Template("./views/index.php", []);
             $this->render($template);
@@ -54,27 +58,29 @@ class App
 
     private function getModelFileName($modelName)
     {
-        if (preg_match('/-/', $modelName)) {
-            $modelParts = explode('-', $modelName);
-            return implode('', $modelParts) . ".php";
-        }
-        return $modelName . ".php";
+        return str_replace('-', '', $modelName) . ".php";
     }
 
     private function getModelName($modelName)
     {
-        if (preg_match('/-/', $modelName)) {
-            $modelParts = explode('-', $modelName);
-            return implode('', $modelParts);
-        }
-        return $modelName;
+        return str_replace('-', '', $modelName);
     }
 
     private function callMethod($model)
     {
         $template = "";
 
-        // Asegúrate de que el método index esté en el modelo
+        if ($this->layout === "app") {
+            $template = $this->loadApp($model);
+        } else {
+            $template = $this->loadAdmin($model);
+        }
+
+        $this->render($template, $model->getTitle());
+    }
+
+    private function loadApp($model)
+    {
         if (method_exists($model, 'index') && !isset($this->args[0])) {
             $template = $model->index();
         } else if (method_exists($model, 'create') && $this->args[0] === "crear") {
@@ -85,30 +91,39 @@ class App
             $template = $model->delete($this->args[1]);
         } else if (method_exists($model, 'show')) {
             $template = $model->show($this->args[0]);
+        } else {
+            $this->redirectToErrorPage();
+            return;
         }
-        //  else {
-        //      // Si no se encuentra un método, redirigir a la página de error
-        //  $this->redirectToErrorPage();
-        //      return; // Evitar que continúe
-        //  }
-
-        $layout = (get_class($model) === "Dashboard") ? "admin" : "app";
-        $this->render($template, $model->getTitle(), $layout);
+        return $template;
     }
 
-    private function render($child, $title = "PP | Home", $layout = "app")
+    private function loadAdmin($model)
     {
-        if ($layout === "app") {
-            $view = new Template("./views/app.php", [
-                "title" => $title,
-                "child" => $child
-            ]);
-        } else if ($layout === "admin") {
-            $view = new Template("./views/admin.php", [
-                "title" => $title,
-                "child" => $child
-            ]);
+        if (method_exists($model, 'index') && !isset($this->args[1])) {
+            $template = $model->index();
+        } else if (method_exists($model, 'create') && $this->args[1] === "crear") {
+            $template = $model->create();
+        } else if (method_exists($model, 'update') && $this->args[1] === "editar") {
+            $template = $model->update($this->args[2]);
+        } else if (method_exists($model, 'delete') && $this->args[1] === "eliminar") {
+            $template = $model->delete($this->args[2]);
+        } else if (method_exists($model, 'show') && $this->args[1] !== "crear" && $this->args[1] !== "editar" && $this->args[1] !== "eliminar") {
+            $template = $model->show($this->args[1]);
+        } else {
+            $this->redirectToErrorPage();
+            return;
         }
+        return $template;
+    }
+
+    private function render($child, $title = "PP | Home")
+    {
+        echo $this->layout;
+        $view = new Template("./views/{$this->layout}.php", [
+            "title" => $title,
+            "child" => $child
+        ]);
         echo $view;
     }
 
@@ -119,4 +134,5 @@ class App
         exit();
     }
 }
+
 ?>
