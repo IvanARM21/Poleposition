@@ -1,6 +1,8 @@
 import { PAGE_URL } from '../constants.js';
 
 const modalShowBtn = document.getElementById("menuBtn") ?? null;
+const spanToShowModal = document.getElementById("spanModal") ?? null;
+
 const modalShowEditBtn = document.getElementsByName("editBtn")
 const modalCloseBtn = document.getElementById("btnClose") ?? null;
 const modalCancelBtn = document.getElementById("btnCancel") ?? null;
@@ -27,6 +29,16 @@ let imagenesEliminar = [];
 
 export const LoadModalBtn = () => {
     resetData();
+    if(spanToShowModal) {
+        spanToShowModal.addEventListener("click", () => {
+            modalBg.classList.add("flex");
+            modalBg.classList.remove("hidden");
+
+            vehicleId = -1;
+            isEdit = false;
+            setTitle();
+        });
+    }
     if (modalShowBtn && modalCloseBtn && modalCancelBtn && form) {
         // Mostrar modal
         modalShowBtn.addEventListener("click", () => {
@@ -53,7 +65,7 @@ export const LoadModalBtn = () => {
         modalCloseBtn.addEventListener("click", menuClose);
         modalCancelBtn.addEventListener("click", menuClose);
 
-        form.addEventListener("submit", saveVehicle)
+        form.addEventListener("submit", saveVehicle);
     }
 };
 
@@ -179,8 +191,6 @@ const showImages = () => {
         divElement.appendChild(p2);
 
         dragChange.appendChild(divElement);
-
-
     }
 }
 
@@ -190,7 +200,7 @@ const deleteImage = (event) => {
     imagenesCargadas = imagenesCargadas.filter(imagenCargada => imagenCargada !== url);
 
     if(url.startsWith("../../img/uploads")) {
-        imagenesEliminar.push(url);
+        imagenesEliminar.push(url.split("/").pop());
     }
     clearImages();
     showImages();
@@ -251,7 +261,7 @@ const getVehicleById = async (id) => {
         año.value = vehicule.año;
         imagenesCargadas = data[0].imagenes.split(",").map(img => `../../img/uploads/${img}`)
     }
-
+    
     clearImages();
     showImages();
 }
@@ -289,15 +299,14 @@ const updateVehicle = async (vehicleData, vehicleId) => {
             },
             body: JSON.stringify({...vehicleData, imagenesEliminar, imagenesCrear})
         });
-
-        console.log(response.text());
+        console.log(await response.text());
     } catch (error) {
         
     }
 }
 
 const createVehicle = async (vehicleData) => {
-        try {
+    try {
         const response = await fetch(`${PAGE_URL}/productos/crear`, {
             method: "POST",
             headers: {
@@ -306,12 +315,7 @@ const createVehicle = async (vehicleData) => {
             body: JSON.stringify(vehicleData)
         });
 
-        const result = await response.text();
-
-        console.log(result);
-
         if (response.ok) {
-            localStorage.setItem("vehiculoAgregado", "true");
             menuClose();
         } else {
             const errorMessage = document.getElementById("errorMessage");
@@ -333,6 +337,7 @@ const resetData = () => {
         marca.value = "";
         modelo.value = "";
         kilometraje.value = 0;
+        año.value = 0;
         precio.value = 0;
         color.value = "";
         descripcion.value = "";

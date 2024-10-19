@@ -1,22 +1,5 @@
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const vehiculoAgregado = localStorage.getItem("vehiculoAgregado");
-        if (vehiculoAgregado === "true") {
-            const successAlert = document.getElementById("successAlert");
-            if (successAlert) {
-                successAlert.classList.remove("hidden");
-            }
-            localStorage.removeItem("vehiculoAgregado");
-        }
-    });
-</script>
+<div>
 
-
-<div id="successAlert" class="hidden flex items-center p-4 border-2 border-green-500/70 rounded-lg bg-black bg-opacity-10 shadow-lg mb-4">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-    </svg>
-    <h2 id="successMessage" class="text-black font-bold text-xl">Vehículo agregado correctamente</h2>
 </div>
 
 
@@ -30,66 +13,80 @@
     </button>
 </div>
 
-<div class="overflow-auto mt-10">
-    <table class="min-w-[800px] w-full caption-bottom border-b border-gray-200">
-        <thead>
-            <tr class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800 border-gray-820">
-                <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800 border-gray-820">ID</th>
-                <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800 border-gray-820">Vehiculo
-                </th>
-                <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Precio
-                </th>
-                <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Km</th>
-                <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Año</th>
-                <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Acciones
-                </th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-200">
-            <?php foreach ($vehiculos as $vehiculo): ?>
-                <tr>
-                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $vehiculo->id; ?></td>
-                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium flex items-center gap-1">
-                        <?php
-                        $imagenes = explode(',', $vehiculo->imagenes);
-                        if (!empty($imagenes[0])) { //para arreglar el bug de q al poner 2 imagenes no cargaba la preview
-                            echo '<img src="../../img/uploads/' . trim($imagenes[0]) . '" alt="" class="h-14 w-20 object-cover rounded-lg">';
-                        }
-                        ?>
-                        <?php echo $vehiculo->marca ?>
-                        <?php echo $vehiculo->modelo; ?>
-                    </td>
-                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">US$ <?= number_format($vehiculo->precio, 2) ?>
-                    </td>
-                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $vehiculo->kilometraje; ?></td>
-                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $vehiculo->año ?></td>
-                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">
-                        <div class="flex gap-5 items-center">
-                            <button type="button" id="<?php echo $vehiculo->id ?>" name="editBtn"
-                                class="text-gray-700 hover:text-blue-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor" class="size-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                </svg>
-                            </button>
-                            <button type="button" class="text-gray-700 hover:text-red-600" id="<?php echo $vehiculo->id ?>"
-                                name="deleteBtn">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor" class="size-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                </svg>
-                            </button>
-
-                        </div>
-                    </td>
+<?php if ($vehiculos): ?>
+    <div class="overflow-auto mt-10">
+        <table class="min-w-[800px] w-full caption-bottom border-b border-gray-200">
+            <thead>
+                <tr class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800 border-gray-820">
+                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800 border-gray-820">ID</th>
+                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800 border-gray-820">Vehiculo
+                    </th>
+                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Precio
+                    </th>
+                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Km</th>
+                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Año</th>
+                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Acciones
+                    </th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                <?php foreach ($vehiculos as $vehiculo): ?>
+                    <tr>
+                        <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $vehiculo->id; ?></td>
+                        <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium flex items-center gap-1">
+                            <?php
+                            $imagenes = explode(',', $vehiculo->imagenes ?? '');
 
+                            if (!empty($imagenes[0])) { // Evitar el bug de la imagen vacía
+                                echo '<img src="../../img/uploads/' . trim($imagenes[0]) . '" alt="" class="h-14 w-24 object-cover rounded-lg">';
+                            } else {
+                                echo "<div class='bg-gray-700 text-white rounded-lg h-14 w-24 flex justify-center items-center font-medium'>Sin imagen</div>";
+                            }
+                            ?>
+                            <?php echo $vehiculo->marca ?>
+                            <?php echo $vehiculo->modelo; ?>
+                        </td>
+                        <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">US$ <?= number_format($vehiculo->precio, 2) ?>
+                        </td>
+                        <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $vehiculo->kilometraje; ?></td>
+                        <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $vehiculo->año ?></td>
+                        <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">
+                            <div class="flex gap-5 items-center">
+                                <button type="button" id="<?php echo $vehiculo->id ?>" name="editBtn"
+                                    class="text-gray-700 hover:text-blue-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" class="size-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                    </svg>
+                                </button>
+                                <button type="button" class="text-gray-700 hover:text-red-600" id="<?php echo $vehiculo->id ?>"
+                                    name="deleteBtn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" class="size-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                    </svg>
+                                </button>
+
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+
+<?php else: ?>
+    <p class="text-xl text-gray-500">Aún no tienes vehiculos creados, <span
+            class="text-red-600 font-medium hover:underline decoration-1" id="spanModal">empieza agregando
+            uno</span>
+    </p>
+<?php endif; ?>
+
+
+<!-- Modal Add and Edit -->
 <div id="modalBg" class="hidden bg-black bg-opacity-50 fixed inset-0 backdrop-blur-sm  justify-center items-center">
     <div id="modalContainer"
         class="flex flex-col justify-between max-w-3xl w-full bg-white fixed z-10 h-[90vh] rounded-2xl overflow-auto p-5 overflow-y-scroll no-scrollbar">
@@ -127,7 +124,7 @@
             <div class="flex flex-col gap-1">
                 <label for="kilometraje" class="font-medium text-gray-800 ">Año</label>
                 <input type="number" class="w-full border shadow rounded-xl py-2 px-4" id="año"
-                    placeholder="Kilometros del vehiculo">
+                    placeholder="Año del vehiculo">
             </div>
 
             <div class="flex flex-col gap-1">
@@ -138,8 +135,8 @@
 
             <div class="flex flex-col gap-1">
                 <label for="descripcion" class="font-medium text-gray-800 ">Descripción</label>
-                <textarea id="descripcion" class="w-full border shadow rounded-xl py-2 px-4" cols="10"
-                    rows="4"></textarea>
+                <textarea id="descripcion" placeholder="Descripción del vehiculo"
+                    class="w-full border shadow rounded-xl py-2 px-4" cols="10" rows="4"></textarea>
             </div>
 
             <div class="flex flex-col gap-1">
@@ -170,7 +167,9 @@
         </form>
     </div>
 </div>
+<!-- Fin Modal Add and Edit -->
 
+<!-- Modal Delete -->
 <div id="modalBgDelete"
     class="hidden bg-black bg-opacity-50 fixed inset-0 backdrop-blur-sm justify-center items-center">
     <div id="modalContainer"
@@ -194,4 +193,4 @@
     </div>
 </div>
 
-<script src="../../js/dashboard/modal.js" type="module"></script>
+<!-- Fin Modal Delete -->

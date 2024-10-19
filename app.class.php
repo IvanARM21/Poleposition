@@ -9,6 +9,8 @@ class App
     private $model;
     private $args;
 
+    private $modelDash;
+
     public function __construct()
     {
         $uri = $_SERVER['REQUEST_URI'];
@@ -16,7 +18,12 @@ class App
         array_shift($uriParts);
         $this->args = array_slice($uriParts, 1); // Simplificación
         $this->connectDB();
-        $this->loadModel($uriParts[0]);
+
+        if ($uriParts[0] === "dashboard" && isset($uriParts[1])) {
+            $this->loadModel($uriParts[0] . $uriParts[1]);
+        } else {
+            $this->loadModel($uriParts[0]);
+        }
     }
 
     public function connectDB()
@@ -26,6 +33,7 @@ class App
 
     public function loadModel($modelName)
     {
+
         if ($modelName != "") {
             $modelPath = "./models/" . $this->getModelFileName($modelName);
             if (file_exists($modelPath)) {
@@ -33,10 +41,11 @@ class App
                 $modelName = ucfirst($this->getModelName($modelName));
                 $this->model = new $modelName($this->db);
                 $this->callMethod($this->model);
-            }  else {
-                http_response_code(404);
-                $this->redirectToErrorPage(); // Redirige a la página de error
             }
+            // else {
+            //     http_response_code(404);
+            //     $this->redirectToErrorPage(); // Redirige a la página de error
+            // }
         } else {
             $template = new Template("./views/index.php", []);
             $this->render($template);
@@ -76,11 +85,12 @@ class App
             $template = $model->delete($this->args[1]);
         } else if (method_exists($model, 'show')) {
             $template = $model->show($this->args[0]);
-         }  else {
-             // Si no se encuentra un método, redirigir a la página de error
-         $this->redirectToErrorPage();
-             return; // Evitar que continúe
-         }
+        }
+        //  else {
+        //      // Si no se encuentra un método, redirigir a la página de error
+        //  $this->redirectToErrorPage();
+        //      return; // Evitar que continúe
+        //  }
 
         $layout = (get_class($model) === "Dashboard") ? "admin" : "app";
         $this->render($template, $model->getTitle(), $layout);

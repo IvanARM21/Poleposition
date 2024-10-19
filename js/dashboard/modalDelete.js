@@ -33,12 +33,27 @@ const menuClose = () => {
 }
 
 const deleteVehicle = async () => {
-    console.log("Eliminando", vehicleId);
-    const resp = await fetch(`${PAGE_URL}/productos/eliminar/${vehicleId}`);
-
-    const result = await resp.text();
-    console.log(result);
+    const resp = await fetch(`${PAGE_URL}/productos/eliminar/${vehicleId}`).then(resp => resp.json());
 
     menuClose();
-    location.reload();
-}
+
+    if (resp.ok) {
+        Swal.fire({
+            title: 'Éxito!',
+            text: 'El vehiculo ha sido eliminado',
+            icon: 'success',
+            confirmButtonText: 'Ok',
+            
+        }).then(() => {
+            location.reload(); 
+        });
+    } else {
+        Swal.fire({
+            title: 'Error!',
+            text: resp.message || 'Ha ocurrido un error',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+    }
+};
+

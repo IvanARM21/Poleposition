@@ -64,6 +64,7 @@ class Productos
         $precio = $vehicleData['precio'] ?? 0;
         $kilometraje = $vehicleData['kilometraje'] ?? 0;
         $descripcion = $vehicleData['descripcion'] ?? '';
+        $año = $vehicleData["año"];
         $images = $vehicleData['images'] ?? [];
 
         $imagesName = [];
@@ -75,7 +76,7 @@ class Productos
 
         try {
             // Guardar en la BD
-            $sql = "INSERT INTO Vehiculo (modelo, marca, color, precio, kilometraje, descripcion, año) VALUES ('$modelo', '$marca', '$color', $precio, $kilometraje, '$descripcion', 2025)";
+            $sql = "INSERT INTO Vehiculo (modelo, marca, color, precio, kilometraje, descripcion, año) VALUES ('$modelo', '$marca', '$color', $precio, $kilometraje, '$descripcion', $año)";
             $idVehiculo = $this->db->save($sql);
 
             echo $idVehiculo;
@@ -87,7 +88,6 @@ class Productos
                 $this->db->save($sql);
             }
 
-            echo $idVehiculo;
             echo json_encode(['ok' => true, 'message' => 'Se ha guardado correctamente.']);
         } catch (\Throwable $th) {
             echo json_encode(['ok' => false, 'message' => 'Ha ocurrido un error.']);
@@ -107,7 +107,7 @@ class Productos
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             echo json_encode(['status' => 'error', 'message' => 'Error en los datos']);
-            return;
+            exit;
         }
 
         $modelo = $vehicleData['modelo'] ?? '';
@@ -115,6 +115,7 @@ class Productos
         $color = $vehicleData['color'] ?? '';
         $precio = $vehicleData['precio'] ?? 0;
         $kilometraje = $vehicleData['kilometraje'] ?? 0;
+        $año = $vehicleData["año"];
         $descripcion = $vehicleData['descripcion'] ?? '';
         $imagenesCrear = $vehicleData['imagenesCrear'] ?? [];
         $imagenesEliminar = $vehicleData['imagenesEliminar'] ?? [];
@@ -124,19 +125,40 @@ class Productos
             foreach ($imagenesCrear as $image) {
                 $imagenesCreadas[] = $this->uploadFiles($image);
             }
-        }  
+        }
+        // Guardar Imagenes
+        foreach ($imagenesCreadas as $image) {
+            $sql = "INSERT INTO vehiculoimagenes (idVehiculo, imagen) VALUES ($id, '$image')";
+            $this->db->save($sql);
+        }
 
-        if($imagenesEliminar) {
-            foreach($imagenesEliminar as $imageName) {
+        if ($imagenesEliminar) {
+            foreach ($imagenesEliminar as $imageName) {
                 $this->deleteFile($imageName);
+                $sql = "DELETE FROM vehiculoimagenes WHERE imagen = '$imageName'";
+                $this->db->delete($sql);
             }
         }
 
-        // Eliminar en BD
-        $sqlImages = "DELETE FROM vehiculoimagenes WHERE idVehiculo = $id";
+        // Guardar vehiculo
+        $sql = "UPDATE Vehiculo 
+        SET modelo = '$modelo', 
+            marca = '$marca', 
+            color = '$color', 
+            precio = $precio, 
+            kilometraje = $kilometraje, 
+            descripcion = '$descripcion', 
+            año = $año 
+        WHERE id = $id";
 
-        
-        
+        $this->db->save($sql);
+
+        // Eliminar en BD
+        echo json_encode(['ok' => true, 'message' => 'Se ha guardado correctamente.']);
+
+        exit;
+
+
     }
 
     public function delete($id)
@@ -148,7 +170,7 @@ class Productos
             $imagesName = $this->getImages($id);
             if ($imagesName) {
                 foreach ($imagesName as $imageName) {
-                    $this->deleteFile($imageName);
+                    $this->deleteFile($imageName->imagen);
                 }
             }
             $sqlImages = "DELETE FROM vehiculoimagenes WHERE idVehiculo = $id";
@@ -165,11 +187,12 @@ class Productos
         exit;
     }
 
-    public function getImages($idVehiculo) {
+    public function getImages($idVehiculo)
+    {
         $sql = "SELECT * FROM vehiculoimagenes WHERE idVehiculo = $idVehiculo";
         $imagesName = $this->db->find($sql);
         return $imagesName;
-    } 
+    }
 
     public function uploadFiles($file)
     {
@@ -200,10 +223,11 @@ class Productos
 
     public function deleteFile($fileName)
     {
+
         $uploadDir = dirname(__DIR__) . DIRECTORY_SEPARATOR . "img" . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
-        
-        $filePath = $uploadDir . $fileName->imagen;
-    
+
+        $filePath = $uploadDir . $fileName;
+
         if (file_exists($filePath)) {
             if (unlink($filePath)) {
                 return true;
@@ -214,5 +238,5 @@ class Productos
             return false;
         }
     }
-    
+
 }
