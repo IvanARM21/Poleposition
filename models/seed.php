@@ -106,7 +106,7 @@ class Seed {
                 'descripcion' => 'La RAM 1500 TRX es la máxima expresión de poder y rendimiento en una camioneta. Equipada con un motor V8 supercargado de 6.2L que entrega impresionantes 702 caballos de fuerza, esta pick-up está diseñada para dominar cualquier terreno con una aceleración de 0 a 100 km/h en solo 4.5 segundos. Su suspensión de alto rendimiento y tecnología todoterreno hacen que no haya desafío imposible. En su interior, el lujo y la tecnología de punta se combinan para ofrecer una experiencia de conducción cómoda y emocionante. ¡La RAM 1500 TRX es pura potencia y aventura lista para llevarte a donde quieras!',
                 'año' => 2021,
                 'imagenes' => [
-                    "ram1500trx_frente.webp",
+                    "ram1500trx_atras.webp",
                     "ram1500trx_frente.webp"
                 ]
             ],
@@ -119,7 +119,7 @@ class Seed {
                 'descripcion' => 'La RAM 2500 es una camioneta robusta y versátil diseñada para enfrentar las tareas más exigentes. Con opciones de motorización que incluyen un potente motor diésel de 6.7L, esta pick-up ofrece una capacidad de remolque impresionante, perfecta para trabajos pesados y aventuras al aire libre. Su diseño exterior muscular se complementa con un interior cómodo y bien equipado, que cuenta con tecnología avanzada y materiales de alta calidad. Además, la RAM 2500 garantiza un manejo seguro y confiable, tanto en carretera como fuera de ella. ¡La RAM 2500 es la elección ideal para quienes buscan fuerza y durabilidad sin sacrificar el confort!',
                 'año' => 2023,
                 'imagenes' => [
-                    "ram2500_frente.webp",
+                    "ram2500_costado.webp",
                     "ram2500_frente.webp"
                 ]
             ],
@@ -147,5 +147,7 @@ class Seed {
                 $this->db->save("INSERT INTO vehiculoImagenes (idVehiculo, imagen) VALUES ({$idVehiculo}, '{$imagen}')");
             }
         }
+
+        header("Location: /catalogo");
     }
 }
