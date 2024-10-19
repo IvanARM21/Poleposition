@@ -105,8 +105,8 @@ $vehiculos = $db->find($sql);
             <?php foreach ($vehiculos as $vehiculo): ?>
                 <?php
                 $imagenes = explode(',', $vehiculo->imagenes);
-                $imagenPrincipal = "../../img/uploads/" . $imagenes[0];
-                $imagenSecundaria = isset($imagenes[1]) ? "../../img/uploads/" . $imagenes[1] : $imagenPrincipal;
+                $imagenPrincipal = "../../img/uploads/" . $imagenes[1];
+                $imagenSecundaria = isset($imagenes[0]) ? "../../img/uploads/" . $imagenes[0] : $imagenPrincipal;
                 ?>
                 <li class="flex flex-col gap-2 rounded-xl">
 
