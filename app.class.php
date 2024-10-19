@@ -119,7 +119,6 @@ class App
 
     private function render($child, $title = "PP | Home")
     {
-        echo $this->layout;
         $view = new Template("./views/{$this->layout}.php", [
             "title" => $title,
             "child" => $child

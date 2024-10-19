@@ -22,7 +22,8 @@
             <a href="/">
                 <img src="/img/logo.png" class="w-20 px-4 mb-5" alt="">
             </a>
-            <a href="" class="flex gap-2 items-center text-gray-600 hover:bg-gray-200/70 py-2 px-4 rounded-xl">
+            <a href="/dashboard"
+                class="flex gap-2 items-center text-gray-600 hover:bg-gray-200/70 py-2 px-4 rounded-xl">
                 <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-500 size-6" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -30,7 +31,8 @@
                 </svg>
                 <p class="font-medium text-lg">Productos</p>
             </a>
-            <a href="" class="flex gap-2 items-center text-gray-600 hover:bg-gray-200/70 py-2 px-4 rounded-xl">
+            <a href="/dashboard/usuarios"
+                class="flex gap-2 items-center text-gray-600 hover:bg-gray-200/70 py-2 px-4 rounded-xl">
                 <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-500 size-6" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -39,7 +41,8 @@
 
                 <p class="font-medium text-lg">Usuarios</p>
             </a>
-            <a href="" class="flex gap-2 items-center text-gray-600 hover:bg-gray-200/70 py-2 px-4 rounded-xl">
+            <a href="/dashboard/testimonios"
+                class="flex gap-2 items-center text-gray-600 hover:bg-gray-200/70 py-2 px-4 rounded-xl">
                 <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-500 size-6" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
