@@ -169,9 +169,13 @@
     </main>
 
 
+<<<<<<< HEAD
 
     <!-- Contenido de la página -->
     <footer class="bg-gray-50 w-full  border-opacity-60">
+=======
+  <footer class="bg-gray-50 w-full border-t border-gray-300 border-opacity-60">
+>>>>>>> 2c458d83a8212bcdd1632d743311bd75f5a4830c
         <div class="mx-auto max-w-screen-xl w-full px-6  py-10">
             <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 pb-10">
                 <div class="sm:col-span-2 md:col-span-3 lg:col-span-2">
