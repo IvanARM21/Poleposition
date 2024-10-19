@@ -42,12 +42,12 @@ if ($idProducto > 0) {
 
 <?php if ($totalImagenes > 1): ?>
     <!-- boton antes -->
-    <button id="prev-button" class="absolute top-[calc(50%-5rem)] left-4 text-gray-700 p-2 md:p-3 z-10 bg-white rounded-full shadow">
+    <button id="prev-button" class="absolute top-[calc(50%-7rem)] left-4 text-gray-700 p-2 md:p-3 z-10 bg-white rounded-full shadow">
         &#10094;
     </button>
 
     <!-- boton despues -->
-    <button id="next-button" class="absolute top-[calc(50%-5rem)] right-4 text-gray-700 p-2 md:p-3 z-10 bg-white rounded-full shadow">
+    <button id="next-button" class="absolute top-[calc(50%-7rem)] right-4 text-gray-700 p-2 md:p-3 z-10 bg-white rounded-full shadow">
         &#10095;
     </button>
 <?php endif; ?>
