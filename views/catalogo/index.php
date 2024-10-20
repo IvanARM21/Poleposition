@@ -18,7 +18,7 @@
             top-5 lg:sticky fixed z-20
             -ml-5 -mt-5 p-5 lg:p-0 lg:mr-5
             h-screen lg:h-[730px] 
-            max-w-[calc(500px-20px)] w-full lg:max-w-80
+            lg:max-w-80 w-full 
             overflow-hidden opacity-100 
             bg-white 
             transition-all duration-300" id="filtersContainer">

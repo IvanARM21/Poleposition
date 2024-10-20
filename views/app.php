@@ -218,7 +218,7 @@
             </div>
 
             <div class="border-t w-full pt-10 flex flex-col-reverse gap-5 md:flex-row justify-between items-center">
-                <p class="text-lg font-medium text-gray-600 text-balance text-center">© 2024 PolePosition. Todos los
+                <p class="text-lg font-medium text-gray-600 text-balance text-center">© 2024 Pole-Position. Todos los
                     derechos
                     reservados.</p>
 

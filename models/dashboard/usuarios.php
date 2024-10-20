@@ -21,8 +21,18 @@ class Usuarios
 
         $this->title = "Dashboard | Usuarios";
 
+        $sql = "SELECT c.*, 
+       IF(a.idAdmin IS NOT NULL, 'Admin', 'Usuario') AS tipo
+FROM cuentas c
+LEFT JOIN admin a ON c.id = a.idAdmin;
+";
+
+        $usuarios = $this->db->find($sql);
+        json_encode(value: $usuarios);
+
 
         return new Template('./views/dashboard/usuarios/index.php', [
+            "usuarios" => $usuarios
         ]);
     }
 
