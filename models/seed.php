@@ -35,7 +35,7 @@ class Seed {
             [
                 'modelo' => 'Huracán',
                 'marca' => 'Lamborghini',
-                'color' => 'Verde',
+                'color' => 'Azul',
                 'precio' => 755273,
                 'kilometraje' => 97,
                 'descripcion' => 'El Lamborghini Huracán 2023 redefine la velocidad y el lujo en cada aspecto. Con su potente motor V10 de 5.2L que entrega 631 caballos de fuerza, este superdeportivo acelera de 0 a 100 km/h en solo 2.9 segundos. Su diseño aerodinámico y agresivo, junto con las tecnologías más avanzadas en manejo y confort, hacen de este modelo un referente absoluto en el mundo de los supercoches. Si deseas una experiencia de conducción inigualable, el Huracán está hecho para ti.',
@@ -137,7 +137,7 @@ class Seed {
             [
                 'modelo' => 'AMG GT 63 S 4M',
                 'marca' => 'Mercedes',
-                'color' => 'Negro',
+                'color' => 'Azul',
                 'precio' => 161593,
                 'kilometraje' => 14864,
                 'descripcion' => 'El Mercedes-Benz AMG GT 63 S 2019 es un impresionante coupé de lujo que combina un potente motor con un diseño elegante y aerodinámico. Ofrece un rendimiento excepcional y un interior refinado, lleno de tecnología avanzada y comodidad. Con su capacidad de acelerar de 0 a 100 km/h en solo unos segundos, es el coche ideal para quienes buscan emoción y sofisticación.',
