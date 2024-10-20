@@ -74,11 +74,11 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
             <div class="border-2 p-4 rounded-lg shadow-md mt-5 transition-transform transform hover:shadow-lg max-w-full sm:max-w-md md:max-w-lg flex flex-col h-full">
                 <a href="/catalogo" class="flex flex-col h-full">
                     <div class="flex-grow flex flex-col items-center">
-                        <img src="../img/uploads/<?= htmlspecialchars($imagenes[1]) ?>"
+                        <img src="../img/uploads/<?= htmlspecialchars($imagenes[0]) ?>"
                              class="w-96 h-96 object-contain transition duration-500 ease-in-out transform hover:scale-102"
                              <?php if (count($imagenes) > 1): ?>
-                                onmouseout="this.src='../img/uploads/<?= htmlspecialchars($imagenes[1]) ?>'"
-                                onmouseover="this.src='../img/uploads/<?= htmlspecialchars($imagenes[0]) ?>'" <?php endif; ?>>
+                                onmouseout="this.src='../img/uploads/<?= htmlspecialchars($imagenes[0]) ?>'"
+                                onmouseover="this.src='../img/uploads/<?= htmlspecialchars($imagenes[1]) ?>'" <?php endif; ?>>
 
                         <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase text-lg sm:text-xl lg:text-2xl pt-4">
                             <?= htmlspecialchars($vehiculo->marca) ?> <?= htmlspecialchars($vehiculo->modelo) ?>

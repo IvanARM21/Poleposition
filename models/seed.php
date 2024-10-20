@@ -33,110 +33,148 @@ class Seed {
 
         $autos = [
             [
-                'modelo' => 'M3 Competition',
-                'marca' => 'BMW',
-                'color' => 'Amarillo',
-                'precio' => 75295,
-                'kilometraje' => 0,
-                'descripcion' => 'Potencia y precisión se fusionan en el BMW M3 Competition 2023. Equipado con un motor 3.0L Twin-Turbo de 6 cilindros en línea, este sedán deportivo entrega 510 caballos de fuerza y acelera de 0 a 100 km/h en solo 3.9 segundos. Su diseño agresivo, combinado con tecnología de última generación y un manejo dinámico, hacen de este modelo la elección perfecta para quienes buscan rendimiento sin sacrificar el lujo. ¿Estás listo para sentir la adrenalina al volante? ¡Este es el momento de llevarte el M3 Competition!',
+                'modelo' => 'Huracán',
+                'marca' => 'Lamborghini',
+                'color' => 'Azul',
+                'precio' => 755273,
+                'kilometraje' => 97,
+                'descripcion' => 'El Lamborghini Huracán 2023 redefine la velocidad y el lujo en cada aspecto. Con su potente motor V10 de 5.2L que entrega 631 caballos de fuerza, este superdeportivo acelera de 0 a 100 km/h en solo 2.9 segundos. Su diseño aerodinámico y agresivo, junto con las tecnologías más avanzadas en manejo y confort, hacen de este modelo un referente absoluto en el mundo de los supercoches. Si deseas una experiencia de conducción inigualable, el Huracán está hecho para ti.',
                 'año' => 2023,
                 'imagenes' => [
-                    "bmwm3_costado.webp",
-                    "bmwm3_frente.webp"
-                ]
-            ],
-            [
-                'modelo' => 'Silverado High Country',
-                'marca' => 'Chevrolet',
-                'color' => 'Negro',
-                'precio' => 71603,
-                'kilometraje' => 0,
-                'descripcion' => 'La Chevrolet Silverado High Country 2024 redefine el lujo y la potencia en el mundo de las camionetas. Con un motor V8 de 6.2L que entrega 420 caballos de fuerza, esta pick-up está diseñada para el trabajo duro sin perder elegancia. Su interior premium incluye detalles en madera, asientos de cuero y tecnología avanzada con pantalla táctil de 13.4”. Además, cuenta con capacidad de remolque impresionante y un manejo suave, haciendo que cualquier trayecto, sea en la ciudad o el campo, se sienta excepcional. ¡Lleva tu aventura al siguiente nivel con la Silverado High Country!',
-                'año' => 2024,
-                'imagenes' => [
-                    "chevroletsilveradohc_costado.webp",
-                    "chevroletsilveradohc_frente.webp"
-                ]
-            ],
-            [
-                'modelo' => 'Mustang Mach 1',
-                'marca' => 'Ford',
-                'color' => 'Negro',
-                'precio' => 65390,
-                'kilometraje' => 0,
-                'descripcion' => 'El Ford Mustang Mach 1 es una leyenda que revive con más fuerza que nunca. Equipado con un motor V8 de 5.0L que genera 480 caballos de fuerza, ofrece un rendimiento impresionante en carretera y pista. Su diseño aerodinámico y agresivo, combinado con mejoras de suspensión y frenado, garantiza una experiencia de manejo ágil y emocionante. Con detalles deportivos únicos y tecnología avanzada, el Mach 1 no solo rinde homenaje a su legado, sino que también establece un nuevo estándar para los autos de alto rendimiento. ¡Siente el poder y la herencia del Mustang en cada curva!',
-                'año' => 2024,
-                'imagenes' => [
-                    "fordmustang_costado.webp",
-                    "fordmustang_frente.webp"
+                    "lambohuracan-frente.webp",
+                    "lambohuracan-costado.webp",
+                    "lambohuracan-adentro.webp",
+                    "lambohuracan-adentro1.webp",
+                    "lambohuracan-adentro2.webp",
+                    "lambohuracan-atras.webp",
+                    "lambohuracan-atras2.webp",
+                    "lambohuracan-frente2.webp",
                 ]
             ],
             [
                 'modelo' => 'AMG G63',
-                'marca' => 'Mercedes',
+                'marca' => 'Mercedes-Benz',
                 'color' => 'Negro',
-                'precio' => 131923,
-                'kilometraje' => 6263,
-                'descripcion' => 'La Mercedes-AMG G63 2021 es la perfecta combinación de lujo extremo y potencia todoterreno. Bajo su icónico diseño cuadrado se encuentra un motor V8 biturbo de 4.0L que genera 577 caballos de fuerza, permitiendo acelerar de 0 a 100 km/h en solo 4.5 segundos. Con tracción integral 4MATIC, suspensión ajustable y un interior tapizado en cuero de la más alta calidad, la G63 ofrece comodidad y rendimiento tanto en la ciudad como en terrenos desafiantes. Con tecnología de punta y una presencia imponente, este SUV es sinónimo de exclusividad y capacidad sin límites. ¡Elige la G63 y domina cualquier camino con estilo!',
-                'año' => 2021,
+                'precio' => 187120,
+                'kilometraje' => 129,
+                'descripcion' => 'El Mercedes-Benz AMG G63 2024 combina lujo y rendimiento excepcional. Este SUV cuenta con un potente motor V8 biturbo, ofreciendo una experiencia de conducción inigualable. Su diseño robusto y elegante lo convierte en un ícono en el mundo automotriz. Con tecnología avanzada y un interior lujoso, el G63 es perfecto para aquellos que buscan confort y potencia.',
+                'año' => 2024,
                 'imagenes' => [
-                    "mercedesamg_costado.webp",
-                    "mercedesamg_frente.webp"
+                    "amgg63-frente.webp",
+                    "amgg63-costado.webp",
+                    "amgg63-adentro5.webp",
+                    "amgg63-adentro4.webp",
+                    "amgg63-adentro3.webp",
+                    "amgg63-adentro2.webp",
+                    "amgg63-adentro.webp",
+                    "amgg63-atras.webp",
+                    "amgg63-atras2.webp",
+                    "amgg63-frente2.webp"
                 ]
             ],
             [
-                'modelo' => 'Cayenne Coupe',
+                'modelo' => '911 Turbo Cabriolet',
                 'marca' => 'Porsche',
-                'color' => 'Blanco',
-                'precio' => 84300,
-                'kilometraje' => 2973,
-                'descripcion' => 'La Porsche Cayenne Coupé combina deportividad y elegancia en un SUV que desborda carácter. Con un motor turboalimentado que va desde los 340 hasta los 670 caballos de fuerza en sus versiones más potentes, este modelo ofrece un desempeño que rivaliza con autos deportivos, pero con la comodidad y versatilidad de un SUV. Su diseño coupé resalta con líneas dinámicas y un techo más bajo, mientras que el interior lujoso, con tecnología de vanguardia y acabados premium, garantiza una experiencia de conducción inigualable. ¡El Cayenne Coupé es el equilibrio perfecto entre lujo y emoción!',
-                'año' => 2023,
-                'imagenes' => [
-                    "porschecayenne_costado.webp",
-                    "porschecayenne_frente.webp"
-                ]
-            ],
-            [
-                'modelo' => '1500 TRX',
-                'marca' => 'RAM',
                 'color' => 'Gris',
-                'precio' => 80000,
-                'kilometraje' => 10315,
-                'descripcion' => 'La RAM 1500 TRX es la máxima expresión de poder y rendimiento en una camioneta. Equipada con un motor V8 supercargado de 6.2L que entrega impresionantes 702 caballos de fuerza, esta pick-up está diseñada para dominar cualquier terreno con una aceleración de 0 a 100 km/h en solo 4.5 segundos. Su suspensión de alto rendimiento y tecnología todoterreno hacen que no haya desafío imposible. En su interior, el lujo y la tecnología de punta se combinan para ofrecer una experiencia de conducción cómoda y emocionante. ¡La RAM 1500 TRX es pura potencia y aventura lista para llevarte a donde quieras!',
-                'año' => 2021,
-                'imagenes' => [
-                    "ram1500trx_atras.webp",
-                    "ram1500trx_frente.webp"
-                ]
-            ],
-            [
-                'modelo' => '2500',
-                'marca' => 'RAM',
-                'color' => 'Negro',
-                'precio' => 79990,
-                'kilometraje' => 1900,
-                'descripcion' => 'La RAM 2500 es una camioneta robusta y versátil diseñada para enfrentar las tareas más exigentes. Con opciones de motorización que incluyen un potente motor diésel de 6.7L, esta pick-up ofrece una capacidad de remolque impresionante, perfecta para trabajos pesados y aventuras al aire libre. Su diseño exterior muscular se complementa con un interior cómodo y bien equipado, que cuenta con tecnología avanzada y materiales de alta calidad. Además, la RAM 2500 garantiza un manejo seguro y confiable, tanto en carretera como fuera de ella. ¡La RAM 2500 es la elección ideal para quienes buscan fuerza y durabilidad sin sacrificar el confort!',
+                'precio' => 314404,
+                'kilometraje' => 1026,
+                'descripcion' => 'El Porsche 911 Turbo Cabriolet 2023 ofrece una experiencia de conducción excepcional, combinando lujo y potencia. Con un motor turboalimentado y un diseño icónico, este convertible es perfecto para disfrutar al aire libre sin sacrificar el rendimiento. Equipado con tecnología avanzada, el 911 Turbo Cabriolet redefine el concepto de automóviles deportivos.',
                 'año' => 2023,
                 'imagenes' => [
-                    "ram2500_costado.webp",
-                    "ram2500_frente.webp"
+                    "porsche911-frente.webp",
+                    "porsche911-costado.webp",
+                    "porsche911-adentro.webp",
+                    "porsche911-adentro2.webp",
+                    "porsche911-adentro3.webp",
+                    "porsche911-adentro4.webp",
+                    "porsche911-atras.webp",
+                    "porsche911-atras2.webp",
+                    "porsche911-atras3.webp",
+                    "porsche911-frente2.webp"
                 ]
             ],
             [
-                'modelo' => 'R1T ',
-                'marca' => 'Rivian',
+                'modelo' => 'i7 xDrive 60 M Sport',
+                'marca' => 'BMW',
                 'color' => 'Negro',
-                'precio' => 73000,
-                'kilometraje' => 465,
-                'descripcion' => 'La Rivian R1T es una innovadora camioneta eléctrica que redefine el concepto de aventura. Con su motor dual o cuádruple que ofrece hasta 800 caballos de fuerza, la R1T puede acelerar de 0 a 100 km/h en apenas 3 segundos. Su diseño robusto y aerodinámico, junto con una impresionante capacidad de remolque de hasta 5,000 kg, la convierten en la compañera perfecta para explorar terrenos difíciles. El interior está equipado con tecnología de vanguardia, incluyendo una pantalla táctil de 15.6 pulgadas y materiales sostenibles. Con un enfoque en la sostenibilidad y la conectividad, la Rivian R1T es el futuro de las camionetas. ¡Prepárate para llevar tus aventuras a un nuevo nivel!',
-                'año' => 2022,
+                'precio' => 201816,
+                'kilometraje' => 10806,
+                'descripcion' => 'El BMW i7 xDrive 60 M Sport 2024 es un sedán eléctrico de lujo que combina rendimiento, tecnología de vanguardia y confort excepcional. Con un diseño elegante y una motorización potente, este modelo redefine la experiencia de conducción eléctrica. Equipado con características de alta gama y sistemas de asistencia al conductor, es ideal para quienes buscan sostenibilidad sin sacrificar el lujo.',
+                'año' => 2024,
                 'imagenes' => [
-                    "rivianr1t_costado.webp",
-                    "rivianr1t_frente.webp"
+                    "bmwi7-frente.webp",
+                    "bmwi7-costado.webp",
+                    "bmwi7-adentro.webp",
+                    "bmwi7-adentro2.webp",
+                    "bmwi7-adentro3.webp",
+                    "bmwi7-adentro4.webp",
+                    "bmwi7-adentro5.webp",
+                    "bmwi7-atras.webp",
+                    "bmwi7-atras2.webp",
+                    "bmwi7-frente2.webp"
                 ]
-            ]
+            ],
+            [
+                'modelo' => '458 Italia',
+                'marca' => 'Ferrari',
+                'color' => 'Rojo',
+                'precio' => 437356,
+                'kilometraje' => 26239,
+                'descripcion' => 'El Ferrari 458 Italia 2013 es un superdeportivo que combina un impresionante motor V8 de 4.5 litros con un diseño aerodinámico. Con un rendimiento excepcional y una aceleración que corta el aliento, este vehículo ofrece una experiencia de conducción única. Su interior lujoso y tecnología avanzada garantizan que cada viaje sea memorable.',
+                'año' => 2013,
+                'imagenes' => [
+                    "ferrari458-frente2.webp",
+                    "ferrari458-costado.webp",
+                    "ferrari458-adentro.webp",
+                    "ferrari458-adentro2.webp",
+                    "ferrari458-adentro3.webp",
+                    "ferrari458-adentro4.webp",
+                    "ferrari458-atras.webp",
+                    "ferrari458-atras2.webp",
+                    "ferrari458-frente.webp",
+                ]
+            ],
+            [
+                'modelo' => 'AMG GT 63 S 4M',
+                'marca' => 'Mercedes',
+                'color' => 'Azul',
+                'precio' => 161593,
+                'kilometraje' => 14864,
+                'descripcion' => 'El Mercedes-Benz AMG GT 63 S 2019 es un impresionante coupé de lujo que combina un potente motor con un diseño elegante y aerodinámico. Ofrece un rendimiento excepcional y un interior refinado, lleno de tecnología avanzada y comodidad. Con su capacidad de acelerar de 0 a 100 km/h en solo unos segundos, es el coche ideal para quienes buscan emoción y sofisticación.',
+                'año' => 2019,
+                'imagenes' => [
+                    "mercedesamggt-frente.webp",
+                    "mercedesamggt-costado.webp",
+                    "mercedesamggt-adentro.webp",
+                    "mercedesamggt-adentro2.webp",
+                    "mercedesamggt-adentro3.webp",
+                    "mercedesamggt-adentro4.webp",
+                    "mercedesamggt-adentro5.webp",
+                    "mercedesamggt-atras.webp",
+                    "mercedesamggt-atras2.webp",
+                    "mercedesamggt-frente2.webp"
+                ]
+            ],
+            [
+                'modelo' => 'Huracán Spyder LP',
+                'marca' => 'Lamborghini',
+                'color' => 'Naranja',
+                'precio' => '309985',
+                'kilometraje' => 0,
+                'descripcion' => 'El Lamborghini Huracán Spyder LP 610-4 2017 es un superdeportivo convertible que combina potencia y estilo. Con un motor V10 de 610 caballos de fuerza, este modelo ofrece un rendimiento impresionante y un diseño aerodinámico. Su interior está equipado con tecnología de vanguardia y acabados de lujo, ofreciendo una experiencia de conducción emocionante y placentera.',
+                'año' => 2017,
+                'imagenes' => [
+                    "lambohurcanspider-frente.webp",
+                    "lambohuracanspider-costado.webp",
+                    "lambohurcanspider-adentro.webp",
+                    "lambohurcanspider-adentro3.webp",
+                    "lambohurcanspider-adentro4.webp",
+                    "lambohuracanspider-atras.webp",
+                    "lambohurcanspider-frente2.webp"
+                ]
+            ],
         ];
+
 
         foreach ($autos as $auto) {
             $idVehiculo = $this->db->save("INSERT INTO vehiculo (modelo, marca, color, precio, kilometraje, descripcion, año) 
