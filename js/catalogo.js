@@ -80,8 +80,9 @@ export const createVehicle = (vehicle) => {
     // Crear el párrafo para el precio
     const pPrecio = document.createElement('p');
     pPrecio.className = "text-gray-500 text-sm sm:text-lg font-medium";
-    pPrecio.textContent = `$${vehicle.precio.toLocaleString()} USD`;
+    pPrecio.textContent = `$${vehicle.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} USD`;
     divDetails.appendChild(pPrecio);
+
 
     // Crear la sección de año y kilometraje
     const divInfo = document.createElement('div');
