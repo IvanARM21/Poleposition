@@ -151,74 +151,8 @@ $jsonCompras = json_encode($compras);
     }
     
 
-    private function actualizarSeguridad($usuarioDatos) {
-        $contraseñaActual = $_POST['contraseñaActual'] ?? '';
-        $contraseñaNueva = $_POST['contraseñaNueva'] ?? '';
-        $contraseñaNueva2 = $_POST['contraseñaNueva2'] ?? '';
+ 
 
-        if (empty($contraseñaActual) || empty($contraseñaNueva) || empty($contraseñaNueva2)) {
-            return 'Todos los campos son obligatorios para cambiar la contraseña.';
-        }
-
-        if (strlen($contraseñaNueva) < 8) {
-            return 'La nueva contraseña debe tener al menos 8 caracteres.';
-        }
-    
-        if ($contraseñaNueva !== $contraseñaNueva2) {
-            return 'Las nuevas contraseñas no coinciden.';
-        }
-    
-        $stmt = $this->db->getConexion()->prepare("SELECT password FROM cuentas WHERE usuario = ?");
-        $stmt->bind_param('s', $usuarioDatos['usuario']);
-        $stmt->execute();
-        $usuarioDB = $stmt->get_result()->fetch_assoc();
-    
-        if (!$usuarioDB || !password_verify($contraseñaActual, $usuarioDB['password'])) {
-            return 'Contraseña actual incorrecta.';
-        }
-    
-        $stmt = $this->db->getConexion()->prepare("UPDATE cuentas SET password = ? WHERE usuario = ?");
-        $hashContraseñaNueva = password_hash($contraseñaNueva, PASSWORD_DEFAULT);
-    
-        if (!$stmt->bind_param('ss', $hashContraseñaNueva, $usuarioDatos['usuario']) || !$stmt->execute()) {
-            return 'Error al cambiar la contraseña.';
-        }
-    
-        return null;
-    }
-    
-    private function eliminarCuenta($usuarioDatos) {
-        $contraseñaActualBorrar = $_POST['contraseñaActualBorrar'] ?? '';
-        
-        if (empty($contraseñaActualBorrar)) {
-            return 'Tienes que escribir tu contraseña para eliminar la cuenta.';
-        }
-        
-        $usuario = $usuarioDatos['usuario'];
-        
-        $stmt = $this->db->getConexion()->prepare("SELECT password FROM cuentas WHERE usuario = ?");
-        $stmt->bind_param('s', $usuario);
-        $stmt->execute();
-        $usuarioDB = $stmt->get_result()->fetch_assoc();
-        
-        if (!$usuarioDB || !password_verify($contraseñaActualBorrar, $usuarioDB['password'])) {
-            return 'Contraseña actual incorrecta.';
-        }
-
-        $stmt = $this->db->getConexion()->prepare("DELETE FROM cuentas WHERE usuario = ?");
-        $stmt->bind_param('s', $usuario);
-        
-        if ($stmt->execute()) {
-            // Eliminar la cookie del usuario
-            setcookie('usuario', '', time() - 3600, '/');
-            // Redirigir a la página principal
-            header("Location: /");
-            exit;
-        }
-        
-        return 'Error al eliminar la cuenta.';
-    }    
-    
     private function obtenerDatosUsuario($usuario) {
         $stmt = $this->db->getConexion()->prepare("SELECT nombreCompleto, usuario, email FROM cuentas WHERE usuario = ?");
         if (!$stmt) {

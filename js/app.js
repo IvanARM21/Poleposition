@@ -5,6 +5,7 @@ import { validacionLogin } from './validacion.js';
 import { loadVehicles } from './catalogo.js';
 import { loadBuy } from './comprar.js';
 import { loadInput } from './search.js';
+import { } from './modalPerfil.js';
 
 addEventListener("DOMContentLoaded", () => {
     loadPerfilButtons();

@@ -71,10 +71,58 @@
         <!-- SEGURIDAD -->
         <div class="hidden w-full" id="seguridadForm">
             <div class="flex justify-between items-center p-5 sm:p-10 border rounded-xl h-full">
-                <button type="button" id="cambiar-contraseña"
-                    class="text-gray-600 hover:text-black transition-colors">Cambiar Contraseña</button>
+                <!-- Botón para cambiar contraseña -->
+<button type="button" id="cambiar-contraseña" class="text-gray-600 hover:text-black transition-colors">
+    Cambiar Contraseña
+</button>
 
-                <button type="button">Eliminar Cuenta</button>
+<!-- Modal Cambiar Contraseña -->
+<div id="modal-cambiar" class="fixed z-40 inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800">Cambiar Contraseña</h2>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Contraseña actual</label>
+            <input type="password" id="actual-pass" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Nueva contraseña</label>
+            <input type="password" id="new-pass" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Repetir nueva contraseña</label>
+            <input type="password" id="repeat-pass" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <p id="error-msg" class="text-red-500 text-sm hidden">Las contraseñas deben coincidir y ser de más de 8 caracteres</p>
+        <div class="flex justify-end space-x-4">
+            <button id="guardar-pass" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">Guardar</button>
+            <button id="cancelar-pass" class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400 transition">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Eliminar Cuenta -->
+<div id="modal-eliminar" class="fixed z-40 inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800">¿Estás seguro?</h2>
+        <p class="mb-4 text-gray-600">Para eliminar tu cuenta, por favor ingresa tu contraseña.</p>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Contraseña</label>
+            <input type="password" id="delete-pass" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" />
+        </div>
+        <div class="flex justify-end space-x-4">
+            <button id="confirmar-eliminar" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Eliminar</button>
+            <button id="cancelar-eliminar" class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400 transition">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Botón para eliminar cuenta -->
+<button type="button" id="eliminar-cuenta" class="text-gray-600 hover:text-black transition-colors">
+    Eliminar Cuenta
+</button>
+
+
             </div>
         </div>
 
