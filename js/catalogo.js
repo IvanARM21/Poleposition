@@ -125,17 +125,7 @@ const vehiclesEmpty = (message) => {
     }
 }
 
-// Filter button
-const filtersContainer = document.getElementById("filtersContainer");
-document?.getElementById("filterButton")?.addEventListener("click", () => {
-    if(filtersContainer.classList.contains("max-w-80")) {
-        filtersContainer.classList.remove("max-w-80", "opacity-100", "mr-5");
-        filtersContainer.classList.add("max-w-0", "opacity-0");
-    } else {
-        filtersContainer.classList.add("max-w-80", "opacity-100", "mr-5");
-        filtersContainer.classList.remove("max-w-0", "opacity-0");
-    }
-});
+
 
 // Filtros
 export const brands = Array.from(document.getElementsByName("brands[]"));
@@ -182,4 +172,42 @@ export const clear = (parent) => {
         parent.removeChild(parent.firstChild);
     }
 }
+
+
+// Filter button
+const bgFilter = document.getElementById("bgFilter") ?? null;
+const closeFilter = document.getElementById("closeFilter") ?? null;
+
+const filtersContainer = document.getElementById("filtersContainer");
+document?.getElementById("filterButton")?.addEventListener("click", () => {
+    const viewportWidth = window.innerWidth;
+    if(viewportWidth >= 1024) {
+        if(filtersContainer.classList.contains("lg:max-w-80")) {
+            filtersContainer.classList.remove("lg:max-w-80", "opacity-100", "lg:mr-5");
+            filtersContainer.classList.add("lg:max-w-0", "opacity-0");
+        } else {
+            filtersContainer.classList.add("lg:max-w-80", "opacity-100", "lg:mr-5");
+            filtersContainer.classList.remove("lg:max-w-0", "opacity-0");
+        }
+    } else{ 
+        bgFilter?.classList?.remove("hidden");
+        bgFilter?.classList?.add("block");
+        filtersContainer.classList.remove("-translate-x-full");
+        filtersContainer.classList.add("translate-x-0");
+        closeFilter?.classList?.remove("hidden");
+        closeFilter?.classList?.add("block");
+    }
+});
+
+const closeFilters = () => {
+    bgFilter?.classList?.add("hidden");
+    bgFilter?.classList?.remove("block");
+    filtersContainer.classList.add("-translate-x-full");
+    filtersContainer.classList.remove("translate-x-0");
+    closeFilter?.classList?.add("hidden");
+    closeFilter?.classList?.remove("block");
+}
+
+bgFilter.addEventListener("click", closeFilters);
+closeFilter.addEventListener("click", closeFilters);
 

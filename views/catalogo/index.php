@@ -1,8 +1,20 @@
+<div class="inset-0 fixed bg-black bg-opacity-70 z-30 lg:hidden hidden" id="bgFilter"></div>
+
+<button class="fixed top-3 right-2 text-white bg-black rounded-full bg-opacity-40 p-1 z-50 lg:hidden hidden"
+    id="closeFilter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8">
+        <path fill-rule="evenodd"
+            d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+            clip-rule="evenodd" />
+    </svg>
+
+</button>
+
 <section class="px-4 max-w-screen-xl mx-auto">
     <!-- filtros -->
     <h1 class="title">Nuestro cátalogo de vehiculos</h1>
     <button type="button" id="filterButton" class="
-        sticky top-5 z-20
+        sticky top-5 z-10
         shadow-sm w-full sm:w-fit px-6 py-2 mb-10 
         bg-gray-200 text-black hover:bg-gray-300 font-medium rounded-xl
         transition duration-300 
@@ -15,10 +27,11 @@
     <div class="w-full flex">
         <div class="
             lg:block 
-            top-5 lg:sticky fixed z-20
-            -ml-5 -mt-5 p-5 lg:p-0 lg:mr-5
+            top-5 lg:sticky fixed z-40
+            -ml-5 -mt-5 p-5 lg:p-0 lg:ml-0 lg:mr-5
             h-screen lg:h-[730px] 
-            lg:max-w-80 w-full 
+            lg:max-w-80 w-[calc(100%-50px)] max-w-[500px]
+            -translate-x-full lg:translate-x-0
             overflow-hidden opacity-100 
             bg-white 
             transition-all duration-300" id="filtersContainer">
@@ -99,27 +112,25 @@
                     </ul>
                 </div>
 
-                <div>
-                    <button type="button" id="resetFilters"
-                        class="w-full bg-gray-900 text-white py-2 rounded-xl font-medium hover:bg-gray-700 transition duration-300 flex gap-2 items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                        </svg>
+                <button type="button" id="resetFilters"
+                    class="w-full bg-gray-900 text-white py-2 rounded-xl font-medium hover:bg-gray-700 transition duration-300 flex gap-2 items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                    </svg>
 
-                        Resetear Filtros
-                    </button>
-                </div>
+                    Resetear Filtros
+                </button>
             </form>
         </div>
 
         <!--Fin Filtros -->
 
-        <div id="empty" class="hidden col-span-12 lg:col-span-9"></div>
 
-        <ul class=" grid grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-2 lg:gap-x-4 w-full transition-all duration-500"
+        <ul class="w-full grid grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-2 lg:gap-x-4 w-full transition-all duration-500"
             id="vehiculos">
+            <div id="empty" class="hidden"></div>
 
         </ul>
     </div>
