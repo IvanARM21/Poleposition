@@ -1,4 +1,4 @@
-import { vehicles } from "./catalogo";
+import { vehicles } from "./catalogo.js";
 
 const inputSearch = document.getElementById("search");
 

@@ -205,7 +205,7 @@ class Productos
         // Decodificar Base64
         $imageData = base64_decode($base64String);
 
-        // Nombre uncio
+        // Nombre unico
         $imageUnique = md5(uniqid(rand(), true)) . ".webp";
 
         $uploadDir = dirname(__DIR__) . DIRECTORY_SEPARATOR . "img" . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;

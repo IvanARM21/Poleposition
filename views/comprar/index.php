@@ -1,47 +1,149 @@
 <section class="max-w-screen-xl mx-auto">
 
-    <h1 class="title">Comprar</h1>
+    <div class="grid grid-cols-2 px-6 gap-10">
+        <div class=" rounded-xl">
+            <div>
+                <h2 class="text-xl font-medium text-gray-800">Información Contacto</h2>
 
-    <div class="grid grid-cols-6 gap-10">
-        <div class="col-span-4 border-y py-8">
-            <div class="flex justify-between items-start">
-                <div class="flex gap-5">
-                    <img src="../../img/uploads/amgg63-frente2.webp" alt="" id="image"
-                        class="w-72 aspect-square object-cover rounded-lg">
+                <div class="flex flex-col gap-1 mt-5">
+                    <label for="email" class="text-lg text-gray-700">Email</label>
+                    <input id="email" type="email" class="w-full py-2 px-4 border rounded-md">
+                </div>
+            </div>
 
-                    <div class="flex justify-between flex-col">
-                        <div class=" py-2">
-                            <h3 class="text-xl text-gray-800 hover:text-red-600 font-medium">Mercedes-Benz AMG G63</h3>
-                            <div class="flex gap-2">
-                                <p class="text-gray-500 font-medium">2024</p>
-                                <p class="text-gray-500 font-medium">-</p>
-                                <p class="text-gray-500 font-medium">50km</p>
+            <div class="mt-10 pt-10 border-t">
+                <h2 class="text-xl font-medium text-gray-800">Información de cliente</h2>
+
+                <div class="flex flex-col gap-3 mt-2">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="flex flex-col gap-1">
+                            <label for="nombre" class="text-lg text-gray-700">Nombre</label>
+                            <input type="text" id="nombre" class="w-full py-2 px-4 border rounded-md">
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label for="apellido" class="text-lg text-gray-700">Apellido</label>
+                            <input type="text" id="apellido" class="w-full py-2 px-4 border rounded-md">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label for="direccion" class="text-lg text-gray-700">Dirección</label>
+                        <input type="text" id="direccion" class="w-full py-2 px-4 border rounded-md">
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label for="apartamento" class="text-lg text-gray-700">Apartment, suite, etc.</label>
+                        <input type="text" id="apartamento" class="w-full py-2 px-4 border rounded-md">
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="flex flex-col gap-1">
+                            <label for="ciudad" class="text-lg text-gray-700">Ciudad</label>
+                            <input type="text" id="ciudad" class="w-full py-2 px-4 border rounded-md">
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="codigo" class="text-lg text-gray-700">Código Postal</label>
+                            <input type="text" id="codigo" class="w-full py-2 px-4 border rounded-md">
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="pais" class="text-lg text-gray-700">País</label>
+                            <input type="text" id="pais" class="w-full py-2 px-4 border rounded-md">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label for="telefono" class="text-lg text-gray-700">Phone</label>
+                        <input type="text" id="telefono" class="w-full py-2 px-4 border rounded-md">
+                    </div>
+                </div>
+
+                <div class="mt-10 pt-10 border-t">
+                    <h2 class="text-xl font-medium text-gray-800">Pago</h2>
+
+                    <div class="flex flex-col gap-3 mt-2">
+                        <div class="flex flex-col gap-1">
+                            <label for="tarjeta" class="text-lg text-gray-700">Numero de Tarjeta</label>
+                            <input type="text" id="tarjeta" class="w-full py-2 px-4 border rounded-md">
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="nombreTarjeta" class="text-lg text-gray-700">Nombre en Tarjeta</label>
+                            <input type="text" id="nombreTarjeta" class="w-full py-2 px-4 border rounded-md">
+                        </div>
+
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="flex flex-col gap-1 col-span-3">
+                                <label for="caducidad" class="text-lg text-gray-700">Fecha de caducidad (MM/AA)</label>
+                                <input type="text" id="caducidad" class="w-full py-2 px-4 border rounded-md">
+                            </div>
+                            <div class="flex flex-col gap-1 col-span-1">
+                                <label for="cvc" class="text-lg text-gray-700">CVC</label>
+                                <input type="text" id="cvc" class="w-full py-2 px-4 border rounded-md">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Fin Form -->
+
+        <!-- Resumen Orden -->
+
+        <div class="flex flex-col gap-5 sticky top-5 h-[581px]">
+            <h2 class="text-xl font-medium text-gray-800">Resumen compra</h2>
+
+            <div class="flex flex-col gap-10">
+                <div class="flex justify-between border-y py-8">
+                    <div class="flex gap-5">
+                        <img src="../../img/uploads/amgg63-frente2.webp" alt=""
+                            class="aspect-square w-40 object-cover rounded-xl">
+
+                        <div class="flex flex-col justify-between py-2">
+                            <div>
+                                <h3 class="text-xl text-gray-800 hover:text-red-600 font-medium">Mercedes-Benz AMG G63
+                                </h3>
+                                <div class="flex gap-2">
+                                    <p class="text-gray-500 font-medium">2024</p>
+                                    <p class="text-gray-500 font-medium">-</p>
+                                    <p class="text-gray-500 font-medium">50km</p>
+                                </div>
                             </div>
 
                             <p class="text-lg text-gray-500 font-medium">USD 755,273.00</p>
                         </div>
-
-                        <p class="text-gray-500 font-medium">
-                            Tipo:
-                            <span class="py-1 px-2 rounded-lg bg-yellow-50 text-yellow-600">Alquier</span>
-                        </p>
                     </div>
+                    <p class="text-gray-500 font-medium py-2">
+                        Tipo:
+                        <span class="py-1 px-2 rounded-lg bg-yellow-50 text-yellow-600">Alquier</span>
+                    </p>
                 </div>
-                <button class="py-2 text-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-                        <path fill-rule="evenodd"
-                            d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </button>
 
+                <div class="flex flex-col gap-4">
+                    <div class="flex justify-between py-2">
+                        <p class="text-lg text-gray-700">Subtotal</p>
+                        <p class="text-lg text-gray-700 font-medium">USD 755,273.00</p>
+                    </div>
+                    <div class="flex justify-between py-2">
+                        <p class="text-lg text-gray-700">Alquiler</p>
+                        <p class="text-lg text-gray-700 font-medium">USD 377.00</p>
+                    </div>
+                    <div class="flex justify-between py-2">
+                        <p class="text-lg text-gray-700">Impuestos(15%)</p>
+                        <p class="text-lg text-gray-700 font-medium">USD 56.55</p>
+                    </div>
+
+                    <div class="flex justify-between py-4 border-y">
+                        <p class="text-xl text-gray-700 font-medium">Total</p>
+                        <p class="text-xl text-gray-700 font-medium">USD 433.55</p>
+                    </div>
+
+                    <button class="bg-red-600 w-full py-2 px-4 text-white rounded-xl border-t mt-4">
+                        Confirmar compra
+                    </button>
+                </div>
             </div>
-        </div>
-
-        <div class="col-span-2 bg-gray-100 p-5 rounded-xl ">
-            <h2 class="text-2xl font-medium text-gray-700">Resumen de Compra</h2>
-
-            <p class=""></p>
         </div>
     </div>
 </section>
