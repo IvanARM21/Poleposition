@@ -83,20 +83,22 @@ class App
     {
         if (method_exists($model, 'index') && !isset($this->args[0])) {
             $template = $model->index();
-        } else if (method_exists($model, 'create') && $this->args[0] === "crear") {
+        } else if (method_exists($model, 'create') && isset($this->args[0]) && $this->args[0] === "crear") {
             $template = $model->create();
-        } else if (method_exists($model, 'update') && $this->args[0] === "editar") {
-            $template = $model->update($this->args[1]);
-        } else if (method_exists($model, 'delete') && $this->args[0] === "eliminar") {
-            $template = $model->delete($this->args[1]);
-        } else if (method_exists($model, 'show')) {
+        } else if (method_exists($model, 'update') && isset($this->args[0]) && $this->args[0] === "editar") {
+            $template = $model->update($this->args[1] ?? null);
+        } else if (method_exists($model, 'delete') && isset($this->args[0]) && $this->args[0] === "eliminar") {
+            $template = $model->delete($this->args[1] ?? null);
+        } else if (method_exists($model, 'show') && isset($this->args[0])) {
             $template = $model->show($this->args[0]);
         } else {
             $this->redirectToErrorPage();
             return;
         }
+
         return $template;
     }
+
 
     private function loadAdmin($model)
     {

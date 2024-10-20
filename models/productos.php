@@ -14,14 +14,17 @@ class Productos
     {
         return $this->title;
     }
-    // /products
     public function index()
     {
-        $sql = "SELECT * FROM vehiculo";
-        $product = $this->db->find($sql);
-
-        $this->title = "PP | Vehiculos";
-        header("Location: /dashboard");
+        $sql = "
+            SELECT v.id, v.marca, v.modelo, v.precio, v.color, v.kilometraje, v.año, GROUP_CONCAT(vi.imagen) as imagenes
+            FROM vehiculo v
+            LEFT JOIN vehiculoImagenes vi ON v.id = vi.idVehiculo
+            GROUP BY v.id
+        ";
+        $vehiculos = $this->db->find($sql);
+        echo json_encode($vehiculos);
+        exit;
     }
     public function show($id)
     {

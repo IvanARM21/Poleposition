@@ -28,43 +28,45 @@
     }
     ?>
     <!-- intento de nav bar -->
-    <header class="border-b bg-white max-w-screen-xl mx-auto px-6 h-20 w-full z-20">
-        <nav class="flex justify-between lg:grid lg:grid-cols-3">
-            <!-- logo -->
-            <a href="/">
-                <img src="/img/logo.svg" class=" h-20 w-auto">
-            </a>
+    <header class="border-b bg-white h-20 w-full z-20">
+        <div class="max-w-screen-xl mx-auto px-4 w-full">
+            <nav class="flex justify-between lg:grid lg:grid-cols-3">
+                <!-- logo -->
+                <a href="/">
+                    <img src="/img/logo.svg" class=" h-20 w-auto">
+                </a>
 
-            <button type="button" class="block cursor-pointer lg:hidden" id="menuBtn">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-8 text-gray-700">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-            </button>
+                <button type="button" class="block cursor-pointer lg:hidden" id="menuBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-8 text-gray-700">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
 
-            <!-- cosos -->
-            <div class="hidden lg:flex justify-center items-center gap-5 text-red-600 font-semibold text-lg">
-                <a class="link" href="/">Inicio</a>
-                <a class="link" href="/catalogo">Catalogo</a>
-                <a class="link" href="/contacto">Contacto</a>
-                <a class="link" href="/sobre-nosotros">Sobre Nosotros</a>
-            </div>
+                <!-- cosos -->
+                <div class="hidden lg:flex justify-center items-center gap-5 text-red-600 font-semibold text-lg">
+                    <a class="link" href="/">Inicio</a>
+                    <a class="link" href="/catalogo">Catalogo</a>
+                    <a class="link" href="/contacto">Contacto</a>
+                    <a class="link" href="/sobre-nosotros">Sobre Nosotros</a>
+                </div>
 
-            <!-- auth -->
-            <div class="hidden lg:flex gap-5 justify-end items-center  text-red-600 font-semibold text-lg">
-                <?php if ($isLogged): ?>
-                    <a class="link" href="/perfil">Perfil</a>
-                    <?php if ($isAdmin): ?>
-                        <a class="link" href="/dashboard">Dashboard</a>
+                <!-- auth -->
+                <div class="hidden lg:flex gap-5 justify-end items-center  text-red-600 font-semibold text-lg">
+                    <?php if ($isLogged): ?>
+                        <a class="link" href="/perfil">Perfil</a>
+                        <?php if ($isAdmin): ?>
+                            <a class="link" href="/dashboard">Dashboard</a>
+                        <?php endif; ?>
+                        <a class="link" href="/logout">Cerrar Sesión</a>
+                    <?php else: ?>
+                        <a href="/login" class="link">Iniciar Sesión</a>
+                        <a href="/register" class="link">Registrarse</a>
                     <?php endif; ?>
-                    <a class="link" href="/logout">Cerrar Sesión</a>
-                <?php else: ?>
-                    <a href="/login" class="link">Iniciar Sesión</a>
-                    <a href="/register" class="link">Registrarse</a>
-                <?php endif; ?>
-            </div>
-        </nav>
+                </div>
+            </nav>
+        </div>
     </header>
 
     <aside id="menu-mobile"

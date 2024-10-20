@@ -1,34 +1,40 @@
 <?php
 
-include_once __DIR__ . '/Vehiculo.php'; 
+include_once __DIR__ . '/Vehiculo.php';
 
-class Catalogo {
+class Catalogo
+{
 
     private $db;
     private $title;
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->db = $db;
     }
 
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
-    public function index() {
+    public function index()
+    {
         $this->title = "PP | Catalogo";
 
         // Obtener vehículos desde la base de datos
         $vehiculos = $this->obtenerVehiculos();
+
 
         return new Template('./views/catalogo/index.php', [
             "vehiculos" => $vehiculos
         ]);
     }
 
-    private function obtenerVehiculos() {
+    private function obtenerVehiculos()
+    {
         $sql = "
-            SELECT v.id, v.marca, v.modelo, v.precio, v.kilometraje, GROUP_CONCAT(vi.imagen) as imagenes
+            SELECT v.id, v.marca, v.modelo, v.precio, v.color, v.kilometraje, v.año, GROUP_CONCAT(vi.imagen) as imagenes
             FROM vehiculo v
             LEFT JOIN vehiculoImagenes vi ON v.id = vi.idVehiculo
             GROUP BY v.id
@@ -38,21 +44,25 @@ class Catalogo {
 
     // Otros métodos...
 
-    public function show($id) {
+    public function show($id)
+    {
         return new Template('./views/catalogo/show.php', [
             "vehiculo" => "vehiculo"
         ]);
     }
 
-    public function create() {
+    public function create()
+    {
         // Lógica para crear
     }
 
-    public function update($id) {
+    public function update($id)
+    {
         // Lógica para actualizar
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         // Lógica para eliminar
     }
 }
