@@ -166,12 +166,11 @@ class Seed {
                 'imagenes' => [
                     "lambohurcanspider-frente.webp",
                     "lambohuracanspider-costado.webp",
-                    "lambohuracanspider-adentro.webp",
-                    "lambohuracanspider-adentro2.webp",
-                    "lambohuracanspider-adentro3.webp",
-                    "lambohuracanspider-adentro4.webp",
+                    "lambohurcanspider-adentro.webp",
+                    "lambohurcanspider-adentro3.webp",
+                    "lambohurcanspider-adentro4.webp",
                     "lambohuracanspider-atras.webp",
-                    "lambohurcanspider-frente2.webp",
+                    "lambohurcanspider-frente2.webp"
                 ]
             ],
         ];
