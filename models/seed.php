@@ -123,7 +123,7 @@ class Seed {
                 'descripcion' => 'El Ferrari 458 Italia 2013 es un superdeportivo que combina un impresionante motor V8 de 4.5 litros con un diseño aerodinámico. Con un rendimiento excepcional y una aceleración que corta el aliento, este vehículo ofrece una experiencia de conducción única. Su interior lujoso y tecnología avanzada garantizan que cada viaje sea memorable.',
                 'año' => 2013,
                 'imagenes' => [
-                    "ferrari458-frente.webp",
+                    "ferrari458-frente2.webp",
                     "ferrari458-costado.webp",
                     "ferrari458-adentro.webp",
                     "ferrari458-adentro2.webp",
@@ -131,8 +131,7 @@ class Seed {
                     "ferrari458-adentro4.webp",
                     "ferrari458-atras.webp",
                     "ferrari458-atras2.webp",
-                    "ferrari458-frente.webp"
-
+                    "ferrari458-frente.webp",
                 ]
             ],
             [
