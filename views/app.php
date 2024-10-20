@@ -175,7 +175,7 @@
 
 
     <!-- child para generar las paginas -->
-    <main class="container-page flex-1 my-10">
+    <main class="container-page flex-1 mt-10 mb-20">
         <?= $child ?>
     </main>
 

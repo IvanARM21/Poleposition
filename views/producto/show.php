@@ -122,7 +122,7 @@ if ($idProducto > 0) {
                 </p>
             </div>
             <div class="flex gap-4 flex-col mt-auto sm:pt-4">
-                <button
+                <button name="comprar" id="<?php echo $vehiculo->id ?>"
                     class="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-102">Comprar</button>
                 <button
                     class="w-full bg-white border border-red-600 text-red-600 py-2 rounded-md hover:bg-red-50 hover:border-red-700 hover:text-red-700 hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-102">Alquilar</button>
@@ -137,6 +137,7 @@ if ($idProducto > 0) {
 
 <script>
     let images = document.querySelectorAll('.vehicle-image');
+
     let currentIndex = 0;
 
     if (images.length > 1) {
