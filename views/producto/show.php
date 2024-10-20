@@ -63,9 +63,9 @@ if ($idProducto > 0) {
                     <p class="text-gray-500">No hay imágenes disponibles para este vehículo.</p>
                 </div>
             <?php endif; ?>
-            <div class="p-4 bg-white rounded-b-lg">
-                <h2 class="text-lg font-bold text-red-600">Más información</h2>
-                <p class="mt-2 text-gray-700"><?php echo $vehiculo->descripcion; ?></p>
+            <div class="pt-4 bg-white rounded-b-lg">
+                <h2 class="text-xl font-bold text-red-600">Más información</h2>
+                <p class="mt-2 text-gray-700 text-left"><?php echo $vehiculo->descripcion; ?></p>
             </div>
         </div>
 
