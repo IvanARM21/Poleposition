@@ -4,6 +4,7 @@ import { LoadMenuBtn } from './menu.js';
 import { validacionLogin } from './validacion.js';
 import { loadVehicles } from './catalogo.js';
 import { loadBuy } from './comprar.js';
+import { loadInput } from './search.js';
 
 addEventListener("DOMContentLoaded", () => {
     loadPerfilButtons();
@@ -12,4 +13,5 @@ addEventListener("DOMContentLoaded", () => {
     loadVehicles();
 
     loadBuy();
+    loadInput();
 });
