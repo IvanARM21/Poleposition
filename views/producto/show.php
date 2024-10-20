@@ -36,7 +36,7 @@ if ($idProducto > 0) {
                 ?>
                 <div id="image-slider" class="relative w-full overflow-hidden rounded-lg">
                 <?php foreach ($imagenes as $index => $imagen): ?>
-                <img src="../img/uploads/<?php echo htmlspecialchars($imagenes[($index + 7) % count($imagenes)]); ?>" 
+                <img src="../img/uploads/<?php echo htmlspecialchars($imagenes[($index) % count($imagenes)]); ?>" 
          alt="Imagen del vehículo" 
          class="vehicle-image w-full h-full object-cover rounded-lg <?php echo $index === 0 ? 'block' : 'hidden'; ?>">
 <?php endforeach; ?>
