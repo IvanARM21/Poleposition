@@ -32,8 +32,7 @@
             h-screen lg:h-[730px] 
             lg:max-w-80 w-[calc(100%-50px)] max-w-[500px]
             -translate-x-full lg:translate-x-0
-            overflow-hidden opacity-100 
-            bg-white 
+            bg-white opacity-100
             transition-all duration-300" id="filtersContainer">
             <form id="formFilters" method="GET" class="space-y-6">
                 <!-- filtro x marca -->
@@ -59,9 +58,9 @@
                     <h3 class="text-lg font-semibold text-gray-800 mb-2">Año</h3>
                     <div class="flex space-x-3">
                         <input type="number" id="year_min" placeholder="Desde"
-                            class="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-red-200">
+                            class="ml-1 w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-red-200">
                         <input type="number" id="year_max" placeholder="Hasta"
-                            class="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-red-200">
+                            class="ml-1 w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-red-200">
                     </div>
                 </div>
 
@@ -70,9 +69,9 @@
                     <h3 class="text-lg font-semibold text-gray-800 mb-2">Precio</h3>
                     <div class="flex space-x-3">
                         <input type="number" id="price_min" placeholder="Mínimo"
-                            class="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-red-200">
+                            class="ml-1 w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-red-200">
                         <input type="number" id="price_max" placeholder="Máximo"
-                            class="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-red-200">
+                            class="ml-1 w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-red-200">
                     </div>
                 </div>
 
@@ -81,9 +80,9 @@
                     <h3 class="text-lg font-semibold text-gray-800 mb-2">Kilómetros</h3>
                     <div class="flex space-x-3">
                         <input type="number" id="km_min" placeholder="Mínimo"
-                            class="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-red-200">
+                            class="ml-1 w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-red-200">
                         <input type="number" id="km_max" placeholder="Máximo"
-                            class="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-red-200">
+                            class="ml-1 w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-red-200">
                     </div>
                 </div>
 
@@ -127,10 +126,11 @@
 
         <!--Fin Filtros -->
 
+        <div id="empty" class="hidden"></div>
 
-        <ul class="w-full grid grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-2 lg:gap-x-4 w-full transition-all duration-500"
+        <ul class="grid grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-2 lg:gap-x-4 w-full transition-all duration-500"
             id="vehiculos">
-            <div id="empty" class="hidden"></div>
+
 
         </ul>
     </div>

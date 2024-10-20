@@ -21,6 +21,7 @@ export const loadVehicles = async () => {
 export const showVehicles = (vehicles, message = "Por el momento no tenemos vehiculos disponibles") => {
     clear(catalogo);
     if(vehicles.length) {
+        catalogo.classList.remove("hidden");
         vehicles.forEach(vehicle => {
             const vehicleElement = createVehicle(vehicle);
             catalogo.appendChild(vehicleElement);
@@ -114,9 +115,13 @@ const vehiclesEmpty = (message) => {
     paragraph.textContent = message;
     paragraph.classList.add("text-gray-500", "text-xl", "font-normal", "xl:ml-5", "lg:text-left", "text-center");
 
+    catalogo.classList.add("hidden");
+
     const div = document.getElementById("empty");
 
     clear(div);
+
+
 
     if(div) {
         div.classList.add("block");
