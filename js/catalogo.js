@@ -1,5 +1,6 @@
 import { PAGE_URL } from "./constants.js";
 import { filter } from "./filtros.js";
+import { priceFormatted } from "./helpers.js";
 
 export let vehicles = [];
 
@@ -81,7 +82,8 @@ export const createVehicle = (vehicle) => {
     // Crear el párrafo para el precio
     const pPrecio = document.createElement('p');
     pPrecio.className = "text-gray-500 text-sm sm:text-lg font-medium";
-    pPrecio.textContent = `$${vehicle.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} USD`;
+    
+    pPrecio.textContent = priceFormatted(vehicle.precio);
     divDetails.appendChild(pPrecio);
 
 
