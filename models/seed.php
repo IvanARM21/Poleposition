@@ -75,7 +75,7 @@ class Seed {
                 [
                     'modelo' => '911 Turbo Cabriolet',
                     'marca' => 'Porsche',
-                    'color' => 'Desconocido',
+                    'color' => 'Gris',
                     'precio' => 314404,
                     'kilometraje' => 1026,
                     'descripcion' => 'El Porsche 911 Turbo Cabriolet 2023 ofrece una experiencia de conducción excepcional, combinando lujo y potencia. Con un motor turboalimentado y un diseño icónico, este convertible es perfecto para disfrutar al aire libre sin sacrificar el rendimiento. Equipado con tecnología avanzada, el 911 Turbo Cabriolet redefine el concepto de automóviles deportivos.',
@@ -96,7 +96,7 @@ class Seed {
                     [
                         'modelo' => 'i7 xDrive 60 M Sport',
                         'marca' => 'BMW',
-                        'color' => 'Desconocido',
+                        'color' => 'Negro',
                         'precio' => 201816,
                         'kilometraje' => 10806,
                         'descripcion' => 'El BMW i7 xDrive 60 M Sport 2024 es un sedán eléctrico de lujo que combina rendimiento, tecnología de vanguardia y confort excepcional. Con un diseño elegante y una motorización potente, este modelo redefine la experiencia de conducción eléctrica. Equipado con características de alta gama y sistemas de asistencia al conductor, es ideal para quienes buscan sostenibilidad sin sacrificar el lujo.',
@@ -117,7 +117,7 @@ class Seed {
                     [
                         'modelo' => '458 Italia',
                         'marca' => 'Ferrari',
-                        'color' => 'Desconocido',
+                        'color' => 'Rojo',
                         'precio' => 437356,
                         'kilometraje' => 26239,
                         'descripcion' => 'El Ferrari 458 Italia 2013 es un superdeportivo que combina un impresionante motor V8 de 4.5 litros con un diseño aerodinámico. Con un rendimiento excepcional y una aceleración que corta el aliento, este vehículo ofrece una experiencia de conducción única. Su interior lujoso y tecnología avanzada garantizan que cada viaje sea memorable.',
@@ -136,7 +136,7 @@ class Seed {
                         [
                             'modelo' => 'AMG GT 63 S 4M',
                             'marca' => 'Mercedes',
-                            'color' => 'Desconocido',
+                            'color' => 'Negro',
                             'precio' => 161593,
                             'kilometraje' => 14864,
                             'descripcion' => 'El Mercedes-Benz AMG GT 63 S 2019 es un impresionante coupé de lujo que combina un potente motor con un diseño elegante y aerodinámico. Ofrece un rendimiento excepcional y un interior refinado, lleno de tecnología avanzada y comodidad. Con su capacidad de acelerar de 0 a 100 km/h en solo unos segundos, es el coche ideal para quienes buscan emoción y sofisticación.',
@@ -153,7 +153,29 @@ class Seed {
                                 "mercedesamggt-frente.webp",
                                 "mercedesamggt-frente2.webp"
                             ]
-                        ]
+                            ],
+                            [
+                                'modelo' => 'Huracán Spyder LP 610-4',
+                                'marca' => 'Lamborghini',
+                                'color' => 'Naranja',
+                                'precio' => '309985',
+                                'kilometraje' => 0,
+                                'descripcion' => 'El Lamborghini Huracán Spyder LP 610-4 2017 es un superdeportivo convertible que combina potencia y estilo. Con un motor V10 de 610 caballos de fuerza, este modelo ofrece un rendimiento impresionante y un diseño aerodinámico. Su interior está equipado con tecnología de vanguardia y acabados de lujo, ofreciendo una experiencia de conducción emocionante y placentera.',
+                                'año' => 2017,
+                                'imagenes' => [
+                                    "lambohuracanspider-atras.webp",
+                                    "lambohuracanspider-costado.webp",
+                                    "lambohuracanspider-frente.webp",
+                                    "lambohurcanspider-adentro.webp",
+                                    "lambohurcanspider-adentro2.webp",
+                                    "lambohurcanspider-adentro3.webp",
+                                    "lambohurcanspider-adentro4.webp",
+                                    "lambohurcanspider-atras2.webp",
+                                    "lambohurcanspider-frente.webp",
+                                    "lambohurcanspider-frente2.webp"
+                                ]
+                            ]
+                            
                         
                     
                     
