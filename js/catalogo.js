@@ -39,7 +39,7 @@ export const createVehicle = (vehicle) => {
     const imagenSecundaria = imagenes[1] ? `../../img/uploads/${imagenes[1]}` : imagenPrincipal;
 
     if(div) {
-        div.classList.add("hidden");
+        div.classList?.add("hidden");
         div.classList.remove("block");
     }
 
@@ -113,9 +113,9 @@ export const createVehicle = (vehicle) => {
 const vehiclesEmpty = (message) => {
     const paragraph = document.createElement("P");
     paragraph.textContent = message;
-    paragraph.classList.add("text-gray-500", "text-xl", "font-normal", "xl:ml-5", "lg:text-left", "text-center");
+    paragraph.classList?.add("text-gray-500", "text-xl", "font-normal", "xl:ml-5", "lg:text-left", "text-center");
 
-    catalogo.classList.add("hidden");
+    catalogo.classList?.add("hidden");
 
     const div = document.getElementById("empty");
 
@@ -124,7 +124,7 @@ const vehiclesEmpty = (message) => {
 
 
     if(div) {
-        div.classList.add("block");
+        div.classList?.add("block");
         div.classList.remove("hidden");
         div.appendChild(paragraph);
     }
@@ -158,18 +158,18 @@ document?.getElementById("resetFilters")?.addEventListener("click", () => {
 
 
 // Filters by Brands
-year_min.addEventListener("change", filter);
-year_max.addEventListener("change", filter);
+year_min?.addEventListener("change", filter);
+year_max?.addEventListener("change", filter);
 
-price_min.addEventListener("change", filter);
-price_max.addEventListener("change", filter);
+price_min?.addEventListener("change", filter);
+price_max?.addEventListener("change", filter);
 
-km_min.addEventListener("change", filter);
-km_max.addEventListener("change", filter);
+km_min?.addEventListener("change", filter);
+km_max?.addEventListener("change", filter);
 
-brands.forEach(brand => brand.addEventListener("click", filter));
+brands.forEach(brand => brand?.addEventListener("click", filter));
 
-states.forEach(state => state.addEventListener("change", filter));
+states.forEach(state => state?.addEventListener("change", filter));
 
 
 export const clear = (parent) => {
@@ -189,16 +189,16 @@ document?.getElementById("filterButton")?.addEventListener("click", () => {
     if(viewportWidth >= 1024) {
         if(filtersContainer.classList.contains("lg:max-w-80")) {
             filtersContainer.classList.remove("lg:max-w-80", "opacity-100", "lg:mr-5");
-            filtersContainer.classList.add("lg:max-w-0", "opacity-0");
+            filtersContainer.classList?.add("lg:max-w-0", "opacity-0");
         } else {
-            filtersContainer.classList.add("lg:max-w-80", "opacity-100", "lg:mr-5");
+            filtersContainer.classList?.add("lg:max-w-80", "opacity-100", "lg:mr-5");
             filtersContainer.classList.remove("lg:max-w-0", "opacity-0");
         }
     } else{ 
         bgFilter?.classList?.remove("hidden");
         bgFilter?.classList?.add("block");
         filtersContainer.classList.remove("-translate-x-full");
-        filtersContainer.classList.add("translate-x-0");
+        filtersContainer.classList?.add("translate-x-0");
         closeFilter?.classList?.remove("hidden");
         closeFilter?.classList?.add("block");
     }
@@ -207,12 +207,12 @@ document?.getElementById("filterButton")?.addEventListener("click", () => {
 const closeFilters = () => {
     bgFilter?.classList?.add("hidden");
     bgFilter?.classList?.remove("block");
-    filtersContainer.classList.add("-translate-x-full");
+    filtersContainer.classList?.add("-translate-x-full");
     filtersContainer.classList.remove("translate-x-0");
     closeFilter?.classList?.add("hidden");
     closeFilter?.classList?.remove("block");
 }
 
-bgFilter.addEventListener("click", closeFilters);
-closeFilter.addEventListener("click", closeFilters);
+bgFilter?.addEventListener("click", closeFilters);
+closeFilter?.addEventListener("click", closeFilters);
 
