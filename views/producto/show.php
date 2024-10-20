@@ -34,10 +34,13 @@ if ($idProducto > 0) {
                 $imagenes = explode(',', $vehiculo->imagenes);
                 $totalImagenes = count($imagenes);
                 ?>
-                <div id="image-slider" class="relative w-full h-64 md:h-80 overflow-hidden rounded-lg">
-    <?php foreach ($imagenes as $index => $imagen): ?>
-        <img src="/img/uploads/<?php echo $imagen; ?>" alt="Imagen del vehículo" class="vehicle-image w-full h-full object-cover rounded-lg <?php echo $index === 0 ? 'block' : 'hidden'; ?>">
-    <?php endforeach; ?>
+                <div id="image-slider" class="relative w-full overflow-hidden rounded-lg">
+                <?php foreach ($imagenes as $index => $imagen): ?>
+                <img src="../img/uploads/<?php echo htmlspecialchars($imagenes[($index + 7) % count($imagenes)]); ?>" 
+         alt="Imagen del vehículo" 
+         class="vehicle-image w-full h-full object-cover rounded-lg <?php echo $index === 0 ? 'block' : 'hidden'; ?>">
+<?php endforeach; ?>
+
 </div>
 
 <?php if ($totalImagenes > 1): ?>
@@ -74,7 +77,7 @@ if ($idProducto > 0) {
                     <strong>Kilometraje:</strong> <?php echo $vehiculo->kilometraje; ?> km
                 </p>
             </div>
-            <div class="flex gap-4 flex-col mt-auto sm:pt-16">
+            <div class="flex gap-4 flex-col mt-auto sm:pt-72">
             <button class="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-102">Comprar</button>
 <button class="w-full bg-white border border-red-600 text-red-600 py-2 rounded-md hover:bg-red-50 hover:border-red-700 hover:text-red-700 hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-102">Alquilar</button>
 

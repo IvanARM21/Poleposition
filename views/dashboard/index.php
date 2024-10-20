@@ -37,8 +37,8 @@
                             <?php
                             $imagenes = explode(',', $vehiculo->imagenes ?? '');
 
-                            if (!empty($imagenes[0])) { // Evitar el bug de la imagen vacía
-                                echo '<img src="../../img/uploads/' . trim($imagenes[0]) . '" alt="" class="h-14 w-24 object-cover rounded-lg">';
+                            if (!empty($imagenes[1])) { // Evitar el bug de la imagen vacía
+                                echo '<img src="../../img/uploads/' . trim($imagenes[1]) . '" alt="" class="h-14 w-24 object-cover rounded-lg">';
                             } else {
                                 echo "<div class='bg-gray-700 text-white rounded-lg h-14 w-24 flex justify-center items-center font-medium'>Sin imagen</div>";
                             }

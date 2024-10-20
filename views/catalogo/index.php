@@ -28,7 +28,7 @@
                     <h3 class="text-lg font-semibold text-gray-800 mb-2">Marca</h3>
                     <ul class="space-y-2">
                         <?php
-                        $marcas = ['Ferrari', 'Lamborghini', 'Porsche', 'Ram', 'BMW'];
+                        $marcas = ['Ferrari', 'Lamborghini', 'Porsche', 'Mercedes', 'BMW'];
                         foreach ($marcas as $marca): ?>
                             <li>
                                 <label class="inline-flex items-center">

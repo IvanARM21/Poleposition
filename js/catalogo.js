@@ -55,7 +55,7 @@ export const createVehicle = (vehicle) => {
     const img = document.createElement('img');
     img.src = imagenPrincipal;
     img.alt = `Imagen de ${vehicle.marca} ${vehicle.modelo}`;
-    img.className = "w-full aspect-video object-cover transition-all duration-300 hover:scale-105 cursor-pointer";
+    img.className = "w-full  object-cover transition-all duration-300 hover:scale-105 cursor-pointer";
     img.onmouseover = () => { img.src = imagenSecundaria; };
     img.onmouseout = () => { img.src = imagenPrincipal; };
 
