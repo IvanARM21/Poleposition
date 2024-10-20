@@ -1039,6 +1039,7 @@ video {
   grid-column: span 2 / span 2;
 }
 
+<<<<<<< HEAD
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
@@ -1047,6 +1048,8 @@ video {
   grid-column: span 4 / span 4;
 }
 
+=======
+>>>>>>> ee39b6473734831e83cbf2f21d224e01c85551f4
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1290,6 +1293,7 @@ video {
   width: 100%;
 }
 
+<<<<<<< HEAD
 .w-64 {
   width: 16rem;
 }
@@ -1298,6 +1302,8 @@ video {
   width: 18rem;
 }
 
+=======
+>>>>>>> ee39b6473734831e83cbf2f21d224e01c85551f4
 .min-w-\[800px\] {
   min-width: 800px;
 }
@@ -1542,6 +1548,14 @@ video {
 
 .overflow-y-scroll {
   overflow-y: scroll;
+}
+
+.text-wrap {
+  text-wrap: wrap;
+}
+
+.text-nowrap {
+  text-wrap: nowrap;
 }
 
 .text-balance {

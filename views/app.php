@@ -86,9 +86,18 @@
         </nav>
 
         <nav class="flex flex-col gap-4 py-8 border-t">
-            <a href="/login" class="text-gray-500 text-sm">Iniciar Sesión</a>
-            <a href="/registro" class="text-gray-500 text-sm">Registro</a>
-        </nav>
+    <?php if ($isLogged): ?>
+        <a class="text-gray-500 text-sm" href="/perfil">Perfil</a>
+        <?php if ($isAdmin): ?>
+            <a class="text-gray-500 text-sm" href="/dashboard">Dashboard</a>
+        <?php endif; ?>
+        <a class="text-gray-500 text-sm" href="/logout">Cerrar Sesión</a>
+    <?php else: ?>
+        <a href="/login" class="text-gray-500 text-sm">Iniciar Sesión</a>
+        <a href="/registro" class="text-gray-500 text-sm">Registro</a>
+    <?php endif; ?>
+</nav>
+
     </aside>
 
     <div id="bgMenu"
