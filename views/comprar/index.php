@@ -1,6 +1,6 @@
 <section class="max-w-screen-xl mx-auto">
 
-    <div class="grid grid-cols-2 px-6 gap-10">
+    <div class="flex flex-col-reverse lg:grid lg:grid-cols-2 px-6 gap-10">
         <div class=" rounded-xl">
             <div>
                 <h2 class="text-xl font-medium text-gray-800">Información Contacto</h2>
@@ -91,55 +91,53 @@
 
         <!-- Resumen Orden -->
 
-        <div class="flex flex-col gap-5 sticky top-5 h-[581px]">
+        <div class="flex flex-col gap-5 lg:sticky top-5 h-[581px]">
             <h2 class="text-xl font-medium text-gray-800">Resumen compra</h2>
 
             <div class="flex flex-col gap-10">
                 <div class="flex justify-between border-y py-8">
                     <div class="flex gap-5">
-                        <img src="../../img/uploads/amgg63-frente2.webp" alt=""
-                            class="aspect-square w-40 object-cover rounded-xl">
+                        <img id="imagen" alt="" src="" class="h-32 w-48 object-cover rounded-xl">
 
                         <div class="flex flex-col justify-between py-2">
                             <div>
-                                <h3 class="text-xl text-gray-800 hover:text-red-600 font-medium">Mercedes-Benz AMG G63
+                                <h3 class="text-xl text-gray-800 hover:text-red-600 font-medium" id="titulo">
+                                    Mercedes-Benz AMG G63
                                 </h3>
                                 <div class="flex gap-2">
-                                    <p class="text-gray-500 font-medium">2024</p>
+                                    <p class="text-gray-500 font-medium" id="año"></p>
                                     <p class="text-gray-500 font-medium">-</p>
-                                    <p class="text-gray-500 font-medium">50km</p>
+                                    <p class="text-gray-500 font-medium" id="km"></p>
                                 </div>
                             </div>
 
-                            <p class="text-lg text-gray-500 font-medium">USD 755,273.00</p>
+                            <p class="text-lg text-gray-500 font-medium" id="precio"></p>
                         </div>
                     </div>
                     <p class="text-gray-500 font-medium py-2">
                         Tipo:
-                        <span class="py-1 px-2 rounded-lg bg-yellow-50 text-yellow-600">Alquier</span>
+                        <span class="py-1 px-2 rounded-lg capitalize" id="tipo">Alquier</span>
                     </p>
                 </div>
 
-                <div class="flex flex-col gap-4">
+                <div class="flex flex-col">
                     <div class="flex justify-between py-2">
                         <p class="text-lg text-gray-700">Subtotal</p>
-                        <p class="text-lg text-gray-700 font-medium">USD 755,273.00</p>
-                    </div>
-                    <div class="flex justify-between py-2">
-                        <p class="text-lg text-gray-700">Alquiler</p>
-                        <p class="text-lg text-gray-700 font-medium">USD 377.00</p>
-                    </div>
-                    <div class="flex justify-between py-2">
-                        <p class="text-lg text-gray-700">Impuestos(15%)</p>
-                        <p class="text-lg text-gray-700 font-medium">USD 56.55</p>
+                        <p class="text-lg text-gray-700 font-medium" id="subtotal">USD 755,273.00</p>
                     </div>
 
-                    <div class="flex justify-between py-4 border-y">
+                    <div class="flex justify-between py-2">
+                        <p class="text-lg text-gray-700">Impuestos(5%)</p>
+                        <p class="text-lg text-gray-700 font-medium" id="tax">USD 56.55</p>
+                    </div>
+
+                    <div class="flex justify-between py-4 mt-8 border-y">
                         <p class="text-xl text-gray-700 font-medium">Total</p>
-                        <p class="text-xl text-gray-700 font-medium">USD 433.55</p>
+                        <p class="text-xl text-gray-700 font-medium" id="total">USD 533.55</p>
                     </div>
 
-                    <button class="bg-red-600 w-full py-2 px-4 text-white rounded-xl border-t mt-4">
+                    <button type="button" id="confirmBtn"
+                        class="bg-red-600 font-medium text-lg w-full py-2 px-4 text-white rounded-xl border-t mt-4">
                         Confirmar compra
                     </button>
                 </div>

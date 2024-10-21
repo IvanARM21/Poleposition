@@ -17,11 +17,22 @@ class Producto
     // /products
     public function show($id)
     {
-        // Consulrar la bd y obtener el vehiculo 
+        $sql = "
+                SELECT v.id, v.marca, v.descripcion, v.modelo, v.año, v.color, v.precio, v.kilometraje, GROUP_CONCAT(vi.imagen) as imagenes
+                FROM vehiculo v
+                LEFT JOIN vehiculoImagenes vi ON v.id = vi.idVehiculo
+                WHERE v.id = ?
+                GROUP BY v.id
+            ";
 
-        // retornar la vista y mandar el vehiculo 
+        $vehiculos = $this->db->findPrepared($sql, [$id], 'i');
+
+        $vehiculo = $vehiculos[0];
+
+        $this->title = "PP | " . $vehiculo->marca . " " . $vehiculo->modelo;
+
         return new Template('./views/producto/show.php', [
-            // s'vehiculo' => $vehiculo,
+            'vehiculo' => $vehiculo,
         ]);
 
     }

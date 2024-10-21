@@ -1,31 +1,3 @@
-<?php
-$db = new DB();
-
-$requestUri = $_SERVER['REQUEST_URI'];
-$segments = explode('/', trim($requestUri, '/'));
-$idProducto = end($segments);
-
-$idProducto = is_numeric($idProducto) ? (int) $idProducto : 0;
-
-$vehiculo = null;
-
-if ($idProducto > 0) {
-    $sql = "
-        SELECT v.id, v.marca, v.descripcion, v.modelo, v.año, v.color, v.precio, v.kilometraje, GROUP_CONCAT(vi.imagen) as imagenes
-        FROM vehiculo v
-        LEFT JOIN vehiculoImagenes vi ON v.id = vi.idVehiculo
-        WHERE v.id = ?
-        GROUP BY v.id
-    ";
-
-    $vehiculos = $db->findPrepared($sql, [$idProducto], 'i');
-
-    if (!empty($vehiculos)) {
-        $vehiculo = $vehiculos[0];
-    }
-}
-?>
-
 <section class="flex flex-col md:flex-row gap-6 p-6 bg-white shadow-md rounded-lg items-start">
     <?php if ($vehiculo): ?>
         <div class="w-full md:w-1/2 flex flex-col bg-gray-100 rounded-lg relative">
@@ -76,7 +48,7 @@ if ($idProducto > 0) {
                 </h1>
                 <p class="mt-2 text-lg font-semibold text-green-900">$<?php echo number_format($vehiculo->precio, 2); ?></p>
                 <p class="mt-4 text-gray-700">
-                <div class="flex items-center space-x-2 border-2 rounded-lg p-4 mt-4">
+                <div class="flex items-center space-x-2 rounded-lg shadow p-4 mt-4">
                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -85,7 +57,7 @@ if ($idProducto > 0) {
                     <span><?php echo $vehiculo->año; ?></span>
                 </div>
 
-                <div class="flex items-center space-x-2 border-2 rounded-lg p-4 mt-4">
+                <div class="flex items-center space-x-2 rounded-lg shadow p-4 mt-4">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -95,7 +67,7 @@ if ($idProducto > 0) {
                     <span> <?php echo $vehiculo->color; ?></span>
                 </div>
 
-                <div class="flex items-center space-x-2 border-2 rounded-lg p-4 mt-4">
+                <div class="flex items-center space-x-2 rounded-lg shadow p-4 mt-4">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -106,7 +78,7 @@ if ($idProducto > 0) {
                 </div>
 
 
-                <div class="flex items-center space-x-2 border-2 rounded-lg p-4 mt-4">
+                <div class="flex items-center space-x-2 rounded-lg shadow p-4 mt-4">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -121,11 +93,11 @@ if ($idProducto > 0) {
                 </div>
                 </p>
             </div>
-            <div class="flex gap-4 flex-col mt-auto sm:pt-4">
+            <div class="flex gap-4 mt-auto sm:pt-10">
+                <button name="alquilar" id="<?php echo $vehiculo->id ?>"
+                    class="w-fit px-6  text-red-600 py-2 rounded-xl bg-red-50 transition hover:scale-105 ">Alquilar</button>
                 <button name="comprar" id="<?php echo $vehiculo->id ?>"
-                    class="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-102">Comprar</button>
-                <button
-                    class="w-full bg-white border border-red-600 text-red-600 py-2 rounded-md hover:bg-red-50 hover:border-red-700 hover:text-red-700 hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-102">Alquilar</button>
+                    class="w-fit px-6 bg-red-600 text-white py-2 rounded-xl  transition-all hover:scale-105">Comprar</button>
 
             </div>
         </div>
