@@ -102,7 +102,7 @@
                         <div class="flex flex-col justify-between py-2">
                             <div>
                                 <h3 class="text-xl text-gray-800 hover:text-red-600 font-medium" id="titulo">
-                                    Mercedes-Benz AMG G63
+                                    Mercedes Benz AMG G63
                                 </h3>
                                 <div class="flex gap-2">
                                     <p class="text-gray-500 font-medium" id="año"></p>

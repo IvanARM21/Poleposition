@@ -53,7 +53,7 @@ class Seed {
             ],
             [
                 'modelo' => 'AMG G63',
-                'marca' => 'Mercedes-Benz',
+                'marca' => 'Mercedes',
                 'color' => 'Negro',
                 'precio' => 187120,
                 'kilometraje' => 129,

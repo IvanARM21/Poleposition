@@ -19,14 +19,20 @@ class DB
     }
 
     public function find($sql)
-    {
-        $result = $this->db->query($sql);
-        $arr = [];
-        while ($row = $result->fetch_object()) {
-            $arr[] = $row;
-        }
-        return $arr;
+{
+    $result = $this->db->query($sql);
+
+    if ($result === false) {
+        die("Error en la consulta: " . $this->db->error);
     }
+
+    $arr = [];
+    while ($row = $result->fetch_object()) {
+        $arr[] = $row;
+    }
+    return $arr;
+}
+
 
     public function findPrepared($sql, $params, $types)
     {

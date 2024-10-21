@@ -80,7 +80,7 @@ const loadVehicleInfo = (vehicle) => {
         imgElement.src = `../../img/uploads/${imagenes.split(",")[0]}`;  
         titleElement.textContent = `${marca} ${modelo}`;  
         yearElement.textContent = año;
-        kmElement.textContent = `${kilometraje}km`;
+        kmElement.textContent = `${kilometraje} km`;
         typeElement.textContent = tipo;
         
         // Añadimos clases de acuerdo al tipo (compra o alquiler)

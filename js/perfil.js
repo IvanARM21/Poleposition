@@ -1,13 +1,13 @@
 export function loadPerfilButtons() {
-    const perfilBtn = document.getElementById('perfilBtn');
-    const seguridadBtn = document.getElementById('seguridadBtn');
-    const historialBtn = document.getElementById('historialBtn'); 
+    const perfilBtn = document?.getElementById('perfilBtn');
+    const seguridadBtn = document?.getElementById('seguridadBtn');
+    const historialBtn = document?.getElementById('historialBtn'); 
 
-    const perfilForm = document.getElementById('perfilForm');
-    const seguridadForm = document.getElementById('seguridadForm');
-    const historialForm = document.getElementById('historialForm'); 
+    const perfilForm = document?.getElementById('perfilForm');
+    const seguridadForm = document?.getElementById('seguridadForm');
+    const historialForm = document?.getElementById('historialForm'); 
 
-    const cambiarContraseñaBtn = document.getElementById('cambiar-contraseña');
+    const cambiarContraseñaBtn = document?.getElementById('cambiar-contraseña');
 
     if(perfilBtn && seguridadBtn && historialBtn) {
         perfilBtn.addEventListener('click', function() {

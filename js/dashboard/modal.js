@@ -285,6 +285,9 @@ const saveVehicle = async (e) => {
     } else {
         await createVehicle(vehicleData);
     }
+
+    menuClose();
+    window.location.reload(); // que se cierre y recargue el editar
 }
 
 const updateVehicle = async (vehicleData, vehicleId) => {

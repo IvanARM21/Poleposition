@@ -70,13 +70,20 @@
 
         <!-- SEGURIDAD -->
         <div class="hidden w-full" id="seguridadForm">
-            <div class="flex justify-between items-center p-5 sm:p-10 border rounded-xl h-full">
-                <!-- Botón para cambiar contraseña -->
-<button type="button" id="cambiar-contraseña" class="text-gray-600 hover:text-black transition-colors">
+            <div class="items-center p-5 sm:p-10 border rounded-xl h-full">
+
+            <h2 class="text-gray-800 font-black text-xl">Seguridad:</h2>
+
+
+            <div class="pt-4"></div>
+
+<!-- cambiar contraseña -->
+
+<button type="button" id="cambiar-contraseña" class="font-bold text-white p-4 bg-red-600 rounded-xl border-2 transition-colors duration-300 hover:bg-white hover:text-black hover:border-red-600">
     Cambiar Contraseña
 </button>
 
-<!-- Modal Cambiar Contraseña -->
+<!-- modal cambiar contraseña -->
 <div id="modal-cambiar" class="fixed z-40 inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden">
     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h2 class="text-xl font-semibold mb-4 text-gray-800">Cambiar Contraseña</h2>
@@ -100,7 +107,7 @@
     </div>
 </div>
 
-<!-- Modal Eliminar Cuenta -->
+<!-- modal eliminar Cuenta -->
 <div id="modal-eliminar" class="fixed z-40 inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden">
     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h2 class="text-xl font-semibold mb-4 text-gray-800">¿Estás seguro?</h2>
@@ -117,8 +124,9 @@
 </div>
 
 
-<!-- Botón para eliminar cuenta -->
-<button type="button" id="eliminar-cuenta" class="text-gray-600 hover:text-black transition-colors">
+<!-- boton eliminar cuenta -->
+
+<button type="button" id="eliminar-cuenta" class="font-bold text-white p-4 bg-red-600 rounded-xl border-2 transition-colors duration-300 hover:bg-white hover:text-black hover:border-red-600">
     Eliminar Cuenta
 </button>
 
