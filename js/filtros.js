@@ -35,7 +35,7 @@ const filterByBrand = (vehicles) => {
     return vehiclesFiltered;
 }
 
-const filterByColor = () => {
+const filterByColor = (vehicles) => {
     let vehiclesFiltered = [];
     const colorSelected = colors.map(color => {
         if(color.checked) {
