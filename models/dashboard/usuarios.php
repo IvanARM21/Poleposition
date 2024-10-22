@@ -44,4 +44,8 @@ LEFT JOIN admin a ON c.id = a.idAdmin;
         ]);
     }
 
+    public function update($id) {
+        
+    }
+
 }
