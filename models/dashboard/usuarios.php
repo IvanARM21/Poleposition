@@ -22,7 +22,7 @@ class Usuarios
         $this->title = "Dashboard | Usuarios";
 
         $sql = "SELECT c.*, 
-       IF(a.idAdmin IS NOT NULL, 'Admin', 'Usuario') AS tipo
+       IF(a.idAdmin IS NOT NULL, 'admin', 'usuario') AS tipo
 FROM cuentas c
 LEFT JOIN admin a ON c.id = a.idAdmin;
 ";

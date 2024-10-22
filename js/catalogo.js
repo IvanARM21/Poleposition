@@ -204,6 +204,8 @@ document?.getElementById("filterButton")?.addEventListener("click", () => {
         filtersContainer.classList?.add("translate-x-0");
         closeFilter?.classList?.remove("hidden");
         closeFilter?.classList?.add("block");
+        filtersContainer.classList?.add("lg:max-w-80", "opacity-100", "lg:mr-5");
+        filtersContainer.classList.remove("lg:max-w-0", "opacity-0");
     }
 });
 

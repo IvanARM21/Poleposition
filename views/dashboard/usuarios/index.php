@@ -22,7 +22,13 @@
                         <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $usuario->usuario; ?></td>
                         <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $usuario->nombreCompleto; ?></td>
                         <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $usuario->email; ?></td>
-                        <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $usuario->tipo; ?></td>
+                        <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">
+                            <select id="selectRol">
+                                <option value="usuario" <?php echo $usuario->tipo === "usuario" ? 'selected' : '' ?>>Usuario</option>
+                                <option value="admin" <?php echo $usuario->tipo === "admin" ? 'selected' : '' ?>>Admin</option>
+                            </select>
+                            
+                        </td>
                         <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">
                             <div class="flex gap-5 items-center">
                                 <button type="button" id="<?php echo $usuario->id ?>" name="editBtn"

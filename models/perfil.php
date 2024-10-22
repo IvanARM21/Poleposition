@@ -16,36 +16,41 @@ class Perfil {
         if (!isset($_COOKIE['usuario'])) {
             header("Location: /");
             exit;
-        }
-
+        }$usuario = json_decode($_COOKIE['usuario']);
+        $usuarioId = $usuario->id;
+        
+        // Asegúrate de que el ID del usuario esté escapado de forma segura para evitar inyección SQL
+        $usuarioId = intval($usuarioId);
+        
+        // Construir la consulta SQL para obtener las compras y alquileres del usuario actual
         $sql = "SELECT
-    cuentas.nombreCompleto AS Nombre,
-    vehiculo.marca AS Marca,
-    vehiculo.modelo AS Modelo,
-    vehiculo.color AS Color,
-    vehiculo.precio AS Precio,
-    vehiculo.kilometraje AS Kilometraje,
-    vehiculo.año AS Año,
-    CASE
-        WHEN compra.id IS NOT NULL THEN 'Compra'
-        WHEN alquiler.id IS NOT NULL THEN 'Alquiler'
-        ELSE 'Desconocido'
-    END AS Tipo,
-    CASE
-        WHEN compra.id IS NOT NULL THEN compra.fechaCompra
-        WHEN alquiler.id IS NOT NULL THEN alquiler.fecha_inicio
-    END AS Fecha
-FROM
-    vehiculo
-LEFT JOIN compra ON vehiculo.id = compra.idVehiculo
-LEFT JOIN alquiler ON vehiculo.id = alquiler.idVehiculo
-LEFT JOIN cuentas ON cuentas.id = COALESCE(compra.idCliente, alquiler.idCliente)
-WHERE
-    compra.id IS NOT NULL OR alquiler.id IS NOT NULL;";
-
-$compras = $this->db->find($sql);
-$jsonCompras = json_encode($compras);
-
+            cuentas.nombreCompleto AS Nombre,
+            vehiculo.marca AS Marca,
+            vehiculo.modelo AS Modelo,
+            vehiculo.color AS Color,
+            vehiculo.precio AS Precio,
+            vehiculo.kilometraje AS Kilometraje,
+            vehiculo.año AS Año,
+            CASE
+                WHEN compra.id IS NOT NULL THEN 'Compra'
+                WHEN alquiler.id IS NOT NULL THEN 'Alquiler'
+                ELSE 'Desconocido'
+            END AS Tipo,
+            CASE
+                WHEN compra.id IS NOT NULL THEN compra.fechaCompra
+                WHEN alquiler.id IS NOT NULL THEN alquiler.fecha_inicio
+            END AS Fecha
+        FROM
+            vehiculo
+        LEFT JOIN compra ON vehiculo.id = compra.idVehiculo AND compra.idCliente = $usuarioId
+        LEFT JOIN alquiler ON vehiculo.id = alquiler.idVehiculo AND alquiler.idCliente = $usuarioId
+        LEFT JOIN cuentas ON cuentas.id = $usuarioId
+        WHERE
+            compra.id IS NOT NULL OR alquiler.id IS NOT NULL";
+        
+        // Ejecutar la consulta
+        $compras = $this->db->find($sql);
+        
 
         $usuarioDatos = json_decode($_COOKIE['usuario'], true);
         if (json_last_error() !== JSON_ERROR_NONE) {
