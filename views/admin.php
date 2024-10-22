@@ -48,7 +48,7 @@
 </svg>
 
 
-                <p class="font-medium text-lg">Historial de Compras</p>
+                <p class="font-medium text-lg">Historial de Ventas</p>
             </a>
             <a href="/dashboard/testimonios"
                 class="flex gap-2 items-center text-gray-600 hover:bg-gray-200/70 py-2 px-4 rounded-xl">

@@ -19,10 +19,8 @@ class Perfil {
         }$usuario = json_decode($_COOKIE['usuario']);
         $usuarioId = $usuario->id;
         
-        // Asegúrate de que el ID del usuario esté escapado de forma segura para evitar inyección SQL
         $usuarioId = intval($usuarioId);
         
-        // Construir la consulta SQL para obtener las compras y alquileres del usuario actual
         $sql = "SELECT
             cuentas.nombreCompleto AS Nombre,
             vehiculo.marca AS Marca,
@@ -48,7 +46,6 @@ class Perfil {
         WHERE
             compra.id IS NOT NULL OR alquiler.id IS NOT NULL";
         
-        // Ejecutar la consulta
         $compras = $this->db->find($sql);
         
 
@@ -60,7 +57,6 @@ class Perfil {
         $usuario = $usuarioDatos['usuario'];
         $this->title = "PP | Mi Perfil";
 
-        // Maneja las actualizaciones y eliminaciones
         [$errorPerfil, $errorSeguridad, $errorEliminar] = $this->actualizar($usuarioDatos);
     
         $usuarioDB = $this->obtenerDatosUsuario($usuario);

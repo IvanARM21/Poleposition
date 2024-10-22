@@ -137,7 +137,7 @@
             </div>
         </div>
 
-<!-- HISTORIAL DE COMPRAS -->
+<!-- HISTORIAL DE VENTAS -->
 
 
 <div class="hidden w-full" id="historialForm">

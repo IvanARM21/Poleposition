@@ -7,7 +7,7 @@
         <table class="min-w-[800px] w-full caption-bottom border-b border-gray-200">
             <thead>
                 <tr class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800 border-gray-820">
-                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800 border-gray-820">ID</th>
+                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800 border-gray-820">ID (Usuario)</th>
                     <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800 border-gray-820">Nombre</th>
                     <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800 border-gray-200">Marca</th>
                     <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800 border-gray-200">Modelo</th>
@@ -37,5 +37,5 @@
         </table>
     </div>
 <?php else: ?>
-    <p class="text-xl text-gray-500">Aún no tienes usuarios creados, <span class="text-red-600 font-medium hover:underline decoration-1" id="spanModal">empieza agregando uno</span></p>
+    <p class="text-xl text-gray-500">Aún no tienes <span class="text-red-600 font-medium hover:underline decoration-1" id="spanModal">ninguna venta</span></p>
 <?php endif; ?>
