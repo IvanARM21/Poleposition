@@ -1,5 +1,5 @@
 // Brand
-import { brands, vehicles, showVehicles, year_min, price_max, price_min, year_max, km_min, km_max, states } from "./catalogo.js"
+import { brands, vehicles, showVehicles, year_min, price_max, price_min, year_max, km_min, km_max, states, colors } from "./catalogo.js"
 
 
 export const filter = () => {
@@ -8,6 +8,7 @@ export const filter = () => {
     vehiclesFiltered = filterByBrand(vehicles);
     vehiclesFiltered = filterByYear(vehiclesFiltered);
     vehiclesFiltered = filterByPrice(vehiclesFiltered);
+    vehiclesFiltered = filterByColor(vehiclesFiltered);
     vehiclesFiltered = filterByKm(vehiclesFiltered);
     vehiclesFiltered = filterByState(vehiclesFiltered);
 
@@ -27,6 +28,26 @@ const filterByBrand = (vehicles) => {
         const brandName = brandsSelected.map(brand => brand.value.toUpperCase());
     
         vehiclesFiltered = vehicles.filter(vehicle => brandName.includes(vehicle.marca.toUpperCase()));
+    } else {
+        vehiclesFiltered = vehicles;
+    }
+
+    return vehiclesFiltered;
+}
+
+const filterByColor = () => {
+    let vehiclesFiltered = [];
+    const colorSelected = colors.map(color => {
+        if(color.checked) {
+            return color;
+        }
+        return null
+    }).filter(color => color !== null);
+
+    if(colorSelected.length) {
+        const color = colorSelected.map(color => color.value.toUpperCase());
+    
+        vehiclesFiltered = vehicles.filter(vehicle => color.includes(vehicle.color.toUpperCase()));
     } else {
         vehiclesFiltered = vehicles;
     }

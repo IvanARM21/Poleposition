@@ -138,6 +138,8 @@ const vehiclesEmpty = (message) => {
 // Filtros
 export const brands = Array.from(document.getElementsByName("brands[]"));
 
+export const colors = Array.from(document.getElementsByName("colors[]"));
+
 // Year
 export const year_min = document.getElementById("year_min");
 export const year_max = document.getElementById("year_max");
@@ -171,6 +173,9 @@ km_min?.addEventListener("change", filter);
 km_max?.addEventListener("change", filter);
 
 brands.forEach(brand => brand?.addEventListener("click", filter));
+
+colors.forEach(color => color?.addEventListener("click", filter));
+
 
 states.forEach(state => state?.addEventListener("change", filter));
 

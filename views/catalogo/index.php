@@ -71,6 +71,23 @@
                     </ul>
                 </div>
 
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Colores</h3>
+                    <ul class="space-y-2">
+                        <?php
+                        $colors = ['Negro', 'Rojo', 'Azul'];
+                        foreach ($colors as $color): ?>
+                            <li>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="colors[]" value="<?php echo $color; ?>"
+                                        class="form-checkbox h-4 w-4 text-red-600">
+                                    <span class="ml-2 text-gray-700"><?php echo $color; ?></span>
+                                </label>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+
                 <!-- filtro año -->
                 <div>
                     <h3 class="text-lg font-semibold text-gray-800 mb-2">Año</h3>
