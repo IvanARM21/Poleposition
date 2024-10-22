@@ -34,8 +34,8 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
     <div class="flex flex-col sm:flex-row justify-center space-x-0 sm:space-x-3  items-center">
         <div
             class="border-2 p-4 rounded-lg shadow-md max-w-xs mt-5 transition-transform transform hover:scale-105 hover:shadow-lg">
-            <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Aserrin</h3>
-            <p class="text-gray-600 mb-4">Ese telefono parece carpintero, porque aserrin porque aserrin</p>
+            <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Excelente Servicio</h3>
+            <p class="text-gray-600 mb-4">En Pole-Position encontré el auto de mis sueños. La atención fue excepcional y el proceso de compra fue rápido y sencillo. ¡Recomiendo esta automotora a todos!</p>
             <p class="text-sm text-gray-500 text-right">- Rodrigo Martinez</p>
         </div>
 
@@ -43,16 +43,16 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
         <div class="flex flex-col sm:flex-row justify-center space-x-0 sm:space-x-3  items-center">
             <div
                 class="border-2 p-4 rounded-lg shadow-md max-w-xs mt-5 transition-transform transform hover:scale-105 hover:shadow-lg">
-                <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Skibidi Toilet</h3>
-                <p class="text-gray-600 mb-4">Skibi toilet skibidi skibidi toilet, skibi toilet skibidi</p>
+                <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Recomiendo Totalmente</h3>
+                <p class="text-gray-600 mb-4">El personal es muy amable y profesional. Disfruté de una amplia selección de vehículos y precios justos. ¡Altamente recomendable!</p>
                 <p class="text-sm text-gray-500 text-right">- Bruno Flamant</p>
             </div>
 
             <div class="flex flex-row sm:flex-row justify-center space-x-0 sm:space-x-3  items-center">
                 <div
                     class="border-2 p-4 rounded-lg shadow-md max-w-xs mt-5 transition-transform transform hover:scale-105 hover:shadow-lg">
-                    <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Tomas Shelby</h3>
-                    <p class="text-gray-600 mb-4">Tomas Shelby sigma sigma mafia, shelby sigma mafia
+                    <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Los Mejores</h3>
+                    <p class="text-gray-600 mb-4">Me ayudaron a elegir el coche perfecto, y todo el proceso fue ágil. Estoy muy satisfecho con mi compra y su servicio. ¡Gracias!
                     </p>
                     <p class="text-sm text-gray-500 text-right">- Ivan Rodriguez</p>
                 </div>
