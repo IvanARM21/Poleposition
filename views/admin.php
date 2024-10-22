@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="module" src="/js/dashboard/index.js"></script>
-    <link rel="icon" type="image" href="/img/logo.png">
+    <link rel="icon" type="image" href="/img/logo.svg">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 
         <nav class="flex flex-col gap-2">
             <a href="/">
-                <img src="/img/logo.png" class="w-20 px-4 mb-5" alt="">
+                <img src="/img/logo.svg" class="w-24 px-4 mb-5" alt="">
             </a>
             <a href="/dashboard"
                 class="flex gap-2 items-center text-gray-600 hover:bg-gray-200/70 py-2 px-4 rounded-xl">

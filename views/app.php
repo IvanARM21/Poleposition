@@ -169,7 +169,7 @@
 
                 </div>
             </div>
-            <div class="swiper-pagination">a</div>
+            <div class="swiper-pagination"></div>
         </div>
     <?php endif; ?>
 
@@ -193,10 +193,18 @@
                     <h2 class="font-semibold text-gray-800 text-xl">Navegación</h2>
 
                     <ul class="mt-4 flex flex-col gap-4 text-gray-600 font-medium">
-                        <li>Inicio</li>
-                        <li>Cátalogo</li>
-                        <li>Contacto</li>
-                        <li>Sobre Nosotros</li>
+                        <li>
+                            <a href="/">Inicio</a>
+                        </li>
+                        <li>
+                            <a href="/catalogo">Cátalogo</a>
+                        </li>
+                        <li>
+                            <a href="/contacto">Contacto</a>
+                        </li>
+                        <li>
+                            <a href="/sobre-nosotros">Sobre Nosotros</a>
+                        </li>
                     </ul>
                 </div>
 

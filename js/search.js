@@ -10,19 +10,20 @@ export const loadInput = () => {
 
         if(value.length >= 3) {
             const vehiclesFound = vehicles.filter(vehicle => {
-                const normalizedValue = normalizeString(value);
-            
                 const normalizedMarca = normalizeString(vehicle.marca);
+                const normalizedColor = normalizeString(vehicle.color);
+                const normalizedModelo = normalizeString(vehicle.modelo);
+                const normalizedValue = normalizeString(value);
+
+            
                 if (normalizedMarca.includes(normalizedValue)) {
                     return vehicle;
                 }
             
-                const normalizedColor = normalizeString(vehicle.color);
                 if (normalizedColor.includes(normalizedValue)) {
                     return vehicle;
                 }
             
-                const normalizedModelo = normalizeString(vehicle.modelo);
                 if (normalizedModelo.includes(normalizedValue)) {
                     return vehicle;
                 }
@@ -41,9 +42,9 @@ export const loadInput = () => {
     searchBtn?.addEventListener("click", () => {
         if(inputSearch.classList.contains("w-0")) {
             inputSearch.classList.remove("w-0", "px-0");
-            inputSearch.classList.add("w-52", "px-6");
+            inputSearch.classList.add("w-80", "px-6");
         } else {
-            inputSearch.classList.remove("w-52", "px-6");
+            inputSearch.classList.remove("w-80", "px-6");
             inputSearch.classList.add("w-0", "px-0");
         }
     });
