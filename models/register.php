@@ -59,7 +59,7 @@ class Register {
                     $sql = "INSERT INTO cuentas (usuario, password, email, nombreCompleto) VALUES ('$usuarioEscaped', '$contraseñaHash', '$correoEscaped', '$nombreCompleto')";
                     $this->db->getConexion()->query($sql);
 
-                    $usuarioDatos = [ "usuario" => $usuario, "email" => $correo ];
+                    $usuarioDatos = [ "id" => $usuarioDB->id, "usuario" => $usuarioDB->usuario, "email" => $usuarioDB->email, "admin" => $esAdmin->id, "nombreCompleto" => $usuarioDB->nombreCompleto];
                     setcookie('usuario', json_encode($usuarioDatos), time() + (86400*30));
 
                     header("Location: /");

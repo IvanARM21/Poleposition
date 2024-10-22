@@ -84,7 +84,7 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
                             <?= htmlspecialchars($vehiculo->marca) ?> <?= htmlspecialchars($vehiculo->modelo) ?>
                         </h3>
                         <h3 class="font-extrabold text-left text-green-900 uppercase text-lg sm:text-xl lg:text-xl italic">
-                            US$ <?= number_format($vehiculo->precio, 2) ?>
+                            USD <?= number_format($vehiculo->precio, 2) ?>
                         </h3>
                     </div>
                 </a>

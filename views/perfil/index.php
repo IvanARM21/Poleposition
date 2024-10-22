@@ -168,7 +168,7 @@
                             <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap"><?php echo $compra->Marca; ?></td>
                             <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap"><?php echo $compra->Modelo; ?></td>
                             <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap"><?php echo $compra->Color; ?></td>
-                            <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">US$ <?= number_format($compra->Precio, 2) ?>
+                            <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">USD <?= number_format($compra->Precio, 2) ?>
                             <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap"><?php echo $compra->Kilometraje; ?> Km</td>
                             <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap"><?php echo $compra->Año; ?></td>
                             <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap"><?php echo $compra->Tipo; ?></td>

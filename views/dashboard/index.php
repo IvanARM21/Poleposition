@@ -46,7 +46,7 @@
                             <?php echo $vehiculo->marca ?>
                             <?php echo $vehiculo->modelo; ?>
                         </td>
-                        <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">US$ <?= number_format($vehiculo->precio, 2) ?>
+                        <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">USD <?= number_format($vehiculo->precio, 2) ?>
                         </td>
                         <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $vehiculo->kilometraje; ?></td>
                         <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $vehiculo->año ?></td>
