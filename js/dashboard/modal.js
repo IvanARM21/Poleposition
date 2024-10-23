@@ -114,7 +114,7 @@ const loadImagesAndShow = async (files) => {
     errorMsg.classList.add("hidden");  
     errorMsg.innerHTML = '';
 
-    const allowedExtensions = ['PNG', 'JPEG', 'Webp', 'Avif', 'Jfif'];
+    const allowedExtensions = ['PNG', 'JPEG', 'Webp', 'Avif', 'Jfif', 'webp'];
 
     imagenes = [...imagenes, ...files];
 
@@ -185,11 +185,7 @@ const showImages = () => {
 
         const p2 = document.createElement('p');
         p2.className = 'text-gray-500 font-medium';
-        p2.textContent = 'PNG, JPEG, Webp, Avif, JFIF';
-
-        divElement.appendChild(p1);
-        divElement.appendChild(p2);
-
+        p2.textContent = 'PNG, JPEG, Webp, Avif, JFIF', 'Webp'
         dragChange.appendChild(divElement);
     }
 }

@@ -146,9 +146,9 @@
                         class="w-full h-full border border-gray-300 rounded-xl border-dashed flex flex-col justify-center items-center">
                         <p class="text-gray-600 font-medium mb-1"><span class="text-red-600">Subir archivos</span> o
                             arrastra y suelta</p>
-                        <p class="text-gray-500  font-medium">PNG, JPEG, Webp, Avif, JFIF</p>
+                        <p class="text-gray-500  font-medium">PNG, JPEG, Webp, Avif, JFIF, 'Webp'</p>
                     </div>
-                    <input type="file" class="opacity-0 absolute inset-0" id="imagenes" accept=".jpg,.jpeg,.png,.gif"
+                    <input type="file" class="opacity-0 absolute inset-0" id="imagenes" accept=".jpg,.jpeg,.png,.gif,.webp,.avif"
                         multiple>
                 </div>
             </div>
