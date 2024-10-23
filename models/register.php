@@ -29,7 +29,6 @@ class Register {
             $contraseña = $_POST['Contraseña'];
             $repetirContraseña = $_POST['RepetirContraseña'];
 
-            // Validaciones
             if (empty($nombreCompleto) || empty($correo) || empty($usuario) || empty($contraseña) || empty($repetirContraseña)) {
                 $error = 'Todos los campos son obligatorios.';
             } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
@@ -39,7 +38,6 @@ class Register {
             } elseif ($contraseña !== $repetirContraseña) {
                 $error = 'Las contraseñas no coinciden.';
             } else {
-                // Verifica si el usuario o el correo ya existen
                 $usuarioEscaped = $this->db->getConexion()->real_escape_string($usuario);
                 $correoEscaped = $this->db->getConexion()->real_escape_string($correo);
 
@@ -54,13 +52,21 @@ class Register {
                 } elseif ($correoDB) {
                     $error = 'El correo electrónico ya está registrado.';
                 } else {
-                    // Registrar nuevo usuario
                     $contraseñaHash = password_hash($contraseña, PASSWORD_DEFAULT);
                     $sql = "INSERT INTO cuentas (usuario, password, email, nombreCompleto) VALUES ('$usuarioEscaped', '$contraseñaHash', '$correoEscaped', '$nombreCompleto')";
                     $this->db->getConexion()->query($sql);
 
-                    $usuarioDatos = [ "id" => $usuarioDB->id, "usuario" => $usuarioDB->usuario, "email" => $usuarioDB->email, "admin" => $esAdmin->id, "nombreCompleto" => $usuarioDB->nombreCompleto];
-                    setcookie('usuario', json_encode($usuarioDatos), time() + (86400*30));
+                    $nuevoUsuarioId = $this->db->getConexion()->insert_id; 
+
+                    $usuarioDatos = [
+                        "id" => $nuevoUsuarioId,
+                        "usuario" => $usuarioEscaped,
+                        "email" => $correoEscaped,
+                        "admin" => 0, 
+                        "nombreCompleto" => $nombreCompleto
+                    ];
+                    
+                    setcookie('usuario', json_encode($usuarioDatos), time() + (86400 * 30));
 
                     header("Location: /");
                     exit();
