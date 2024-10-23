@@ -1,5 +1,5 @@
 <section class="flex flex-col items-center py-8">
-    <h1 class="title text-2xl font-bold mb-5 sm:text-">Mi </h1>
+    <h1 class="title text-2xl font-bold mb-5 sm:text-">Mi Perfil</h1>
     <div class="flex flex-col sm:flex-row items-start gap-5 w-full max-w-6xl mx-auto">
 
         <!-- sidebar -->
