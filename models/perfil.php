@@ -6,6 +6,7 @@ class Perfil {
 
     public function __construct($db) {
         $this->db = $db;
+        $this->title = "PP | Mi Perfil";
     }
 
     public function getTitle() {
