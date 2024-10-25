@@ -130,7 +130,7 @@
                 <!-- modal eliminar Cuenta -->
                 <div id="modal-eliminar"
                     class="fixed z-40 inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden">
-                    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+                    <form id="formDeleteAccount" class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
                         <h2 class="text-xl font-semibold mb-4 text-gray-800">¿Estás seguro?</h2>
                         <p class="mb-4 text-gray-600">Para eliminar tu cuenta, por favor ingresa tu contraseña.</p>
                         <div class="mb-4">
@@ -139,12 +139,12 @@
                                 class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" />
                         </div>
                         <div class="flex justify-end space-x-4">
-                            <button id="confirmar-eliminar"
+                            <button id="confirmar-eliminar" type="submit"
                                 class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Eliminar</button>
-                            <button id="cancelar-eliminar"
+                            <button id="cancelar-eliminar"  type="button"
                                 class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400 transition">Cancelar</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
 
