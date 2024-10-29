@@ -95,10 +95,36 @@ class Cuentas
     public function delete($id)
 {
     header('Content-Type: application/json');
+
+    // Obtén el contenido JSON de la solicitud
+    $rawData = file_get_contents('php://input');
+
+    $userData = json_decode($rawData, true);
     try {
         // Verifica que el ID sea válido
         if (!is_numeric($id) || $id <= 0) {
             echo json_encode(['ok' => false, 'message' => 'ID inválido.']);
+            exit;
+        }
+
+        $pass = $userData["pass"];
+
+        if(!$pass) {
+            echo json_encode(['ok' => false, 'message' => 'La contraseña es obligatoria']);
+            exit;
+        }
+
+        $sql = "SELECT * FROM cuentas WHERE id = $id";
+        $user = $this->db->findOne($sql);
+
+        if(!$user) {
+            echo json_encode(['ok' => false, 'message' => 'El usuario no fue encontrado']);
+            exit;
+        }
+        $checkPass = password_verify($pass, $user->password);
+
+        if(!$checkPass) {
+            echo json_encode(['ok' => false, 'message' => 'La contraseña es incorrecta']);
             exit;
         }
 
@@ -124,7 +150,7 @@ class Cuentas
         if ($res > 0) {
             echo json_encode(['ok' => true, 'message' => 'Se ha eliminado correctamente.']);
         } else {
-            echo json_encode(['ok' => false, 'message' => 'No se encontró la cuenta a eliminar.']);
+            echo json_encode(['ok' => false, 'message' => 'No se encontró ' . $id . ' la cuenta a eliminar.']);
         }
         exit;
     } catch (Exception $e) {

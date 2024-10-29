@@ -131,8 +131,11 @@
                 <div id="modal-eliminar"
                     class="fixed z-40 inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden">
                     <form id="formDeleteAccount" class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-                        <h2 class="text-xl font-semibold mb-4 text-gray-800">¿Estás seguro?</h2>
+                        <h2 class="text-xl font-semibold mb-2 text-gray-800">¿Estás seguro?</h2>
                         <p class="mb-4 text-gray-600">Para eliminar tu cuenta, por favor ingresa tu contraseña.</p>
+                        
+                        <p id="alert"></p>
+                        
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700">Contraseña</label>
                             <input type="password" id="delete-pass"

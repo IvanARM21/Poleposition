@@ -82,8 +82,8 @@ class DB
     {
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
-        $id = $this->db->insert_id;
-        return $id;
+
+        return $stmt->affected_rows;
     }
 
     public function findVehiculosByIds($ids)

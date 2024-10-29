@@ -130,9 +130,9 @@ class App
 
     private function redirectToErrorPage()
     {
-        http_response_code(404);
-        header("Location: /no-encontrada");
-        exit();
+        // http_response_code(404);
+        // header("Location: /no-encontrada");
+        // exit();
     }
 }
 
