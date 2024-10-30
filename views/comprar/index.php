@@ -7,7 +7,7 @@
 
                 <div class="flex flex-col gap-1 mt-5">
                     <label for="email" class="text-lg text-gray-700">Email</label>
-                    <input id="email" type="email" class="w-full py-2 px-4 border rounded-md">
+                    <input id="email" type="email" class="w-full py-2 px-4 border rounded-md" value="<?= htmlspecialchars($email) ?>">
                 </div>
             </div>
 
@@ -18,12 +18,12 @@
                     <div class="grid grid-cols-2 gap-2">
                         <div class="flex flex-col gap-1">
                             <label for="nombre" class="text-lg text-gray-700">Nombre</label>
-                            <input type="text" id="nombre" class="w-full py-2 px-4 border rounded-md">
+                            <input type="text" id="nombre" class="w-full py-2 px-4 border rounded-md" value="<?= htmlspecialchars($nombre) ?>">
                         </div>
 
                         <div class="flex flex-col gap-1">
                             <label for="apellido" class="text-lg text-gray-700">Apellido</label>
-                            <input type="text" id="apellido" class="w-full py-2 px-4 border rounded-md">
+                            <input type="text" id="apellido" class="w-full py-2 px-4 border rounded-md" value="<?= htmlspecialchars($apellido) ?>">
                         </div>
                     </div>
 
@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="flex flex-col gap-1">
-                        <label for="apartamento" class="text-lg text-gray-700">Apartment, suite, etc.</label>
+                        <label for="apartamento" class="text-lg text-gray-700">Apartamento, suite, etc..</label>
                         <input type="text" id="apartamento" class="w-full py-2 px-4 border rounded-md">
                     </div>
 

@@ -23,7 +23,6 @@ class GenerarFactura
         // fecha de compra desde la bd
         $compra = $this->db->findOne("SELECT * FROM compra WHERE id = $compraId");
         $fechaCompra = $compra->fechaCompra;
-
         // genera el numero factura random
         $numeroFactura = random_int(10000000, 99999999);
 

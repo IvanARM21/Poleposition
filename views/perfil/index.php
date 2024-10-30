@@ -135,7 +135,7 @@
                         <p class="mb-4 text-gray-600">Para eliminar tu cuenta, por favor ingresa tu contraseña.</p>
                         
                         <p id="alert"></p>
-                        
+
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700">Contraseña</label>
                             <input type="password" id="delete-pass"
