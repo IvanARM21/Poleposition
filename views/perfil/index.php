@@ -101,31 +101,38 @@
                     class="fixed z-40 inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden">
                     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
                         <h2 class="text-xl font-semibold mb-4 text-gray-800">Cambiar Contraseña</h2>
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700">Contraseña actual</label>
-                            <input type="password" id="actual-pass"
-                                class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700">Nueva contraseña</label>
-                            <input type="password" id="new-pass"
-                                class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700">Repetir nueva contraseña</label>
-                            <input type="password" id="repeat-pass"
-                                class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
-                        </div>
-                        <p id="error-msg" class="text-red-500 text-sm hidden">Las contraseñas deben coincidir y ser de
-                            más de 8 caracteres</p>
-                        <div class="flex justify-end space-x-4">
-                            <button id="guardar-pass"
-                                class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">Guardar</button>
-                            <button id="cancelar-pass"
-                                class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400 transition">Cancelar</button>
-                        </div>
+                        <form id="formCambiarPass">
+                            <p id="alertCambiarPass"></p>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Contraseña actual</label>
+                                <input type="password" id="actual-pass"
+                                    class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                    required />
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Nueva contraseña</label>
+                                <input type="password" id="new-pass"
+                                    class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                    required />
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Repetir nueva contraseña</label>
+                                <input type="password" id="repeat-pass"
+                                    class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                    required />
+                            </div>
+                            <p id="error-msg" class="text-red-500 text-sm hidden">Las contraseñas deben coincidir y ser
+                                de más de 8 caracteres</p>
+                            <div class="flex justify-end space-x-4">
+                                <button type="submit" id="guardar-pass"
+                                    class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">Guardar</button>
+                                <button type="button" id="cancelar-pass"
+                                    class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400 transition">Cancelar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
+
 
                 <!-- modal eliminar Cuenta -->
                 <div id="modal-eliminar"
@@ -133,7 +140,7 @@
                     <form id="formDeleteAccount" class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
                         <h2 class="text-xl font-semibold mb-2 text-gray-800">¿Estás seguro?</h2>
                         <p class="mb-4 text-gray-600">Para eliminar tu cuenta, por favor ingresa tu contraseña.</p>
-                        
+
                         <p id="alert"></p>
 
                         <div class="mb-4">
@@ -144,7 +151,7 @@
                         <div class="flex justify-end space-x-4">
                             <button id="confirmar-eliminar" type="submit"
                                 class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Eliminar</button>
-                            <button id="cancelar-eliminar"  type="button"
+                            <button id="cancelar-eliminar" type="button"
                                 class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400 transition">Cancelar</button>
                         </div>
                     </form>
@@ -192,23 +199,31 @@
                             <?php foreach ($compras as $compra): ?>
                                 <tr>
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
-                                        <?php echo $compra->Nombre; ?></td>
+                                        <?php echo $compra->Nombre; ?>
+                                    </td>
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
-                                        <?php echo $compra->Marca; ?></td>
+                                        <?php echo $compra->Marca; ?>
+                                    </td>
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
-                                        <?php echo $compra->Modelo; ?></td>
+                                        <?php echo $compra->Modelo; ?>
+                                    </td>
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
-                                        <?php echo $compra->Color; ?></td>
+                                        <?php echo $compra->Color; ?>
+                                    </td>
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">USD
                                         <?= number_format($compra->Precio, 2) ?>
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
-                                        <?php echo $compra->Kilometraje; ?> Km</td>
+                                        <?php echo $compra->Kilometraje; ?> Km
+                                    </td>
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
-                                        <?php echo $compra->Año; ?></td>
+                                        <?php echo $compra->Año; ?>
+                                    </td>
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
-                                        <?php echo $compra->Tipo; ?></td>
+                                        <?php echo $compra->Tipo; ?>
+                                    </td>
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
-                                        <?php echo $compra->Fecha; ?></td>
+                                        <?php echo $compra->Fecha; ?>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
