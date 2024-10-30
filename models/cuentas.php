@@ -28,74 +28,45 @@ class Cuentas
 
 
     public function update($id)
-    {
-        header('Content-Type: application/json');
+{
+    header('Content-Type: application/json');
 
-        // Obtén el contenido JSON de la solicitud
-        $rawData = file_get_contents('php://input');
-        $userData = json_decode($rawData, true);
+    $rawData = file_get_contents('php://input');
+    $userData = json_decode($rawData, true);
 
-        try {
-            if (!is_numeric($id) || $id <= 0) {
-                echo json_encode(['ok' => false, 'message' => 'ID inválido.']);
-                exit;
-            }
-
-            $pass = $userData["pass"];
-            if (!$pass) {
-                echo json_encode(['ok' => false, 'message' => 'La contraseña actual es obligatoria']);
-                exit;
-            }
-
-            $contraseña = $userData["contraseña"];
-            $repetirContraseña = $userData["repetirContraseña"];
-
-            if (!$contraseña) {
-                echo json_encode(['ok' => false, 'message' => 'Elige una nueva contraseña']);
-                exit;
-            }
-
-            if (!$repetirContraseña) {
-                echo json_encode(['ok' => false, 'message' => 'Confirma la Contraseña']);
-                exit;
-            }
-
-            if ($contraseña !== $repetirContraseña) {
-                echo json_encode(['ok' => false, 'message' => 'Las contraseñas no coinciden']);
-                exit;
-            }
-
-            if (strlen($contraseña) < 8) {
-                echo json_encode(['ok' => false, 'message' => 'La contraseña debe tener más de 8 caracteres']);
-                exit;
-            }
-
-            // se fija q el usuario exista
-            $user = $this->db->findOne("SELECT * FROM cuentas WHERE id = $id");
-            if (!$user) {
-                echo json_encode(['ok' => false, 'message' => 'Usuario no encontrado']);
-                exit;
-            }
-
-            // se fija en la contraseña actual
-            if (!password_verify($pass, $user->password)) {
-                echo json_encode(['ok' => false, 'message' => 'La contraseña actual es incorrecta']);
-                exit;
-            }
-
-            //hashea la contraseña nueva
-            $hashedPassword = password_hash($contraseña, PASSWORD_DEFAULT);
-
-            // actualiza la contraseña
-            $sql = "UPDATE cuentas SET password = '$hashedPassword' WHERE id = $id";
-            $this->db->save($sql);
-
-            echo json_encode(['ok' => true, 'message' => 'Contraseña actualizada correctamente.']);
-        } catch (Exception $e) {
-            echo json_encode(['ok' => false, 'message' => 'Ha ocurrido un error.', 'error' => $e->getMessage()]);
-            exit;
-        }
+    if (!is_numeric($id) || $id <= 0) {
+        echo json_encode(['ok' => false, 'message' => 'ID inválido.']);
+        exit;
     }
+
+    $pass = $userData["pass"] ?? null;
+    $contraseña = $userData["contraseña"] ?? null;
+    $repetirContraseña = $userData["repetirContraseña"] ?? null;
+
+    if (!$pass || !$contraseña || !$repetirContraseña) {
+        echo json_encode(['ok' => false, 'message' => 'Todos los campos son obligatorios.']);
+        exit;
+    }
+
+    if ($contraseña !== $repetirContraseña) {
+        echo json_encode(['ok' => false, 'message' => 'Las contraseñas no coinciden.']);
+        exit;
+    }
+
+    $user = $this->db->findOne("SELECT * FROM cuentas WHERE id = $id");
+    if (!$user || !password_verify($pass, $user->password)) {
+        echo json_encode(['ok' => false, 'message' => 'Contraseña actual incorrecta.']);
+        exit;
+    }
+
+    $hashedPassword = password_hash($contraseña, PASSWORD_DEFAULT);
+    $this->db->save("UPDATE cuentas SET password = '$hashedPassword' WHERE id = $id");
+
+    // Respuesta final
+    echo json_encode(['ok' => true, 'message' => 'Contraseña actualizada correctamente.']);
+    exit;
+}
+
 
 
     public function delete($id)

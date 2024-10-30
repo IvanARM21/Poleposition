@@ -47,36 +47,46 @@ export const loadPerfilEvents = () => {
     formCambiarPass?.addEventListener("submit", async (e) => {
         e.preventDefault();
     
-        // Obtener los valores del formulario
-        const pass = document.getElementById('actual-pass').value; // Asegúrate de tener este input en el formulario
-        const contraseña = document.getElementById('new-pass').value; // Input para la nueva contraseña
-        const repetirContraseña = document.getElementById('repeat-pass').value; // Input para repetir la nueva contraseña
+        const pass = {
+            pass: document.getElementById('actual-pass').value, // contraseña actual
+            contraseña: document.getElementById('new-pass').value, // nueva contraseña
+            repetirContraseña: document.getElementById('repeat-pass').value // repetir nueva contraseña
+        };
     
         const user = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
     
         if (user) {
-            const res = await fetch(`${PAGE_URL}/cuentas/editar/${user.id}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ 
-                    pass: pass, 
-                    contraseña: contraseña, 
-                    repetirContraseña: repetirContraseña 
-                })
-            }).then(res => res.json());
+            try {
+                const res = await fetch(`${PAGE_URL}/cuentas/editar/${user.id}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(pass) 
+                });
     
-            if (!res.ok && alertCambiarPass) { // Cambia a alertCambiarPass
-                showAlert(alertCambiarPass, true, res.message);
-            } else {
-                showAlert(alertCambiarPass, false, res.message);
-                setTimeout(() => {
-                    modalCambiar.classList.add('hidden'); // Cierra el modal después del cambio exitoso
-                }, 2000);
+                const text = await res.text(); // Obtener la respuesta como texto
+    
+                // Intentar analizar el texto como JSON
+                const json = JSON.parse(text);
+    
+                if (!json.ok && alertCambiarPass) { 
+                    showAlert(alertCambiarPass, true, json.message);
+                } else {
+                    showAlert(alertCambiarPass, false, json.message);
+                    setTimeout(() => {
+                        modalCambiar.classList.add('hidden'); // cierra el modal
+                        window.location.href = "/logout";
+                    }, 2000);
+                }
+            } catch (error) {
+                console.error("Error al manejar la respuesta:", error);
+                // Manejar el caso en que la respuesta no es un JSON válido
+                console.log("Respuesta del servidor:", text); // Imprimir la respuesta completa para depuración
             }
         } else {
             console.error('No se pudo obtener la información del usuario desde la cookie.');
         }
     });
+    
     
 
     btnCambiarPass?.addEventListener('click', () => {
