@@ -13,7 +13,7 @@ class Dashboard {
         return $this->title;
     }
 
-    public function index() {
+    public function index(): Template {
         if (!isset($_COOKIE['usuario'])) {
             header("Location: /");
             exit();

@@ -6,6 +6,7 @@ class Perfil {
 
     public function __construct($db) {
         $this->db = $db;
+        $this->title = "PP | Mi Perfil";
     }
 
     public function getTitle() {
@@ -16,11 +17,18 @@ class Perfil {
         if (!isset($_COOKIE['usuario'])) {
             header("Location: /");
             exit;
-        }$usuario = json_decode($_COOKIE['usuario']);
-        $usuarioId = $usuario->id;
+        }
         
-        $usuarioId = intval($usuarioId);
-        
+        $usuario = json_decode($_COOKIE['usuario']);
+        $usuarioId = intval($usuario->id);
+        $usuarioDatos = json_decode($_COOKIE['usuario'], true); 
+
+        $cuentas = $this->obtenerDatosPerfil($usuarioId);
+
+if (!$cuentas) {
+    return $this->mostrarError('No se encontraron datos del usuario.');
+}
+    
         $sql = "SELECT
             cuentas.nombreCompleto AS Nombre,
             vehiculo.marca AS Marca,
@@ -48,30 +56,36 @@ class Perfil {
         
         $compras = $this->db->find($sql);
         
-
-        $usuarioDatos = json_decode($_COOKIE['usuario'], true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            return $this->mostrarError('Error al decodificar los datos de usuario.');
-        }
-    
-        $usuario = $usuarioDatos['usuario'];
-        $this->title = "PP | Mi Perfil";
-
-        [$errorPerfil, $errorSeguridad, $errorEliminar] = $this->actualizar($usuarioDatos);
-    
-        $usuarioDB = $this->obtenerDatosUsuario($usuario);
-        if ($usuarioDB === null) {
-            return $this->mostrarError('Usuario Incorrecto / No Encontrado');
-        }
+        [$errorPerfil, $errorSeguridad, $errorEliminar] = $this->actualizar($usuario);
     
         return new Template('./views/perfil/index.php', [
-            'usuarioDB' => $usuarioDB,
+            'cuentas' => [
+        'nombreCompleto' => $cuentas->nombreCompleto,
+        'usuario' => $cuentas->usuario,
+        'email' => $cuentas->email
+    ],
+            'compras' => $compras, 
             'errorPerfil' => $errorPerfil ?? null,
             'errorSeguridad' => $errorSeguridad ?? null,
-            'errorEliminar' => $errorEliminar ?? null,
-            "compras" => $compras
+            'errorEliminar' => $errorEliminar ?? null
         ]);
     }
+    
+
+    public function obtenerDatosPerfil($usuarioId) {
+        $sql = "SELECT nombreCompleto, usuario, email FROM cuentas WHERE id = ?";
+        $params = [$usuarioId];
+        
+        $resultado = $this->db->findPrepared($sql, $params, 'i');
+        
+        if (!empty($resultado)) {
+            return $resultado[0];
+        }
+        
+        return null;
+    }
+    
+
 
     private function actualizar($usuarioDatos) {
         $errorPerfil = null;
@@ -93,14 +107,12 @@ class Perfil {
         $nombreCompleto = $_POST['nombreCompleto'] ?? '';
         $nuevoUsuario = $_POST['usuario'] ?? '';
         $email = $_POST['email'] ?? '';
-        $usuarioActual = $usuarioDatos['usuario'];
+        $usuarioActual = $usuarioDatos->usuario; 
     
-        // Validar campos
         if (empty($nombreCompleto) || empty($nuevoUsuario) || empty($email)) {
             return 'Todos los campos son obligatorios para actualizar el perfil.';
         }
     
-        //verifica si el usuario ya existe mano
         $stmt = $this->db->getConexion()->prepare(
             "SELECT COUNT(*) FROM cuentas WHERE usuario = ? AND usuario != ?"
         );
@@ -114,7 +126,6 @@ class Perfil {
             return 'El nombre de usuario ya está en uso. Por favor, elige otro.';
         }
     
-        //para verificar si el email existe bo
         $stmt = $this->db->getConexion()->prepare(
             "SELECT COUNT(*) FROM cuentas WHERE email = ? AND usuario != ?"
         );
@@ -134,14 +145,12 @@ class Perfil {
         $stmt->bind_param('ssss', $nombreCompleto, $nuevoUsuario, $email, $usuarioActual);
     
         if ($stmt->execute()) {
-            $usuarioDatos['usuario'] = $nuevoUsuario;
-            $usuarioDatos['nombreCompleto'] = $nombreCompleto; 
-            $usuarioDatos['email'] = $email;
+            $usuarioDatos->usuario = $nuevoUsuario;
+            $usuarioDatos->nombreCompleto = $nombreCompleto; 
+            $usuarioDatos->email = $email;
     
             setcookie('usuario', json_encode($usuarioDatos), time() + (86400 * 30), "/", "", false, true); 
     
-
-            //lo manda a la misma pagina xq sino no se ven los cambios xd
             header('Location: ' . $_SERVER['REQUEST_URI']);
             exit();
         } else {
@@ -152,19 +161,9 @@ class Perfil {
     }
     
 
- 
 
-    private function obtenerDatosUsuario($usuario) {
-        $stmt = $this->db->getConexion()->prepare("SELECT nombreCompleto, usuario, email FROM cuentas WHERE usuario = ?");
-        if (!$stmt) {
-            return null;
-        }
     
-        $stmt->bind_param('s', $usuario);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_assoc();
-    }
+    
     
     private function mostrarError($mensaje) {
         return new Template('./views/perfil/index.php', ['error' => $mensaje]);
