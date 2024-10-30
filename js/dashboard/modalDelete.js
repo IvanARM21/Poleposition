@@ -22,9 +22,9 @@ export const loadModalDeleteBtn = () => {
     });
 
 
-    deleteBtn.addEventListener("click", deleteVehicle);
-    modalCloseBtn.addEventListener("click", menuClose);
-    modalCancelBtn.addEventListener("click", menuClose);
+    deleteBtn?.addEventListener("click", deleteVehicle);
+    modalCloseBtn?.addEventListener("click", menuClose);
+    modalCancelBtn?.addEventListener("click", menuClose);
 }
 
 const menuClose = () => {

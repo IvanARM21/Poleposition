@@ -14,7 +14,6 @@ export const loadInput = () => {
                 const normalizedColor = normalizeString(vehicle.color);
                 const normalizedModelo = normalizeString(vehicle.modelo);
                 const normalizedValue = normalizeString(value);
-
             
                 if (normalizedMarca.includes(normalizedValue)) {
                     return vehicle;

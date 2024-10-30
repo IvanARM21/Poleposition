@@ -23,7 +23,7 @@
                         <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $usuario->nombreCompleto; ?></td>
                         <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $usuario->email; ?></td>
                         <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">
-                            <select id="selectRol">
+                            <select id="<?php echo $usuario->id ?>" name="selectRol">
                                 <option value="usuario" <?php echo $usuario->tipo === "usuario" ? 'selected' : '' ?>>Usuario</option>
                                 <option value="admin" <?php echo $usuario->tipo === "admin" ? 'selected' : '' ?>>Admin</option>
                             </select>

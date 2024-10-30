@@ -45,7 +45,30 @@ LEFT JOIN admin a ON c.id = a.idAdmin;
     }
 
     public function update($id) {
-        
+
+        header('Content-Type: application/json');
+
+        echo $id;
+
+        $adminSql = "SELECT * FROM admin WHERE idAdmin = $id";
+        $admin = $this->db->findOne($adminSql);
+
+        if($admin) {
+            $updateSql = "DELETE FROM admin WHERE idAdmin = $id"; 
+            $this->db->delete($updateSql);
+
+            echo json_encode([
+                "success" => false,
+            ]);
+            exit;
+        }
+
+        $createSql = "INSERT INTO admin (idAdmin) VALUES ($id)";
+        $this->db->save($createSql);
+        echo json_encode([
+            "success" => true,
+        ]);
+        exit;
     }
 
 }

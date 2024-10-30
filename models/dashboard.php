@@ -46,9 +46,6 @@ class Dashboard {
         return new Template('./views/dashboard/index.php', [
             "vehiculos" => $vehiculos
         ]);
-
-    
-
     }
 }
 ?>

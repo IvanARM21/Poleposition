@@ -19,11 +19,12 @@ export const loadVehicles = async () => {
     }
 }
 
-export const showVehicles = (vehicles, message = "Por el momento no tenemos vehiculos disponibles") => {
+export const showVehicles = (vehiclesToShow, message = "Por el momento no tenemos vehiculos disponibles") => {
+    if(vehicles.length === vehiclesToShow.length && vehicles.length === catalogo.children.length) return 
     clear(catalogo);
-    if(vehicles.length) {
+    if(vehiclesToShow.length) {
         catalogo.classList.remove("hidden");
-        vehicles.forEach(vehicle => {
+        vehiclesToShow.forEach(vehicle => {
             const vehicleElement = createVehicle(vehicle);
             catalogo.appendChild(vehicleElement);
         });
@@ -123,8 +124,6 @@ const vehiclesEmpty = (message) => {
     const div = document.getElementById("empty");
 
     clear(div);
-
-
 
     if(div) {
         div.classList?.add("block");

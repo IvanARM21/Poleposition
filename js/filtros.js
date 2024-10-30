@@ -36,7 +36,6 @@ const filterByBrand = (vehicles) => {
 }
 
 const filterByColor = (vehicles) => {
-    let vehiclesFiltered = [];
     const colorSelected = colors.map(color => {
         if(color.checked) {
             return color;
@@ -47,12 +46,12 @@ const filterByColor = (vehicles) => {
     if(colorSelected.length) {
         const color = colorSelected.map(color => color.value.toUpperCase());
     
-        vehiclesFiltered = vehicles.filter(vehicle => color.includes(vehicle.color.toUpperCase()));
+        vehicles = vehicles.filter(vehicle => color.includes(vehicle.color.toUpperCase()));
     } else {
-        vehiclesFiltered = vehicles;
+        vehicles = vehicles;
     }
 
-    return vehiclesFiltered;
+    return vehicles;
 }
 
 const filterByYear = (vehicles) => {

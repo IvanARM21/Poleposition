@@ -1,4 +1,4 @@
-<section class="flex flex-col md:flex-row gap-6 p-6 bg-white shadow-md rounded-lg items-start">
+<section class="flex flex-col md:flex-row gap-6 p-6 bg-white shadow-md rounded-lg items-start max-w-screen-xl mx-auto">
     <?php if ($vehiculo): ?>
         <div class="w-full md:w-1/2 flex flex-col bg-gray-100 rounded-lg relative">
             <?php if (!empty($vehiculo->imagenes)): ?>
