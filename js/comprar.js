@@ -18,6 +18,10 @@ const subtotalElement = document.getElementById('subtotal');
 const taxElement = document.getElementById('tax');
 const totalElement = document.getElementById('total');
 
+const fechaIncio = document.getElementById('fechaInicio');
+const fechaFin = document.getElementById('fechaFin');
+
+
 export const loadBuy = () => {
     btnBuy?.addEventListener("click", loadVehicle);
     btnRent?.addEventListener("click", loadVehicle);
@@ -86,8 +90,17 @@ const loadVehicleInfo = (vehicle) => {
         
         // Añadimos clases de acuerdo al tipo (compra o alquiler)
         if (tipo === "compra") {
+            const containerFechaInicio = fechaIncio?.parentNode;
+            const containerFechaFin = fechaFin?.parentNode;
+            containerFechaInicio.classList.add("hidden");
+            containerFechaFin.classList.add("hidden")
             typeElement.classList.add("bg-green-50", "text-green-600");
         } else {
+            const date = new Date()
+            const dateFormattedToday = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`;
+            const dateFormattedNextDay = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()+1 < 10 ? `0${date.getDate()+1}` : date.getDate()+1}`;
+            fechaIncio.value = dateFormattedToday;
+            fechaFin.value = dateFormattedNextDay;
             typeElement.classList.add("bg-blue-50", "text-blue-600");
         }
 
@@ -96,6 +109,8 @@ const loadVehicleInfo = (vehicle) => {
 
         taxElement.textContent = priceFormatted(tax);
         totalElement.textContent = priceFormatted(total);
+
+
 
         // Cambiamos el texto del botón de confirmación según el tipo
         confirmBtn.textContent = tipo === "compra" ? "Confirmar compra" : "Confirmar alquiler";
@@ -194,7 +209,6 @@ const validateInput = (event) => {
         }
     };
 
-    // Esté código iterará sobre cada input  para saber si mostrar alerta o no
     for (const [key, { value, required, pattern, message }] of Object.entries(inputs)) {
         const inputEl = document.getElementById(key);
 
@@ -217,13 +231,64 @@ const validateInput = (event) => {
         isValid = false;
     }
 
+    const user = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
     if (isValid) {
 
+
         // Obtener datos de localstorage
+        const vehicle = JSON.parse(localStorage.getItem("vehicle"));
+        const datosCompra = {
+            vehiculoId: vehicle.id,
+            imagen: vehicle.imagenes.split(",")[0],
+            idCliente: user.id,
+            direccion: inputs.direccion,
+            codigo: inputs.codigo,
+            pais: inputs.pais,
+            telefono: inputs.telefono,
+            ciudad: inputs.ciudad,
+            nombre: inputs.nombre,
+            apellido: inputs.apellido,
+            email: inputs.email,
+            tipo: vehicle.tipo,
+            subtotal: vehicle.subtotal,
+            tax: vehicle.tax,
+            total: vehicle.total,
+        }
 
-        // Llamar api de php con todos los datos, habrá otra validación desde php
+        // Llamar api de php con todos los datos, habrá otra validación desde 
+    } 
 
 
+    const datosCompra = {
+        idCliente: user?.id, // ID ficticio de 10 dígitos
+        direccion: "123 Calle Falsa",
+        codigo: "12345",
+        pais: "Ficticia",
+        telefono: "099612953",
+        ciudad: "Ciudad Falsa",
+        nombre: "Juan",
+        apellido: "Pérez",
+        email: "juan.perez@example.com",
+        tipo: "alquiler", // Cambiado a "alquiler"
+        idVehiculo: 1, // ID del vehículo
+        subtotal: 25000,
+        tax: 2500,
+        total: 27500
+    };
+    
+    // Ejemplo de cómo utilizar los datos
+    console.log(datosCompra);
+    
 
-    }
+    realizarCompra(datosCompra);
+
+}
+
+const realizarCompra = async (datosCompra) => {
+    const res = await fetch(`${PAGE_URL}/comprar/crear`, {
+        method: "POST",
+        body: JSON.stringify(datosCompra)
+    }).then(res => res.text());
+
+    console.log(res);
 }

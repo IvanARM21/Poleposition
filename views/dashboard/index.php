@@ -120,6 +120,12 @@
                     placeholder="Precio del vehiculo">
             </div>
 
+            <div class="flex flex-col gap-1"> <!-- Un campo nuevo, de stock -->
+                <label for="stock" class="font-medium text-gray-800 ">Stock</label>
+                <input type="text" class="w-full border shadow rounded-xl py-2 px-4" id="stock"
+                    placeholder="Stock del vehiculo">
+            </div>
+
             <div class="flex flex-col gap-1">
                 <label for="kilometraje" class="font-medium text-gray-800 ">Año</label>
                 <input type="number" class="w-full border shadow rounded-xl py-2 px-4" id="año"

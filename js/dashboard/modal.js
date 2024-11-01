@@ -18,6 +18,9 @@ const kilometraje = document.getElementById("kilometraje");
 const descripcion = document.getElementById("descripcion");
 const año = document.getElementById("año");
 
+// <!-- Un campo nuevo, de stock, lo seleccionamos en JavaScript -->
+const stock = document.getElementById("stock");
+
 const modalTitle = document.getElementById("loadTitle");
 
 let vehicleId = -1;
@@ -255,9 +258,10 @@ const getVehicleById = async (id) => {
         color.value = vehicule.color;
         descripcion.value =  vehicule.descripcion;
         año.value = vehicule.año;
+        // <!-- Un campo nuevo, de stock --> (EIDICIÓN)
+        stock.value = vehicule.stock
         imagenesCargadas = data[0].imagenes.split(",").map(img => `../../img/uploads/${img}`)
     }
-    
     clearImages();
     showImages();
 }
@@ -272,7 +276,9 @@ const saveVehicle = async (e) => {
         precio: +precio?.value,
         kilometraje: +kilometraje?.value,
         descripcion: descripcion?.value,
-        año: año.value,
+        año: año?.value,
+        // <!-- Un campo nuevo, de stock --> (AMBAS)
+        stock: stock?.value,
         images: imagenesCargadas
     };
 

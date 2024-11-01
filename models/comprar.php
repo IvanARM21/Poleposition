@@ -39,7 +39,9 @@ class Comprar
         }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $this->validateInput();
+            $result = $this->validateInput();
+            echo json_encode($result);
+            exit;
         }
 
         return new Template('./views/comprar/index.php', [
@@ -52,96 +54,143 @@ class Comprar
         ]);
     }
 
-    private function validateInput()
-    {
-        function limpiarDato($dato)
-        {
-            return htmlspecialchars(trim($dato));
-        }
+    public function create() {
+        header('Content-Type: application/json');
 
-        $this->inputData['nombre'] = limpiarDato($_POST["nombre"]);
-        if (empty($this->inputData['nombre'])) {
-            $this->errors['nombre'] = "El nombre es obligatorio.";
-        }
+        $rawData = file_get_contents('php://input');
+        $data = json_decode($rawData, true);
 
-        $this->inputData['apellido'] = limpiarDato($_POST["apellido"]);
-        if (empty($this->inputData['apellido'])) {
-            $this->errors['apellido'] = "El apellido es obligatorio.";
-        }
+        $result = $this->validateInput($data);
 
-        $this->inputData['email'] = limpiarDato($_POST["email"]);
-        if (empty($this->inputData['email'])) {
-            $this->errors['email'] = "El email es obligatorio.";
-        } elseif (!filter_var($this->inputData['email'], FILTER_VALIDATE_EMAIL)) {
-            $this->errors['email'] = "Formato de email inválido.";
-        }
-
-        $this->inputData['direccion'] = limpiarDato($_POST["direccion"]);
-        if (empty($this->inputData['direccion'])) {
-            $this->errors['direccion'] = "La dirección es obligatoria.";
-        }
-
-        $this->inputData['ciudad'] = limpiarDato($_POST["ciudad"]);
-        if (empty($this->inputData['ciudad'])) {
-            $this->errors['ciudad'] = "La ciudad es obligatoria.";
-        }
-
-        $this->inputData['codigo'] = limpiarDato($_POST["codigo"]);
-        if (empty($this->inputData['codigo'])) {
-            $this->errors['codigo'] = "El código postal es obligatorio.";
-        } elseif (!preg_match("/^[0-9]{5}$/", $this->inputData['codigo'])) {
-            $this->errors['codigo'] = "El código postal debe tener 5 dígitos.";
-        }
-
-        $this->inputData['pais'] = limpiarDato($_POST["pais"]);
-        if (empty($this->inputData['pais'])) {
-            $this->errors['pais'] = "El país es obligatorio.";
-        }
-
-        $this->inputData['telefono'] = limpiarDato($_POST["telefono"]);
-        if (empty($this->inputData['telefono'])) {
-            $this->errors['telefono'] = "El teléfono es obligatorio.";
-        } elseif (!preg_match("/^[0-9]{9}$/", $this->inputData['telefono'])) {
-            $this->errors['telefono'] = "El teléfono debe tener 9 digitos.";
-        }
-
-        $this->inputData['tarjeta'] = limpiarDato($_POST["tarjeta"]);
-        if (empty($this->inputData['tarjeta'])) {
-            $this->errors['tarjeta'] = "El número de tarjeta es obligatorio.";
-        } elseif (!preg_match("/^[0-9]{16}$/", $this->inputData['tarjeta'])) {
-            $this->errors['tarjeta'] = "El número de tarjeta debe tener 16 dígitos.";
-        }
-
-        $this->inputData['nombreTarjeta'] = limpiarDato($_POST["nombreTarjeta"]);
-        if (empty($this->inputData['nombreTarjeta'])) {
-            $this->errors['nombreTarjeta'] = "El nombre en la tarjeta es obligatorio.";
-        }
-
-        $this->inputData['caducidad'] = limpiarDato($_POST["caducidad"]);
-        if (empty($this->inputData['caducidad'])) {
-            $this->errors['caducidad'] = "La fecha de caducidad es obligatoria.";
-        } elseif (!preg_match("/^(0[1-9]|1[0-2])\/?([0-9]{2})$/", $this->inputData['caducidad'])) {
-            $this->errors['caducidad'] = "La fecha de caducidad debe tener el formato MM/AA.";
-        } else {
-            $caducidad = DateTime::createFromFormat('m/y', $this->inputData['caducidad']);
-            $caducidad->modify('last day of this month');
-
-            if ($caducidad < new DateTime()) {
-                $this->errors['caducidad'] = "La fecha de caducidad está vencida.";
-            }
-        }
-
-        $this->inputData['cvc'] = limpiarDato($_POST["cvc"]);
-        if (empty($this->inputData['cvc'])) {
-            $this->errors['cvc'] = "El CVC es obligatorio.";
-        } elseif (!preg_match("/^[0-9]{3,5}$/", $this->inputData['cvc'])) {
-            $this->errors['cvc'] = "El CVC debe tener entre 3 y 5 dígitos.";
-        }
-
-
-        if (empty($this->errors)) {
-            header("Location: confirmacion.php");
+        if(!$result) {
+            echo json_encode(["error" => true, "", "message" => "Ha ocurrido un error validando los datos."]);
             exit;
         }
+        $idCliente = $data['idCliente'];
+        $direccion = $data['direccion'];
+        $codigo = $data['codigo'];
+        $pais = $data['pais'];
+        $telefono = $data['telefono'];
+        $ciudad = $data['ciudad'];
+        $nombre = $data['nombre'];
+        $apellido = $data['apellido'];
+        $email = $data['email'];
+        $tipo = $data['tipo'];
+        $idVehiculo = $data['idVehiculo'];
+        $subtotal = $data['subtotal'];
+        $tax = $data['tax'];
+        $total = $data['total'];
+        
+
+        if($tipo === "alquiler") {
+            // Guardamos tabla de alquileres
+            $fechaInicio = $data['fechaInicio'];
+            $fechaFin = $data["fechaFin"];
+
+            if(!$this->validarFechas($fechaInicio, $fechaFin)) {
+                echo json_encode(["error" => true, "", "message" => "Ha ocurrido en la fecha"]);
+                exit;
+            }
+
+        } else {
+            // Guardado tabla de compra
+            $sql = "INSERT INTO compra (idCliente, direccion, codigo, pais, telefono, ciudad, nombre, apellido, email, idVehiculo, subtotal, tax, total)
+            VALUES ($idCliente, '$direccion', '$codigo', '$pais', '$telefono', '$ciudad', '$nombre', '$apellido', '$email', $idVehiculo, $subtotal, $tax, $total)";
+            
+            $id = $this->db->save($sql);
+
+            if($id) {
+                echo json_encode(["error" => false, "", "message" => "Se ha realizado correctamente la compra"]);
+            } else {
+                echo json_encode(["error" => true, "", "message" => "Ha ocurrido un error al realizar la compra"]);
+            }
+        }
+        exit;
+    }
+
+    function limpiarDato($dato) {
+        return htmlspecialchars(trim($dato));
+    }
+
+    function validateInput($data) {
+        // if (empty($data['idCliente']) || !preg_match("/^\d{10}$/", $data['idCliente'])) {
+        //     return false; 
+        // }
+    
+        $data['direccion'] = $this->limpiarDato($data['direccion']);
+        if (empty($data['direccion'])) {
+            return false; 
+        }
+    
+        $data['codigo'] = $this->limpiarDato($data['codigo']);
+        if (empty($data['codigo']) || !preg_match("/^\d{5}$/", $data['codigo'])) {
+            return false; 
+        }
+    
+        $data['pais'] = $this->limpiarDato($data['pais']);
+        if (empty($data['pais'])) {
+            return false; 
+        }
+    
+        $data['telefono'] = $this->limpiarDato($data['telefono']);
+        if (empty($data['telefono']) || !preg_match("/^\d{9}$/", $data['telefono'])) {
+            return false; 
+        }
+    
+        $data['ciudad'] = $this->limpiarDato($data['ciudad']);
+        if (empty($data['ciudad'])) {
+            return false; 
+        }
+    
+        $data['nombre'] = $this->limpiarDato($data['nombre']);
+        if (empty($data['nombre'])) {
+            return false; 
+        }
+    
+        $data['apellido'] = $this->limpiarDato($data['apellido']);
+        if (empty($data['apellido'])) {
+            return false; 
+        }
+    
+        $data['email'] = $this->limpiarDato($data['email']);
+        if (empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            return false; 
+        }
+    
+        $data['tipo'] = $this->limpiarDato($data['tipo']);
+        if (empty($data['tipo'])) {
+            return false; 
+        }
+    
+        $data['idVehiculo'] = isset($data['idVehiculo']) ? (int)$data['idVehiculo'] : null; 
+        if (empty($data['idVehiculo'])) {
+            return false; 
+        }
+    
+        if (!isset($data['subtotal']) || $data['subtotal'] <= 0) {
+            return false; 
+        }
+    
+        if (!isset($data['tax']) || $data['tax'] < 0) {
+            return false; 
+        }
+    
+        if (!isset($data['total']) || $data['total'] <= 0) {
+            return false; 
+        }
+    
+        return true; 
+    }
+    
+    function validarFechas($fechaInicio, $fechaFin) {
+        $inicio = DateTime::createFromFormat('Y-m-d', $fechaInicio);
+        $fin = DateTime::createFromFormat('Y-m-d', $fechaFin);
+    
+        if (!$inicio || !$fin) {
+            return false; 
+        }
+    
+        // Comparar las fechas
+        return $inicio < $fin;
     }
 }

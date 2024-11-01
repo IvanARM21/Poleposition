@@ -3,10 +3,11 @@
         <div class="flex flex-col-reverse lg:grid lg:grid-cols-2 px-6 gap-10">
             <div class="rounded-xl">
                 <div>
-                    <h2 class="text-xl font-medium text-gray-800">Información Contacto</h2>
+                    <h2 class="text-xl font-medium text-gray-800 mb-4">Información Contacto</h2>
 
                     <div class="flex flex-col gap-1 mt-5">
-                        <label for="email" class="text-lg text-gray-700">Email</label>
+                        <label for="email" class="text-lg text-gray-700">Email <span
+                        class="text-red-600">*</span></label>
                         <input id="email" name="email" type="email" class="w-full py-2 px-4 border rounded-md"
                             value="<?= htmlspecialchars($email) ?>">
                         <?php if (!empty($errors['email'])): ?>
@@ -16,7 +17,7 @@
                 </div>
 
                 <div class="mt-8 pt-8 border-t">
-                    <h2 class="text-xl font-medium text-gray-800">Información de cliente</h2>
+                    <h2 class="text-xl font-medium text-gray-800 mb-4">Información de cliente</h2>
 
                     <div class="flex flex-col gap-3 mt-2">
                         <div class="grid grid-cols-2 gap-2">
@@ -99,7 +100,22 @@
                     </div>
 
                     <div class="mt-8 pt-8 border-t">
-                        <h2 class="text-xl font-medium text-gray-800">Pago</h2>
+                        <h2 class="text-xl font-medium text-gray-800 mb-4">Pago</h2>
+
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="flex flex-col gap-1">
+                                <label for="fechaInicio" class="text-lg text-gray-700">Fecha inicio <span
+                                        class="text-red-600">*</span> </label>
+                                <input type="date" id="fechaInicio" name="fechaInicio" class="w-full py-2 px-4 border rounded-md" />
+                            </div>
+
+                            <div class="flex flex-col gap-1">
+                                <label for="fechaFin" class="text-lg text-gray-700">Fecha fin <span
+                                        class="text-red-600">*</span> </label>
+                                <input type="date" id="fechaFin" name="fechaFin"
+                                    class="w-full py-2 px-4 border rounded-md" />
+                            </div>
+                        </div>
 
                         <div class="flex flex-col gap-3 mt-2">
                             <div class="flex flex-col gap-1">
@@ -172,10 +188,12 @@
                                 <p class="text-sm sm:text-base text-gray-500 font-medium " id="precio"></p>
                             </div>
                         </div>
+                        <div class="flex flex-col justify-between items-end pl-4">
                         <p class="text-gray-500 font-medium py-2 text-xs sm:text-base text-nowrap">
                             Tipo:
                             <span class="py-1 px-2 rounded-lg capitalize" id="tipo">Alquiler</span>
                         </p>
+                        </div>
                     </div>
 
                     <div class="flex flex-col">

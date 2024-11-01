@@ -70,6 +70,9 @@ class Productos
         $año = $vehicleData["año"];
         $images = $vehicleData['images'] ?? [];
 
+        // // <!-- Un campo nuevo, de stock --> (CREACION)
+        $stock = $vehicleData["stock"] ?? 0;
+
         $imagesName = [];
         if ($images) {
             foreach ($images as $image) {
@@ -79,7 +82,8 @@ class Productos
 
         try {
             // Guardar en la BD
-            $sql = "INSERT INTO Vehiculo (modelo, marca, color, precio, kilometraje, descripcion, año) VALUES ('$modelo', '$marca', '$color', $precio, $kilometraje, '$descripcion', $año)";
+            // <!-- Un campo nuevo, de stock (Creación) -->
+            $sql = "INSERT INTO Vehiculo (modelo, marca, color, precio, kilometraje, descripcion, año, stock) VALUES ('$modelo', '$marca', '$color', $precio, $kilometraje, '$descripcion', $año, $stock)";
             $idVehiculo = $this->db->save($sql);
 
             echo $idVehiculo;
@@ -122,6 +126,9 @@ class Productos
         $descripcion = $vehicleData['descripcion'] ?? '';
         $imagenesCrear = $vehicleData['imagenesCrear'] ?? [];
         $imagenesEliminar = $vehicleData['imagenesEliminar'] ?? [];
+        
+        // // <!-- Un campo nuevo, de stock --> (CREACION)
+        $stock = $vehicleData["stock"] ?? 0;
 
         $imagenesCreadas = [];
         if ($imagenesCrear) {
@@ -151,8 +158,11 @@ class Productos
             precio = $precio, 
             kilometraje = $kilometraje, 
             descripcion = '$descripcion', 
-            año = $año 
+            año = $año,
+            stock = $stock 
         WHERE id = $id";
+
+        // <!-- Un campo nuevo, de stock (Edicion) -->
 
         $this->db->save($sql);
 
@@ -160,7 +170,6 @@ class Productos
         echo json_encode(['ok' => true, 'message' => 'Se ha guardado correctamente.']);
 
         exit;
-
 
     }
 
