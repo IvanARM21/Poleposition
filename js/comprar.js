@@ -25,7 +25,7 @@ const fechaFin = document.getElementById('fechaFin');
 export const loadBuy = () => {
     btnBuy?.addEventListener("click", loadVehicle);
     btnRent?.addEventListener("click", loadVehicle);
-    compraForm.addEventListener("submit", validateInput);
+    compraForm?.addEventListener("submit", validateInput);
 }
 
 const loadVehicle = async (e) => {
@@ -238,57 +238,40 @@ const validateInput = (event) => {
         // Obtener datos de localstorage
         const vehicle = JSON.parse(localStorage.getItem("vehicle"));
         const datosCompra = {
-            vehiculoId: vehicle.id,
-            imagen: vehicle.imagenes.split(",")[0],
-            idCliente: user.id,
-            direccion: inputs.direccion,
-            codigo: inputs.codigo,
-            pais: inputs.pais,
-            telefono: inputs.telefono,
-            ciudad: inputs.ciudad,
-            nombre: inputs.nombre,
-            apellido: inputs.apellido,
-            email: inputs.email,
-            tipo: vehicle.tipo,
+            idCliente: user?.id,
+            direccion: inputs.direccion.value,
+            codigo: inputs.codigo.value,
+            pais: inputs.pais.value,
+            telefono: inputs.telefono.value,
+            ciudad: inputs.ciudad.value,
+            nombre: inputs.nombre.value,
+            apellido: inputs.apellido.value,
+            email: inputs.email.value,
+            tipo: vehicle.tipo, // Esto debería ser "compra" o "alquiler" según lo seleccionado
+            idVehiculo: vehicle.id, // ID del vehículo
             subtotal: vehicle.subtotal,
             tax: vehicle.tax,
             total: vehicle.total,
-        }
+            fechaCompra: new Date().toISOString().split('T')[0]
+            };
+        
+        
 
-        // Llamar api de php con todos los datos, habrá otra validación desde 
-    } 
+
+            console.log(datosCompra);
+            console.log("Datos enviados:", JSON.stringify(datosCompra, null, 2));
 
 
-    const datosCompra = {
-        idCliente: user?.id, // ID ficticio de 10 dígitos
-        direccion: "123 Calle Falsa",
-        codigo: "12345",
-        pais: "Ficticia",
-        telefono: "099612953",
-        ciudad: "Ciudad Falsa",
-        nombre: "Juan",
-        apellido: "Pérez",
-        email: "juan.perez@example.com",
-        tipo: "alquiler", // Cambiado a "alquiler"
-        idVehiculo: 1, // ID del vehículo
-        subtotal: 25000,
-        tax: 2500,
-        total: 27500
-    };
-    
-    // Ejemplo de cómo utilizar los datos
-    console.log(datosCompra);
-    
-
-    realizarCompra(datosCompra);
-
+            
+            const realizarCompra = async (datosCompra) => {
+                const res = await fetch(`${PAGE_URL}/comprar/crear`, {
+                    method: "POST",
+                    body: JSON.stringify(datosCompra)
+                }).then(res => res.text());
+                
+                console.log(res);
+            }
+            realizarCompra(datosCompra);
+        } 
 }
 
-const realizarCompra = async (datosCompra) => {
-    const res = await fetch(`${PAGE_URL}/comprar/crear`, {
-        method: "POST",
-        body: JSON.stringify(datosCompra)
-    }).then(res => res.text());
-
-    console.log(res);
-}

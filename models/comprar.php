@@ -87,6 +87,10 @@ class Comprar
             $fechaInicio = $data['fechaInicio'];
             $fechaFin = $data["fechaFin"];
 
+            $sql = "INSERT INTO alquiler (idCliente, direccion, codigo, pais, telefono, ciudad, nombre, apellido, email, idVehiculo, subtotal, tax, total, fechaInicio)";
+
+            $id = $this->db->save($sql);
+
             if(!$this->validarFechas($fechaInicio, $fechaFin)) {
                 echo json_encode(["error" => true, "", "message" => "Ha ocurrido en la fecha"]);
                 exit;

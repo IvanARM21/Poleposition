@@ -25,6 +25,7 @@
                     </th>
                     <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Km</th>
                     <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Año</th>
+                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Stock</th>
                     <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Acciones
                     </th>
                 </tr>
@@ -50,6 +51,8 @@
                         </td>
                         <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $vehiculo->kilometraje; ?></td>
                         <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $vehiculo->año ?></td>
+                        <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium"><?php echo $vehiculo->stock ?></td>
+
                         <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">
                             <div class="flex gap-5 items-center">
                                 <button type="button" id="<?php echo $vehiculo->id ?>" name="editBtn"
