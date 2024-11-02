@@ -233,8 +233,6 @@ const validateInput = (event) => {
 
     const user = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
     if (isValid) {
-
-
         // Obtener datos de localstorage
         const vehicle = JSON.parse(localStorage.getItem("vehicle"));
         const datosCompra = {
@@ -253,25 +251,18 @@ const validateInput = (event) => {
             tax: vehicle.tax,
             total: vehicle.total,
             fechaCompra: new Date().toISOString().split('T')[0]
-            };
-        
-        
-
-
-            console.log(datosCompra);
-            console.log("Datos enviados:", JSON.stringify(datosCompra, null, 2));
-
-
-            
-            const realizarCompra = async (datosCompra) => {
-                const res = await fetch(`${PAGE_URL}/comprar/crear`, {
-                    method: "POST",
-                    body: JSON.stringify(datosCompra)
-                }).then(res => res.text());
-                
-                console.log(res);
-            }
+        };
             realizarCompra(datosCompra);
+            
         } 
+}
+
+const realizarCompra = async (datosCompra) => {
+    const res = await fetch(`${PAGE_URL}/comprar/crear`, {
+        method: "POST",
+        body: JSON.stringify(datosCompra)
+    }).then(res => res.text());
+    
+    console.log(res);
 }
 

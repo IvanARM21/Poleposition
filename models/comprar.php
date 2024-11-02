@@ -54,7 +54,8 @@ class Comprar
         ]);
     }
 
-    public function create() {
+    public function create()
+    {
         header('Content-Type: application/json');
 
         $rawData = file_get_contents('php://input');
@@ -62,7 +63,7 @@ class Comprar
 
         $result = $this->validateInput($data);
 
-        if(!$result) {
+        if (!$result) {
             echo json_encode(["error" => true, "", "message" => "Ha ocurrido un error validando los datos."]);
             exit;
         }
@@ -80,9 +81,11 @@ class Comprar
         $subtotal = $data['subtotal'];
         $tax = $data['tax'];
         $total = $data['total'];
-        
+        $fechaCompra = $data['fechaCompra'];
 
-        if($tipo === "alquiler") {
+        echo $fechaCompra;
+
+        if ($tipo === "alquiler") {
             // Guardamos tabla de alquileres
             $fechaInicio = $data['fechaInicio'];
             $fechaFin = $data["fechaFin"];
@@ -91,19 +94,19 @@ class Comprar
 
             $id = $this->db->save($sql);
 
-            if(!$this->validarFechas($fechaInicio, $fechaFin)) {
+            if (!$this->validarFechas($fechaInicio, $fechaFin)) {
                 echo json_encode(["error" => true, "", "message" => "Ha ocurrido en la fecha"]);
                 exit;
             }
 
         } else {
             // Guardado tabla de compra
-            $sql = "INSERT INTO compra (idCliente, direccion, codigo, pais, telefono, ciudad, nombre, apellido, email, idVehiculo, subtotal, tax, total)
-            VALUES ($idCliente, '$direccion', '$codigo', '$pais', '$telefono', '$ciudad', '$nombre', '$apellido', '$email', $idVehiculo, $subtotal, $tax, $total)";
-            
+            $sql = "INSERT INTO compra (idCliente, direccion, codigo, pais, telefono, ciudad, nombre, apellido, email, idVehiculo, subtotal, tax, total, fechaCompra)
+            VALUES ($idCliente, '$direccion', '$codigo', '$pais', '$telefono', '$ciudad', '$nombre', '$apellido', '$email', $idVehiculo, $subtotal, $tax, $total, '$fechaCompra')";
+
             $id = $this->db->save($sql);
 
-            if($id) {
+            if ($id) {
                 echo json_encode(["error" => false, "", "message" => "Se ha realizado correctamente la compra"]);
             } else {
                 echo json_encode(["error" => true, "", "message" => "Ha ocurrido un error al realizar la compra"]);
@@ -112,88 +115,91 @@ class Comprar
         exit;
     }
 
-    function limpiarDato($dato) {
+    function limpiarDato($dato)
+    {
         return htmlspecialchars(trim($dato));
     }
 
-    function validateInput($data) {
+    function validateInput($data)
+    {
         // if (empty($data['idCliente']) || !preg_match("/^\d{10}$/", $data['idCliente'])) {
         //     return false; 
         // }
-    
+
         $data['direccion'] = $this->limpiarDato($data['direccion']);
         if (empty($data['direccion'])) {
-            return false; 
+            return false;
         }
-    
+
         $data['codigo'] = $this->limpiarDato($data['codigo']);
         if (empty($data['codigo']) || !preg_match("/^\d{5}$/", $data['codigo'])) {
-            return false; 
+            return false;
         }
-    
+
         $data['pais'] = $this->limpiarDato($data['pais']);
         if (empty($data['pais'])) {
-            return false; 
+            return false;
         }
-    
+
         $data['telefono'] = $this->limpiarDato($data['telefono']);
         if (empty($data['telefono']) || !preg_match("/^\d{9}$/", $data['telefono'])) {
-            return false; 
+            return false;
         }
-    
+
         $data['ciudad'] = $this->limpiarDato($data['ciudad']);
         if (empty($data['ciudad'])) {
-            return false; 
+            return false;
         }
-    
+
         $data['nombre'] = $this->limpiarDato($data['nombre']);
         if (empty($data['nombre'])) {
-            return false; 
+            return false;
         }
-    
+
         $data['apellido'] = $this->limpiarDato($data['apellido']);
         if (empty($data['apellido'])) {
-            return false; 
+            return false;
         }
-    
+
         $data['email'] = $this->limpiarDato($data['email']);
         if (empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            return false; 
+            return false;
         }
-    
+
         $data['tipo'] = $this->limpiarDato($data['tipo']);
         if (empty($data['tipo'])) {
-            return false; 
+            return false;
         }
-    
-        $data['idVehiculo'] = isset($data['idVehiculo']) ? (int)$data['idVehiculo'] : null; 
+
+        $data['idVehiculo'] = isset($data['idVehiculo']) ? (int) $data['idVehiculo'] : null;
         if (empty($data['idVehiculo'])) {
-            return false; 
+            return false;
         }
-    
+
         if (!isset($data['subtotal']) || $data['subtotal'] <= 0) {
-            return false; 
+            return false;
         }
-    
+
         if (!isset($data['tax']) || $data['tax'] < 0) {
-            return false; 
+            return false;
         }
-    
+
         if (!isset($data['total']) || $data['total'] <= 0) {
-            return false; 
+            return false;
         }
-    
-        return true; 
+
+        return true;
     }
-    
-    function validarFechas($fechaInicio, $fechaFin) {
+
+    function validarFechas($fechaInicio, $fechaFin)
+    {
         $inicio = DateTime::createFromFormat('Y-m-d', $fechaInicio);
         $fin = DateTime::createFromFormat('Y-m-d', $fechaFin);
-    
+
         if (!$inicio || !$fin) {
-            return false; 
+            return false;
         }
-    
+
         // Comparar las fechas
         return $inicio < $fin;
     }
