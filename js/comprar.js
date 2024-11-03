@@ -20,12 +20,53 @@ const totalElement = document.getElementById('total');
 
 const fechaIncio = document.getElementById('fechaInicio');
 const fechaFin = document.getElementById('fechaFin');
+const parentFromParent = fechaIncio.parentElement.parentElement; // Para mostrar error y que se vea bien en el Fecha inciio - Fecha fin
 
 
+const calculateDifferenceDays = (startDateFormatted, endDateFormatted) => {
+    if (!startDateFormatted || !endDateFormatted) return 0;
+
+    const startDate = new Date(startDateFormatted);
+    const endDate = new Date(endDateFormatted);
+    const today = new Date();
+    
+    // if (startDate.valueOf() < today.valueOf() || endDate.valueOf() < today.valueOf()) {
+    //     showErrorDate(parentFromParent, "Las fechas seleccionadas no pueden ser anteriores a la fecha actual.");
+    //     return 0;
+    // }
+
+    // if (endDate.valueOf() < startDate.valueOf()) {
+    //     showErrorDate(parentFromParent, "La fecha de finalización no puede ser anterior a la fecha de inicio.");
+    //     return 0;
+    // }
+
+    const diffMilliseconds = endDate - startDate;
+    const diffDays = diffMilliseconds / (1000 * 60 * 60 * 24);
+    return diffDays;
+}
 export const loadBuy = () => {
     btnBuy?.addEventListener("click", loadVehicle);
     btnRent?.addEventListener("click", loadVehicle);
     compraForm?.addEventListener("submit", validateInput);
+
+    fechaIncio?.addEventListener("change", (e) => {
+        const vehicle = JSON.parse(localStorage.getItem("vehicle"));
+
+        
+        const value = e.target.value;
+        const difference = calculateDifferenceDays(value ,fechaIncio.value );
+        if(difference <= 0) loadPrices(vehicle.tipo, vehicle.precio, difference);
+    });
+    fechaFin?.addEventListener("change", (e) => {
+        const vehicle = JSON.parse(localStorage.getItem("vehicle"));
+        const value = e.target.value;
+        const difference = calculateDifferenceDays(fechaIncio.value ,value);
+        if(difference <= 0) loadPrices(vehicle.tipo, vehicle.precio, difference);
+    });
+}
+
+const showErrorDate = (container, message) => {
+    container.insertAdjacentHTML('beforeend', `<div class="col-span-2 text-red-600 flex gap-2 items-center text-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-h-4 min-w-4 size-4 text-red-600"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" /></svg> <p>${message}</p></div>`);
 }
 
 const loadVehicle = async (e) => {
@@ -38,9 +79,7 @@ const loadVehicle = async (e) => {
     if(vehicle[0]) {
         const { precio } = vehicleData;
 
-        const calcData = e.target.name === "comprar" ? saveBuyData(+precio) : saveRentData(+precio);
-
-        localStorage.setItem("vehicle", JSON.stringify({...vehicleData, ...calcData}));
+        localStorage.setItem("vehicle", JSON.stringify(vehicleData));
         window.location.href = "/comprar";
     }
 }
@@ -56,18 +95,33 @@ const saveBuyData = (precio) => {
     return data;
 }
 
-const saveRentData = (precio) => {
+const loadPrices = (type, precio, dias) => {
+    const { subtotal, tax, total } = type === "comprar" ? saveBuyData(+precio) : saveRentData(+precio, +dias);
+
+        console.log(subtotal)
+        console.log(tax)
+        console.log(total)
+
+    priceElement.textContent = priceFormatted(precio); 
+    subtotalElement.textContent = priceFormatted(subtotal); 
+    taxElement.textContent = priceFormatted(tax);
+    totalElement.textContent = priceFormatted(total);
+
+}
+
+const saveRentData = (precio, dias) => {
     const data = {};
-    const subtotal = (precio / 2000) + 25;
+    const subtotal = (precio / 2000 + 25) * dias; 
 
     data.tipo = "alquiler";
     data.subtotal = subtotal;
     const tax = subtotal * TAX;
-    data.tax = tax
+    data.tax = tax;
     data.total = (subtotal + tax).toFixed(2);
+    data.dias = dias;
+    
     return data;
-}
-
+};
 export const loadCheckout = () => {
     const vehicle = JSON.parse(localStorage.getItem('vehicle'));
     if(vehicle) {
@@ -78,7 +132,7 @@ export const loadCheckout = () => {
     
 }
 const loadVehicleInfo = (vehicle) => {
-    const { imagenes, marca, modelo, año, kilometraje, tipo, precio, subtotal, tax, total } = vehicle;
+    const { imagenes, marca, modelo, año, kilometraje, tipo, precio } = vehicle;
     
     // Verificamos si todos los elementos existen antes de continuar
     if (imgElement && titleElement && yearElement && kmElement && typeElement && priceElement && subtotalElement && taxElement && totalElement && confirmBtn) {
@@ -95,27 +149,25 @@ const loadVehicleInfo = (vehicle) => {
             containerFechaInicio.classList.add("hidden");
             containerFechaFin.classList.add("hidden")
             typeElement.classList.add("bg-green-50", "text-green-600");
+
+            loadPrices(tipo, precio, calculateDifferenceDays());
+
         } else {
             const date = new Date()
             const dateFormattedToday = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`;
             const dateFormattedNextDay = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()+1 < 10 ? `0${date.getDate()+1}` : date.getDate()+1}`;
             fechaIncio.value = dateFormattedToday;
             fechaFin.value = dateFormattedNextDay;
+
+            loadPrices(tipo, precio, calculateDifferenceDays(dateFormattedToday, dateFormattedNextDay));
             typeElement.classList.add("bg-blue-50", "text-blue-600");
         }
-
-        priceElement.textContent = priceFormatted(precio); 
-        subtotalElement.textContent = priceFormatted(subtotal); 
-
-        taxElement.textContent = priceFormatted(tax);
-        totalElement.textContent = priceFormatted(total);
-
-
 
         // Cambiamos el texto del botón de confirmación según el tipo
         confirmBtn.textContent = tipo === "compra" ? "Confirmar compra" : "Confirmar alquiler";
     } 
 };
+
 
 
 const validateInput = (event) => {
@@ -250,7 +302,9 @@ const validateInput = (event) => {
             subtotal: vehicle.subtotal,
             tax: vehicle.tax,
             total: vehicle.total,
-            fechaCompra: new Date().toISOString().split('T')[0]
+            fechaCompra: new Date().toISOString().split('T')[0],
+            fechaIncio: inputs.fechaIncio.value,
+            fechaFin: inputs.fechaFin.value,
         };
             realizarCompra(datosCompra);
             
