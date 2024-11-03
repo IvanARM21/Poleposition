@@ -16,7 +16,6 @@
     @apply w-full max-w-3xl flex flex-col gap-5 p-5 sm:p-10 rounded-xl border;
   }
 
-  
   .centrarDiv {
     @apply flex items-center justify-center min-h-screen;
   }
@@ -31,6 +30,6 @@
     @apply flex flex-col gap-2;
   }
   .submit {
-    @apply mt-5 hover:bg-white hover:text-red-600 hover:border-red-600 cursor-pointer border-2 border-red-600 bg-red-600 p-3 text-white font-bold transition-all duration-300 rounded-xl;
+    @apply mt-5 hover:bg-white hover:text-red-600 hover:border-red-600 cursor-pointer border-2 border-red-600 bg-red-600 px-4 py-2 text-white font-bold transition-all duration-300 rounded-xl;
   }
 }

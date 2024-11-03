@@ -6,6 +6,7 @@ import { loadVehicles } from './catalogo.js';
 import { loadBuy, loadCheckout } from './comprar.js';
 import { loadInput } from './search.js';
 import { loadPerfilEvents } from './modalPerfil.js';
+import { loadReviewModal } from './review.js';
 
 addEventListener("DOMContentLoaded", () => {
     loadPerfilButtons();
@@ -18,4 +19,5 @@ addEventListener("DOMContentLoaded", () => {
     loadCheckout();
 
     loadPerfilEvents();
+    loadReviewModal();
 });

@@ -3,7 +3,7 @@ import { priceFormatted } from "./helpers.js";
 
 const compraForm = document.getElementById("compraForm")
 
-const btnBuy = document.getElementsByName("comprar")[0];
+const btnBuy = document.getElementsByName("compra")[0];
 const btnRent = document.getElementsByName("alquilar")[0];
 
 const confirmBtn = document.getElementById("confirmBtn");
@@ -20,7 +20,7 @@ const totalElement = document.getElementById('total');
 
 const fechaIncio = document.getElementById('fechaInicio');
 const fechaFin = document.getElementById('fechaFin');
-const parentFromParent = fechaIncio.parentElement.parentElement; // Para mostrar error y que se vea bien en el Fecha inciio - Fecha fin
+const parentFromParent = fechaIncio?.parentElement?.parentElement; // Para mostrar error y que se vea bien en el Fecha inciio - Fecha fin
 
 
 const calculateDifferenceDays = (startDateFormatted, endDateFormatted) => {
@@ -52,34 +52,49 @@ export const loadBuy = () => {
     fechaIncio?.addEventListener("change", (e) => {
         const vehicle = JSON.parse(localStorage.getItem("vehicle"));
 
-        
         const value = e.target.value;
-        const difference = calculateDifferenceDays(value ,fechaIncio.value );
-        if(difference <= 0) loadPrices(vehicle.tipo, vehicle.precio, difference);
+        const difference = calculateDifferenceDays(value ,fechaFin.value );
+        if(difference > 0) {
+            loadPrices("alquiler", +vehicle.precio, difference);
+            return
+        }
+        showErrorDate(parentFromParent, "Porfavor verifica las fechas")
     });
     fechaFin?.addEventListener("change", (e) => {
         const vehicle = JSON.parse(localStorage.getItem("vehicle"));
+
         const value = e.target.value;
         const difference = calculateDifferenceDays(fechaIncio.value ,value);
-        if(difference <= 0) loadPrices(vehicle.tipo, vehicle.precio, difference);
+        if(difference > 0) {
+            loadPrices("alquiler", +vehicle.precio, difference);
+            return
+        }
+        showErrorDate(parentFromParent, "Porfavor verifica las fechas")
     });
 }
 
 const showErrorDate = (container, message) => {
-    container.insertAdjacentHTML('beforeend', `<div class="col-span-2 text-red-600 flex gap-2 items-center text-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-h-4 min-w-4 size-4 text-red-600"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" /></svg> <p>${message}</p></div>`);
+    document.querySelectorAll(".error-message").forEach(el => el.remove());
+
+    container.insertAdjacentHTML('beforeend', `<div class="error-message col-span-2 text-red-600 flex gap-2 items-center text-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
+</svg>
+<p>${message}</p></div>`);
 }
 
 const loadVehicle = async (e) => {
     const id = e.target.id;
+    const tipo = e.target.name;
 
     const { vehicle } = await fetch(`${PAGE_URL}/productos/${id}`).then(res => res.json());
 
     const vehicleData = vehicle[0];
 
+    console.log(vehicleData);
     if(vehicle[0]) {
         const { precio } = vehicleData;
 
-        localStorage.setItem("vehicle", JSON.stringify(vehicleData));
+        localStorage.setItem("vehicle", JSON.stringify({...vehicleData, tipo}));
         window.location.href = "/comprar";
     }
 }
@@ -96,20 +111,20 @@ const saveBuyData = (precio) => {
 }
 
 const loadPrices = (type, precio, dias) => {
-    const { subtotal, tax, total } = type === "comprar" ? saveBuyData(+precio) : saveRentData(+precio, +dias);
-
-        console.log(subtotal)
-        console.log(tax)
-        console.log(total)
+    const { subtotal, tax, total } = type === "compra" ? saveBuyData(+precio) : saveRentData(+precio, +dias);
 
     priceElement.textContent = priceFormatted(precio); 
     subtotalElement.textContent = priceFormatted(subtotal); 
     taxElement.textContent = priceFormatted(tax);
     totalElement.textContent = priceFormatted(total);
 
+    return { subtotal, tax, total };
 }
 
 const saveRentData = (precio, dias) => {
+    console.log(precio)
+    console.log(dias)
+
     const data = {};
     const subtotal = (precio / 2000 + 25) * dias; 
 
@@ -119,7 +134,7 @@ const saveRentData = (precio, dias) => {
     data.tax = tax;
     data.total = (subtotal + tax).toFixed(2);
     data.dias = dias;
-    
+    console.log(data);
     return data;
 };
 export const loadCheckout = () => {
@@ -133,7 +148,7 @@ export const loadCheckout = () => {
 }
 const loadVehicleInfo = (vehicle) => {
     const { imagenes, marca, modelo, año, kilometraje, tipo, precio } = vehicle;
-    
+
     // Verificamos si todos los elementos existen antes de continuar
     if (imgElement && titleElement && yearElement && kmElement && typeElement && priceElement && subtotalElement && taxElement && totalElement && confirmBtn) {
         imgElement.src = `../../img/uploads/${imagenes.split(",")[0]}`;  
@@ -149,7 +164,6 @@ const loadVehicleInfo = (vehicle) => {
             containerFechaInicio.classList.add("hidden");
             containerFechaFin.classList.add("hidden")
             typeElement.classList.add("bg-green-50", "text-green-600");
-
             loadPrices(tipo, precio, calculateDifferenceDays());
 
         } else {
@@ -181,9 +195,10 @@ const validateInput = (event) => {
         if (!input || !message) return
         const error = document.createElement("div");
         error.classList.add("error-message", "text-red-600", "text-xs", "flex", "gap-1", "items-center");
-        error.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-h-4 min-w-4 size-4">
-<path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" />
-</svg> <p>${message}</p>`
+        error.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
+</svg>
+ <p>${message}</p>`
             ;
         input.classList.add("outline-none", "ring-2", "ring-red-400")
         input.insertAdjacentElement("afterend", error);
@@ -286,7 +301,11 @@ const validateInput = (event) => {
     const user = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
     if (isValid) {
         // Obtener datos de localstorage
+       
+            
+        } 
         const vehicle = JSON.parse(localStorage.getItem("vehicle"));
+        const { subtotal, tax, total } = loadPrices(vehicle.tipo, vehicle.precio, calculateDifferenceDays(fechaIncio?.value, fechaFin?.value));
         const datosCompra = {
             idCliente: user?.id,
             direccion: inputs.direccion.value,
@@ -297,26 +316,45 @@ const validateInput = (event) => {
             nombre: inputs.nombre.value,
             apellido: inputs.apellido.value,
             email: inputs.email.value,
-            tipo: vehicle.tipo, // Esto debería ser "compra" o "alquiler" según lo seleccionado
-            idVehiculo: vehicle.id, // ID del vehículo
-            subtotal: vehicle.subtotal,
-            tax: vehicle.tax,
-            total: vehicle.total,
+            tipo: vehicle.tipo, 
+            idVehiculo: vehicle.id,
+            subtotal: subtotal,
+            tax: tax,
+            total: total,
             fechaCompra: new Date().toISOString().split('T')[0],
-            fechaIncio: inputs.fechaIncio.value,
-            fechaFin: inputs.fechaFin.value,
+            fechaInicio: fechaIncio?.value,
+            fechaFin: fechaFin?.value,
         };
-            realizarCompra(datosCompra);
-            
-        } 
+
+        console.log(datosCompra);
+        realizarCompra(datosCompra);
 }
 
+
 const realizarCompra = async (datosCompra) => {
-    const res = await fetch(`${PAGE_URL}/comprar/crear`, {
+    const resp = await fetch(`${PAGE_URL}/comprar/crear`, {
         method: "POST",
         body: JSON.stringify(datosCompra)
     }).then(res => res.text());
-    
-    console.log(res);
+
+    console.log(resp);
+
+    if (resp.error) {
+        Swal.fire({
+            title: 'Error!',
+            text: resp.message || 'Ha ocurrido un error',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+    } else {
+        Swal.fire({
+            title: 'Éxito!',
+            text: `${datosCompra.tipo === "compra" ? "La compra se realizo correctamente" : "El alquier se realizo correctamente"}`,
+            icon: 'success',
+            confirmButtonText: 'Ok',
+        }).then(() => {
+            window.location.href = "/compra-confirmada";
+        });
+    }
 }
 

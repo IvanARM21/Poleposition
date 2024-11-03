@@ -96,7 +96,7 @@
             <div class="flex gap-4 mt-auto sm:pt-10">
                 <button name="alquilar" id="<?php echo $vehiculo->id ?>"
                     class="w-fit px-6  text-red-600 py-2 rounded-xl bg-red-50 transition hover:scale-105 ">Alquilar</button>
-                <button name="comprar" id="<?php echo $vehiculo->id ?>"
+                <button name="compra" id="<?php echo $vehiculo->id ?>"
                     class="w-fit px-6 bg-red-600 text-white py-2 rounded-xl  transition-all hover:scale-105">Comprar</button>
 
             </div>

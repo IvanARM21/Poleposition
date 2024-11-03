@@ -46,7 +46,7 @@
         <div class="w-full" id="perfilForm">
             <form method="POST" action="" class="flex flex-col space-y-4 w-full">
                 <div class="flex flex-col gap-y-3 formulario">
-                    <h2 class="text-gray-800 font-black text-xl">Información Personal:</h2>
+                    <h2 class="text-gray-800 font-bold text-xl">Información Personal:</h2>
 
                     <?php if (isset($cuentas['nombreCompleto'])): ?>
                         <div class="campo">
@@ -75,7 +75,7 @@
                     <?php endif; ?>
 
 
-                    <input type="submit" name="enviarDatosPerfil" class="submit" value="Actualizar Perfil">
+                    <input type="submit" name="enviarDatosPerfil" class="submit w-fit" value="Actualizar Perfil">
                 </div>
             </form>
         </div>
@@ -84,7 +84,7 @@
         <div class="hidden w-full" id="seguridadForm">
             <div class="items-center p-5 sm:p-10 border rounded-xl h-full">
 
-                <h2 class="text-gray-800 font-black text-xl">Seguridad:</h2>
+                <h2 class="text-gray-800 font-bold text-xl">Seguridad:</h2>
 
 
                 <div class="pt-4"></div>
@@ -92,7 +92,7 @@
                 <!-- cambiar contraseña -->
 
                 <button type="button" id="cambiar-contraseña"
-                    class="font-bold text-white p-4 bg-red-600 rounded-xl border-2 transition-colors duration-300 hover:bg-white hover:text-black hover:border-red-600">
+                    class="bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-xl hover:bg-gray-300 transition-colors duration-300 mr-4">
                     Cambiar Contraseña
                 </button>
 
@@ -161,7 +161,7 @@
                 <!-- boton eliminar cuenta -->
 
                 <button type="button" id="eliminar-cuenta"
-                    class="font-bold text-white p-4 bg-red-600 rounded-xl border-2 transition-colors duration-300 hover:bg-white hover:text-black hover:border-red-600">
+                    class="bg-red-600 text-white font-medium py-2 px-4 rounded-xl hover:bg-red-700 transition-colors duration-300">
                     Eliminar Cuenta
                 </button>
 

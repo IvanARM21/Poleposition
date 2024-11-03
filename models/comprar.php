@@ -64,7 +64,7 @@ class Comprar
         $result = $this->validateInput($data);
 
         if (!$result) {
-            echo json_encode(["error" => true, "", "message" => "Ha ocurrido un error validando los datos."]);
+            echo json_encode(["error" => true, "message" => "Ha ocurrido un error validando los datos."]);
             exit;
         }
         $idCliente = $data['idCliente'];
@@ -83,20 +83,22 @@ class Comprar
         $total = $data['total'];
         $fechaCompra = $data['fechaCompra'];
 
-        echo $fechaCompra;
+        if ($tipo === "alquilar") {
 
-        if ($tipo === "alquiler") {
-            // Guardamos tabla de alquileres
             $fechaInicio = $data['fechaInicio'];
-            $fechaFin = $data["fechaFin"];
+            $fechaFin = $data['fechaInicio'];
 
-            $sql = "INSERT INTO alquiler (idCliente, direccion, codigo, pais, telefono, ciudad, nombre, apellido, email, idVehiculo, subtotal, tax, total, fechaInicio)";
+            $sql = "INSERT INTO alquiler 
+                (idCliente, direccion, codigo, pais, telefono, ciudad, nombre, apellido, email, idVehiculo, subtotal, tax, total, fechaCompra, fecha_inicio, fecha_fin)
+                VALUES 
+                ($idCliente, '$direccion', '$codigo', '$pais', '$telefono', '$ciudad', '$nombre', '$apellido', '$email', $idVehiculo, $subtotal, $tax, $total, '$fechaCompra', '$fechaInicio', '$fechaFin')";
 
             $id = $this->db->save($sql);
 
-            if (!$this->validarFechas($fechaInicio, $fechaFin)) {
-                echo json_encode(["error" => true, "", "message" => "Ha ocurrido en la fecha"]);
-                exit;
+            if ($id) {
+                echo json_encode(["error" => false, "message" => "Se ha realizado correctamente la compra"]);
+            } else {
+                echo json_encode(["error" => true, "message" => "Ha ocurrido un error al realizar la compra"]);
             }
 
         } else {
@@ -107,9 +109,9 @@ class Comprar
             $id = $this->db->save($sql);
 
             if ($id) {
-                echo json_encode(["error" => false, "", "message" => "Se ha realizado correctamente la compra"]);
+                echo json_encode(["error" => false, "message" => "Se ha realizado correctamente la compra"]);
             } else {
-                echo json_encode(["error" => true, "", "message" => "Ha ocurrido un error al realizar la compra"]);
+                echo json_encode(["error" => true, "message" => "Ha ocurrido un error al realizar la compra"]);
             }
         }
         exit;
@@ -122,10 +124,6 @@ class Comprar
 
     function validateInput($data)
     {
-        // if (empty($data['idCliente']) || !preg_match("/^\d{10}$/", $data['idCliente'])) {
-        //     return false; 
-        // }
-
         $data['direccion'] = $this->limpiarDato($data['direccion']);
         if (empty($data['direccion'])) {
             return false;
@@ -171,6 +169,33 @@ class Comprar
             return false;
         }
 
+        if ($data['tipo'] === "alquiler") {
+            // Validar fechas
+            $fechaInicio = isset($data['fechaInicio']) ? $data['fechaInicio'] : null;
+            $fechaFin = isset($data['fechaFin']) ? $data['fechaFin'] : null;
+
+            if (!$fechaInicio || !$fechaFin) {
+                return false;
+            }
+
+            // Convertir fechas a objetos DateTime
+            $inicio = DateTime::createFromFormat('Y-m-d', $fechaInicio);
+            $fin = DateTime::createFromFormat('Y-m-d', $fechaFin);
+            $hoy = new DateTime();
+
+            if (!$inicio || !$fin) {
+                return false;
+            }
+
+            if ($inicio < $hoy) {
+                return false;
+            }
+
+            if ($fin < $inicio) {
+                return false;
+            }
+        }
+
         $data['idVehiculo'] = isset($data['idVehiculo']) ? (int) $data['idVehiculo'] : null;
         if (empty($data['idVehiculo'])) {
             return false;
@@ -191,16 +216,4 @@ class Comprar
         return true;
     }
 
-    function validarFechas($fechaInicio, $fechaFin)
-    {
-        $inicio = DateTime::createFromFormat('Y-m-d', $fechaInicio);
-        $fin = DateTime::createFromFormat('Y-m-d', $fechaFin);
-
-        if (!$inicio || !$fin) {
-            return false;
-        }
-
-        // Comparar las fechas
-        return $inicio < $fin;
-    }
 }
