@@ -19,6 +19,18 @@ class Usuarios
     public function index()
     {
 
+        if (!isset($_COOKIE['usuario'])) {
+            header("Location: /");
+            exit();
+        }
+        
+        $usuarioDatos = json_decode($_COOKIE['usuario'], true);
+        
+        if (empty($usuarioDatos['admin']) || !$usuarioDatos['admin']) {
+            header("Location: /");
+            exit();
+        }
+
         $this->title = "Dashboard | Usuarios";
 
         $sql = "SELECT c.*, 
