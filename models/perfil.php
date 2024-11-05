@@ -30,29 +30,78 @@ if (!$cuentas) {
 }
     
         $sql = "SELECT
-            cuentas.nombreCompleto AS Nombre,
-            vehiculo.marca AS Marca,
-            vehiculo.modelo AS Modelo,
-            vehiculo.color AS Color,
-            vehiculo.precio AS Precio,
-            vehiculo.kilometraje AS Kilometraje,
-            vehiculo.año AS Año,
-            CASE
-                WHEN compra.id IS NOT NULL THEN 'Compra'
-                WHEN alquiler.id IS NOT NULL THEN 'Alquiler'
-                ELSE 'Desconocido'
-            END AS Tipo,
-            CASE
-                WHEN compra.id IS NOT NULL THEN compra.fechaCompra
-                WHEN alquiler.id IS NOT NULL THEN alquiler.fecha_inicio
-            END AS Fecha
-        FROM
-            vehiculo
-        LEFT JOIN compra ON vehiculo.id = compra.idVehiculo AND compra.idCliente = $usuarioId
-        LEFT JOIN alquiler ON vehiculo.id = alquiler.idVehiculo AND alquiler.idCliente = $usuarioId
-        LEFT JOIN cuentas ON cuentas.id = $usuarioId
-        WHERE
-            compra.id IS NOT NULL OR alquiler.id IS NOT NULL";
+    cuentas.nombreCompleto AS Nombre,
+    vehiculo.marca AS Marca,
+    vehiculo.modelo AS Modelo,
+    vehiculo.color AS Color,
+    vehiculo.precio AS PrecioOriginal,
+    vehiculo.kilometraje AS Kilometraje,
+    vehiculo.año AS Año,
+    CASE
+        WHEN compra.id IS NOT NULL THEN 'Compra'
+        WHEN alquiler.id IS NOT NULL THEN 'Alquiler'
+        ELSE 'Desconocido'
+    END AS Tipo,
+    CASE
+        WHEN compra.id IS NOT NULL THEN compra.fechaCompra
+        WHEN alquiler.id IS NOT NULL THEN alquiler.fecha_inicio
+    END AS Fecha,
+    CASE
+        WHEN compra.id IS NOT NULL THEN compra.direccion
+        WHEN alquiler.id IS NOT NULL THEN alquiler.direccion
+    END AS Direccion,
+    CASE
+        WHEN compra.id IS NOT NULL THEN compra.codigo
+        WHEN alquiler.id IS NOT NULL THEN alquiler.codigo
+    END AS Codigo,
+    CASE
+        WHEN compra.id IS NOT NULL THEN compra.pais
+        WHEN alquiler.id IS NOT NULL THEN alquiler.pais
+    END AS Pais,
+    CASE
+        WHEN compra.id IS NOT NULL THEN compra.telefono
+        WHEN alquiler.id IS NOT NULL THEN alquiler.telefono
+    END AS Telefono,
+    CASE
+        WHEN compra.id IS NOT NULL THEN compra.ciudad
+        WHEN alquiler.id IS NOT NULL THEN alquiler.ciudad
+    END AS Ciudad,
+    CASE
+        WHEN compra.id IS NOT NULL THEN compra.nombre
+        WHEN alquiler.id IS NOT NULL THEN alquiler.nombre
+    END AS Nombre_Cliente,
+    CASE
+        WHEN compra.id IS NOT NULL THEN compra.apellido
+        WHEN alquiler.id IS NOT NULL THEN alquiler.apellido
+    END AS Apellido_Cliente,
+    CASE
+        WHEN compra.id IS NOT NULL THEN compra.subtotal
+        WHEN alquiler.id IS NOT NULL THEN alquiler.subtotal
+    END AS Subtotal,
+    CASE
+        WHEN compra.id IS NOT NULL THEN compra.tax
+        WHEN alquiler.id IS NOT NULL THEN alquiler.tax
+    END AS Tax,
+    CASE
+        WHEN compra.id IS NOT NULL THEN compra.total
+        WHEN alquiler.id IS NOT NULL THEN alquiler.total
+    END AS Total,
+    CASE
+        WHEN compra.id IS NOT NULL THEN vehiculo.precio
+        WHEN alquiler.id IS NOT NULL THEN DATEDIFF(alquiler.fecha_fin, alquiler.fecha_inicio) * vehiculo.precio
+    END AS Precio,
+    CASE
+        WHEN compra.id IS NOT NULL THEN compra.email
+        WHEN alquiler.id IS NOT NULL THEN alquiler.email
+    END AS Email
+FROM
+    vehiculo
+LEFT JOIN compra ON vehiculo.id = compra.idVehiculo AND compra.idCliente = $usuarioId
+LEFT JOIN alquiler ON vehiculo.id = alquiler.idVehiculo AND alquiler.idCliente = $usuarioId
+LEFT JOIN cuentas ON cuentas.id = $usuarioId
+WHERE
+    compra.id IS NOT NULL OR alquiler.id IS NOT NULL;
+";
         
         $compras = $this->db->find($sql);
         

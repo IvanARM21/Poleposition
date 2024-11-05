@@ -211,7 +211,7 @@
                                         <?php echo $compra->Color; ?>
                                     </td>
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">USD
-                                        <?= number_format($compra->Precio, 2) ?>
+                                        <?= number_format($compra->Total, 2) ?>
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
                                         <?php echo $compra->Kilometraje; ?> Km
                                     </td>
