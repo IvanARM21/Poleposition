@@ -1,7 +1,7 @@
 <?php
 
-require('../fpdf186/fpdf.php');
-include_once('../db.class.php');
+require('fpdf186/fpdf.php');
+include_once('db.class.php');
 
 class GenerarFactura
 {
@@ -12,14 +12,13 @@ class GenerarFactura
         $this->db = new DB();
     }
 
-    public function generar()
+    public function update($id)
     {
-        if (!isset($_GET['compraId'])) {
+        if (!$id) {
             die("Error: Se requiere un ID de compra.");
         }
 
-        $compraId = (int)$_GET['compraId'];
-        $this->crearFactura($compraId);
+        $this->crearFactura($id);
     }
 
     private function crearFactura($compraId)
@@ -28,14 +27,14 @@ class GenerarFactura
     $pdf->AddPage();
 
     // Cargar el logo
-    $pdf->Image('../img/logo.png', 10, 10, 30);
+    $pdf->Image('img/logo.png', 10, 10, 30);
 
     // Obtener la fecha de compra desde la base de datos
     $compra = $this->db->findOne("SELECT * FROM compra WHERE id = $compraId");
     if (!$compra) {
         die("Error: No se encontró la compra con ID $compraId.");
     }
-    $fechaCompra = $compra->fechaCompra;
+    $comprafechaCompra = $compra->fechaCompra;
 
     // Generar un número de factura aleatorio
     $numeroFactura = random_int(10000000, 99999999);
@@ -62,7 +61,7 @@ class GenerarFactura
     $pdf->SetXY(50, 20);
     $pdf->SetXY(150, 10);
     $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(50, 10, utf8_decode('Fecha: ' . $fechaCompra), 0, 0, 'R');
+    $pdf->Cell(50, 10, utf8_decode('Fecha: ' . $compra->fechaCompra), 0, 0, 'R');
     $pdf->SetXY(150, 20);
     $pdf->Cell(50, 10, utf8_decode('Número de Factura: ' . $numeroFactura), 0, 0, 'R');
 
@@ -124,7 +123,7 @@ class GenerarFactura
 
 }
 
-$factura = new GenerarFactura();
-$factura->generar();
+// $factura = new GenerarFactura();
+// $factura->update();
 
 ?>

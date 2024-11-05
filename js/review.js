@@ -76,7 +76,6 @@ export const loadReviewModal = () => {
 
         const formData = {
             ...review,
-            // autor: 
         }
     });
 };

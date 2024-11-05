@@ -24,7 +24,9 @@ class Review
 
     public function create()
     {
-
+        header('Content-Type: application/json');
+        
+        echo "Desde create";
     }
 
     public function update($id)
