@@ -29,8 +29,10 @@ if (!$cuentas) {
     return $this->mostrarError('No se encontraron datos del usuario.');
 }
     
-        $sql = "SELECT
+$sql = "SELECT
     cuentas.nombreCompleto AS Nombre,
+    vehiculo.id AS idVehiculo,
+    compra.id AS idCompra,
     vehiculo.marca AS Marca,
     vehiculo.modelo AS Modelo,
     vehiculo.color AS Color,
@@ -40,40 +42,11 @@ if (!$cuentas) {
     CASE
         WHEN compra.id IS NOT NULL THEN 'Compra'
         WHEN alquiler.id IS NOT NULL THEN 'Alquiler'
-        ELSE 'Desconocido'
     END AS Tipo,
     CASE
         WHEN compra.id IS NOT NULL THEN compra.fechaCompra
         WHEN alquiler.id IS NOT NULL THEN alquiler.fecha_inicio
     END AS Fecha,
-    CASE
-        WHEN compra.id IS NOT NULL THEN compra.direccion
-        WHEN alquiler.id IS NOT NULL THEN alquiler.direccion
-    END AS Direccion,
-    CASE
-        WHEN compra.id IS NOT NULL THEN compra.codigo
-        WHEN alquiler.id IS NOT NULL THEN alquiler.codigo
-    END AS Codigo,
-    CASE
-        WHEN compra.id IS NOT NULL THEN compra.pais
-        WHEN alquiler.id IS NOT NULL THEN alquiler.pais
-    END AS Pais,
-    CASE
-        WHEN compra.id IS NOT NULL THEN compra.telefono
-        WHEN alquiler.id IS NOT NULL THEN alquiler.telefono
-    END AS Telefono,
-    CASE
-        WHEN compra.id IS NOT NULL THEN compra.ciudad
-        WHEN alquiler.id IS NOT NULL THEN alquiler.ciudad
-    END AS Ciudad,
-    CASE
-        WHEN compra.id IS NOT NULL THEN compra.nombre
-        WHEN alquiler.id IS NOT NULL THEN alquiler.nombre
-    END AS Nombre_Cliente,
-    CASE
-        WHEN compra.id IS NOT NULL THEN compra.apellido
-        WHEN alquiler.id IS NOT NULL THEN alquiler.apellido
-    END AS Apellido_Cliente,
     CASE
         WHEN compra.id IS NOT NULL THEN compra.subtotal
         WHEN alquiler.id IS NOT NULL THEN alquiler.subtotal
@@ -91,9 +64,9 @@ if (!$cuentas) {
         WHEN alquiler.id IS NOT NULL THEN DATEDIFF(alquiler.fecha_fin, alquiler.fecha_inicio) * vehiculo.precio
     END AS Precio,
     CASE
-        WHEN compra.id IS NOT NULL THEN compra.email
-        WHEN alquiler.id IS NOT NULL THEN alquiler.email
-    END AS Email
+        WHEN alquiler.id IS NOT NULL THEN DATEDIFF(alquiler.fecha_fin, alquiler.fecha_inicio)
+        ELSE NULL
+    END AS Dias_Alquilados
 FROM
     vehiculo
 LEFT JOIN compra ON vehiculo.id = compra.idVehiculo AND compra.idCliente = $usuarioId
@@ -102,6 +75,7 @@ LEFT JOIN cuentas ON cuentas.id = $usuarioId
 WHERE
     compra.id IS NOT NULL OR alquiler.id IS NOT NULL;
 ";
+
         
         $compras = $this->db->find($sql);
         

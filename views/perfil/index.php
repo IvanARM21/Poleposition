@@ -187,6 +187,8 @@
                             <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Año</th>
                             <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Tipo</th>
                             <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Fecha</th>
+                            <!-- <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Dias</th> -->
+
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
@@ -224,6 +226,8 @@
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
                                         <?php echo $compra->Fecha; ?>
                                     </td>
+
+
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
