@@ -23,7 +23,7 @@ export const loadPerfilEvents = () => {
         const pass = { pass: userPass?.value };
 
         const user = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
-
+        3
         if (user) {
             const res = await fetch(`${PAGE_URL}/cuentas/eliminar/${user.id}`, {
                 method: "POST",
