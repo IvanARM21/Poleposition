@@ -93,7 +93,7 @@
                 </div>
                 </p>
             </div>
-            <div class="flex gap-4 mt-auto sm:pt-10">
+            <div class="flex gap-4 mt-auto sm:pt-10 pt-4">
                 <button name="alquilar" id="<?php echo $vehiculo->id ?>"
                     class="w-fit px-6  text-red-600 py-2 rounded-xl bg-red-50 transition hover:scale-105 ">Alquilar</button>
                 <button name="compra" id="<?php echo $vehiculo->id ?>"

@@ -72,8 +72,8 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
         <?php foreach ($vehiculosDestacados as $vehiculo): ?>
             <?php $imagenes = explode(',', $vehiculo->imagenes); ?>
             <div class="border-2 p-4 rounded-lg shadow-md mt-5 transition-transform transform hover:shadow-lg max-w-full sm:max-w-md md:max-w-lg flex flex-col h-full">
-                <a href="/catalogo" class="flex flex-col h-full">
-                    <div class="flex-grow flex flex-col items-center">
+            <a href="/producto/<?= htmlspecialchars($vehiculo->id) ?>" class="flex flex-col h-full">
+            <div class="flex-grow flex flex-col items-center">
                         <img src="../img/uploads/<?= htmlspecialchars($imagenes[0]) ?>"
                              class="w-96 h-96 object-contain transition duration-500 ease-in-out transform hover:scale-102"
                              <?php if (count($imagenes) > 1): ?>
