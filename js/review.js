@@ -1,3 +1,5 @@
+import { PAGE_URL } from "./constants.js";
+
 const starsByName = document.getElementsByName("calificacion");
 const calificacionTexto = document.getElementById("calificacionTexto");
 const modalReseña = document.getElementById("modalReseña");
@@ -16,19 +18,19 @@ const stars = {
 }
 
 const review = {
-    title: "",
-    message: "",
-    qualification: 1,
+    titulo: "",
+    mensaje: "",
+    calificacion: 1,
 };
 
 const isBlur = {
-    title: false,
-    message: false,
+    titulo: false,
+    mensaje: false,
 };
 
-const messages = {
-    title: "El título de la reseña es obligatorio",
-    message: "El mensaje de la reseña es obligatorio",
+const mensajes = {
+    titulo: "El título de la reseña es obligatorio",
+    mensaje: "El mensaje de la reseña es obligatorio",
 };
 
 export const loadReviewModal = () => {
@@ -65,18 +67,28 @@ export const loadReviewModal = () => {
         validateInput(e.currentTarget);
     }));
 
-    reviewForm?.addEventListener("submit", e => {
+    reviewForm?.addEventListener("submit", async e => {
         e.preventDefault();
 
-        const idVehiculo = JSON.stringify(localStorage.getItem("vehicle"))[0]?.id;
-        const compra = JSON.stringify(localStorage.getItem(""))[0];
-        console.log(idVehiculo)
-        console.log(compra)
-        if(!idVehiculo) return 
+        const idVehiculo = JSON.parse(localStorage.getItem("vehicle")).id;
+        const compra = JSON.parse(localStorage.getItem("compra"));
+        const { nombreCompleto, id } = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
+
+        if(!idVehiculo || !nombreCompleto || !id || !compra) {
+            location.href = "/";
+        } 
 
         const formData = {
             ...review,
+            autor: nombreCompleto,
+            idVehiculo,
+            idCliente: id
         }
+
+        await fetch(`${PAGE_URL}/review/crear`, {
+            method: "POST",
+            body: formData
+        })
     });
 };
 
@@ -87,26 +99,26 @@ const validateInput = (input) => {
     if (isBlur[inputId] && valueLength <= 3) {
         showAlertReview(input);
     } else {
-        const prevMessages = input.parentElement.querySelectorAll('.error-message');
-        if (prevMessages.length > 0) {
-            prevMessages.forEach(msg => msg.remove());
+        const prevmensajes = input.parentElement.querySelectorAll('.error-mensaje');
+        if (prevmensajes.length > 0) {
+            prevmensajes.forEach(msg => msg.remove());
         }
     }
 };
 
 const showAlertReview = (input) => {
-    if(!messages[input.id]) return
-    const prevMessages = input.parentElement.querySelectorAll('.error-message');
-    if (prevMessages.length > 0) return
+    if(!mensajes[input.id]) return
+    const prevmensajes = input.parentElement.querySelectorAll('.error-mensaje');
+    if (prevmensajes.length > 0) return
 
     const paragraph = document.createElement("DIV");
     paragraph.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
             <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
         </svg>
-        <p>${messages[input.id]}</p>
+        <p>${mensajes[input.id]}</p>
     `;
-    paragraph.classList.add("error-message", "text-red-600", "text-xs", "flex", "gap-1", "items-center");
+    paragraph.classList.add("error-mensaje", "text-red-600", "text-xs", "flex", "gap-1", "items-center");
     input.parentElement.appendChild(paragraph);
 };
 
@@ -133,17 +145,17 @@ const onMouseLeave = () => {
 }
 
 const onClick = (starId) => {
-    review.qualification = starId;
+    review.calificacion = starId;
     updateStars();
 }
 
 const updateStars = () => {
     starsByName.forEach((star, indexStar) => {
-        if(indexStar <= +review.qualification-1) {
+        if(indexStar <= +review.calificacion-1) {
             star.classList.remove("text-gray-300");
             star.classList.add("text-yellow-500");
         }
     });
-    const qualificationFormatted = (+review.qualification).toFixed(1);
-    calificacionTexto.textContent = qualificationFormatted;
+    const calificacionFormatted = (+review.calificacion).toFixed(1);
+    calificacionTexto.textContent = calificacionFormatted;
 }
