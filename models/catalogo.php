@@ -34,10 +34,9 @@ class Catalogo
     private function obtenerVehiculos()
     {
         $sql = "
-            SELECT v.id, v.marca, v.modelo, v.precio, v.color, v.kilometraje, v.año, v.stock, GROUP_CONCAT(vi.imagen) as imagenes
+            SELECT v.id, v.marca, v.modelo, v.precio, v.color, v.kilometraje, v.año, GROUP_CONCAT(vi.imagen) as imagenes
             FROM vehiculo v
             LEFT JOIN vehiculoImagenes vi ON v.id = vi.idVehiculo
-            WHERE v.stock > 0
             GROUP BY v.id
         ";
         return $this->db->find($sql);
