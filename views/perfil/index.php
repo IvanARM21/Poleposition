@@ -188,6 +188,7 @@
                             <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Tipo</th>
                             <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Fecha</th>
                             <!-- <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Dias</th> -->
+                            <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Acciones</th>
 
                         </tr>
                     </thead>
