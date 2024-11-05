@@ -301,9 +301,6 @@ const validateInput = (event) => {
     const user = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
     if (isValid) {
         // Obtener datos de localstorage
-       
-            
-        } 
         const vehicle = JSON.parse(localStorage.getItem("vehicle"));
         const { subtotal, tax, total } = loadPrices(vehicle.tipo, vehicle.precio, calculateDifferenceDays(fechaIncio?.value, fechaFin?.value));
         const datosCompra = {
@@ -325,9 +322,8 @@ const validateInput = (event) => {
             fechaInicio: fechaIncio?.value,
             fechaFin: fechaFin?.value,
         };
-
-        console.log(datosCompra);
         realizarCompra(datosCompra);
+    }
 }
 
 
@@ -353,6 +349,7 @@ const realizarCompra = async (datosCompra) => {
             icon: 'success',
             confirmButtonText: 'Ok',
         }).then(() => {
+            localStorage.setItem("compra", true);
             window.location.href = "/compra-confirmada";
         });
     }

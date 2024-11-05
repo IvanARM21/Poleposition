@@ -26,7 +26,7 @@
             </button>
             <h2 class="text-xl font-bold text-gray-800">Agregar Reseña</h2>
 
-            <form class="mt-10 flex flex-col gap-3" id="vehiculoForm" enctype="multipart/form-data">
+            <form class="mt-10 flex flex-col gap-3" id="reviewForm" method="POST">
                 <div class="flex flex-col gap-1">
                     <label for="title" class="font-medium text-gray-800 ">Título reseña</label>
                     <input type="text" class="w-full border shadow rounded-xl py-2 px-4" id="title"

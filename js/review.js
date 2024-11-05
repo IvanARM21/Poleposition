@@ -4,6 +4,7 @@ const modalReseña = document.getElementById("modalReseña");
 const openModal = document.getElementById("openModal");
 const closeModalBtns = Array.from(document.getElementsByName("closeModal"));
 
+const reviewForm = document.getElementById("reviewForm");
 const inputs = Array.from([...document.getElementsByTagName("input"), ...document.getElementsByTagName("textarea")]);
 
 const stars = {
@@ -63,6 +64,21 @@ export const loadReviewModal = () => {
         isBlur[e.currentTarget.id] = true; // Marcamos como desenfocado
         validateInput(e.currentTarget);
     }));
+
+    reviewForm?.addEventListener("submit", e => {
+        e.preventDefault();
+
+        const idVehiculo = JSON.stringify(localStorage.getItem("vehicle"))[0]?.id;
+        const compra = JSON.stringify(localStorage.getItem(""))[0];
+        console.log(idVehiculo)
+        console.log(compra)
+        if(!idVehiculo) return 
+
+        const formData = {
+            ...review,
+            // autor: 
+        }
+    });
 };
 
 const validateInput = (input) => {
