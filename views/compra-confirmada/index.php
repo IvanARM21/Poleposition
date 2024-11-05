@@ -3,7 +3,7 @@
         <h1 class="title mb-4">Compra confirmada</h1>
         <p class="text-xl text-gray-500 text-center max-w-xl mx-auto">
             Tu compra se ha confirmado correctamente. ¡Gracias por comprar con nosotros! Puedes revisar la información
-            en tu perfil. También puedes dejarnos <span class="text-red-600 font-medium hover:underline decoration-1"
+            en tu <a href="/perfil"><span class="text-red-600 font-medium hover:underline decoration-1">perfil.</span></a> También puedes dejarnos <span class="text-red-600 font-medium hover:underline decoration-1"
                 id="openModal">una reseña </span>
             de tu
             experiencia de compra.
@@ -91,7 +91,8 @@
 </div>
 
 <section>
-    <a href="/models/generarfactura.php">
+<!-- aca hay q poner el id de la compra, tambien hay que hacer q vea si es tipo alquiler o compra y mandar a generar-factura-alquiler -->
+    <a href="/generar-factura/editar/"> 
     <button type="button" id="descargarFactura"
         class="bg-red-600 text-white font-medium py-2 px-4 rounded-xl hover:bg-red-900 transition-colors duration-300 flex items-center mt-4 text-center max-w-xl mx-auto">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

@@ -34,6 +34,15 @@ const mensajes = {
 };
 
 export const loadReviewModal = () => {
+    const idVehiculo = JSON.parse(localStorage.getItem("vehicle"))?.id;
+    const compra = JSON.parse(localStorage.getItem("compra"));
+
+    const user = decodeURIComponent(document?.cookie) ? JSON.parse(decodeURIComponent(document?.cookie)?.split("=")[1]) : null;
+
+    if(window.location.href.includes("/compra-confirmada") && (!idVehiculo || !compra || !user.id )) {
+        window.location.href = "/";
+    }
+
     starsByName.forEach(star => {
         star.addEventListener("mouseenter", (e) => {
             noMouseEnter(e.target.id);
@@ -70,25 +79,48 @@ export const loadReviewModal = () => {
     reviewForm?.addEventListener("submit", async e => {
         e.preventDefault();
 
-        const idVehiculo = JSON.parse(localStorage.getItem("vehicle")).id;
+        const idVehiculo = JSON.parse(localStorage.getItem("vehicle"))?.id;
         const compra = JSON.parse(localStorage.getItem("compra"));
         const { nombreCompleto, id } = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
 
         if(!idVehiculo || !nombreCompleto || !id || !compra) {
-            location.href = "/";
+            return
         } 
-
         const formData = {
             ...review,
             autor: nombreCompleto,
-            idVehiculo,
-            idCliente: id
+            idVehiculo: +idVehiculo,
+            idCliente: +id
         }
 
-        await fetch(`${PAGE_URL}/review/crear`, {
+        const resp = await fetch(`${PAGE_URL}/review/crear`, {
             method: "POST",
-            body: formData
-        })
+            headers: {
+                "Content-Type": "application/json"  
+            },
+            body: JSON.stringify(formData)
+        }).then(resp => resp.text());
+        
+        if (resp.error) {
+            Swal.fire({
+                title: 'Error!',
+                text: resp.message || 'Ha ocurrido un error',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+        } else {
+            modalReseña.classList.add("hidden");
+            modalReseña.classList.remove("flex");
+            Swal.fire({
+                title: 'Éxito!',
+                text: resp.message || 'Se ha creado correctamente su reseña',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+            }).then(() => {
+                localStorage.setItem("compra", false);
+                localStorage.setItem("vehicle", {});
+            });
+        }
     });
 };
 
@@ -145,7 +177,7 @@ const onMouseLeave = () => {
 }
 
 const onClick = (starId) => {
-    review.calificacion = starId;
+    review.calificacion = +starId;
     updateStars();
 }
 

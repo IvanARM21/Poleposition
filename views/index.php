@@ -91,35 +91,28 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
             </div>
         <?php endforeach; ?>
     </div>
-
-    <div class="flex justify-start sm:justify-start mt-6">
-        <a name="catalogo" class="uppercase mx-auto sm:mx-0 py-3 px-8 text-xl text-white bg-red-600 hover:bg-red-700 rounded-lg font-extrabold transition-colors duration-300" href="./catalogo">
-            Catálogo
-        </a>
-    </div>
+    <section class="flex justify-start mt-6">
+    <a name="catalogo" class="uppercase mx-2 py-3 px-8 text-xl text-white bg-red-600 hover:bg-red-700 rounded-lg font-extrabold transition-colors duration-300" href="./catalogo">
+        Catálogo
+    </a>
 </section>
 
+<!-- contáctenos -->
+<section class="flex flex-col justify-start mt-6">
+    <h2 class="pt-20 font-black text-3xl sm:text-4xl lg:text-5xl text-red-600 uppercase text-left">
+        <a href="/contacto" class="inline-block">
+            Contáctenos
+        </a>
+    </h2>
 
+    <p class="font-medium text-lg sm:text-xl lg:text-2xl text-gray-600 text-left">
+        Nuestros horarios de atención al cliente:
+    </p>
+    <p class="font-medium text-lg text-zinc-400 text-left">
+        Lunes a Viernes de 8.30 a 12.30 y de 14.00 a 18.30; Sábado de 8.30 a 12:30
+    </p>
 
-<!-- contactenos -->
-
-<section>
-
-    <div>
-    <h2 class="pt-20 font-black text-3xl sm:text-4xl lg:text-5xl text-red-600 flex justify-center lg:justify-normal uppercase text-center sm:text-left">
-    <a href="/contacto" class="inline-block">
-        Contáctenos
-    </a>
-</h2>
-
-        <p
-            class="font-medium text-lg sm:text-xl lg:text-2xl text-gray-600 flex justify-center lg:justify-normal text-center sm:text-left sm:pt-5">
-            Nuestros horarios de atención al cliente:</p>
-        <p class="font-medium text-lg  text-zinc-400 flex justify-center lg:justify-normal text-center sm:text-left">
-            Lunes a Viernes de 8.30 a 12.30 y de 14.00 a 18.30; Sábado de 8.30 a 12:30</p>
-
-        <p
-            class="pt-5 font-black text-2xl sm:text-3xl lg:text-4xl text-red-600 flex justify-center lg:justify-normal uppercase text-center sm:text-left">
-            (+598) 91 014 226</p>
-    </div>
+    <p class="pt-5 font-black text-2xl sm:text-3xl lg:text-4xl text-red-600 uppercase text-left">
+        (+598) 91 014 226
+    </p>
 </section>
