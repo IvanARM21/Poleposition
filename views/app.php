@@ -114,7 +114,7 @@
             <a name="catalogo"
                 class="uppercase mt-6 mx-auto sm:mx-0 w-fit block py-3 px-8 text-xl text-white bg-red-600 hover:bg-red-700 rounded-3xl font-extrabold transition-colors duration-300"
                 href="./catalogo">
-                Catalogo
+                Cátalogo
             </a>
         </div>
         <div class="swiper">
