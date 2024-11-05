@@ -928,15 +928,13 @@ video {
   cursor: pointer;
   border-radius: 0.75rem;
   border-width: 2px;
-  --tw-border-opacity: 1;
-  border-color: rgb(220 38 38 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  font-weight: 700;
+  font-weight: 500;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
   transition-property: all;
@@ -945,12 +943,8 @@ video {
 }
 
 .submit:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(220 38 38 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity));
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
 
 .fixed {
@@ -1053,14 +1047,14 @@ video {
   grid-column: span 4 / span 4;
 }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .-ml-5 {
@@ -2374,10 +2368,6 @@ video {
     align-items: center;
   }
 
-  .sm\:justify-start {
-    justify-content: flex-start;
-  }
-
   .sm\:gap-5 {
     gap: 1.25rem;
   }
@@ -2409,10 +2399,6 @@ video {
 
   .sm\:pt-10 {
     padding-top: 2.5rem;
-  }
-
-  .sm\:pt-5 {
-    padding-top: 1.25rem;
   }
 
   .sm\:text-left {
