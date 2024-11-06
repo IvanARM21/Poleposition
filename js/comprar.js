@@ -132,13 +132,13 @@ const saveRentData = (precio, dias) => {
     data.subtotal = subtotal;
     const tax = subtotal * TAX;
     data.tax = tax;
-    data.total = (subtotal + tax).toFixed(2);
+    data.total = (subtotal + tax).toFixed(2); 
     data.dias = dias;
     console.log(data);
     return data;
 };
 export const loadCheckout = () => {
-    const vehicle = JSON.parse(localStorage.getItem('vehicle'));
+    const vehicle = localStorage.getItem('vehicle') ? JSON.parse(localStorage.getItem('vehicle')) : null;
     if(vehicle) {
         loadVehicleInfo(vehicle);
     } else {

@@ -83,12 +83,27 @@ export const loadReviewModal = () => {
         const compra = JSON.parse(localStorage.getItem("compra"));
         const { nombreCompleto, id } = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
 
-        if(!idVehiculo || !nombreCompleto || !id || !compra) {
-            return
+        if(!idVehiculo || !nombreCompleto || !id) {
+            Swal.fire({
+                title: 'Error!',
+                text: resp.message || 'Ha ocurrido un error al intentar subir el testimomio',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            });
         } 
+
+        if(!compra) {
+            Swal.fire({
+                title: 'Error!',
+                text: resp.message || 'No puedes dejar otro testiomonio',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+            return
+        }
         const formData = {
             ...review,
-            autor: nombreCompleto,
+            autor: 3,
             idVehiculo: +idVehiculo,
             idCliente: +id
         }
@@ -96,11 +111,12 @@ export const loadReviewModal = () => {
         const resp = await fetch(`${PAGE_URL}/review/crear`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"  
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(formData)
-        }).then(resp => resp.text());
-        
+        }).then(resp => resp.json());
+
+        console.log(resp);
         if (resp.error) {
             Swal.fire({
                 title: 'Error!',
@@ -117,8 +133,8 @@ export const loadReviewModal = () => {
                 icon: 'success',
                 confirmButtonText: 'Ok',
             }).then(() => {
-                localStorage.setItem("compra", false);
-                localStorage.setItem("vehicle", {});
+                localStorage.setItem("compra", JSON.stringify(false));
+                localStorage.setItem("vehicle", JSON.stringify({}));
             });
         }
     });

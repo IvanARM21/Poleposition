@@ -27,7 +27,6 @@ class Review
         try {
             header('Content-Type: application/json');
             
-            // Obtén el contenido JSON de la solicitud
             $rawData = file_get_contents('php://input');
 
             $formData = json_decode($rawData, true);
@@ -39,13 +38,14 @@ class Review
             $idVehiculo = $formData['idVehiculo'] ?? null;
             $idCliente = $formData['idCliente'] ?? null;
 
-            $sql = "INSERT INTO testimonio (idVehiculo, idCliente, calificacion, mensaje, titulo, autor) VALUES ($idVehiculo, $idCliente, $calificacion, '$mensaje', '$titulo', '$autor')";
+            $sql = "INSERT INTO Testimonio (idVehiculo, idCliente, calificacion, mensaje, titulo, autor) VALUES ($idVehiculo, $idCliente, $calificacion, '$mensaje', '$titulo', '$autor')";
+            
             $result = $this->db->save($sql);
 
             if($result > 0) {
                 echo json_encode(["error" => false, "message" => "Se ha creado correctamente el testimonio"]);
             } else {
-                echo json_encode(["error" => true, "message" => "Hubo un error al crear el testimonio: "]);
+                echo json_encode(["error" => true, "message" => "Hubo un error al crear el testimonio", "result" => $result]);
             }
 
         } catch (Exception $e) {

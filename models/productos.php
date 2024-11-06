@@ -88,9 +88,6 @@ class Productos
             $sql = "INSERT INTO Vehiculo (modelo, marca, color, precio, kilometraje, descripcion, año, stock) VALUES ('$modelo', '$marca', '$color', $precio, $kilometraje, '$descripcion', $año, $stock)";
             $idVehiculo = $this->db->save($sql);
 
-            echo $idVehiculo;
-            echo $sql;
-
             // Guardar Imagenes
             foreach ($imagesName as $image) {
                 $sql = "INSERT INTO vehiculoimagenes (idVehiculo, imagen) VALUES ($idVehiculo, '$image')";

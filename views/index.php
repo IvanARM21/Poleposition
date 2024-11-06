@@ -25,39 +25,34 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
     </div>
 </section>
 
-<!-- testimonios y reseñas -->
-
 <section class="pt-16">
-    <h2 class="font-black text-2xl text-red-600 flex justify-center uppercase text-center  md:text-5xl lg:text-5xl">
-        Testimonios & Reseñas</h2>
+    <h2 class="font-black text-2xl text-red-600 flex justify-center uppercase text-center md:text-4xl lg:text-5xl">
+        Testimonios & Reseñas
+    </h2>
 
-    <div class="flex flex-col sm:flex-row justify-center space-x-0 sm:space-x-3  items-center">
-        <div
-            class="border-2 p-4 rounded-lg shadow-md max-w-xs mt-5 transition-transform transform hover:scale-105 hover:shadow-lg">
+    <div class="flex flex-wrap justify-center gap-6 mt-5 px-4">
+
+        <div class="border-2 p-6 rounded-lg shadow-md max-w-xs transition-transform transform hover:scale-105 hover:shadow-lg">
             <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Excelente Servicio</h3>
             <p class="text-gray-600 mb-4">En Pole-Position encontré el auto de mis sueños. La atención fue excepcional y el proceso de compra fue rápido y sencillo. ¡Recomiendo esta automotora a todos!</p>
             <p class="text-sm text-gray-500 text-right">- Rodrigo Martinez</p>
         </div>
 
+        <div class="border-2 p-6 rounded-lg shadow-md max-w-xs transition-transform transform hover:scale-105 hover:shadow-lg">
+            <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Recomiendo Totalmente</h3>
+            <p class="text-gray-600 mb-4">El personal es muy amable y profesional. Disfruté de una amplia selección de vehículos y precios justos. ¡Altamente recomendable!</p>
+            <p class="text-sm text-gray-500 text-right">- Bruno Flamant</p>
+        </div>
 
-        <div class="flex flex-col sm:flex-row justify-center space-x-0 sm:space-x-3  items-center">
-            <div
-                class="border-2 p-4 rounded-lg shadow-md max-w-xs mt-5 transition-transform transform hover:scale-105 hover:shadow-lg">
-                <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Recomiendo Totalmente</h3>
-                <p class="text-gray-600 mb-4">El personal es muy amable y profesional. Disfruté de una amplia selección de vehículos y precios justos. ¡Altamente recomendable!</p>
-                <p class="text-sm text-gray-500 text-right">- Bruno Flamant</p>
-            </div>
-
-            <div class="flex flex-row sm:flex-row justify-center space-x-0 sm:space-x-3  items-center">
-                <div
-                    class="border-2 p-4 rounded-lg shadow-md max-w-xs mt-5 transition-transform transform hover:scale-105 hover:shadow-lg">
-                    <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Los Mejores</h3>
-                    <p class="text-gray-600 mb-4">Me ayudaron a elegir el coche perfecto, y todo el proceso fue ágil. Estoy muy satisfecho con mi compra y su servicio. ¡Gracias!
-                    </p>
-                    <p class="text-sm text-gray-500 text-right">- Ivan Rodriguez</p>
-                </div>
-            </div>
+        <div class="border-2 p-6 rounded-lg shadow-md max-w-xs transition-transform transform hover:scale-105 hover:shadow-lg">
+            <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Los Mejores</h3>
+            <p class="text-gray-600 mb-4">Me ayudaron a elegir el coche perfecto, y todo el proceso fue ágil. Estoy muy satisfecho con mi compra y su servicio. ¡Gracias!</p>
+            <p class="text-sm text-gray-500 text-right">- Ivan Rodriguez</p>
+        </div>
+    </div>
 </section>
+
+
 
 <!-- vehiculos seleccionado -->
 <section class="px-4 sm:px-8 lg:px-16">

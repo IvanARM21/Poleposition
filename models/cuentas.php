@@ -125,7 +125,7 @@ class Cuentas
 
             // Verifica si se eliminó algún registro
             if ($res > 0) {
-                echo json_encode(['ok' => true, 'message' => 'Se ha eliminado correctamente.']);
+                echo json_encode(['ok' => true, 'message' => 'Tu cuenta se ha eliminado correctamente.']);
             } else {
                 echo json_encode(['ok' => false, 'message' => 'No se encontró ' . $id . ' la cuenta a eliminar.']);
             }

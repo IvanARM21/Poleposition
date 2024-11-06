@@ -172,7 +172,7 @@ WHERE
             $usuarioDatos->nombreCompleto = $nombreCompleto; 
             $usuarioDatos->email = $email;
     
-            setcookie('usuario', json_encode($usuarioDatos), time() + (86400 * 30), "/");   
+            setcookie('usuario', json_encode($usuarioDatos), time() + (86400 * 30));   
     
             header('Location: ' . $_SERVER['REQUEST_URI']);
             exit();
