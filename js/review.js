@@ -103,7 +103,7 @@ export const loadReviewModal = () => {
         }
         const formData = {
             ...review,
-            autor: 3,
+            autor: nombreCompleto,
             idVehiculo: +idVehiculo,
             idCliente: +id
         }

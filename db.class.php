@@ -97,5 +97,25 @@ class DB
         return $this->find($sql);
     }
 
+    public function findTestimonials($ids = null)
+{
+    $whereClause = '';
+    if ($ids) {
+        $idsString = implode(',', array_map('intval', $ids));
+        $whereClause = "WHERE t.id IN ($idsString)";
+    }
+
+    $sql = "SELECT t.id, t.idVehiculo, t.calificacion, t.mensaje, 
+                   t.titulo, t.autor
+            FROM testimonio t
+            $whereClause
+            ORDER BY t.id DESC";
+
+    return $this->find($sql);
+}
+
+
+
+    
 
 }

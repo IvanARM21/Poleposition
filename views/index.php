@@ -1,9 +1,14 @@
 <?php
-
 $db = new DB();
+
 $idsDestacados = [1, 6, 4];
 $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
+
+$idsTestimonios = [2, 3, 4]; 
+$testimonios = $db->findTestimonials($idsTestimonios);
+
 ?>
+
 <!-- marcas con las q trabajamos -->
 
 <!-- <div class="h-24"> </div> -->
@@ -31,26 +36,26 @@ $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
     </h2>
 
     <div class="flex flex-wrap justify-center gap-6 mt-5 px-4">
-
-        <div class="border-2 p-6 rounded-lg shadow-md max-w-xs transition-transform transform hover:scale-105 hover:shadow-lg">
-            <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Excelente Servicio</h3>
-            <p class="text-gray-600 mb-4">En Pole-Position encontré el auto de mis sueños. La atención fue excepcional y el proceso de compra fue rápido y sencillo. ¡Recomiendo esta automotora a todos!</p>
-            <p class="text-sm text-gray-500 text-right">- Rodrigo Martinez</p>
-        </div>
-
-        <div class="border-2 p-6 rounded-lg shadow-md max-w-xs transition-transform transform hover:scale-105 hover:shadow-lg">
-            <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Recomiendo Totalmente</h3>
-            <p class="text-gray-600 mb-4">El personal es muy amable y profesional. Disfruté de una amplia selección de vehículos y precios justos. ¡Altamente recomendable!</p>
-            <p class="text-sm text-gray-500 text-right">- Bruno Flamant</p>
-        </div>
-
-        <div class="border-2 p-6 rounded-lg shadow-md max-w-xs transition-transform transform hover:scale-105 hover:shadow-lg">
-            <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">Los Mejores</h3>
-            <p class="text-gray-600 mb-4">Me ayudaron a elegir el coche perfecto, y todo el proceso fue ágil. Estoy muy satisfecho con mi compra y su servicio. ¡Gracias!</p>
-            <p class="text-sm text-gray-500 text-right">- Ivan Rodriguez</p>
-        </div>
+        <?php foreach ($testimonios as $testimonio): ?>
+            <div class="border-2 p-6 rounded-lg shadow-md max-w-xs transition-transform transform hover:scale-105 hover:shadow-lg">
+                <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">
+                    <?= htmlspecialchars($testimonio->titulo) ?: 'Reseña' ?>
+                </h3>
+                <p class="text-gray-600 mb-4">
+                    <?= htmlspecialchars($testimonio->mensaje) ?>
+                </p>
+                <p class="text-sm text-gray-500 text-right">
+                    <?= htmlspecialchars($testimonio->autor) ?>
+                </p>
+                <p class="text-yellow-500 text-right">
+                    Calificación: <?= htmlspecialchars($testimonio->calificacion) ?>/5
+                </p>
+            </div>
+        <?php endforeach; ?>
     </div>
 </section>
+
+
 
 
 
