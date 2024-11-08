@@ -4,7 +4,7 @@ $db = new DB();
 $idsDestacados = [1, 6, 4];
 $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
 
-$idsTestimonios = [2, 3, 4]; 
+$idsTestimonios = [29, 38, 40]; 
 $testimonios = $db->findTestimonials($idsTestimonios);
 
 ?>
@@ -37,27 +37,32 @@ $testimonios = $db->findTestimonials($idsTestimonios);
 
     <div class="flex flex-wrap justify-center gap-6 mt-5 px-4">
         <?php foreach ($testimonios as $testimonio): ?>
-            <div class="border-2 p-6 rounded-lg shadow-md max-w-xs transition-transform transform hover:scale-105 hover:shadow-lg">
-                <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">
-                    <?= htmlspecialchars($testimonio->titulo) ?: 'Reseña' ?>
-                </h3>
-                <p class="text-gray-600 mb-4">
-                    <?= htmlspecialchars($testimonio->mensaje) ?>
-                </p>
-                <p class="text-sm text-gray-500 text-right">
-                    <?= htmlspecialchars($testimonio->autor) ?>
-                </p>
-                <p class="text-yellow-500 text-right">
-                    Calificación: <?= htmlspecialchars($testimonio->calificacion) ?>/5
-                </p>
+            <div class="border-2 p-6 rounded-lg shadow-md max-w-xs flex flex-col justify-between h-full transition-transform transform hover:scale-105 hover:shadow-lg">
+                <div>
+                    <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase">
+                        <?= htmlspecialchars($testimonio->titulo) ?: 'Reseña' ?>
+                    </h3>
+                    <p class="text-gray-600 mb-4 text-sm">
+                        <?= htmlspecialchars($testimonio->mensaje) ?>
+                    </p>
+                </div>
+
+                <div class="mt-4">
+                    <div class="text-xl flex space-x-1 mb-1 justify-right">
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 <?= $i <= $testimonio->calificacion ? 'text-yellow-500' : 'text-gray-300' ?>">
+                                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
+                            </svg>
+                        <?php endfor; ?>
+                    </div>
+                    <p class="text-xs text-gray-500 text-right">
+                        <?= htmlspecialchars($testimonio->autor) ?>
+                    </p>
+                </div>
             </div>
         <?php endforeach; ?>
     </div>
 </section>
-
-
-
-
 
 <!-- vehiculos seleccionado -->
 <section class="px-4 sm:px-8 lg:px-16">
