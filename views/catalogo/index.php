@@ -50,7 +50,7 @@
             h-screen lg:h-[730px] 
             lg:max-w-0 opacity-0 w-[calc(100%-50px)] max-w-[500px]
             -translate-x-full lg:translate-x-0
-            bg-white 
+            bg-white max-lg:overflow-y-auto
             transition-all duration-300" id="filtersContainer">
             <form id="formFilters" method="GET" class="space-y-6">
                 <!-- filtro x marca -->

@@ -4,14 +4,11 @@ $db = new DB();
 $idsDestacados = [1, 6, 4];
 $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
 
-$idsTestimonios = [29, 38, 40]; 
+$idsTestimonios = [1, 38, 40]; 
 $testimonios = $db->findTestimonials($idsTestimonios);
 
 ?>
 
-<!-- marcas con las q trabajamos -->
-
-<!-- <div class="h-24"> </div> -->
 
 <section class>
     <h2 class="font-black text-2xl text-red-600 flex justify-center uppercase text-center md:text-5xl lg:text-5xl">
