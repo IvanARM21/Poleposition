@@ -44,6 +44,31 @@
             </tbody>
         </table>
     </div>
+
 <?php else: ?>
     <p class="text-xl text-gray-500">Aún no tienes usuarios creados, <span class="text-red-600 font-medium hover:underline decoration-1" id="spanModal">empieza agregando uno</span></p>
 <?php endif; ?>
+
+
+<div id="modalUserDelete"
+    class="hidden bg-black bg-opacity-50 fixed inset-0 backdrop-blur-sm justify-center items-center">
+    <div id="modalContainer"
+        class="flex flex-col justify-between max-w-3xl w-full bg-white fixed z-10 h-auto rounded-2xl overflow-auto p-5 overflow-y-scroll no-scrollbar">
+        <button class=" text-red-600 absolute top-5 right-5" type="button" id="btnCloseDelete">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+        </button>
+
+        <h2 class="text-2xl font-bold text-gray-800">Eliminar Usuario</h2>
+        <p class="text-lg text-gray-500">¿Estás seguro de eliminar esta cuenta? está acción es irreversible.</p>
+
+        <div class="flex justify-end gap-5 mt-5">
+            <button class="text-gray-700 text-lg font-semibold" id="btnCancelDelete">Cancelar</button>
+            <button class="text-white bg-red-600 py-2 px-4 rounded-xl text-lg font-semibold"
+                id="delete">Eliminar</button>
+        </div>
+    </div>
+</div>

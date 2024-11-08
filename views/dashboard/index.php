@@ -26,8 +26,7 @@
                     <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Km</th>
                     <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Año</th>
                     <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Stock</th>
-                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Acciones
-                    </th>
+                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Acciones</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
