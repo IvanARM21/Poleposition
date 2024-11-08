@@ -7,7 +7,7 @@ const modalUser = document.getElementById("modalUserDelete") ?? null;
 
 const deleteBtn = document.getElementById("delete");
 
-let vehicleId = "";
+let userId = "";
 
 export const loadModalDeleteUserBtn = () => {
 
@@ -17,12 +17,12 @@ export const loadModalDeleteUserBtn = () => {
             modalUser.classList.add("flex");
             modalUser.classList.remove("hidden");
 
-            vehicleId = e.currentTarget.id;
+            userId = e.currentTarget.id;
         });
     });
 
 
-    deleteBtn?.addEventListener("click", deleteVehicle);
+    deleteBtn?.addEventListener("click", deleteuser);
     modalCloseBtn?.addEventListener("click", menuClose);
     modalCancelBtn?.addEventListener("click", menuClose);
 }
@@ -32,8 +32,8 @@ const menuClose = () => {
     modalUser.classList.remove("flex");
 }
 
-const deleteVehicle = async () => {
-    const resp = await fetch(`${PAGE_URL}/usuarios/eliminar/${vehicleId}`).then(resp => resp.json());
+const deleteuser = async () => {
+    const resp = await fetch(`${PAGE_URL}/usuarios/eliminar/${userId}`).then(resp => resp.json());
 
     menuClose();
 
