@@ -1,3 +1,5 @@
+import { PAGE_URL } from "./constants.js";
+
 const starsByName = document.getElementsByName("calificacion");
 const calificacionTexto = document.getElementById("calificacionTexto");
 const modalReseña = document.getElementById("modalReseña");
@@ -64,6 +66,24 @@ export const loadReviewModal = () => {
         validateInput(e.currentTarget);
     }));
 };
+
+const publishReview = async () => {
+    const idVehicle = localStorage.getItem("idVehicle");
+    const idClient = localStorage.getItem("idClient");
+
+    const formData = {
+        idVehiculo: idVehicle,
+        idCliente: idClient,
+        calificacion: review.qualification,
+        mensaje: review.message,
+        titulo: review.title
+    }
+
+    const resp = await fetch(`${PAGE_URL}/review/crear`, {
+        method: "POST",
+        body: JSON.stringify(formData)
+    }).then(res => res.text());
+}
 
 const validateInput = (input) => {
     const valueLength = input.value.length;

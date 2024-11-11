@@ -24,6 +24,13 @@ class Review
 
     public function create()
     {
+        header("Content-Type: application/json");
+
+        $rawData = file_get_contents('php://input');
+
+        $reviewData = json_decode($rawData, true);
+
+        echo $reviewData;
 
     }
 

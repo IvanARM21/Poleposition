@@ -335,7 +335,7 @@ const realizarCompra = async (datosCompra) => {
     const resp = await fetch(`${PAGE_URL}/comprar/crear`, {
         method: "POST",
         body: JSON.stringify(datosCompra)
-    }).then(res => res.text());
+    }).then(res => res.json());
 
     console.log(resp);
 
@@ -353,6 +353,8 @@ const realizarCompra = async (datosCompra) => {
             icon: 'success',
             confirmButtonText: 'Ok',
         }).then(() => {
+            localStorage.setItem("idVehicle", datosCompra.idVehiculo);
+            localStorage.setItem("idClient", datosCompra.idCliente);
             window.location.href = "/compra-confirmada";
         });
     }
