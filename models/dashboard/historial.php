@@ -34,35 +34,39 @@ class Historial
         
         $this->title = "Dashboard | Historial";
 
-        $sql = "SELECT 
-    c.idCliente AS Cuenta,
-    CONCAT(c.nombre, ' ', c.apellido) AS Nombre,
-    v.marca AS Marca,
-    v.modelo AS Modelo,
-    v.color AS Color,
-    v.kilometraje AS Kilometraje,
-    v.año AS Año,
-    'Compra' AS Tipo,
-    c.fechaCompra AS Fecha
-FROM compra c
-JOIN vehiculo v ON c.idVehiculo = v.id
-
-UNION ALL
-
-SELECT 
-    a.idCliente AS Cuenta,
-    CONCAT(a.nombre, ' ', a.apellido) AS Nombre,
-    v.marca AS Marca,
-    v.modelo AS Modelo,
-    v.color AS Color,
-    v.kilometraje AS Kilometraje,
-    v.año AS Año,
-    'Alquiler' AS Tipo,
-    a.fecha_inicio AS Fecha
-FROM alquiler a
-JOIN vehiculo v ON a.idVehiculo = v.id
-ORDER BY Fecha DESC;
-";
+        $sql = "
+        SELECT 
+            c.idCliente AS Cuenta,
+            CONCAT(c.nombre, ' ', c.apellido) AS Nombre,
+            v.marca AS Marca,
+            v.modelo AS Modelo,
+            v.color AS Color,
+            v.kilometraje AS Kilometraje,
+            v.año AS Año,
+            'Compra' AS Tipo,
+            c.fechaCompra AS Fecha,
+            c.id AS idCompra
+        FROM compra c
+        JOIN vehiculo v ON c.idVehiculo = v.id
+        
+        UNION ALL
+        
+        SELECT 
+            a.idCliente AS Cuenta,
+            CONCAT(a.nombre, ' ', a.apellido) AS Nombre,
+            v.marca AS Marca,
+            v.modelo AS Modelo,
+            v.color AS Color,
+            v.kilometraje AS Kilometraje,
+            v.año AS Año,
+            'Alquiler' AS Tipo,
+            a.fecha_inicio AS Fecha,
+            a.id AS idCompra
+        FROM alquiler a
+        JOIN vehiculo v ON a.idVehiculo = v.id
+        ORDER BY Fecha DESC;
+        ";
+        
         
         $historial = $this->db->find($sql);
         json_encode(value: $historial);

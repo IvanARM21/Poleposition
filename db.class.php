@@ -105,7 +105,7 @@ class DB
         $whereClause = "WHERE t.id IN ($idsString)";
     }
 
-    $sql = "SELECT t.id, t.idVehiculo, t.calificacion, t.mensaje, 
+    $sql = "SELECT t.idVehiculo, t.calificacion, t.mensaje, 
                    t.titulo, t.autor
             FROM testimonio t
             $whereClause

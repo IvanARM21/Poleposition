@@ -38,12 +38,10 @@
             <div class="pt-4 bg-white rounded-b-lg">
                 <h2 class="text-xl font-bold text-red-600">Más información</h2>
                 <p class="mt-2 text-gray-700 text-left"><?php echo $vehiculo->descripcion; ?></p>
-            </div>
 
-            <div class="pt-4 bg-white rounded-b-lg mt-4">
                 <h2 class="mt-4 text-xl font-bold text-red-600">Reseñas</h2>
                 <?php if ($testimonio !== null): ?>
-                    <h3 class="mt-2 mb-4 text-xl text-gray-700 font-black"><?= htmlspecialchars($testimonio->titulo); ?></h3>
+                    <h3 class="mt-2 mb-4 text-xl text-gray-700 font-bold"><?= htmlspecialchars($testimonio->titulo); ?></h3>
                     <p class=" text-gray-700 text-left"><?= htmlspecialchars($testimonio->mensaje); ?></p>
                     <div class="flex justify-between items-center mt-2">
                         <div class="flex space-x-1">
@@ -52,7 +50,7 @@
                                     <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
                                 </svg>
                             <?php endfor; ?>
-                        </div>
+            </div>
 
                         <p class="text-gray-700 text-right"><span class="font-bold">-</span> <?= htmlspecialchars($testimonio->autor); ?></p>
                     </div>
