@@ -5,7 +5,8 @@ const calificacionTexto = document.getElementById("calificacionTexto");
 const modalReseña = document.getElementById("modalReseña");
 const openModal = document.getElementById("openModal");
 const closeModalBtns = Array.from(document.getElementsByName("closeModal"));
-
+const btnDownload = document.getElementById("btnDownload");
+const reviewForm = document.getElementById("reviewForm");
 const inputs = Array.from([...document.getElementsByTagName("input"), ...document.getElementsByTagName("textarea")]);
 
 const stars = {
@@ -17,22 +18,31 @@ const stars = {
 }
 
 const review = {
-    title: "",
-    message: "",
-    qualification: 1,
+    titulo: "",
+    mensaje: "",
+    calificacion: 1,
 };
 
 const isBlur = {
-    title: false,
-    message: false,
+    titulo: false,
+    mensaje: false,
 };
 
-const messages = {
-    title: "El título de la reseña es obligatorio",
-    message: "El mensaje de la reseña es obligatorio",
+const mensajes = {
+    titulo: "El título de la reseña es obligatorio",
+    mensaje: "El mensaje de la reseña es obligatorio",
 };
 
 export const loadReviewModal = () => {
+    const idVehiculo = JSON.parse(localStorage.getItem("vehicle"))?.id;
+    const compra = JSON.parse(localStorage.getItem("compra"));
+
+    const user = decodeURIComponent(document?.cookie) ? JSON.parse(decodeURIComponent(document?.cookie)?.split("=")[1]) : null;
+
+    if(window.location.href.includes("/compra-confirmada") && (!idVehiculo || !compra || !user.id )) {
+        window.location.href = "/";
+    }
+
     starsByName.forEach(star => {
         star.addEventListener("mouseenter", (e) => {
             noMouseEnter(e.target.id);
@@ -65,25 +75,94 @@ export const loadReviewModal = () => {
         isBlur[e.currentTarget.id] = true; // Marcamos como desenfocado
         validateInput(e.currentTarget);
     }));
+
+    reviewForm?.addEventListener("submit", async e => {
+        e.preventDefault();
+
+        const idVehiculo = JSON.parse(localStorage.getItem("vehicle"))?.id;
+        const compra = JSON.parse(localStorage.getItem("compra"));
+        const { nombreCompleto, id } = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
+
+        if(!compra || !nombreCompleto || !id) {
+            Swal.fire({
+                title: 'Error!',
+                text: resp.message || 'Ha ocurrido un error al intentar subir el testimomio',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            });
+        } 
+
+        if(!compra) {
+            Swal.fire({
+                title: 'Error!',
+                text: resp.message || 'No puedes dejar otro testiomonio',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+            return
+        }
+        const formData = {
+            ...review,
+            autor: nombreCompleto,
+            idVehiculo: +idVehiculo,
+            idCliente: +id
+        }
+
+        const resp = await fetch(`${PAGE_URL}/review/crear`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        }).then(resp => resp.json());
+
+        if (resp.error) {
+            Swal.fire({
+                title: 'Error!',
+                text: resp.message || 'Ha ocurrido un error',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+        } else {
+            modalReseña.classList.add("hidden");
+            modalReseña.classList.remove("flex");
+            Swal.fire({
+                title: 'Éxito!',
+                text: resp.message || 'Se ha creado correctamente su reseña',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+            }).then(() => {
+                const compra = JSON.parse(localStorage.getItem("compra"));
+                localStorage.setItem("compra", JSON.stringify({
+                    ...compra,
+                    isPurchase: false
+                }));
+            });
+        }
+    });
+
+
+    // Btn Download
+    btnDownload?.addEventListener("click", redirectToDownloadPDF)
 };
 
-const publishReview = async () => {
-    const idVehicle = localStorage.getItem("idVehicle");
-    const idClient = localStorage.getItem("idClient");
+// const publishReview = async () => {
+//     const idVehicle = localStorage.getItem("idVehicle");
+//     const idClient = localStorage.getItem("idClient");
 
-    const formData = {
-        idVehiculo: idVehicle,
-        idCliente: idClient,
-        calificacion: review.qualification,
-        mensaje: review.message,
-        titulo: review.title
-    }
+//     const formData = {
+//         idVehiculo: idVehicle,
+//         idCliente: idClient,
+//         calificacion: review.qualification,
+//         mensaje: review.message,
+//         titulo: review.title
+//     }
 
-    const resp = await fetch(`${PAGE_URL}/review/crear`, {
-        method: "POST",
-        body: JSON.stringify(formData)
-    }).then(res => res.text());
-}
+//     const resp = await fetch(`${PAGE_URL}/review/crear`, {
+//         method: "POST",
+//         body: JSON.stringify(formData)
+//     }).then(res => res.text());
+// }
 
 const validateInput = (input) => {
     const valueLength = input.value.length;
@@ -92,26 +171,26 @@ const validateInput = (input) => {
     if (isBlur[inputId] && valueLength <= 3) {
         showAlertReview(input);
     } else {
-        const prevMessages = input.parentElement.querySelectorAll('.error-message');
-        if (prevMessages.length > 0) {
-            prevMessages.forEach(msg => msg.remove());
+        const prevmensajes = input.parentElement.querySelectorAll('.error-mensaje');
+        if (prevmensajes.length > 0) {
+            prevmensajes.forEach(msg => msg.remove());
         }
     }
 };
 
 const showAlertReview = (input) => {
-    if(!messages[input.id]) return
-    const prevMessages = input.parentElement.querySelectorAll('.error-message');
-    if (prevMessages.length > 0) return
+    if(!mensajes[input.id]) return
+    const prevmensajes = input.parentElement.querySelectorAll('.error-mensaje');
+    if (prevmensajes.length > 0) return
 
     const paragraph = document.createElement("DIV");
     paragraph.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
             <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
         </svg>
-        <p>${messages[input.id]}</p>
+        <p>${mensajes[input.id]}</p>
     `;
-    paragraph.classList.add("error-message", "text-red-600", "text-xs", "flex", "gap-1", "items-center");
+    paragraph.classList.add("error-mensaje", "text-red-600", "text-xs", "flex", "gap-1", "items-center");
     input.parentElement.appendChild(paragraph);
 };
 
@@ -138,17 +217,23 @@ const onMouseLeave = () => {
 }
 
 const onClick = (starId) => {
-    review.qualification = starId;
+    review.calificacion = +starId;
     updateStars();
 }
 
 const updateStars = () => {
     starsByName.forEach((star, indexStar) => {
-        if(indexStar <= +review.qualification-1) {
+        if(indexStar <= +review.calificacion-1) {
             star.classList.remove("text-gray-300");
             star.classList.add("text-yellow-500");
         }
     });
-    const qualificationFormatted = (+review.qualification).toFixed(1);
-    calificacionTexto.textContent = qualificationFormatted;
+    const calificacionFormatted = (+review.calificacion).toFixed(1);
+    calificacionTexto.textContent = calificacionFormatted;
+}
+
+const redirectToDownloadPDF = () => {
+    const compra = JSON.parse(localStorage.getItem("compra"));
+    const { idCompra, type } = compra
+    window.location.href = type === "compra" ? `/generar-factura/editar/${idCompra}` : `/generar-factura-alquiler/editar/${idCompra}`;
 }

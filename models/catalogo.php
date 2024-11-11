@@ -41,6 +41,9 @@ class Catalogo
         ";
         return $this->db->find($sql);
     }
+    
+
+
 
     // Otros métodos...
 

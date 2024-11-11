@@ -46,11 +46,11 @@
         <div class="
             lg:block 
             top-5 lg:sticky fixed z-40
-            -ml-5 -mt-5 p-5 lg:p-0 lg:ml-0 lg:mr-5
+            -ml-5 -mt-5 p-5 lg:p-0 lg:ml-0
             h-screen lg:h-[730px] 
-            lg:max-w-80 w-[calc(100%-50px)] max-w-[500px]
+            lg:max-w-0 opacity-0 w-[calc(100%-50px)] max-w-[500px]
             -translate-x-full lg:translate-x-0
-            bg-white opacity-100
+            bg-white max-lg:overflow-y-auto
             transition-all duration-300" id="filtersContainer">
             <form id="formFilters" method="GET" class="space-y-6">
                 <!-- filtro x marca -->

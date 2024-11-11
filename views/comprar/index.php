@@ -82,7 +82,7 @@
                             <div class="flex flex-col gap-1">
                                 <label for="pais" class="text-lg text-gray-700">País <span class="text-red-600">*</span>
                                 </label>
-                                <input type="text" id="pais" name="pais" class="w-full py-2 px-4 border rounded-md">
+                                <input type="text" id="pais" name="pais" value="Uruguay" class="w-full py-2 px-4 border rounded-md">
                                 <?php if (!empty($errors['pais'])): ?>
                                     <p class="text-red-600"><?= htmlspecialchars($errors['pais']) ?></p>
                                 <?php endif; ?>

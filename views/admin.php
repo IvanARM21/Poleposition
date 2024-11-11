@@ -16,7 +16,8 @@
 
 <body>
     <aside
-        class="hidden fixed top-0 left-0 bg-gray-50 w-80 min-h-full py-5 px-2 lg:flex flex-col justify-between shadow">
+        id="sidebar"
+        class="fixed transition-all duration-300 -translate-x-full lg:translate-x-0 top-0 left-0 bg-gray-50 w-80 min-h-full py-5 px-2 flex flex-col justify-between shadow z-20">
 
         <nav class="flex flex-col gap-2">
             <a href="/">
@@ -60,7 +61,6 @@
                 <p class="font-medium text-lg">Testimonios</p>
             </a>
         </nav>
-
         <div class="flex flex-col gap-2 border-t pt-5">
             <a href="/logout" class="flex gap-2 items-center text-gray-600 hover:bg-gray-200 py-2 px-4 rounded-xl">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -74,12 +74,32 @@
         </div>
     </aside>
 
-    <header class=" w-[calc(100%-320px) lg:ml-80 grid grid-cols-3 gap-5 px-4 md:px-16 py-2">
-        <div class="col-span-2">
+
+<div class="inset-0 fixed bg-black bg-opacity-70 z-10 lg:hidden hidden" id="bgSidebar"></div>
+
+    <button class="fixed top-3 right-2 text-white bg-black rounded-full bg-opacity-40 p-1 z-50 lg:hidden hidden"
+    id="closeSidebar">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8">
+        <path fill-rule="evenodd"
+            d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+            clip-rule="evenodd" />
+    </svg>
+
+</button>
+
+    <header class=" w-[calc(100%-320px) lg:ml-80 flex justify-between lg:grid lg:grid-cols-3 gap-5 px-4 md:px-20 py-2">
+        <div class="col-span-2 ">
             <input type="text" placeholder="Buscar..." class="w-full bg-gray-200 rounded-xl py-2 px-4">
         </div>
-        <div class="flex items-center text-gray-500 justify-end">
-            <?php echo json_decode($_COOKIE["usuario"])->nombreCompleto ?? "" ?>
+        <div class="flex gap-5 items-center justify-end">
+            <div class="flex items-end text-gray-500 justify-end">
+                <?php echo json_decode($_COOKIE["usuario"])->nombreCompleto ?? "" ?>
+            </div>
+            <button class="text-gray-600 lg:hidden" type="button" id="btnSidebar">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12H12m-8.25 5.25h16.5" />
+                </svg>
+            </button>
         </div>
     </header>
 

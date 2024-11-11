@@ -114,7 +114,7 @@
             <a name="catalogo"
                 class="uppercase mt-6 mx-auto sm:mx-0 w-fit block py-3 px-8 text-xl text-white bg-red-600 hover:bg-red-700 rounded-3xl font-extrabold transition-colors duration-300"
                 href="./catalogo">
-                Cátalogo
+                Catálogo
             </a>
         </div>
         <div class="swiper">
@@ -182,7 +182,7 @@
 
 
     <!-- Contenido de la página -->
-    <footer class="bg-gray-100 w-full mt-32">
+    <footer class="bg-gray-100 w-full mt-10">
         <div class="mx-auto max-w-screen-xl w-full px-4  py-10">
             <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 pb-10">
                 <div class="sm:col-span-2 md:col-span-3 lg:col-span-2">

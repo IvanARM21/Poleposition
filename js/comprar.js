@@ -132,13 +132,13 @@ const saveRentData = (precio, dias) => {
     data.subtotal = subtotal;
     const tax = subtotal * TAX;
     data.tax = tax;
-    data.total = (subtotal + tax).toFixed(2);
+    data.total = (subtotal + tax).toFixed(2); 
     data.dias = dias;
     console.log(data);
     return data;
 };
 export const loadCheckout = () => {
-    const vehicle = JSON.parse(localStorage.getItem('vehicle'));
+    const vehicle = localStorage.getItem('vehicle') ? JSON.parse(localStorage.getItem('vehicle')) : null;
     if(vehicle) {
         loadVehicleInfo(vehicle);
     } else {
@@ -301,9 +301,6 @@ const validateInput = (event) => {
     const user = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
     if (isValid) {
         // Obtener datos de localstorage
-       
-            
-        } 
         const vehicle = JSON.parse(localStorage.getItem("vehicle"));
         const { subtotal, tax, total } = loadPrices(vehicle.tipo, vehicle.precio, calculateDifferenceDays(fechaIncio?.value, fechaFin?.value));
         const datosCompra = {
@@ -325,9 +322,8 @@ const validateInput = (event) => {
             fechaInicio: fechaIncio?.value,
             fechaFin: fechaFin?.value,
         };
-
-        console.log(datosCompra);
         realizarCompra(datosCompra);
+    }
 }
 
 
@@ -355,6 +351,11 @@ const realizarCompra = async (datosCompra) => {
         }).then(() => {
             localStorage.setItem("idVehicle", datosCompra.idVehiculo);
             localStorage.setItem("idClient", datosCompra.idCliente);
+            localStorage.setItem("compra", JSON.stringify({
+                type: resp.tipo,
+                isPurchase: true,
+                idCompra: resp.id
+            }));
             window.location.href = "/compra-confirmada";
         });
     }

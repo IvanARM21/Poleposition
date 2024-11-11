@@ -23,7 +23,7 @@ export const loadPerfilEvents = () => {
         const pass = { pass: userPass?.value };
 
         const user = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
-
+        3
         if (user) {
             const res = await fetch(`${PAGE_URL}/cuentas/eliminar/${user.id}`, {
                 method: "POST",
@@ -53,8 +53,8 @@ export const loadPerfilEvents = () => {
             repetirContraseña: document.getElementById('repeat-pass').value // repetir nueva contraseña
         };
     
-        const user = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
-    
+        const user = decodeURIComponent(document?.cookie) ? JSON.parse(decodeURIComponent(document?.cookie)?.split("=")[1]) : null;
+
         if (user) {
             try {
                 const res = await fetch(`${PAGE_URL}/cuentas/editar/${user.id}`, {

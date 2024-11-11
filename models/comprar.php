@@ -67,6 +67,8 @@ class Comprar
             echo json_encode(["error" => true, "message" => "Ha ocurrido un error validando los datos."]);
             exit;
         }
+
+        // datos
         $idCliente = $data['idCliente'];
         $direccion = $data['direccion'];
         $codigo = $data['codigo'];
@@ -83,37 +85,39 @@ class Comprar
         $total = $data['total'];
         $fechaCompra = $data['fechaCompra'];
 
+        $id = 0;
+        // que cambie si es alquiler
         if ($tipo === "alquilar") {
-
             $fechaInicio = $data['fechaInicio'];
-            $fechaFin = $data['fechaInicio'];
+            $fechaFin = $data['fechaFin'];
 
+            // que meta los datos de la compra en alquiler
             $sql = "INSERT INTO alquiler 
-                (idCliente, direccion, codigo, pais, telefono, ciudad, nombre, apellido, email, idVehiculo, subtotal, tax, total, fechaCompra, fecha_inicio, fecha_fin)
-                VALUES 
-                ($idCliente, '$direccion', '$codigo', '$pais', '$telefono', '$ciudad', '$nombre', '$apellido', '$email', $idVehiculo, $subtotal, $tax, $total, '$fechaCompra', '$fechaInicio', '$fechaFin')";
+            (idCliente, direccion, codigo, pais, telefono, ciudad, nombre, apellido, email, idVehiculo, subtotal, tax, total, fechaCompra, fecha_inicio, fecha_fin)
+            VALUES 
+            ($idCliente, '$direccion', '$codigo', '$pais', '$telefono', '$ciudad', '$nombre', '$apellido', '$email', $idVehiculo, $subtotal, $tax, $total, '$fechaCompra', '$fechaInicio', '$fechaFin')";
 
             $id = $this->db->save($sql);
-
-            if ($id) {
-                echo json_encode(["error" => false, "message" => "Se ha realizado correctamente la compra"]);
-            } else {
-                echo json_encode(["error" => true, "message" => "Ha ocurrido un error al realizar la compra"]);
-            }
 
         } else {
-            // Guardado tabla de compra
-            $sql = "INSERT INTO compra (idCliente, direccion, codigo, pais, telefono, ciudad, nombre, apellido, email, idVehiculo, subtotal, tax, total, fechaCompra)
-            VALUES ($idCliente, '$direccion', '$codigo', '$pais', '$telefono', '$ciudad', '$nombre', '$apellido', '$email', $idVehiculo, $subtotal, $tax, $total, '$fechaCompra')";
+            // mete los datos en compra
+            $sql = "INSERT INTO compra 
+            (idCliente, direccion, codigo, pais, telefono, ciudad, nombre, apellido, email, idVehiculo, subtotal, tax, total, fechaCompra)
+            VALUES 
+            ($idCliente, '$direccion', '$codigo', '$pais', '$telefono', '$ciudad', '$nombre', '$apellido', '$email', $idVehiculo, $subtotal, $tax, $total, '$fechaCompra')";
 
             $id = $this->db->save($sql);
-
-            if ($id) {
-                echo json_encode(["error" => false, "message" => "Se ha realizado correctamente la compra"]);
-            } else {
-                echo json_encode(["error" => true, "message" => "Ha ocurrido un error al realizar la compra"]);
-            }
         }
+
+        if ($id) {
+            $sqlUpdateStock = "UPDATE vehiculo SET stock = stock - 1 WHERE id = $idVehiculo AND stock > 0";
+            $this->db->save($sqlUpdateStock);
+
+            echo json_encode(["error" => false, "message" => "Se ha realizado correctamente la compra", "id" => $id, "tipo" => $tipo]);
+        } else {
+            echo json_encode(["error" => true, "message" => "Ha ocurrido un error al realizar la compra"]);
+        }
+
         exit;
     }
 

@@ -24,14 +24,35 @@ class Review
 
     public function create()
     {
-        header("Content-Type: application/json");
+        try {
+            header('Content-Type: application/json');
 
-        $rawData = file_get_contents('php://input');
+            $rawData = file_get_contents('php://input');
 
-        $reviewData = json_decode($rawData, true);
+            $formData = json_decode($rawData, true);
 
-        echo $reviewData;
+            $titulo = $formData['titulo'] ?? '';
+            $mensaje = $formData['mensaje'] ?? '';
+            $calificacion = $formData['calificacion'] ?? 1;
+            $autor = $formData['autor'] ?? '';
+            $idVehiculo = $formData['idVehiculo'] ?? null;
+            $idCliente = $formData['idCliente'] ?? null;
 
+            $sql = "INSERT INTO Testimonio (idVehiculo, idCliente, calificacion, mensaje, titulo, autor) VALUES ($idVehiculo, $idCliente, $calificacion, '$mensaje', '$titulo', '$autor')";
+
+            $result = $this->db->save($sql);
+
+            if ($result > 0) {
+                echo json_encode(["error" => false, "message" => "Se ha creado correctamente el testimonio"]);
+            } else {
+                echo json_encode(["error" => true, "message" => "Hubo un error al crear el testimonio", "result" => $result]);
+            }
+
+        } catch (Exception $e) {
+            echo json_encode(["error" => true, "message" => "Hubo un error al crear el testimonio: " . $e->getMessage()]);
+        }
+
+        exit;
     }
 
     public function update($id)

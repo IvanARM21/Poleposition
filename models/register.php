@@ -58,6 +58,9 @@ class Register {
 
                     $nuevoUsuarioId = $this->db->getConexion()->insert_id; 
 
+                    $sqlCliente = "INSERT INTO cliente (idCliente) VALUES ('$nuevoUsuarioId')";
+                    $this->db->getConexion()->query($sqlCliente);
+
                     $usuarioDatos = [
                         "id" => $nuevoUsuarioId,
                         "usuario" => $usuarioEscaped,

@@ -139,11 +139,11 @@ export const brands = Array.from(document.getElementsByName("brands[]"));
 
 export const colors = Array.from(document.getElementsByName("colors[]"));
 
-// Year
+// Año
 export const year_min = document.getElementById("year_min");
 export const year_max = document.getElementById("year_max");
 
-// Price
+// Precio
 export const price_min = document.getElementById("price_min");
 export const price_max = document.getElementById("price_max");
 

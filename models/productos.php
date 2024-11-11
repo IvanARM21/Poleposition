@@ -15,17 +15,19 @@ class Productos
         return $this->title;
     }
     public function index()
-    {
-        $sql = "
-            SELECT v.id, v.marca, v.modelo, v.precio, v.color, v.kilometraje, v.año, GROUP_CONCAT(vi.imagen) as imagenes
-            FROM vehiculo v
-            LEFT JOIN vehiculoImagenes vi ON v.id = vi.idVehiculo
-            GROUP BY v.id
-        ";
-        $vehiculos = $this->db->find($sql);
-        echo json_encode($vehiculos);
-        exit;
-    }
+{
+    $sql = "
+        SELECT v.id, v.marca, v.modelo, v.precio, v.color, v.kilometraje, v.año, v.stock, GROUP_CONCAT(vi.imagen) as imagenes
+        FROM vehiculo v
+        LEFT JOIN vehiculoImagenes vi ON v.id = vi.idVehiculo
+        WHERE v.stock > 0
+        GROUP BY v.id
+    ";
+    $vehiculos = $this->db->find($sql);
+    echo json_encode($vehiculos);
+    exit;
+}
+
     public function show($id)
     {
         header('Content-Type: application/json');
@@ -85,9 +87,6 @@ class Productos
             // <!-- Un campo nuevo, de stock (Creación) -->
             $sql = "INSERT INTO Vehiculo (modelo, marca, color, precio, kilometraje, descripcion, año, stock) VALUES ('$modelo', '$marca', '$color', $precio, $kilometraje, '$descripcion', $año, $stock)";
             $idVehiculo = $this->db->save($sql);
-
-            echo $idVehiculo;
-            echo $sql;
 
             // Guardar Imagenes
             foreach ($imagesName as $image) {

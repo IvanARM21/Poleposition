@@ -46,7 +46,7 @@ class Login {
                         $sql = "SELECT * FROM admin WHERE idAdmin = '$usuarioDB->id'";
                         $esAdmin = $this->db->findOne($sql);
                         $usuarioDatos = [ "id" => $usuarioDB->id, "usuario" => $usuarioDB->usuario, "email" => $usuarioDB->email, "admin" => $esAdmin->id, "nombreCompleto" => $usuarioDB->nombreCompleto];
-                        setcookie('usuario', json_encode($usuarioDatos), time() + (86400 * 30), "/");   
+                        setcookie('usuario', json_encode($usuarioDatos), time() + (86400 * 30));   
                         if($esAdmin->id) {
                             header("Location: /dashboard");
                         } else {
