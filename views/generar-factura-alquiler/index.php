@@ -1,3 +1,3 @@
 <?php
-require('../../models/generarfactura.php');
+require('../../models/generarfacturaalquiler.php');
 ?>
