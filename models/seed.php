@@ -178,10 +178,11 @@ class Seed
                     "lambohurcanspider-frente.webp",
                     "lambohuracanspider-costado.webp",
                     "lambohurcanspider-adentro.webp",
-                    "lambohuracanspider-adentro3.webp",
-                    "lambohuracanspider-adentro4.webp",
+                    "lambohurcanspider-adentro2.webp",
+                    "lambohurcanspider-adentro3.webp",
+                    "lambohurcanspider-adentro4.webp",
                     "lambohuracanspider-atras.webp",
-                    "lambohuracanspider-frente2.webp"
+                    "lambohurcanspider-frente2.webp"
                 ]
             ],
         ];
