@@ -345,7 +345,7 @@ const realizarCompra = async (datosCompra) => {
     } else {
         Swal.fire({
             title: 'Éxito!',
-            text: `${datosCompra.tipo === "compra" ? "La compra se realizo correctamente" : "El alquier se realizo correctamente"}`,
+            text: `${datosCompra.tipo === "compra" ? "La compra se realizo correctamente" : "El alquiler se realizo correctamente"}`,
             icon: 'success',
             confirmButtonText: 'Ok',
         }).then(() => {
