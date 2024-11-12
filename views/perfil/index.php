@@ -5,7 +5,7 @@
         <!-- sidebar -->
         <nav class="bg-white p-2 w-full sm:min-h-[372px] sm:w-60 border rounded-xl flex flex-wrap sm:flex-col gap-3">
             <button
-                class="hover:bg-gray-50 px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+                class="hover:bg-gray-200 hover:text-black px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
                 id="perfilBtn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
                     <path
@@ -14,7 +14,8 @@
                 Perfil
             </button>
             <button
-                class="hover:bg-gray-50 px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+            
+                class="hover:bg-gray-200 hover:text-black px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
                 id="seguridadBtn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
                     <path fill-rule="evenodd"
@@ -24,7 +25,7 @@
                 Seguridad
             </button>
             <button
-                class="hover:bg-gray-50 px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+                class="hover:bg-gray-200 hover:text-black px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
                 id="historialBtn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                     <path fill-rule="evenodd"
@@ -42,7 +43,7 @@
             </button>
 
             <button
-                class="hover:bg-gray-50 px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+                class="hover:bg-gray-200 hover:text-black px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
                 id="testimonialBtn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
   <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
@@ -238,7 +239,7 @@
 
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">
                                         <div class="flex gap-5 pl-4 items-center">
-                                            <a href="<?php echo $compra->Tipo === "Compra" ? "/generar-factura/editar/" . $compra->idCompra : "/generar-factura-alquiler/editar/" . $compra->idCompra ?>"
+                                            <a target="_blank" href="<?php echo $compra->Tipo === "Compra" ? "/generar-factura/editar/" . $compra->idCompra : "/generar-factura-alquiler/editar/" . $compra->idCompra ?>"
                                                 class="text-gray-700 hover:text-red-600">
                                                 <!-- Icono de acciones -->
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -259,7 +260,7 @@
             </div>
         </div>
 
-        
+
         <!-- Testimonios -->
         <div class="hidden w-full" id="historialForm">
             <div class="flex justify-between items-center p-5 sm:p-10 border rounded-xl h-full">

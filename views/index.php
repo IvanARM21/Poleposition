@@ -85,7 +85,7 @@ $testimonios = $db->findTestimonials($idsTestimonios);
                         <h3 class="font-extrabold text-left text-gray-800 mb-2 uppercase text-lg sm:text-xl lg:text-2xl pt-4">
                             <?= htmlspecialchars($vehiculo->marca) ?> <?= htmlspecialchars($vehiculo->modelo) ?>
                         </h3>
-                        <h3 class="font-extrabold text-left text-green-900 uppercase text-lg sm:text-xl lg:text-xl italic">
+                        <h3 class="font-extrabold text-left text-gray-500 uppercase text-lg sm:text-xl lg:text-xl ">
                             USD <?= number_format($vehiculo->precio, 2) ?>
                         </h3>
                     </div>

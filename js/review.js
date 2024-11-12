@@ -234,6 +234,12 @@ const updateStars = () => {
 
 const redirectToDownloadPDF = () => {
     const compra = JSON.parse(localStorage.getItem("compra"));
-    const { idCompra, type } = compra
-    window.location.href = type === "compra" ? `/generar-factura/editar/${idCompra}` : `/generar-factura-alquiler/editar/${idCompra}`;
-}
+    const { idCompra, type } = compra;
+    
+    // Abre la página de descarga en una nueva pestaña según el tipo de compra o alquiler
+    const url = type === "compra" 
+        ? `/generar-factura/editar/${idCompra}` 
+        : `/generar-factura-alquiler/editar/${idCompra}`;
+    
+    window.open(url, '_blank');  // '_blank' indica abrir en una nueva pestaña
+};
