@@ -348,6 +348,7 @@ const realizarCompra = async (datosCompra) => {
             text: `${datosCompra.tipo === "compra" ? "La compra se realizo correctamente" : "El alquiler se realizo correctamente"}`,
             icon: 'success',
             confirmButtonText: 'Ok',
+            confirmButtonColor:"#f00"
         }).then(() => {
             localStorage.setItem("idVehicle", datosCompra.idVehiculo);
             localStorage.setItem("idClient", datosCompra.idCliente);
