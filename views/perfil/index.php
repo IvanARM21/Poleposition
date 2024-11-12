@@ -228,7 +228,7 @@
 
                                     <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">
                                         <div class="flex gap-5 pl-4 items-center">
-                                            <a href="<?php echo $compra->Tipo === "Compra" ? "/generar-factura/editar/" . $compra->idCompra : "/generar-factura-alquier/editar/" . $compra->idCompra ?>"
+                                            <a href="<?php echo $compra->Tipo === "Compra" ? "/generar-factura/editar/" . $compra->idCompra : "/generar-factura-alquiler/editar/" . $compra->idCompra ?>"
                                                 class="text-gray-700 hover:text-red-600">
                                                 <!-- Icono de acciones -->
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
