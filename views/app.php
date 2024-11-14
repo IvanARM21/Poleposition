@@ -94,7 +94,7 @@
                 <a class="text-gray-500 text-sm" href="/logout">Cerrar Sesión</a>
             <?php else: ?>
                 <a href="/login" class="text-gray-500 text-sm">Iniciar Sesión</a>
-                <a href="/registro" class="text-gray-500 text-sm">Registro</a>
+                <a href="/register" class="text-gray-500 text-sm">Registro</a>
             <?php endif; ?>
         </nav>
 

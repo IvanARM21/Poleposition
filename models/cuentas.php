@@ -28,44 +28,44 @@ class Cuentas
 
 
     public function update($id)
-{
-    header('Content-Type: application/json');
+    {
+        header('Content-Type: application/json');
 
-    $rawData = file_get_contents('php://input');
-    $userData = json_decode($rawData, true);
+        $rawData = file_get_contents('php://input');
+        $userData = json_decode($rawData, true);
 
-    if (!is_numeric($id) || $id <= 0) {
-        echo json_encode(['ok' => false, 'message' => 'ID inválido.']);
+        if (!is_numeric($id) || $id <= 0) {
+            echo json_encode(['ok' => false, 'message' => 'ID inválido.']);
+            exit;
+        }
+
+        $pass = $userData["pass"] ?? null;
+        $contraseña = $userData["contraseña"] ?? null;
+        $repetirContraseña = $userData["repetirContraseña"] ?? null;
+
+        if (!$pass || !$contraseña || !$repetirContraseña) {
+            echo json_encode(['ok' => false, 'message' => 'Todos los campos son obligatorios.']);
+            exit;
+        }
+
+        if ($contraseña !== $repetirContraseña) {
+            echo json_encode(['ok' => false, 'message' => 'Las contraseñas no coinciden.']);
+            exit;
+        }
+
+        $user = $this->db->findOne("SELECT * FROM cuentas WHERE id = $id");
+        if (!$user || !password_verify($pass, $user->password)) {
+            echo json_encode(['ok' => false, 'message' => 'Contraseña actual incorrecta.']);
+            exit;
+        }
+
+        $hashedPassword = password_hash($contraseña, PASSWORD_DEFAULT);
+        $this->db->save("UPDATE cuentas SET password = '$hashedPassword' WHERE id = $id");
+
+        // Respuesta final
+        echo json_encode(['ok' => true, 'message' => 'Contraseña actualizada correctamente.']);
         exit;
     }
-
-    $pass = $userData["pass"] ?? null;
-    $contraseña = $userData["contraseña"] ?? null;
-    $repetirContraseña = $userData["repetirContraseña"] ?? null;
-
-    if (!$pass || !$contraseña || !$repetirContraseña) {
-        echo json_encode(['ok' => false, 'message' => 'Todos los campos son obligatorios.']);
-        exit;
-    }
-
-    if ($contraseña !== $repetirContraseña) {
-        echo json_encode(['ok' => false, 'message' => 'Las contraseñas no coinciden.']);
-        exit;
-    }
-
-    $user = $this->db->findOne("SELECT * FROM cuentas WHERE id = $id");
-    if (!$user || !password_verify($pass, $user->password)) {
-        echo json_encode(['ok' => false, 'message' => 'Contraseña actual incorrecta.']);
-        exit;
-    }
-
-    $hashedPassword = password_hash($contraseña, PASSWORD_DEFAULT);
-    $this->db->save("UPDATE cuentas SET password = '$hashedPassword' WHERE id = $id");
-
-    // Respuesta final
-    echo json_encode(['ok' => true, 'message' => 'Contraseña actualizada correctamente.']);
-    exit;
-}
 
 
 
@@ -118,19 +118,23 @@ class Cuentas
             $sql3 = "DELETE FROM testimonio WHERE idCliente = $id";
             $sql4 = "DELETE FROM compra WHERE idCliente = $id";
             $sql5 = "DELETE FROM cuentas WHERE id = $id";
+            $sql6 = "DELETE FROM alquiler WHERE idCliente = $id";
 
-            $res = $this->db->delete($sql1);
-            $res = $this->db->delete($sql2);
-            $res = $this->db->delete($sql3);
-            $res = $this->db->delete($sql4);
-            $res = $this->db->delete($sql5);
+            $totalRes = 0;
+            $totalRes += $this->db->delete($sql1);
+            $totalRes += $this->db->delete($sql2);
+            $totalRes += $this->db->delete($sql3);
+            $totalRes += $this->db->delete($sql4);
+            $totalRes += $this->db->delete($sql5);
+            $totalRes += $this->db->delete($sql6);
 
             // Verifica si se eliminó algún registro
-            if ($res > 0) {
+            if ($totalRes > 0) {
                 echo json_encode(['ok' => true, 'message' => 'Tu cuenta se ha eliminado correctamente.']);
             } else {
                 echo json_encode(['ok' => false, 'message' => 'No se encontró ' . $id . ' la cuenta a eliminar.']);
             }
+
             exit;
         } catch (Exception $e) {
             echo json_encode(['ok' => false, 'message' => 'Ha ocurrido un error.', 'error' => $e->getMessage()]);
