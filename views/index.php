@@ -4,7 +4,7 @@ $db = new DB();
 $idsDestacados = [1, 6, 4];
 $vehiculosDestacados = $db->findVehiculosByIds($idsDestacados);
 
-$idsTestimonios = [1, 38, 40]; 
+$idsTestimonios = [1, 2, 3]; 
 $testimonios = $db->findTestimonials($idsTestimonios);
 
 ?>

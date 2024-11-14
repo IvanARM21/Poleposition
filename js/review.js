@@ -131,6 +131,7 @@ export const loadReviewModal = () => {
                 text: resp.message || 'Se ha creado correctamente su reseña',
                 icon: 'success',
                 confirmButtonText: 'Ok',
+                confirmButtonColor: '#f00',
             }).then(() => {
                 const compra = JSON.parse(localStorage.getItem("compra"));
                 localStorage.setItem("compra", JSON.stringify({

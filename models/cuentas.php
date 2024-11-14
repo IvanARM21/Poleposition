@@ -114,7 +114,7 @@ class Cuentas
             }
 
             $sql1 = "DELETE FROM admin WHERE idAdmin = $id";
-            $sql2 = "DELETE FROM cliente WHERE id = $id";
+            $sql2 = "DELETE FROM cliente WHERE idCliente = $id";
             $sql3 = "DELETE FROM testimonio WHERE idCliente = $id";
             $sql4 = "DELETE FROM compra WHERE idCliente = $id";
             $sql5 = "DELETE FROM cuentas WHERE id = $id";

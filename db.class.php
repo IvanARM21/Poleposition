@@ -19,24 +19,22 @@ class DB
     }
 
     public function find($sql)
-{
-    $result = $this->db->query($sql);
+    {
+        $result = $this->db->query($sql);
 
-    if ($result === false) {
-        die("Error en la consulta: " . $this->db->error);
+        if ($result === false) {
+            die("Error en la consulta: " . $this->db->error);
+        }
+
+        $arr = [];
+        while ($row = $result->fetch_object()) {
+            $arr[] = $row;
+        }
+        return $arr;
     }
-
-    $arr = [];
-    while ($row = $result->fetch_object()) {
-        $arr[] = $row;
-    }
-    return $arr;
-}
-
 
     public function findPrepared($sql, $params, $types)
     {
-        // Si no hay parámetros, ejecuta la consulta simple
         if (empty($params)) {
             return $this->find($sql);
         }
@@ -47,7 +45,6 @@ class DB
             die("Error al preparar la consulta: " . $this->db->error);
         }
 
-        // Vincular parámetros si existen
         if (!empty($types) && !empty($params)) {
             $stmt->bind_param($types, ...$params);
         }
@@ -67,21 +64,46 @@ class DB
     public function findOne($sql)
     {
         $result = $this->db->query($sql);
-        return $result->fetch_object();
+        return $result ? $result->fetch_object() : null;
     }
 
-    public function save($sql)
+    public function save($sql, $params = null, $types = "")
     {
         $stmt = $this->db->prepare($sql);
+        
+        if ($stmt === false) {
+            die("Error al preparar la consulta: " . $this->db->error);
+        }
+
+        if ($params && $types) {
+            $stmt->bind_param($types, ...$params);
+        }
+
         $stmt->execute();
-        $id = $this->db->insert_id;
+        
+        if ($stmt->error) {
+            die("Error en la ejecución: " . $stmt->error);
+        }
+
+        $id = $stmt->insert_id;
+        $stmt->close();
+        
         return $id;
     }
 
     public function delete($sql)
     {
         $stmt = $this->db->prepare($sql);
+        
+        if ($stmt === false) {
+            die("Error al preparar la consulta: " . $this->db->error);
+        }
+
         $stmt->execute();
+        
+        if ($stmt->error) {
+            die("Error en la ejecución: " . $stmt->error);
+        }
 
         return $stmt->affected_rows;
     }
@@ -98,24 +120,19 @@ class DB
     }
 
     public function findTestimonials($ids = null)
-{
-    $whereClause = '';
-    if ($ids) {
-        $idsString = implode(',', array_map('intval', $ids));
-        $whereClause = "WHERE t.id IN ($idsString)";
+    {
+        $whereClause = '';
+        if ($ids) {
+            $idsString = implode(',', array_map('intval', $ids));
+            $whereClause = "WHERE t.id IN ($idsString)";
+        }
+
+        $sql = "SELECT t.idVehiculo, t.calificacion, t.mensaje, 
+                       t.titulo, t.autor
+                FROM testimonio t
+                $whereClause
+                ORDER BY t.id DESC";
+
+        return $this->find($sql);
     }
-
-    $sql = "SELECT t.idVehiculo, t.calificacion, t.mensaje, 
-                   t.titulo, t.autor
-            FROM testimonio t
-            $whereClause
-            ORDER BY t.id DESC";
-
-    return $this->find($sql);
-}
-
-
-
-    
-
 }

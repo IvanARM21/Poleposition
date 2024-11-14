@@ -1,129 +1,111 @@
-<?php
+<?php  
+require('fpdf186/fpdf.php'); 
+include_once('db.class.php');  
 
-require('fpdf186/fpdf.php');
-include_once('db.class.php');
+class GenerarFactura {     
+    private $db;      
 
-class GenerarFactura
-{
-    private $db;
+    public function __construct() {         
+        $this->db = new DB();     
+    }      
 
-    public function __construct()
-    {
-        $this->db = new DB();
-    }
+    public function update($id) {         
+        if (!$id) {             
+            die("Error: Se requiere un ID de compra.");         
+        }          
+        $this->crearFactura($id);     
+    }      
 
-    public function update($id)
-    {
-        if (!$id) {
-            die("Error: Se requiere un ID de compra.");
-        }
+    private function crearFactura($compraId) {     
+        $pdf = new FPDF();     
+        $pdf->AddPage();      
 
-        $this->crearFactura($id);
-    }
+        // carga el logo desde el archivo de logo   
+        $pdf->Image('img/logo.png', 10, 10, 30);      
 
-    private function crearFactura($compraId)
-{
-    $pdf = new FPDF();
-    $pdf->AddPage();
+        //saca la fecha desde la bd
+        $compra = $this->db->findOne("SELECT * FROM compra WHERE id = $compraId");     
+        if (!$compra) {         
+            die("Error: No se encontró la compra con ID $compraId.");     
+        }     
+        $comprafechaCompra = $compra->fechaCompra;      
 
-    // Cargar el logo
-    $pdf->Image('img/logo.png', 10, 10, 30);
+        //genera un numero de factura aleatorio xd
+        $numeroFactura = random_int(10000000, 99999999);      
 
-    // Obtener la fecha de compra desde la base de datos
-    $compra = $this->db->findOne("SELECT * FROM compra WHERE id = $compraId");
-    if (!$compra) {
-        die("Error: No se encontró la compra con ID $compraId.");
-    }
-    $comprafechaCompra = $compra->fechaCompra;
+        //saca los datos del cliente desde la bd (el error del !cliente no tendria ni que salir ya que cuando se borra un usuario se borra la compra tambien)
+        $cliente = $this->db->findOne("SELECT * FROM cuentas WHERE id = {$compra->idCliente}");     
+        if (!$cliente) {         
+            die("Error: No se encontró el cliente con ID {$compra->idCliente}.");     
+        }     
+        $nombreCompleto = utf8_decode($compra->nombre . ' ' . $compra->apellido);      
 
-    // Generar un número de factura aleatorio
-    $numeroFactura = random_int(10000000, 99999999);
+        //saca la informacion del vehiculo
+        $vehiculo = $this->db->findOne("SELECT * FROM vehiculo WHERE id = {$compra->idVehiculo}");     
+        if (!$vehiculo) {         
+            die("Error: No se encontró el vehículo con ID {$compra->idVehiculo}.");     
+        }     
+        $producto = utf8_decode($vehiculo->marca . ' ' . ($vehiculo->modelo ?? 'Producto Desconocido'));     
+        $precioSinImpuesto = $vehiculo->precio ?? 0;     
+        $precioConImpuesto = $precioSinImpuesto * 1.05; // 5% IVA      
 
-    // Obtener información del cliente
-    $cliente = $this->db->findOne("SELECT * FROM cuentas WHERE id = {$compra->idCliente}");
-    if (!$cliente) {
-        die("Error: No se encontró el cliente con ID {$compra->idCliente}.");
-    }
-    $nombreCompleto = utf8_decode($cliente->nombreCompleto ?? 'Cliente Anónimo');
+        $pdf->SetFont('Arial', 'B', 12);     
+        $pdf->SetXY(50, 10);     
+        $pdf->SetXY(50, 20);     
+        $pdf->SetXY(150, 10);     
+        $pdf->SetFont('Arial', '', 10);     
+        $pdf->Cell(50, 10, utf8_decode('Fecha: ' . $compra->fechaCompra), 0, 0, 'R');     
+        $pdf->SetXY(150, 20);     
+        $pdf->Cell(50, 10, utf8_decode('Número de Factura: ' . $numeroFactura), 0, 0, 'R');      
 
-    // Obtener información del vehículo
-    $vehiculo = $this->db->findOne("SELECT * FROM vehiculo WHERE id = {$compra->idVehiculo}");
-    if (!$vehiculo) {
-        die("Error: No se encontró el vehículo con ID {$compra->idVehiculo}.");
-    }
-    $producto = utf8_decode($vehiculo->marca . ' ' . ($vehiculo->modelo ?? 'Producto Desconocido'));
-    $precioSinImpuesto = $vehiculo->precio ?? 0;
-    $precioConImpuesto = $precioSinImpuesto * 1.05; // 5% IVA
+        $pdf->SetXY(10, 40);     
+        $pdf->SetFont('Arial', 'B', 10);     
+        $pdf->Cell(100, 10, $nombreCompleto, 0, 1);     
+        $pdf->SetFont('Arial', '', 10);     
+        $pdf->Cell(100, 5, utf8_decode($compra->direccion));     
+        $pdf->Ln();     
+        $pdf->Cell(100, 5, utf8_decode('CP: ' . $compra->codigo));     
+        $pdf->Ln();     
+        $pdf->Cell(100, 5, utf8_decode($compra->ciudad . ', ' . $compra->pais));      
 
-    // Agregar información al PDF
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->SetXY(50, 10);
-    $pdf->SetXY(50, 20);
-    $pdf->SetXY(150, 10);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(50, 10, utf8_decode('Fecha: ' . $compra->fechaCompra), 0, 0, 'R');
-    $pdf->SetXY(150, 20);
-    $pdf->Cell(50, 10, utf8_decode('Número de Factura: ' . $numeroFactura), 0, 0, 'R');
+        $pdf->SetXY(($pdf->GetPageWidth() - 140) / 2, 80);     
+        $pdf->SetFont('Arial', 'B', 10);     
+        $pdf->SetFillColor(220, 220, 220);     
+        $pdf->Cell(60, 10, utf8_decode('PRODUCTO'), 1, 0, 'C', true);     
+        $pdf->Cell(40, 10, utf8_decode('PRECIO'), 1, 0, 'C', true);     
+        $pdf->Cell(40, 10, utf8_decode('TOTAL'), 1, 1, 'C', true);      
 
-    // Información del cliente
-    $pdf->SetXY(10, 40);
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(100, 10, $nombreCompleto, 0, 1);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(100, 5, utf8_decode('Ciudad de Durazno'));
-    $pdf->Ln();
-    $pdf->Cell(100, 5, 'CP: 97000');
-    $pdf->Ln();
-    $pdf->Cell(100, 5, utf8_decode('Uruguay'));
+        $pdf->SetX(($pdf->GetPageWidth() - 140) / 2);     
+        $pdf->SetFont('Arial', '', 10);     
+        $pdf->Cell(60, 10, $producto, 1, 0, 'C');     
+        $pdf->Cell(40, 10, '$' . number_format($precioSinImpuesto, 2), 1, 0, 'C');     
+        $pdf->Cell(40, 10, '$' . number_format($precioConImpuesto, 2), 1, 1, 'C');      
 
-    // Encabezados de la tabla de productos
-    $pdf->SetXY(($pdf->GetPageWidth() - 140) / 2, 80);
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->SetFillColor(220, 220, 220);
-    $pdf->Cell(60, 10, utf8_decode('PRODUCTO'), 1, 0, 'C', true);
-    $pdf->Cell(40, 10, utf8_decode('PRECIO'), 1, 0, 'C', true);
-    $pdf->Cell(40, 10, utf8_decode('TOTAL'), 1, 1, 'C', true);
+        $importeBruto = $precioSinImpuesto;     
+        $iva = $importeBruto * 0.05;     
+        $total = $importeBruto + $iva;      
 
-    // Datos del producto
-    $pdf->SetX(($pdf->GetPageWidth() - 140) / 2);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(60, 10, $producto, 1, 0, 'C');
-    $pdf->Cell(40, 10, '$' . number_format($precioSinImpuesto, 2), 1, 0, 'C');
-    $pdf->Cell(40, 10, '$' . number_format($precioConImpuesto, 2), 1, 1, 'C');
+        $pdf->Ln(10);     
+        $pdf->SetFont('Arial', '', 10);     
+        $pdf->Cell(130, 10, utf8_decode('Importe Bruto'), 0, 0, 'R');     
+        $pdf->Cell(40, 10, '$' . number_format($importeBruto, 2), 0, 1, 'R');             
+        $pdf->SetFont('Arial', '', 10);     
+        $pdf->Cell(130, 10, utf8_decode('IVA Incl. 5%'), 0, 0, 'R');     
+        $pdf->Cell(40, 10, '$' . number_format($iva, 2), 0, 1, 'R');             
+        $pdf->SetFont('Arial', 'B', 10);     
+        $pdf->Cell(130, 10, utf8_decode('Total'), 0, 0, 'R');     
+        $pdf->Cell(40, 10, '$' . number_format($total, 2), 0, 1, 'R');       
 
-    // Calcular totales
-    $importeBruto = $precioSinImpuesto;
-    $iva = $importeBruto * 0.05;
-    $total = $importeBruto + $iva;
+        $pdf->Ln(20);     
+        $pdf->SetFont('Arial', 'B', 12);     
+        $pdf->SetFillColor(255, 0, 0);     
+        $pdf->SetTextColor(255, 255, 255);     
+        $pdf->Cell(0, 10, utf8_decode('Gracias por comprar en Pole-Position'), 0, 1, 'C', true);      
 
-    // Totales
-    $pdf->Ln(10);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(130, 10, utf8_decode('Importe Bruto'), 0, 0, 'R');
-    $pdf->Cell(40, 10, '$' . number_format($importeBruto, 2), 0, 1, 'R');
-    
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(130, 10, utf8_decode('IVA Incl. 5%'), 0, 0, 'R');
-    $pdf->Cell(40, 10, '$' . number_format($iva, 2), 0, 1, 'R');
-    
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(130, 10, utf8_decode('Total'), 0, 0, 'R');
-    $pdf->Cell(40, 10, '$' . number_format($total, 2), 0, 1, 'R'); 
+        $pdf->Output('I', 'factura_' . $compraId . '.pdf'); 
+    }  
+}  
 
-    // Mensaje de agradecimiento
-    $pdf->Ln(20);
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->SetFillColor(255, 0, 0);
-    $pdf->SetTextColor(255, 255, 255);
-    $pdf->Cell(0, 10, utf8_decode('Gracias por comprar en Pole-Position'), 0, 1, 'C', true);
-
-    // Salida del PDF
-    $pdf->Output('I', 'factura_' . $compraId . '.pdf');
-}
-
-}
-
-// $factura = new GenerarFactura();
-// $factura->update();
-
+// $factura = new GenerarFactura(); 
+// $factura->update();  
 ?>
