@@ -25,8 +25,10 @@
                     </th>
                     <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Km</th>
                     <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Año</th>
-                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Stock</th>
-                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Acciones</th>
+                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Stock
+                    </th>
+                    <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800  border-gray-200">Acciones
+                    </th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
@@ -88,7 +90,8 @@
 <?php endif; ?>
 
 
-<div id="modalBg" class="hidden bg-black bg-opacity-50 fixed inset-0 backdrop-blur-sm  justify-center items-center">
+<div id="modalBg"
+    class="hidden bg-black bg-opacity-50 fixed z-40 inset-0 backdrop-blur-sm  justify-center items-center">
     <div id="modalContainer"
         class="flex flex-col justify-between max-w-3xl w-full bg-white fixed z-10 h-[90vh] rounded-2xl overflow-auto p-5 overflow-y-scroll no-scrollbar">
         <button class=" text-red-600 absolute top-5 right-5" type="button" id="btnClose">
@@ -156,8 +159,8 @@
                             arrastra y suelta</p>
                         <p class="text-gray-500  font-medium">PNG, JPEG, Webp, Avif, JFIF, 'Webp'</p>
                     </div>
-                    <input type="file" class="opacity-0 absolute inset-0" id="imagenes" accept=".jpg,.jpeg,.png,.gif,.webp,.avif"
-                        multiple>
+                    <input type="file" class="opacity-0 absolute inset-0" id="imagenes"
+                        accept=".jpg,.jpeg,.png,.gif,.webp,.avif" multiple>
                 </div>
             </div>
 
@@ -176,7 +179,7 @@
 </div>
 
 <div id="modalBgDelete"
-    class="hidden bg-black bg-opacity-50 fixed inset-0 backdrop-blur-sm justify-center items-center">
+    class="hidden bg-black bg-opacity-50 fixed inset-0 backdrop-blur-sm justify-center items-center z-40">
     <div id="modalContainer"
         class="flex flex-col justify-between max-w-3xl w-full bg-white fixed z-10 h-auto rounded-2xl overflow-auto p-5 overflow-y-scroll no-scrollbar">
         <button class=" text-red-600 absolute top-5 right-5" type="button" id="btnCloseDelete">
@@ -197,4 +200,3 @@
         </div>
     </div>
 </div>
-

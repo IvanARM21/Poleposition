@@ -15,18 +15,18 @@ class Productos
         return $this->title;
     }
     public function index()
-{
-    $sql = "
+    {
+        $sql = "
         SELECT v.id, v.marca, v.modelo, v.precio, v.color, v.kilometraje, v.año, v.stock, GROUP_CONCAT(vi.imagen) as imagenes
         FROM vehiculo v
         LEFT JOIN vehiculoImagenes vi ON v.id = vi.idVehiculo
         WHERE v.stock > 0
         GROUP BY v.id
     ";
-    $vehiculos = $this->db->find($sql);
-    echo json_encode($vehiculos);
-    exit;
-}
+        $vehiculos = $this->db->find($sql);
+        echo json_encode($vehiculos);
+        exit;
+    }
 
     public function show($id)
     {
@@ -125,7 +125,7 @@ class Productos
         $descripcion = $vehicleData['descripcion'] ?? '';
         $imagenesCrear = $vehicleData['imagenesCrear'] ?? [];
         $imagenesEliminar = $vehicleData['imagenesEliminar'] ?? [];
-        
+
         // // <!-- Un campo nuevo, de stock --> (CREACION)
         $stock = $vehicleData["stock"] ?? 0;
 
@@ -184,10 +184,18 @@ class Productos
                     $this->deleteFile($imageName->imagen);
                 }
             }
-            $sqlImages = "DELETE FROM vehiculoimagenes WHERE idVehiculo = $id";
-            $this->db->delete($sqlImages);
-            $sql = "DELETE FROM vehiculo WHERE id = $id";
-            $this->db->delete($sql);
+
+            // Borramos imagénes con esté vehiculo
+            $this->db->delete("DELETE FROM vehiculoimagenes WHERE idVehiculo = $id");
+            // Borramos testimonios con esté vehiculo
+            $this->db->delete("DELETE FROM testimonio WHERE idVehiculo = $id");
+            // Borramos compra con esté vehiculo
+            $this->db->delete("DELETE FROM compra WHERE idVehiculo = $id");
+            // Borramos alquiler con esté vehiculo
+            $this->db->delete("DELETE FROM alquiler WHERE idVehiculo = $id");
+
+            // Finalmente borramos el vehiculo
+            $this->db->delete("DELETE FROM vehiculo WHERE id = $id");
             echo json_encode(['ok' => true, 'message' => 'Se ha eliminado correctamente.']);
 
         } else {
