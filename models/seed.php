@@ -35,6 +35,8 @@ class Seed
         $this->db->save("TRUNCATE TABLE cuentas");
         $this->db->save("TRUNCATE TABLE admin");
         $this->db->save("TRUNCATE TABLE testimonio");
+        $this->db->save("TRUNCATE TABLE compra");
+        $this->db->save("TRUNCATE TABLE alquiler");
         $this->db->save("SET FOREIGN_KEY_CHECKS = 1");
 
         $password = 'admin';

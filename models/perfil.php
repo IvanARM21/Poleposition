@@ -29,10 +29,11 @@ if (!$cuentas) {
     return $this->mostrarError('No se encontraron datos del usuario.');
 }
     
-$sql = "SELECT
+$sql = "
+SELECT
     cuentas.nombreCompleto AS Nombre,
     vehiculo.id AS idVehiculo,
-    compra.id AS idCompra,
+    COALESCE(compra.id, alquiler.id) AS idCompra,
     vehiculo.marca AS Marca,
     vehiculo.modelo AS Modelo,
     vehiculo.color AS Color,
@@ -43,22 +44,10 @@ $sql = "SELECT
         WHEN compra.id IS NOT NULL THEN 'Compra'
         WHEN alquiler.id IS NOT NULL THEN 'Alquiler'
     END AS Tipo,
-    CASE
-        WHEN compra.id IS NOT NULL THEN compra.fechaCompra
-        WHEN alquiler.id IS NOT NULL THEN alquiler.fecha_inicio
-    END AS Fecha,
-    CASE
-        WHEN compra.id IS NOT NULL THEN compra.subtotal
-        WHEN alquiler.id IS NOT NULL THEN alquiler.subtotal
-    END AS Subtotal,
-    CASE
-        WHEN compra.id IS NOT NULL THEN compra.tax
-        WHEN alquiler.id IS NOT NULL THEN alquiler.tax
-    END AS Tax,
-    CASE
-        WHEN compra.id IS NOT NULL THEN compra.total
-        WHEN alquiler.id IS NOT NULL THEN alquiler.total
-    END AS Total,
+    COALESCE(compra.fechaCompra, alquiler.fecha_inicio) AS Fecha,
+    COALESCE(compra.subtotal, alquiler.subtotal) AS Subtotal,
+    COALESCE(compra.tax, alquiler.tax) AS Tax,
+    COALESCE(compra.total, alquiler.total) AS Total,
     CASE
         WHEN compra.id IS NOT NULL THEN vehiculo.precio
         WHEN alquiler.id IS NOT NULL THEN DATEDIFF(alquiler.fecha_fin, alquiler.fecha_inicio) * vehiculo.precio
