@@ -24,7 +24,7 @@
     @apply text-sm text-gray-500 uppercase font-bold;
   }
   .input {
-    @apply p-3 bg-gray-50 rounded-xl;
+    @apply p-3 bg-gray-100 rounded-xl;
   }
   .campo {
     @apply flex flex-col gap-2;

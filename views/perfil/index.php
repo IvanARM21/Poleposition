@@ -3,9 +3,13 @@
     <div class="flex flex-col sm:flex-row items-start gap-5 w-full max-w-screen-xl px-4 mx-auto">
 
         <!-- sidebar -->
-        <nav class="bg-white p-2 w-full sm:min-h-[372px] sm:w-60 border rounded-xl flex sm:flex-col gap-3">
+        <nav class="bg-white p-2 w-full sm:min-h-[372px] sm:w-60 border rounded-xl flex flex-wrap sm:flex-col gap-3">
             <button
+<<<<<<< HEAD
                 class="hover:bg-gray-50 px-4 py-2 w-fit transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+=======
+                class="hover:bg-gray-200 hover:text-black px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+>>>>>>> 4853c63bb4634518e0c2471d0421d9d6572894fa
                 id="perfilBtn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
                     <path
@@ -14,7 +18,12 @@
                 Perfil
             </button>
             <button
+<<<<<<< HEAD
                 class="hover:bg-gray-50 px-4 py-2 w-fit transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+=======
+            
+                class="hover:bg-gray-200 hover:text-black px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+>>>>>>> 4853c63bb4634518e0c2471d0421d9d6572894fa
                 id="seguridadBtn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
                     <path fill-rule="evenodd"
@@ -24,7 +33,11 @@
                 Seguridad
             </button>
             <button
+<<<<<<< HEAD
                 class="hover:bg-gray-50 px-4 py-2 w-fit transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+=======
+                class="hover:bg-gray-200 hover:text-black px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+>>>>>>> 4853c63bb4634518e0c2471d0421d9d6572894fa
                 id="historialBtn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                     <path fill-rule="evenodd"
@@ -39,6 +52,16 @@
 
                 </svg>
                 Historial
+            </button>
+
+            <button
+                class="hover:bg-gray-200 hover:text-black px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+                id="testimonialBtn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
+</svg>
+
+                Testimonios
             </button>
         </nav>
 
@@ -242,10 +265,137 @@
                                 </td>
 
                             </tr>
+<<<<<<< HEAD
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </tbody>
             </table>
+=======
+                        <?php else: ?>
+                            <?php foreach ($compras as $compra): ?>
+                                <tr>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Marca; ?>
+                                    </td>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Modelo; ?>
+                                    </td>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Color; ?>
+                                    </td>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">USD
+                                        <?= number_format($compra->Total, 2) ?>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Kilometraje; ?> Km
+                                    </td>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Año; ?>
+                                    </td>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Tipo; ?>
+                                    </td>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Fecha; ?>
+                                    </td>
+
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">
+                                        <div class="flex gap-5 pl-4 items-center">
+                                            <a target="_blank" href="<?php echo $compra->Tipo === "Compra" ? "/generar-factura/editar/" . $compra->idCompra : "/generar-factura-alquiler/editar/" . $compra->idCompra ?>"
+                                                class="text-gray-700 hover:text-red-600">
+                                                <!-- Icono de acciones -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                                    class="size-5">
+                                                    <path fill-rule="evenodd"
+                                                        d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!-- Testimonios -->
+        <div class="hidden w-full" id="historialForm">
+            <div class="flex justify-between items-center p-5 sm:p-10 border rounded-xl h-full">
+                <table class="min-w-[800px] w-full caption-bottom border-b border-gray-200">
+                    <thead>
+                        <tr class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800 border-gray-820">
+                            <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Marca</th>
+                            <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Modelo</th>
+                            <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Color</th>
+                            <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Precio</th>
+                            <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Kilometraje
+                            </th>
+                            <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Año</th>
+                            <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Tipo</th>
+                            <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Fecha</th>
+                            <th class="border-b px-4 py-3.5 text-left text-lg font-semibold text-gray-800">Factura</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <?php if (empty($compras)): ?>
+                            <tr>
+                                <td colspan="9" class="px-1 py-4 text-center text-gray-600 font-medium">No existe ninguna
+                                    compra o alquiler.</td>
+                            </tr>
+                        <?php else: ?>
+                            <?php foreach ($compras as $compra): ?>
+                                <tr>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Marca; ?>
+                                    </td>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Modelo; ?>
+                                    </td>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Color; ?>
+                                    </td>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">USD
+                                        <?= number_format($compra->Total, 2) ?>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Kilometraje; ?> Km
+                                    </td>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Año; ?>
+                                    </td>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Tipo; ?>
+                                    </td>
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium text-nowrap">
+                                        <?php echo $compra->Fecha; ?>
+                                    </td>
+
+                                    <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">
+                                        <div class="flex gap-5 pl-4 items-center">
+                                            <a href="<?php echo $compra->Tipo === "Compra" ? "/generar-factura/editar/" . $compra->idCompra : "/generar-factura-alquiler/editar/" . $compra->idCompra ?>"
+                                                class="text-gray-700 hover:text-red-600">
+                                                <!-- Icono de acciones -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                                    class="size-5">
+                                                    <path fill-rule="evenodd"
+                                                        d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+>>>>>>> 4853c63bb4634518e0c2471d0421d9d6572894fa
         </div>
 </section>
 

@@ -17,7 +17,6 @@ class Seed
 
     public function index()
     {
-
         if (!isset($_COOKIE['usuario'])) {
             header("Location: /");
             exit();
@@ -33,7 +32,18 @@ class Seed
         $this->db->save("SET FOREIGN_KEY_CHECKS = 0");
         $this->db->save("TRUNCATE TABLE vehiculo");
         $this->db->save("TRUNCATE TABLE vehiculoImagenes");
+        $this->db->save("TRUNCATE TABLE cuentas");
+        $this->db->save("TRUNCATE TABLE admin");
+        $this->db->save("TRUNCATE TABLE testimonio");
         $this->db->save("SET FOREIGN_KEY_CHECKS = 1");
+
+        $password = 'admin';
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $idAdmin = $this->db->save("INSERT INTO cuentas (usuario, password, email, nombreCompleto) 
+                    VALUES ('admin', '$hashedPassword', 'admin@poleposition.com', 'Admin Admin')");
+
+        $this->db->save("INSERT INTO admin (idAdmin) VALUES ($idAdmin)");
 
         $autos = [
             [
@@ -178,15 +188,14 @@ class Seed
                     "lambohurcanspider-frente.webp",
                     "lambohuracanspider-costado.webp",
                     "lambohurcanspider-adentro.webp",
-                    "lambohuracanspider-adentro3.webp",
-                    "lambohuracanspider-adentro4.webp",
+                    "lambohurcanspider-adentro2.webp",
+                    "lambohurcanspider-adentro3.webp",
+                    "lambohurcanspider-adentro4.webp",
                     "lambohuracanspider-atras.webp",
-                    "lambohuracanspider-frente2.webp"
+                    "lambohurcanspider-frente2.webp"
                 ]
             ],
         ];
-
-
 
         foreach ($autos as $auto) {
             $idVehiculo = $this->db->save("INSERT INTO vehiculo (modelo, marca, color, precio, kilometraje, descripcion, año, stock) 
@@ -198,6 +207,41 @@ class Seed
             }
         }
 
+        $testimonios = [
+            [
+                'idVehiculo' => 1,
+                'idCliente' => $idAdmin,
+                'calificacion' => 5,
+                'mensaje' => 'Este vehículo es increíble, la experiencia de manejo es única y el diseño es espectacular.',
+                'titulo' => 'Super recomendado',
+                'autor' => 'Bruno Flamant'
+            ],
+            [
+                'idVehiculo' => 2,
+                'idCliente' => $idAdmin,
+                'calificacion' => 5,
+                'mensaje' => 'Este auto es una joya, no hay nada que cambiar, es simplemente perfecto.',
+                'titulo' => 'Muy buen rendimiento',
+                'autor' => 'Rodrigo Martinez'
+            ],
+            [
+                'idVehiculo' => 1,
+                'idCliente' => $idAdmin,
+                'calificacion' => 4,
+                'mensaje' => 'Me encanta, todos los super autos que amo en un solo lugar..',
+                'titulo' => 'Buen rendimiento',
+                'autor' => 'Ivan Rodriguez'
+            ]
+        ];
+
+        foreach ($testimonios as $testimonio) {
+            $this->db->save("INSERT INTO testimonio (idVehiculo, idCliente, calificacion, mensaje, titulo, autor) 
+                VALUES ({$testimonio['idVehiculo']}, {$testimonio['idCliente']}, {$testimonio['calificacion']}, 
+                '{$testimonio['mensaje']}', '{$testimonio['titulo']}', '{$testimonio['autor']}')");
+        }
+
+        ob_clean();
         header("Location: /catalogo");
+        exit();
     }
 }

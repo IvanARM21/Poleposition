@@ -74,16 +74,15 @@ class GenerarFacturaAlquiler
         $pdf->SetXY(150, 20);
         $pdf->Cell(50, 10, utf8_decode('Número de Factura: ' . $numeroFactura), 0, 0, 'R');
 
-        // Información del cliente
-        $pdf->SetXY(10, 40);
-        $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(100, 10, $nombreCompleto, 0, 1);
-        $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(100, 5, utf8_decode('Ciudad de Durazno'));
-        $pdf->Ln();
-        $pdf->Cell(100, 5, 'CP: 97000');
-        $pdf->Ln();
-        $pdf->Cell(100, 5, utf8_decode('Uruguay'));
+        $pdf->SetXY(10, 40);     
+        $pdf->SetFont('Arial', 'B', 10);     
+        $pdf->Cell(100, 10, $nombreCompleto, 0, 1);     
+        $pdf->SetFont('Arial', '', 10);     
+        $pdf->Cell(100, 5, utf8_decode($alquiler->direccion));     
+        $pdf->Ln();     
+        $pdf->Cell(100, 5, utf8_decode('CP: ' . $alquiler->codigo));     
+        $pdf->Ln();     
+        $pdf->Cell(100, 5, utf8_decode($alquiler->ciudad . ', ' . $alquiler->pais));    
 
         // Encabezados de la tabla de productos
         $pdf->SetFont('Arial', 'B', 10);
