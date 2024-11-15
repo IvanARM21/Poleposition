@@ -5,7 +5,7 @@
         <!-- sidebar -->
         <nav class="bg-white p-2 w-full sm:min-h-[372px] sm:w-60 border rounded-xl flex sm:flex-col gap-3">
             <button
-                class="hover:bg-gray-50 px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+                class="hover:bg-gray-50 px-4 py-2 w-fit transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
                 id="perfilBtn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
                     <path
@@ -14,7 +14,7 @@
                 Perfil
             </button>
             <button
-                class="hover:bg-gray-50 px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+                class="hover:bg-gray-50 px-4 py-2 w-fit transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
                 id="seguridadBtn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
                     <path fill-rule="evenodd"
@@ -24,7 +24,7 @@
                 Seguridad
             </button>
             <button
-                class="hover:bg-gray-50 px-4 py-2 w-full transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
+                class="hover:bg-gray-50 px-4 py-2 w-fit transition-all duration-300 text-gray-500 rounded-xl flex gap-2 items-center"
                 id="historialBtn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                     <path fill-rule="evenodd"
