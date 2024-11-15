@@ -195,8 +195,8 @@ document?.getElementById("filterButton")?.addEventListener("click", () => {
     const viewportWidth = window.innerWidth;
     if(viewportWidth >= 1024) {
         if(filtersContainer.classList.contains("lg:max-w-80")) {
-            filtersContainer.classList.remove("lg:max-w-80", "opacity-100", "lg:mr-5");
-            filtersContainer.classList?.add("lg:max-w-0", "opacity-0");
+            filtersContainer.classList.remove("lg:max-w-80", "lg:hidden", "opacity-100", "lg:mr-5");
+            filtersContainer.classList?.add("lg:max-w-0", "opacity-0", );
         } else {
             filtersContainer.classList?.add("lg:max-w-80", "opacity-100", "lg:mr-5");
             filtersContainer.classList.remove("lg:max-w-0", "opacity-0");

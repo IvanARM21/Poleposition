@@ -13,44 +13,43 @@
 <section class="px-4 max-w-screen-xl mx-auto">
     <!-- filtros -->
     <h1 class="title">Nuestro cátalogo de vehiculos</h1>
-   <div class="flex justify-between gap-10">
-   <button type="button" id="filterButton" class="
+    <div class="flex justify-between gap-10">
+        <button type="button" id="filterButton" class="
         sticky top-5 z-10
         shadow-sm w-fit px-6 py-2 mb-10 
         bg-gray-200 text-black hover:bg-gray-300 font-medium rounded-xl
         transition duration-300 
         flex gap-2 items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-            <path
-                d="M18.75 12.75h1.5a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM12 6a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 6ZM12 18a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 18ZM3.75 6.75h1.5a.75.75 0 1 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM5.25 18.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM3 12a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 3 12ZM9 3.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM12.75 12a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0ZM9 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
-        </svg>
-        Filtros</button>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                <path
+                    d="M18.75 12.75h1.5a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM12 6a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 6ZM12 18a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 18ZM3.75 6.75h1.5a.75.75 0 1 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM5.25 18.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM3 12a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 3 12ZM9 3.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM12.75 12a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0ZM9 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
+            </svg>
+            Filtros</button>
 
         <div class="flex gap-2 items-center">
             <input type="text" id="buscarInput" placeholder="Buscar.." class="shadow-sm w-0 px-0 duration-300 transition-all py-2 mb-10
             bg-gray-200 text-black  font-medium rounded-xl">
 
-            <button
-                id="search"
-                type="button"
-            >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-700 mb-10">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
+            <button id="search" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6 text-gray-700 mb-10">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
             </button>
         </div>
-   </div>
+    </div>
 
 
     <div class="w-full flex">
         <div class="
-            lg:block 
+            lg:block
             top-5 lg:sticky fixed z-40
             -ml-5 -mt-5 p-5 lg:p-0 lg:ml-0
             h-screen lg:h-[730px] 
             lg:max-w-0 opacity-0 w-[calc(100%-50px)] max-w-[500px]
             -translate-x-full lg:translate-x-0
-            bg-white max-lg:overflow-y-auto
+            bg-white max-lg:overflow-y-auto overflow-hidden
             transition-all duration-300" id="filtersContainer">
             <form id="formFilters" method="GET" class="space-y-6">
                 <!-- filtro x marca -->
