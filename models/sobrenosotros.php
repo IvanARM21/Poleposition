@@ -19,7 +19,7 @@ class Sobrenosotros
     public function index()
     {
 
-        $this->title = "PP | Contacto";
+        $this->title = "PP | Sobre nosotros";
 
         return new Template('./views/sobre-nosotros/index.php', [
         ]);

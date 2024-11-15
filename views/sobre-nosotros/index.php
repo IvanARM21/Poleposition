@@ -1,4 +1,4 @@
-<div class="info-container grid grid-cols-1 md:grid-cols-3 gap-5 px-4 md:px-8 py-8">
+<div class="max-w-screen-xl grid grid-cols-1 md:grid-cols-3 gap-5 px-4 md:px-8 py-8">
     <div class="info-box p-6  rounded-lg shadow-lg w-full h-full">
         <h2 class="text-xl font-semibold mb-2 flex gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
