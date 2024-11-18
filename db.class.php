@@ -135,4 +135,28 @@ class DB
 
         return $this->find($sql);
     }
+
+    public function findTestimonialsWithVehicles($ids = null)
+{
+    $whereClause = '';
+    if ($ids) {
+        $idsString = implode(',', array_map('intval', $ids));
+        $whereClause = "WHERE t.id IN ($idsString)";
+    }
+
+    $sql = "SELECT 
+                t.id AS TestimonioID,
+                CONCAT(v.marca, ' ', v.modelo) AS Vehiculo,
+                t.calificacion AS Calificacion,
+                t.mensaje AS Mensaje,
+                t.titulo AS Titulo,
+                t.autor AS Autor
+            FROM testimonio t
+            JOIN vehiculo v ON t.idVehiculo = v.id
+            $whereClause
+            ORDER BY t.id DESC";
+
+    return $this->find($sql);
+}
+
 }
