@@ -1,4 +1,6 @@
 <?php  
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
+
 require('fpdf186/fpdf.php'); 
 include_once('db.class.php');  
 
@@ -108,4 +110,6 @@ class GenerarFactura {
 
 // $factura = new GenerarFactura(); 
 // $factura->update();  
+ob_end_clean();
+
 ?>
