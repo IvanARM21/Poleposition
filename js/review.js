@@ -90,15 +90,12 @@ export const loadReviewModal = () => {
 
     reviewForm?.addEventListener("submit", async e => {
         e.preventDefault();
-
         if(review.id) {
             updateReview();
         } else {
             uploadReview();
         }
-        
     });
-
 
     // Btn Download
     btnDownload?.addEventListener("click", redirectToDownloadPDF)
@@ -231,8 +228,7 @@ const getReviewById = async (id) => {
     if (titulo) titulo.value = review.titulo;
     if (mensaje) mensaje.value = review.mensaje;
 
-
-    updateStars();
+    onClick(testimonio?.calificacion ?? 1);
 }
 
 const validateInput = (input) => {
