@@ -4,6 +4,8 @@ const starsByName = document.getElementsByName("calificacion");
 const calificacionTexto = document.getElementById("calificacionTexto");
 const modalReseña = document.getElementById("modalReseña");
 const openModal = document.getElementById("openModal");
+const editReviewBtns = document.getElementsByName("editReviewBtn");
+
 const closeModalBtns = Array.from(document.getElementsByName("closeModal"));
 const btnDownload = document.getElementById("btnDownload");
 const reviewForm = document.getElementById("reviewForm");
@@ -18,6 +20,7 @@ const stars = {
 }
 
 const review = {
+    id: "",
     titulo: "",
     mensaje: "",
     calificacion: 1,
@@ -61,6 +64,15 @@ export const loadReviewModal = () => {
         modalReseña.classList.remove("hidden");
     });
 
+    // Editar review
+    if(editReviewBtns.length) {
+        editReviewBtns?.forEach(btn => btn?.addEventListener("click", (e) => {
+            modalReseña.classList.add("flex");
+            modalReseña.classList.remove("hidden");
+            getReviewById(e.currentTarget.id);
+        }));
+    }
+
     closeModalBtns?.forEach(btn => btn.addEventListener("click", () => {
         modalReseña.classList.add("hidden");
         modalReseña.classList.remove("flex");
@@ -79,6 +91,63 @@ export const loadReviewModal = () => {
     reviewForm?.addEventListener("submit", async e => {
         e.preventDefault();
 
+        if(review.id) {
+            updateReview();
+        } else {
+            uploadReview();
+        }
+        
+    });
+
+
+    // Btn Download
+    btnDownload?.addEventListener("click", redirectToDownloadPDF)
+};
+
+const updateReview = async () => {
+    const idVehiculo = JSON.parse(localStorage.getItem("vehicle"))?.id;
+    const { nombreCompleto, id } = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
+
+    const formData = {
+        ...review,
+        autor: nombreCompleto,
+        idVehiculo: +idVehiculo,
+        idCliente: +id
+    }
+
+    const resp = await fetch(`${PAGE_URL}/review/editar/${review.id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    }).then(resp => resp.json());
+
+    review.id = "";
+
+    if (resp.error) {
+        Swal.fire({
+            title: 'Error!',
+            text: resp.message || 'Ha ocurrido un error',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+    } else {
+        modalReseña.classList.add("hidden");
+        modalReseña.classList.remove("flex");
+        Swal.fire({
+            title: 'Éxito!',
+            text: resp.message || 'Se ha editado correctamente su reseña',
+            icon: 'success',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#f00',
+        }).then(() => {
+            window.location.reload()
+        });
+    }
+}
+
+const uploadReview  = async () => {
         const idVehiculo = JSON.parse(localStorage.getItem("vehicle"))?.id;
         const compra = JSON.parse(localStorage.getItem("compra"));
         const { nombreCompleto, id } = JSON.parse(decodeURIComponent(document.cookie).split("=")[1]);
@@ -140,30 +209,31 @@ export const loadReviewModal = () => {
                 }));
             });
         }
-    });
+}
+
+const getReviewById = async (id) => {
+    const resp = await fetch(`${PAGE_URL}/review/${id}`).then(review => review.json());
+    const { testimonio } = resp;
+
+    if(!testimonio) {
+        modalReseña.classList.add("hidden");
+        modalReseña.classList.remove("flex");
+    }
+
+    review.calificacion = testimonio?.calificacion;
+    review.mensaje = testimonio?.mensaje;
+    review.titulo = testimonio?.titulo;
+    review.id = testimonio?.id;
+
+    const titulo = inputs.find(input => input.id === "titulo");
+    const mensaje = inputs.find(input => input.id === "mensaje");
+
+    if (titulo) titulo.value = review.titulo;
+    if (mensaje) mensaje.value = review.mensaje;
 
 
-    // Btn Download
-    btnDownload?.addEventListener("click", redirectToDownloadPDF)
-};
-
-// const publishReview = async () => {
-//     const idVehicle = localStorage.getItem("idVehicle");
-//     const idClient = localStorage.getItem("idClient");
-
-//     const formData = {
-//         idVehiculo: idVehicle,
-//         idCliente: idClient,
-//         calificacion: review.qualification,
-//         mensaje: review.message,
-//         titulo: review.title
-//     }
-
-//     const resp = await fetch(`${PAGE_URL}/review/crear`, {
-//         method: "POST",
-//         body: JSON.stringify(formData)
-//     }).then(res => res.text());
-// }
+    updateStars();
+}
 
 const validateInput = (input) => {
     const valueLength = input.value.length;

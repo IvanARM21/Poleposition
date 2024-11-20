@@ -128,7 +128,7 @@ class DB
         }
 
         $sql = "SELECT t.idVehiculo, t.calificacion, t.mensaje, 
-                       t.titulo, t.autor
+                       t.titulo, t.autor, t.id
                 FROM testimonio t
                 $whereClause
                 ORDER BY t.id DESC";

@@ -7,6 +7,8 @@ import { loadBuy, loadCheckout } from './comprar.js';
 import { loadInput } from './search.js';
 import { loadPerfilEvents } from './modalPerfil.js';
 import { loadReviewModal } from './review.js';
+import { loadModalDeleteReseñaBtn } from "./modalReseñaDelete.js";
+
 
 addEventListener("DOMContentLoaded", () => {
     loadPerfilButtons();
@@ -20,4 +22,6 @@ addEventListener("DOMContentLoaded", () => {
 
     loadPerfilEvents();
     loadReviewModal();
+
+    loadModalDeleteReseñaBtn();
 });

@@ -304,7 +304,8 @@
                                 </td>
                                 <td class="px-1 py-4 sm:p-4 text-gray-600 font-medium">
                             <div class="flex gap-5 items-center">
-                                <button type="button" name="editBtn"
+                                <button type="button" name="editReviewBtn"
+                                id="<?php echo $testimonio->TestimonioID ?>"
                                     class="text-gray-700 hover:text-blue-600">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                         stroke="currentColor" class="size-5">
@@ -313,9 +314,9 @@
                                     </svg>
                                 </button>
                                 <button type="button" class="text-gray-700 hover:text-red-600"
-                                    name="deleteBtn">
+                                    name="deleteReviewBtn" id="<?php echo $testimonio->TestimonioID ?>"> 
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" class="size-5">
+                                        stroke="currentColor" class="size-5">  <!-- eso esta bien hay q cambiar xq esta redireccionando mal el fetch ahora -->
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                     </svg>
@@ -330,14 +331,116 @@
             </table>
         </div>
 
-
+        
 </section>
 </div>
 
+<div id="modalReseñaDelete"
+    class="hidden bg-black bg-opacity-50 fixed inset-0 backdrop-blur-sm justify-center items-center">
+    <div id="modalContainer"
+        class="flex flex-col justify-between max-w-3xl w-full bg-white fixed z-10 h-auto rounded-2xl overflow-auto p-5 overflow-y-scroll no-scrollbar">
+        <button class=" text-red-600 absolute top-5 right-5" type="button" id="btnCloseDelete">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+        </button>
+
+        <h2 class="text-2xl font-bold text-gray-800">Eliminar Usuario</h2>
+        <p class="text-lg text-gray-500">¿Estás seguro de eliminar esta cuenta? está acción es irreversible.</p>
+
+        <div class="flex justify-end gap-5 mt-5">
+            <button class="text-gray-700 text-lg font-semibold" id="btnCancelDelete">Cancelar</button>
+            <button class="text-white bg-red-600 py-2 px-4 rounded-xl text-lg font-semibold"
+                id="reseñaDelete">Eliminar</button>
+        </div>
+    </div>
+</div>
 
 
+<div class="hidden bg-black bg-opacity-50 fixed inset-0 backdrop-blur-sm z-20 justify-center items-center"
+    id="modalReseña">
+    <div
+        class="bg-white max-w-3xl w-full flex flex-col justify-between z-30 max-h-[90vh] rounded-2xl overflow-y-scroll no-scrollbar p-5 relative">
+        <div>
+            <button class=" text-red-600 absolute top-5 right-5" type="button" name="closeModal">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-8" fill="none" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="currentColor"
+                    class="mr-2 transition-colors duration-300 size-6 cursor-pointer text-gray-300" name="remove">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </button>
+            <h2 class="text-xl font-bold text-gray-800">Editar Reseña</h2>
 
+            <form class="mt-10 flex flex-col gap-3" id="reviewForm" method="POST">
+                <div class="flex flex-col gap-1">
+                    <label for="titulo" class="font-medium text-gray-800 ">Título reseña</label>
+                    <input type="text" class="w-full border shadow rounded-xl py-2 px-4" id="titulo"
+                        placeholder="Título de tu reseña">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label for="mensaje" class="font-medium text-gray-800 ">Mensaje</label>
+                    <textarea name="mensaje" class="w-full border shadow rounded-xl py-2 px-4" id="mensaje"
+                        placeholder="Mensaje de la reseña"></textarea>
+                </div>
 
+                <div>
+                    <label class="font-medium text-gray-800 ">Calificación</label>
+
+                    <div class="flex flex-wrap items-center mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="mr-2 transition-colors duration-300 size-6 cursor-pointer text-yellow-500"
+                            name="calificacion" id="1">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="mr-2 transition-colors duration-300 size-6 cursor-pointer text-gray-300"
+                            name="calificacion" id="2">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="mr-2 transition-colors duration-300 size-6 cursor-pointer text-gray-300"
+                            name="calificacion" id="3">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="mr-2 transition-colors duration-300 size-6 cursor-pointer text-gray-300"
+                            name="calificacion" id="4">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="mr-2 transition-colors duration-300 size-6 cursor-pointer text-gray-300"
+                            name="calificacion" id="5">
+                            <path fill-rule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                clip-rule="evenodd" />
+                        </svg>
+
+                        <p class="ml-4 text-yellow-600 font-medium text-lg" id="calificacionTexto">1.0</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 items-center justify-end mt-5">
+                    <button type="button" class="text-gray-800 font-semibold " name="closeModal">
+                        Cancelar
+                    </button>
+                    <input type="submit" class="bg-red-600 text-white py-2 px-4  rounded-xl font-semibold"
+                        value="Subir reseña">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 

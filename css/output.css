@@ -1262,6 +1262,11 @@ video {
   height: 100vh;
 }
 
+.h-max {
+  height: -moz-max-content;
+  height: max-content;
+}
+
 .max-h-\[90vh\] {
   max-height: 90vh;
 }
