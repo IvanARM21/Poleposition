@@ -70,7 +70,7 @@ class DB
     public function save($sql, $params = null, $types = "")
     {
         $stmt = $this->db->prepare($sql);
-        
+
         if ($stmt === false) {
             die("Error al preparar la consulta: " . $this->db->error);
         }
@@ -80,27 +80,27 @@ class DB
         }
 
         $stmt->execute();
-        
+
         if ($stmt->error) {
             die("Error en la ejecución: " . $stmt->error);
         }
 
         $id = $stmt->insert_id;
         $stmt->close();
-        
+
         return $id;
     }
 
     public function delete($sql)
     {
         $stmt = $this->db->prepare($sql);
-        
+
         if ($stmt === false) {
             die("Error al preparar la consulta: " . $this->db->error);
         }
 
         $stmt->execute();
-        
+
         if ($stmt->error) {
             die("Error en la ejecución: " . $stmt->error);
         }
@@ -137,26 +137,25 @@ class DB
     }
 
     public function findTestimonialsWithVehicles($ids = null)
-{
-    $whereClause = '';
-    if ($ids) {
-        $idsString = implode(',', array_map('intval', $ids));
-        $whereClause = "WHERE t.id IN ($idsString)";
-    }
+    {
+        $whereClause = '';
+        if ($ids) {
+            $idsString = implode(',', array_map('intval', $ids));
+            $whereClause = "WHERE t.idCliente IN ($idsString)";
+        }
 
-    $sql = "SELECT 
+        $sql = "SELECT 
                 t.id AS TestimonioID,
                 CONCAT(v.marca, ' ', v.modelo) AS Vehiculo,
                 t.calificacion AS Calificacion,
                 t.mensaje AS Mensaje,
                 t.titulo AS Titulo,
-                t.autor AS Autor
+                t.idCliente AS idCliente
             FROM testimonio t
             JOIN vehiculo v ON t.idVehiculo = v.id
             $whereClause
             ORDER BY t.id DESC";
 
-    return $this->find($sql);
-}
-
+        return $this->find($sql);
+    }
 }
